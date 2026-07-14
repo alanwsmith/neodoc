@@ -8,6 +8,10 @@ here for now.
 
 -- todo
 
+[] Add a query section type that's a raw
+type that gets passed to the template engine
+Should it be a raw type or its own thing?
+
 [] Add web server?
 
 [] Add front end?
