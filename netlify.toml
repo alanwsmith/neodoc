@@ -1,2 +1,8 @@
 [build]
-  publish = "docs/"
+  publish = "_site/"
+
+[[redirects]]
+  from = "/*"
+  to = "https://al9000.com/neopolitan/"
+  status = 301
+  force = true
