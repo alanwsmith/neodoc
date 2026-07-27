@@ -1,7 +1,12 @@
-<div class="book-list">
+<style>
+== include template_dir("/styles.css")
+</style>
+<div class="book-list default-flow">
   <div class="heading">Alan's Book Reviews</div>
 == for book in d[template_dir("/data.json")].books
 <details><summary>[@ book.title @]</summary>
+    <div class="two-columns">
+      <div>
     == if book.subtitle 
     <div class="subtitle">[@ book.subtitle @]</div>
     == endif
@@ -9,6 +14,11 @@
     == for p in book.review
     <p>[@ p @]</p>
     == endfor
+      </div>
+      <div>
+        <div class="cover-image">[@ image(book.coverImage, alt="The book cover for " + book.title) @]</div>
+      </div>
+    </div>
 </details>
 == endfor 
 </div>

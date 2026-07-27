@@ -1,5 +1,5 @@
+<details><summary class="detail-heading">TL;DR</summary>
 == filter md
-## TL;DR
 
 To give you a quick idea of how it works, this 
 is a neodoc:
@@ -19,7 +19,10 @@ is absolute gold.
 etc.
 == endfilter
 
-Apps turn into this:
+
+it turns into this:
+
+== endfilter
 
 <style>
 == include template_dir("/examples/book-review/styles.css")
@@ -27,33 +30,48 @@ Apps turn into this:
 
 == include template_dir("/examples/book-review/content.html")
 
-The formatting comes from the neodoc lexicon. 
+== filter md
+
+The formatting comes in from the neodoc lexicon. 
 It stores output templates and styles 
 independently from the content. You can created layouts that apply
-to all your content and then override them
-individually. Or, you can skip them all
-together and use an apps defaults. 
+to all your content and versions for individual 
+  pieces of content. Or, you can skip them all
+together and use defaults from wherever
+your content appears. 
+
 
 ### Alternate Perspectives
 
 Separating content from layout means different
-apps can do different things with the content.
-For example, an app could aggregate all the book
-reviews you've posted onto a single page. 
-Something like this:
+apps can do different things with the same
+pieces of content.
+For example, instead of showing a basic
+timeline, an app could aggregate all the book
+reviews you've posted on a single page. 
+Something like:
 
 == endfilter
 == include template_dir("/examples/book-list/content.html")
 == filter md
 
+It doesn't just have to be your books. 
+Apps could just as easily grab all the book
+reviews from all the folks you follow
+for the list. 
 
-Check out the rest of the page
-for more details on how everything works.
+### Shorts Included 
+
+Neodocs can also be dead simple:
+
+== filter highlight("neo", class = "code-block")
+This is a perfectly valid neodoc.
+== endfilter
 
 
-
-
-
-
+No fuss. No muss. Just a post similar to
+one you'd find on [Bluesky](https://bsky.app/).
 
 == endfilter
+
+</details>

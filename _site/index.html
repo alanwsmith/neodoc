@@ -25,27 +25,39 @@
     <h1>neodoc.style</h1>
   </hgroup>
 
-<p>An upcoming content lexicon for the AT Proto
+<p>An upcoming lexicon for the AT Proto
 Atmosphere.</p>
-<h2>Overview</h2>
-<ul>
-<li>
-<p><strong>neodoc</strong> is a format for creating content.
-It's designed to be easy to use and portable without
-sacrificing the ability to create fully
-featured pages and posts.</p>
-<p>If you're familiar with <a href="https://www.markdownguide.org/">markdown</a>,
+
+
+<details><summary class="detail-heading">Overview</summary>
+<p><strong>neodoc</strong> is a writing format for creating content.
+It focuses on being easy to use without
+sacrificing the ability to make full
+featured posts and pages.
+If you're familiar with <a href="https://www.markdownguide.org/">markdown</a>,
 it's like that, but on steroids.</p>
-</li>
-<li>
-<p><strong>neodoc.style</strong> is an upcoming
+<p><strong>neodoc.style</strong> is an upcoming<sup>1</sup>
 <a href="https://atproto.com/">AT Proto</a>
 <a href="https://atproto.com/specs/lexicon">lexicon</a>
 for publishing neodocs
 in the <a href="https://atmosphere.community/">Atmosphere</a>.</p>
-</li>
-</ul>
-<h2>TL;DR</h2>
+<p>Combined, they provide a new way to publish content
+for feeds and sites across the Atmosphere and
+the wider web.</p>
+<p>The rest of this page covers the basics. Check it
+out and <a href="https://bsky.app/profile/alanwsmith.com">hit me up on bluesky</a>
+if you've got questions.</p>
+
+  <div class="inline-footnote">
+    <sup>1</sup> the neodoc parser already exists. 
+    It's embedded in my static site generator and
+    takes care of the <a href="https://www.alanwsmith.com/neo-files/report">roughly
+      three thousand posts on my site</a>.
+    I'm pulling it out to create a stand-alone library
+    for the reference implementation to use
+    for the lexicon.
+  </div>
+</details><details><summary class="detail-heading">TL;DR</summary>
 <p>To give you a quick idea of how it works, this
 is a neodoc:</p>
 <div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text plain">-- book-review
@@ -60,7 +72,8 @@ is a neodoc:</p>
 <span class="line-marker" data-line="10"></span>is absolute gold. 
 <span class="line-marker" data-line="11"></span>
 <span class="line-marker" data-line="12"></span>etc.</span></pre></div></div>
-Apps turn into this:
+<p>it turns into this:</p>
+
 <style>
 .book-review {
   display: grid;
@@ -72,6 +85,7 @@ Apps turn into this:
   border: var(--faded-reverse-border);
   margin: var(--default-margin);
 }
+
 .book-review .title {
   font-weight: 900;
 }
@@ -87,6 +101,7 @@ Apps turn into this:
 .book-review .by {
   color: var(--accent-color);
 }</style>
+
 <div class="book-review">
   <div>
     <img 
@@ -109,50 +124,133 @@ Apps turn into this:
     </p>
   </div>
 </div>
-The formatting comes from the neodoc lexicon. 
-It stores output templates and styles 
+<p>The formatting comes in from the neodoc lexicon.
+It stores output templates and styles
 independently from the content. You can created layouts that apply
-to all your content and then override them
-individually. Or, you can skip them all
-together and use an apps defaults. 
+to all your content and versions for individual
+pieces of content. Or, you can skip them all
+together and use defaults from wherever
+your content appears.</p>
 <h3>Alternate Perspectives</h3>
 <p>Separating content from layout means different
-apps can do different things with the content.
-For example, an app could aggregate all the book
-reviews you've posted onto a single page.
-Something like this:</p>
-<div class="book-list">
+apps can do different things with the same
+pieces of content.
+For example, instead of showing a basic
+timeline, an app could aggregate all the book
+reviews you've posted on a single page.
+Something like:</p>
+<style>
+.book-list {
+  background-color: var(--faded-warning-color);
+  padding: var(--default-padding);
+  border-radius: var(--default-border-radius);
+  border: var(--faded-reverse-border);
+  margin: var(--default-margin);
+}
+
+.book-list details > summary {
+  font-weight: 900;
+}
+
+.book-list img {
+  width: 7rem;
+}
+
+.book-list .subtitle {
+  font-style: italic;
+}
+
+.book-list .two-columns {
+  display: grid;
+  grid-template-columns: 1fr 8rem;
+}
+
+.book-list .two-columns > :first-child {
+  padding-left: 1.6rem;
+  padding-right: 2.2rem;
+  border-left: var(--faded-reverse-border);
+}</style>
+<div class="book-list default-flow">
   <div class="heading">Alan's Book Reviews</div>
 <details><summary>Bird by Bird</summary>
+    <div class="two-columns">
+      <div>
     <div class="subtitle">Some Instructions on Writing and Life</div>
     <div>by: <strong>Anne Lamott</strong></div>
     <p>First off, I did the audio book instead of the paper copy. I don&#x27;t know how much I would have liked the physical version but the narrator for the audio book is absolute gold.</p>
     <p>etc.</p>
+      </div>
+      <div>
+        <div class="cover-image"><figure class="default"><img src="/images/homepage/bird-by-bird-cover.jpg" alt="The book cover for Bird by Bird" /></figure>
+            </div>
+      </div>
+    </div>
 </details>
 <details><summary>Dungeon Crawler Carl</summary>
+    <div class="two-columns">
+      <div>
     <div>by: <strong>Matt Dinniman</strong></div>
     <p>First off, I did the audio book instead of the paper copy. I don&#x27;t know how much I would have liked the physical version but the narrator for the audio book is absolute gold.</p>
     <p>etc.</p>
+      </div>
+      <div>
+        <div class="cover-image"><figure class="default"><img src="/images/homepage/dungeon-crawler-carl-cover.jpg" alt="The book cover for Dungeon Crawler Carl" /></figure>
+            </div>
+      </div>
+    </div>
 </details>
-<details><summary>The Budah Walks Into The Bar</summary>
+<details><summary>The Buddha Walks into a Bar</summary>
+    <div class="two-columns">
+      <div>
     <div class="subtitle">A Guide to Life for a New Generation</div>
     <div>by: <strong>Lodro Rinzler</strong></div>
     <p>My therapist thought I&#x27;d like this one. She was right.</p>
     <p>etc.</p>
+      </div>
+      <div>
+        <div class="cover-image"><figure class="default"><img src="/images/homepage/buddha-walks-into-a-bar-cover.jpg" alt="The book cover for The Buddha Walks into a Bar" /></figure>
+            </div>
+      </div>
+    </div>
 </details>
 <details><summary>Fool</summary>
+    <div class="two-columns">
+      <div>
     <div>by: <strong>Christopher Mooer</strong></div>
     <p>Know what&#x27;s good about having a fiend you&#x27;ve known since third grade? They give you killer books.</p>
     <p>etc.</p>
+      </div>
+      <div>
+        <div class="cover-image"><figure class="default"><img src="/images/homepage/fool-cover.jpg" alt="The book cover for Fool" /></figure>
+            </div>
+      </div>
+    </div>
 </details>
 <details><summary>The Long Way to a Small, Angry Planet</summary>
+    <div class="two-columns">
+      <div>
     <div>by: <strong>Becky Chambers</strong></div>
     <p>This was my introduction to Becky Champbers. It was a good one.</p>
     <p>etc.</p>
+      </div>
+      <div>
+        <div class="cover-image"><figure class="default"><img src="/images/homepage/long-way-cover.jpg" alt="The book cover for The Long Way to a Small, Angry Planet" /></figure>
+            </div>
+      </div>
+    </div>
 </details>
-</div><p>Check out the rest of the page
-for more details on how everything works.</p>
-<h2>The Format</h2>
+</div><p>It doesn't just have to be your books.
+Apps could just as easily grab all the book
+reviews from all the folks you follow
+for the list.</p>
+<h3>Shorts Included</h3>
+<p>Neodocs can also be dead simple:</p>
+<div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text plain">This is a perfectly valid neodoc.</span></pre></div></div>
+<p>No fuss. No muss. Just a post similar to
+one you'd find on <a href="https://bsky.app/">Bluesky</a>.</p>
+
+</details><details><summary class="detail-heading">The Format</summary>
+
 <h3>Sections</h3>
 <p>Neodocs are made of sections. Each
 one starts with two dashes and a name.
@@ -337,10 +435,10 @@ The output HTML looks like this:
 <span class="line-marker" data-line="2"></span>  <span class="meta attribute-with-value class html"><span class="entity other attribute-name class html">class</span><span class="punctuation separator key-value html">=</span></span><span class="meta attribute-with-value class html"><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span></span></span><span class="meta attribute-with-value class html"><span class="string quoted double html"><span class="meta class-name html">featured</span><span class="punctuation definition string end html">&quot;</span></span></span> 
 <span class="line-marker" data-line="3"></span>  <span class="meta attribute-with-value html"><span class="entity other attribute-name html">data-language</span><span class="punctuation separator key-value html">=</span></span><span class="meta attribute-with-value html"><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span>javascript<span class="punctuation definition string end html">&quot;</span></span></span>
 <span class="line-marker" data-line="4"></span>  <span class="punctuation definition tag end html">&gt;</span></span>console.log()<span class="meta tag inline any html"><span class="punctuation definition tag begin html">&lt;/</span><span class="entity name tag inline any html">code</span><span class="punctuation definition tag end html">&gt;</span></span></span></pre></div></div>
-### Span Shorthands
+<h3>Span Shorthands</h3>
 <p>There are shorthands for frequenly used
 span types. For example, backtics denote code
-spans. The orignal example above:</p>
+spans. The orignal example from above:</p>
 <div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text plain">&lt;&lt;code
 <span class="line-marker" data-line="2"></span>  |console.log()
 <span class="line-marker" data-line="3"></span>  |class: featured
@@ -375,7 +473,8 @@ can also be written as:
 </li>
 </ul>
 </details>
-</main>
+
+</details></main>
 
 
 

@@ -9,6 +9,7 @@
   --faded-warning-color: rgb(149 25 25 / 0.4);
   --faded-reverse-color: rgb(255 255 255 /0.4);
   --faded-reverse-border: 1px solid var(--faded-reverse-color);
+  --default-flow: 1em;
 }
 
 body {
@@ -34,6 +35,20 @@ a:hover {
   margin: var(--default-margin);
   padding: var(--default-padding);
 }
+
+
+.default-flow > :where(:not(:first-child)) {
+  margin-top: var(--flow-space, var(--default-flow));
+}
+
+details > :where(:not(summary)) {
+  margin-top: var(--flow-space, var(--default-flow));
+}
+
+details > :where(:not(summary)) {
+  padding-inline: 1.2rem;
+}
+
 
 h1 {
   font-size: 2.6rem;

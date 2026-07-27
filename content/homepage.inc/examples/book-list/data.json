@@ -7,7 +7,8 @@
       "review": [
         "First off, I did the audio book instead of the paper copy. I don't know how much I would have liked the physical version but the narrator for the audio book is absolute gold.",
         "etc."
-      ]
+      ],
+      "coverImage": "bird-by-bird-cover"
     },
     {
       "title": "Dungeon Crawler Carl",
@@ -15,16 +16,18 @@
       "review": [
         "First off, I did the audio book instead of the paper copy. I don't know how much I would have liked the physical version but the narrator for the audio book is absolute gold.",
         "etc."
-      ]
+      ],
+      "coverImage": "dungeon-crawler-carl-cover"
     },
     {
-      "title": "The Budah Walks Into The Bar",
+      "title": "The Buddha Walks into a Bar",
       "subtitle": "A Guide to Life for a New Generation",
       "author": "Lodro Rinzler",
       "review": [
         "My therapist thought I'd like this one. She was right.",
         "etc."
-      ]
+      ],
+      "coverImage": "buddha-walks-into-a-bar-cover"
     },
     {
       "title": "Fool",
@@ -32,7 +35,8 @@
       "review": [
         "Know what's good about having a fiend you've known since third grade? They give you killer books.",
         "etc."
-      ]
+      ],
+      "coverImage": "fool-cover"
     },
     {
       "title": "The Long Way to a Small, Angry Planet",
@@ -40,7 +44,8 @@
       "review": [
         "This was my introduction to Becky Champbers. It was a good one.",
         "etc."
-      ]
+      ],
+      "coverImage": "long-way-cover"
     }
   ]
 }

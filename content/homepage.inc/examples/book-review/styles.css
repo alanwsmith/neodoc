@@ -8,6 +8,7 @@
   border: var(--faded-reverse-border);
   margin: var(--default-margin);
 }
+
 .book-review .title {
   font-weight: 900;
 }

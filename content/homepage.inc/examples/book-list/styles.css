@@ -1,0 +1,30 @@
+.book-list {
+  background-color: var(--faded-warning-color);
+  padding: var(--default-padding);
+  border-radius: var(--default-border-radius);
+  border: var(--faded-reverse-border);
+  margin: var(--default-margin);
+}
+
+.book-list details > summary {
+  font-weight: 900;
+}
+
+.book-list img {
+  width: 7rem;
+}
+
+.book-list .subtitle {
+  font-style: italic;
+}
+
+.book-list .two-columns {
+  display: grid;
+  grid-template-columns: 1fr 8rem;
+}
+
+.book-list .two-columns > :first-child {
+  padding-left: 1.6rem;
+  padding-right: 2.2rem;
+  border-left: var(--faded-reverse-border);
+}
