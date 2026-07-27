@@ -1,0 +1,118 @@
+== filter md
+## The Format
+
+### Sections
+
+Neodocs are made of sections. Each
+one starts with two dashes and a name.
+Content for the section follows below it. 
+
+== filter highlight("neo", class="code-block")
+-- title
+
+A Neodoc Overview
+== endfilter
+
+The section names can be pretty much anything
+as long as they don't contain spaces.
+
+### Section Flags and Attributes
+
+Sections can have metadata attached to them
+in the form of __flags__ and __attributes__.
+
+Flags are pieces of text that start 
+with two dashes on the lines below a 
+section name. For example, this is 
+an __image__ section with a flag for the 
+image's filename (the content portion of the section 
+is used for the image's alt text).
+
+
+== filter highlight("neo", class="code-block")
+-- image 
+-- example-image.jpg
+
+The word "example" written in white text 
+on a dark read background.
+== endfilter
+
+Attributes work the same as flags but
+start with a keyword followed by a colon. 
+For example, here's a "aside" section
+with a "class" attribute of "warning":
+
+== filter highlight("neo", class="code-block")
+-- aside 
+-- class: warning
+
+There is where you can put something 
+that needs extra attention. 
+== endfilter
+
+
+### Section Types
+
+The content of each section is treated 
+as paragraphs by default. This can be changed
+by adding a **section type** after
+the name. The **list** type is an example:
+
+== filter highlight("neo", class="code-block")
+-- notes list
+
+- A note about something. 
+
+- Another note about something else.
+== endfilter
+
+
+Another type is **checklist**:
+
+== filter highlight("neo", class="code-block")
+-- todo checklist 
+
+[] Something that needs to be done
+
+[x] Something that has been done. 
+== endfilter
+
+
+== endfilter
+<details>
+  <summary>More on Section Types</summary>
+== filter md
+
+The full list of section types is:
+
+- checklist - a collection of items 
+with a status associated with them. 
+
+- csv - a collection of CSV data. 
+
+- json - a JSON object. 
+
+- list - a list that uses bullets for
+each item. 
+
+- numbered - a list that uses numbers
+for each item. 
+
+- p - paragraph based content. 
+
+- raw - a raw block of text with 
+no addition processing. 
+
+  == endfilter
+
+</details>
+
+
+
+== filter md
+
+
+
+
+
+== endfilter

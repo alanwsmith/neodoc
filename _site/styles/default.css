@@ -1,8 +1,18 @@
+:root {
+  --default-base-color: #ccc;
+  --default-base-border: 1px solid var(--default-base-color);
+  --default-margin: 1.8rem;
+  --default-padding: 1.1rem;
+  --default-border-radius: 0.4rem;
+  --default-accent-color: darkgreen;
+  --default-accent-border: 1px solid var(--default-accent-color);
+}
+
 body {
   background-color: black;
-  color: #ccc;
+  color: var(--default-base-color);
   font-family: system-ui, sans-serif;
-  font-size: 1rem;
+  font-size: 1.3rem;
 }
 
 a {
@@ -13,8 +23,26 @@ a:hover {
   color: green;
 }
 
+.code-block {
+  background-color: #222;
+  border: var(--default-accent-border);
+  border-radius: var(--default-border-radius);
+  font-size: 1.1rem;
+  margin: var(--default-margin);
+  padding: var(--default-padding);
+}
+
+h1 {
+  font-size: 2.6rem;
+}
+
+h2 {
+  border-bottom: var(--default-base-border);
+}
+
 main.default {
-  max-width: min(56rem, calc(100vw - 3rem));
+  max-width: min(46rem, calc(100vw - 3rem));
   margin: auto;
 }
+
 

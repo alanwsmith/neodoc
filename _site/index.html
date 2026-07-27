@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/default.css" />
     
-
   </head>
   <body>
     
@@ -19,22 +18,103 @@ Atmosphere.</p>
 <h2>Overview</h2>
 <ul>
 <li>
-<p>neodoc is a plain text format.
-It's designed to be easy to use while
-providing everything necessary to
-generate dynamic content.</p>
+<p><strong>neodoc</strong> is a format for creating content.
+It's designed to be easy to use without
+sacrificing the ability to make fully
+featured pages and posts.</p>
 <p>If you're familiar with <a href="https://www.markdownguide.org/">markdown</a>,
 it's like that, but on steroids.</p>
 </li>
 <li>
-<p>neodoc.style is an upcoming
+<p><strong>neodoc.style</strong> is an upcoming
 <a href="https://atproto.com/">AT Proto</a>
 <a href="https://atproto.com/specs/lexicon">lexicon</a>
 for publishing neodoc content
-into the <a href="https://atmosphere.community/">Atmosphere</a>.</p>
+in the <a href="https://atmosphere.community/">Atmosphere</a>.</p>
 </li>
 </ul>
 <h2>The Format</h2>
+<h3>Sections</h3>
+<p>Neodocs are made of sections. Each
+one starts with two dashes and a name.
+Content for the section follows below it.</p>
+<div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text plain">-- title
+<span class="line-marker" data-line="2"></span>
+<span class="line-marker" data-line="3"></span>A Neodoc Overview</span></pre></div></div>
+The section names can be pretty much anything
+as long as they don't contain spaces.
+<h3>Section Flags and Attributes</h3>
+<p>Sections can have metadata attached to them
+in the form of <strong>flags</strong> and <strong>attributes</strong>.</p>
+<p>Flags are pieces of text that start
+with two dashes on the lines below a
+section name. For example, this is
+an <strong>image</strong> section with a flag for the
+image's filename (the content portion of the section
+is used for the image's alt text).</p>
+<div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text plain">-- image 
+<span class="line-marker" data-line="2"></span>-- example-image.jpg
+<span class="line-marker" data-line="3"></span>
+<span class="line-marker" data-line="4"></span>The word &quot;example&quot; written in white text 
+<span class="line-marker" data-line="5"></span>on a dark read background.</span></pre></div></div>
+Attributes work the same as flags but
+start with a keyword followed by a colon. 
+For example, here's a "aside" section
+with a "class" attribute of "warning":
+<div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text plain">-- aside 
+<span class="line-marker" data-line="2"></span>-- class: warning
+<span class="line-marker" data-line="3"></span>
+<span class="line-marker" data-line="4"></span>There is where you can put something 
+<span class="line-marker" data-line="5"></span>that needs extra attention.</span></pre></div></div>
+<h3>Section Types</h3>
+<p>The content of each section is treated
+as paragraphs by default. This can be changed
+by adding a <strong>section type</strong> after
+the name. The <strong>list</strong> type is an example:</p>
+<div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text plain">-- notes list
+<span class="line-marker" data-line="2"></span>
+<span class="line-marker" data-line="3"></span>- A note about something. 
+<span class="line-marker" data-line="4"></span>
+<span class="line-marker" data-line="5"></span>- Another note about something else.</span></pre></div></div>
+<p>Another type is <strong>checklist</strong>:</p>
+<div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text plain">-- todo checklist 
+<span class="line-marker" data-line="2"></span>
+<span class="line-marker" data-line="3"></span>[] Something that needs to be done
+<span class="line-marker" data-line="4"></span>
+<span class="line-marker" data-line="5"></span>[x] Something that has been done.</span></pre></div></div>
+<details>
+  <summary>More on Section Types</summary>
+<p>The full list of section types is:</p>
+<ul>
+<li>
+<p>checklist - a collection of items
+with a status associated with them.</p>
+</li>
+<li>
+<p>csv - a collection of CSV data.</p>
+</li>
+<li>
+<p>json - a JSON object.</p>
+</li>
+<li>
+<p>list - a list that uses bullets for
+each item.</p>
+</li>
+<li>
+<p>numbered - a list that uses numbers
+for each item.</p>
+</li>
+<li>
+<p>p - paragraph based content.</p>
+</li>
+<li>
+<p>raw - a raw block of text with
+no addition processing.</p>
+</li>
+</ul>
+
+</details>
+
 
 
 </main>
