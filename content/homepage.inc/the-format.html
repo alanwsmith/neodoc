@@ -103,6 +103,39 @@ for each item.
 - raw - a raw block of text with 
 no addition processing. 
 
+Using a section type for the name of
+  a section works too. For example, 
+  creating a generic numbered list is done with:
+
+== filter highlight("neo", class="code-block")
+-- numbered 
+
+1. A note about something. 
+
+2. Another note about something else.
+== endfilter
+
+
+There are also a few section names
+  that are processed as __raw__ instead
+  of paragraphs by default. They are:
+
+- css 
+
+- html
+
+- script
+
+- math
+
+- pre
+
+- svg 
+
+- template
+
+- textarea 
+
   == endfilter
 
 </details>
