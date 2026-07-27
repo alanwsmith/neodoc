@@ -1,13 +1,46 @@
 {
   "books": [
     {
-      "title": "A"
+      "title": "Bird by Bird",
+      "subtitle": "Some Instructions on Writing and Life",
+      "author": "Anne Lamott",
+      "review": [
+        "First off, I did the audio book instead of the paper copy. I don't know how much I would have liked the physical version but the narrator for the audio book is absolute gold.",
+        "etc."
+      ]
     },
     {
-      "title": "B"
+      "title": "Dungeon Crawler Carl",
+      "author": "Matt Dinniman",
+      "review": [
+        "First off, I did the audio book instead of the paper copy. I don't know how much I would have liked the physical version but the narrator for the audio book is absolute gold.",
+        "etc."
+      ]
     },
     {
-      "title": "C"
+      "title": "The Budah Walks Into The Bar",
+      "subtitle": "A Guide to Life for a New Generation",
+      "author": "Lodro Rinzler",
+      "review": [
+        "My therapist thought I'd like this one. She was right.",
+        "etc."
+      ]
+    },
+    {
+      "title": "Fool",
+      "author": "Christopher Mooer",
+      "review": [
+        "Know what's good about having a fiend you've known since third grade? They give you killer books.",
+        "etc."
+      ]
+    },
+    {
+      "title": "The Long Way to a Small, Angry Planet",
+      "author": "Becky Chambers",
+      "review": [
+        "This was my introduction to Becky Champbers. It was a good one.",
+        "etc."
+      ]
     }
   ]
 }

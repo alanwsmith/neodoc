@@ -1,0 +1,14 @@
+<div class="book-list">
+  <div class="heading">Alan's Book Reviews</div>
+== for book in d[template_dir("/data.json")].books
+<details><summary>[@ book.title @]</summary>
+    == if book.subtitle 
+    <div class="subtitle">[@ book.subtitle @]</div>
+    == endif
+    <div>by: <strong>[@ book.author @]</strong></div>
+    == for p in book.review
+    <p>[@ p @]</p>
+    == endfor
+</details>
+== endfor 
+</div>

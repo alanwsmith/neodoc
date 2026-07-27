@@ -4,11 +4,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/default.css" />
+    <script type="module" src="&#x2f;scripts.raw&#x2f;bitty&#x2f;bitty-9.0.0-beta1.source.js"></script>
 <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
 <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
 <link rel="shortcut icon" href="/favicon/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="neodoc.style" />    
+<meta name="apple-mobile-web-app-title" content="neodoc.style" />    <style>
+    body {
+      background-color: black;
+      color: #ccc;
+    }
+    </style>
+
+    
   </head>
   <body>
     
@@ -23,8 +31,8 @@ Atmosphere.</p>
 <ul>
 <li>
 <p><strong>neodoc</strong> is a format for creating content.
-It's designed to be easy to use without
-sacrificing the ability to make fully
+It's designed to be easy to use and portable without
+sacrificing the ability to create fully
 featured pages and posts.</p>
 <p>If you're familiar with <a href="https://www.markdownguide.org/">markdown</a>,
 it's like that, but on steroids.</p>
@@ -107,13 +115,42 @@ independently from the content. You can created layouts that apply
 to all your content and then override them
 individually. Or, you can skip them all
 together and use an apps defaults. 
+<h3>Alternate Perspectives</h3>
 <p>Separating content from layout means different
 apps can do different things with the content.
 For example, an app could aggregate all the book
 reviews you've posted onto a single page.
 Something like this:</p>
-<p>TKTKTK</p>
-<p>Check out the rest of the page
+<div class="book-list">
+  <div class="heading">Alan's Book Reviews</div>
+<details><summary>Bird by Bird</summary>
+    <div class="subtitle">Some Instructions on Writing and Life</div>
+    <div>by: <strong>Anne Lamott</strong></div>
+    <p>First off, I did the audio book instead of the paper copy. I don&#x27;t know how much I would have liked the physical version but the narrator for the audio book is absolute gold.</p>
+    <p>etc.</p>
+</details>
+<details><summary>Dungeon Crawler Carl</summary>
+    <div>by: <strong>Matt Dinniman</strong></div>
+    <p>First off, I did the audio book instead of the paper copy. I don&#x27;t know how much I would have liked the physical version but the narrator for the audio book is absolute gold.</p>
+    <p>etc.</p>
+</details>
+<details><summary>The Budah Walks Into The Bar</summary>
+    <div class="subtitle">A Guide to Life for a New Generation</div>
+    <div>by: <strong>Lodro Rinzler</strong></div>
+    <p>My therapist thought I&#x27;d like this one. She was right.</p>
+    <p>etc.</p>
+</details>
+<details><summary>Fool</summary>
+    <div>by: <strong>Christopher Mooer</strong></div>
+    <p>Know what&#x27;s good about having a fiend you&#x27;ve known since third grade? They give you killer books.</p>
+    <p>etc.</p>
+</details>
+<details><summary>The Long Way to a Small, Angry Planet</summary>
+    <div>by: <strong>Becky Chambers</strong></div>
+    <p>This was my introduction to Becky Champbers. It was a good one.</p>
+    <p>etc.</p>
+</details>
+</div><p>Check out the rest of the page
 for more details on how everything works.</p>
 <h2>The Format</h2>
 <h3>Sections</h3>
@@ -344,5 +381,8 @@ can also be written as:
 
 
 
+    <div class="page-templates" hidden>
+      <bitty-9 data-connect="/bits.raw/default.js"></bitty-9>
+    </div>
   </body>
 </html>

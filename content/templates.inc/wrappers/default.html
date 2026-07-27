@@ -4,10 +4,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/default.css" />
+    <script type="module" src="[@ d["/site.json"].bittyURL @]"></script>
     == include "/templates.inc/favicon/default.html"
+    <style>
+    body {
+      background-color: black;
+      color: #ccc;
+    }
+    </style>
+
     [! block styles !][! endblock !]
   </head>
   <body>
     [! block payload !][! endblock !]
+    <div class="page-templates" hidden>
+      <bitty-9 data-connect="/bits.raw/default.js"></bitty-9>
+    </div>
   </body>
 </html>
