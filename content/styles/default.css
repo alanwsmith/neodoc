@@ -6,6 +6,9 @@
   --default-border-radius: 0.4rem;
   --default-accent-color: darkgreen;
   --default-accent-border: 1px solid var(--default-accent-color);
+  --faded-warning-color: rgb(149 25 25 / 0.4);
+  --faded-reverse-color: rgb(255 255 255 /0.4);
+  --faded-reverse-border: 1px solid var(--faded-reverse-color);
 }
 
 body {

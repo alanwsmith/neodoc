@@ -145,6 +145,140 @@ There are also a few section names
 == filter md
 
 
+### Spans
+
+Section content can contain spans. 
+They're snippets that wrap
+text to alter it in some way. 
+
+A basic span looks like this:
+
+== filter highlight("neo", class="code-block")
+<<code|console.log()>>
+== endfilter
+
+The parts are:
+
+- A pair of less than signs (`<<`)
+that mark the start of the span. 
+
+- The type of span (e.g. `code` in the
+example above). 
+
+- A pipe (`|`) character that separates
+the span type from the span's content. 
+
+- The span's content itself. 
+
+- A pair of greter than signs (`>>`)
+that mark the end of the span. 
+
+Here's what a span looks like surrounded
+by more content:
+
+== filter highlight("neo", class="code-block")
+The JavaScript function 
+<<code|console.log()>>
+prints information to the developer console. 
+== endfilter
+
+When that content is turned into a web page
+the span turns into an HTML `&lt;code&gt;` tag
+like this:
+
+
+== filter highlight("html", class="code-block")
+The JavaScript function 
+<code>console.log()</code>
+prints information to the developer console. 
+== endfilter
+
+
+### Span Attributes
+
+Spans can have attributes that further 
+enhance their content. They're added
+by using additional pipes to separate
+them from the content. For example, 
+a class attribute can be added to
+the span like this:
+
+== filter highlight("neo", class="code-block")
+<<code|console.log()|class: featured>>
+== endfilter
+
+which outputs this HTML:
+
+== filter highlight("html", class="code-block")
+<code class="featured">console.log()</code>
+== endfilter
+
+Multiple attributes can be added by using
+more pipes. For example, this span (which
+also shows how spans can be split across lines)
+adds a `data-language` attribute that can be
+used to apply syntax highlighting to the
+code:
+
+== filter highlight("neo", class="code-block")
+<<code
+  |console.log()
+  |class: featured
+  |data-language: javascript>>
+== endfilter
+
+The output HTML looks like this:
+
+== filter highlight("html", class="code-block")
+<code 
+  class="featured" 
+  data-language="javascript"
+  >console.log()</code>
+== endfilter
+
+### Span Shorthands
+
+There are shorthands for frequenly used
+span types. For example, backtics denote code
+spans. The orignal example above:
+
+== filter highlight("neo", class="code-block")
+<<code
+  |console.log()
+  |class: featured
+  |language: javascript>>
+== endfilter
+
+can also be written as:
+
+== filter highlight("neo", class="code-block")
+``console.log()
+  |class: featured
+  |language: javascript``
+== endfilter
+
+
+<details><summary>More on Span Shorthands</summary>
+
+The beta testing list of span shorthands is:
+
+- \`\`TEXT\`\` - code span
+
+- \*\*TEXT\*\* - bold span
+
+- \_\_TEXT\_\_ - emphasis span
+
+- \~\~TEXT\~\~ - strikethrough span
+
+- ^^TEXT^^ - footnote 
+
+- \>\>TEXT|URL>> - link
+
+- [[FILEPATH|alt: ALT_TEXT]] - image span
+
+
+
+</details>
 
 
 
