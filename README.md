@@ -1,6 +1,8 @@
 -- title
 
-Neopolitan
+neodoc
+
+(formerly neopolitan)
 
 A parser for the neopolitan format. 
 
