@@ -51,6 +51,25 @@ Here's some
 -- ideas checklist/ 
 -- h3: For the lexicon
 
+[] Include something in the 
+lexicon for notification for
+likes and follows and comments. 
+(Not sure how that works yet)
+
+[] provide for image storage
+
+[] provide for drafts which
+should be stored encrypted
+with a password. 
+
+[] Determine if there's a standard
+way to encrypt where the same
+password can be used by different 
+apps with relative saftey.
+
+
+
+
 [] Maybe do do a ``status`` but with
 only two values "draft" and "done"?
 or is it better to do that with tags?
@@ -66,6 +85,11 @@ a way to pass data to apps.
 The specific handling of any given
 flag value is up to the app 
 itself. 
+
+Flags can also be set up as
+key/value pairs by separating
+the key and the value with a pipe
+character. 
 
 [] Custom/Arbitrary key/value pairs
 can be used in the ``-- metadata``
