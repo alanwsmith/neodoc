@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/default.css" />
     <script type="module" src="[@ d["/site.json"].bittyURL @]"></script>
-    == include "/templates.inc/favicon/default.html"
     <style>
     body {
       background-color: black;
@@ -14,6 +13,9 @@
     </style>
 
     [! block styles !][! endblock !]
+
+    == include "/templates.inc/metadata/default.html"
+
   </head>
   <body>
     == include "/templates.inc/headers/default.html"

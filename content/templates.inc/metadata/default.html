@@ -1,0 +1,59 @@
+[!- set og_url -!]
+[!- if file_path == "/index.html" -!]
+[@ d["/site.json"].rootURL @]
+[!- elif stem(file_path) == "index" -!]
+[@ d["/site.json"].rootURL @][@ template_dir() @]/
+[!- else -!]
+[@ d["/site.json"].rootURL @][@ template_dir() @]/
+[@ file_path @]
+[!- endif -!]
+[!- endset -!]
+
+[!- set og_image -!]
+  [!- if exists(p.dir + "/og-image.jpg") -!]
+[@ d["/site.json"].rootURL @][@ p.dir @]og-image.jpg
+  [!- elif exists(p.dir + "/og-image-auto.jpg") -!]
+[@ d["/site.json"].rootURL @][@ p.dir @]/og-image-auto.jpg
+  [!- else -!]
+[@ d["/site.json"].rootURL @]/og-image.jpg
+  [!- endif -!]
+[!- endset -!]
+
+[!- set og_title !]
+  [!- if p.title !]
+  [@- p.title -@]
+  [!- else -!]
+  [@- d["/site.json"].site.title -@]
+  [!- endif -!]
+[!- endset -!]
+
+
+[!- set og_description -!]
+[!- if p.ogDescription -!]
+[@ p.ogDescription @]
+[!- else -!]
+[@ d["/site.json"].site.ogImage.defaultDescription @]
+[!- endif -!]
+[!- endset -!]
+
+
+
+<title>[@ og_title @]</title>
+<meta property="og:title" content="[@ og_title @]" />
+<meta name="description" content="[@ og_description @]" />
+<meta property="og:description" content="[@ og_description @]" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="[@ og_url @]" />
+<meta property="og:image" content="[@ og_image @]" />
+[#
+<link rel="alternate" type="application/atom+xml" title="al9000.com" href="/rss/feed.xml" />
+#]
+
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+<link rel="shortcut icon" href="/favicon/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="neodoc.style" />
+

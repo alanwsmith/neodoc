@@ -1,3 +1,12 @@
 {
-  "bittyURL": "/scripts.raw/bitty/bitty-9.0.0-beta1.source.js"
+  "bittyURL": "/scripts.raw/bitty/bitty-9.0.0-beta1.source.js",
+  "domain": "neodoc.style",
+  "rootURL": "https://neodoc.style",
+  "site": {
+    "title": "neodoc.style",
+    "ogImage": {
+      "defaultDescription": "from neodoc.style",
+      "defaultPath": "/images/og-image.jpg"
+    }
+  }
 }
