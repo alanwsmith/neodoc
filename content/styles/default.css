@@ -10,6 +10,8 @@
   --faded-reverse-color: rgb(255 255 255 /0.4);
   --faded-reverse-border: 1px solid var(--faded-reverse-color);
   --default-flow: 1em;
+  --faint-reverse-color: rgb(255 255 255 /0.2);
+  --faint-reverse-border: 1px solid var(--faint-reverse-color);
 }
 
 body {
@@ -56,6 +58,18 @@ h1 {
 
 h2 {
   border-bottom: var(--default-base-border);
+}
+
+h3 {
+  text-decoration: underline;
+
+}
+
+.inline-footnote {
+  border-top: var(--faint-reverse-border);
+  padding-inline: 4rem;
+  padding-block: 1.4rem;
+
 }
 
 main.default {
