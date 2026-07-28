@@ -1,3 +1,14 @@
 <header>
+  == if p.path == "/index.html"
+    neodoc.style
+  == else
+  <a href="/">neodoc.style</a>
+  == endif
+
+  == if p.path == "/todo/index.html"
+  todo
+  == else
+  <a href="/todo/">todo</a>
+  == endif
 
 </header>
