@@ -28,23 +28,37 @@
 [!- endset -!]
 
 
-[!- set og_description -!]
-[!- if p.ogDescription -!]
-[@ p.ogDescription @]
-[!- else -!]
-[@ d["/site.json"].site.ogImage.defaultDescription @]
-[!- endif -!]
-[!- endset -!]
+== set og_description 
+== if p.ogDescription
+[@- p.ogDescription -@]
+== elif p.path != "/index.html"
+[@- d["/site.json"].site.ogImage.defaultDescription -@]
+== else
+[@- "" -@]
+== endif
+== endset
+
+== set og_type
+== if p.path == "/index.html"
+[@- "website" -@]
+== else
+[@- "article" -@]
+== endif
+== endset
 
 
 
 <title>[@ og_title @]</title>
 <meta property="og:title" content="[@ og_title @]" />
+== if og_description != ""
 <meta name="description" content="[@ og_description @]" />
 <meta property="og:description" content="[@ og_description @]" />
-<meta property="og:type" content="article" />
+== endif
+
+<meta property="og:type" content="[@ og_type @]" />
 <meta property="og:url" content="[@ og_url @]" />
 <meta property="og:image" content="[@ og_image @]" />
+
 [#
 <link rel="alternate" type="application/atom+xml" title="al9000.com" href="/rss/feed.xml" />
 #]
