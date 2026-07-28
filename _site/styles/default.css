@@ -51,6 +51,18 @@ details > :where(:not(summary)) {
   padding-inline: 1.2rem;
 }
 
+footer.default {
+  max-width: min(46rem, calc(100vw - 3rem));
+  margin: auto;
+  color: var(--faded-reverse-color);
+  text-align: center;
+  font-size: 0.9rem;
+  padding-block: 2rem;
+  a {
+    text-decoration: none;
+  }
+}
+
 
 h1 {
   font-size: 2.6rem;
@@ -65,6 +77,14 @@ h3 {
 
 }
 
+header.default {
+  max-width: min(46rem, calc(100vw - 3rem));
+  margin: auto;
+  a {
+    text-decoration: none;
+  }
+}
+
 .inline-footnote {
   border-top: var(--faint-reverse-border);
   padding-inline: 4rem;
@@ -75,6 +95,11 @@ h3 {
 main.default {
   max-width: min(46rem, calc(100vw - 3rem));
   margin: auto;
+}
+
+
+.no-underline {
+  text-decoration: none;
 }
 
 
