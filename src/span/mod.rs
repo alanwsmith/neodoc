@@ -1,6 +1,8 @@
-use nom::bytes::complete::is_not;
+pub mod text;
+
 use nom::{IResult, Parser};
 use serde::{Deserialize, Serialize};
+use text::*;
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(tag = "kind", rename_all = "lowercase")]
@@ -9,9 +11,6 @@ pub enum Span {
 }
 
 pub fn span(input: &str) -> IResult<&str, Span> {
-  let (input, result) = is_not("\n").parse(input)?;
-  let response = Span::Text {
-    content: result.to_string(),
-  };
-  Ok((input, response))
+  let (input, result) = text.parse(input)?;
+  Ok((input, result))
 }

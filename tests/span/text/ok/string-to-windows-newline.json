@@ -1,0 +1,13 @@
+{
+  "test": "String to end of input",
+  "given": "alfa bravo\r\ncharlie",
+  "status": {
+    "ok": {
+      "kind": "text",
+      "content": "alfa bravo"
+    }
+  },
+  "remainder": "\r\ncharlie",
+  "skip": false,
+  "solo": false
+}
