@@ -1,4 +1,6 @@
 {
+  "skip": false,
+  "solo": false,
   "test": "Special Characters are fine",
   "given": "-- ~!@#$%^&*()\n\nalfa",
   "status": {

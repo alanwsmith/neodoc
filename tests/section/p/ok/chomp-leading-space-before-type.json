@@ -1,4 +1,6 @@
 {
+  "skip": false,
+  "solo": false,
   "test": "Chomp leaing space before type",
   "given": "--     alfa\n\nbravo",
   "status": {

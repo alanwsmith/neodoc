@@ -1,4 +1,6 @@
 {
+  "skip": false,
+  "solo": false,
   "test": "Chomp trailing whitespace after kind",
   "given": "-- alfa p           \n\nbravo",
   "status": {

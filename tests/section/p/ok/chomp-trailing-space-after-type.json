@@ -1,4 +1,6 @@
 {
+  "skip": false,
+  "solo": false,
   "test": "Chomp trailing space after type",
   "given": "-- alfa     \n\nbravo",
   "status": {
