@@ -1,0 +1,10 @@
+{
+  "test": "Token with single space",
+  "given": "-- x",
+  "result": {
+    "ok": {
+      "expected": "",
+      "remainder": "x"
+    }
+  }
+}

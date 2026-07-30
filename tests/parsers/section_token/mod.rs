@@ -6,14 +6,29 @@ use std::path::PathBuf;
 
 #[test]
 fn basic_test() -> Result<(), std::io::Error> {
-    let json_dir = PathBuf::from("tests/section/jsons");
+    let json_dir = PathBuf::from("tests/parsers/section_token/jsons");
     let files = get_files_in_dir(&json_dir)?;
     for f in files.iter() {
-        let data: TestValue =
+        let data: TestString =
             serde_json::from_str(&fs::read_to_string(f).unwrap()).unwrap();
-        let left = (data.remainder.as_str(), data.expected);
-        let right = section(&data.given).unwrap();
-        assert_eq!(left, right);
+        match data.result {
+            TestResult::Ok {
+                expected,
+                remainder,
+            } => {
+                let left = (remainder.as_str(), expected.as_str());
+                let right = section_token(&data.given).unwrap();
+                assert_eq!(left, right);
+            }
+            TestResult::Error {} => match section_token(&data.given) {
+                Err(_) => {
+                    assert!(true);
+                }
+                _ => {
+                    assert!(false);
+                }
+            },
+        }
     }
     Ok(())
 }
