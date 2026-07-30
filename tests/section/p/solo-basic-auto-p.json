@@ -15,10 +15,8 @@
           "kind": "block",
           "spans": [
             {
-              "attrs": [],
-              "category": "text",
-              "content": "Hello, World",
-              "flags": []
+              "kind": "text",
+              "content": "Hello, World"
             }
           ]
         }

@@ -1,28 +1,101 @@
+use anyhow::anyhow;
+use anyhow::{Error, Result};
 use neodoc::parsers::*;
 use neodoc::test_json::*;
 use pretty_assertions::assert_eq;
-use std::fs;
+use serde::Deserialize;
+use serde_json::Value;
+use std::ffi::OsStr;
+use std::fs::{self, DirEntry};
 use std::path::PathBuf;
+use walkdir::WalkDir;
 
-#[test]
-fn basic_test() -> Result<(), std::io::Error> {
-    let json_dir = PathBuf::from("tests/section/jsons");
-    let files = get_files_in_dir(&json_dir)?;
-    for f in files.iter() {
-        let data: TestValue =
-            serde_json::from_str(&fs::read_to_string(f).unwrap()).unwrap();
-        let left = (data.remainder.as_str(), data.expected);
-        let right = section(&data.given).unwrap();
-        assert_eq!(left, right);
-    }
-    Ok(())
+#[derive(Debug, Deserialize)]
+struct SectionTest {
+  test: String,
+  given: String,
+  status: SectionTestStatus,
+  remainder: String,
 }
 
-pub fn get_files_in_dir(dir: &PathBuf) -> Result<Vec<PathBuf>, std::io::Error> {
-    let files = fs::read_dir(dir)?
-        .filter(|p| p.as_ref().unwrap().path().is_file())
-        .map(|p| p.as_ref().unwrap().path())
-        .filter(|p| !p.file_name().unwrap().to_str().unwrap().starts_with("."))
-        .collect();
-    Ok(files)
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "lowercase")]
+enum SectionTestStatus {
+  Ok(Value),
+  Error(Value),
+}
+
+#[test]
+fn run_solo_tests() -> Result<()> {
+  for test_file in solo_tests()? {
+    let content = &fs::read_to_string(test_file)?;
+    let test: SectionTest = serde_json::from_str(content)?;
+    match test.status {
+      SectionTestStatus::Ok(data) => {
+        let left = (test.remainder.as_str(), data);
+        let right = section(&test.given).unwrap();
+        assert_eq!(left, right);
+      }
+      SectionTestStatus::Error(data) => {}
+    }
+    // let left = (test.remainder.as_str(), test.expected);
+    // let right = section(&test.given).unwrap();
+
+    // let data: TestValue = serde_json::from_str(
+    // )
+    // .unwrap();
+    // let right = section(&data.given).unwrap();
+    // assert_eq!(left, right);
+  }
+
+  // for test_json in test_jsons {
+  //   let file_name = test_json.file_name().ok_or(anyhow!(
+  //     "could not find file name for test file"
+  //   ));
+  // }
+
+  //let json_dir = PathBuf::from("tests/section/jsons");
+  // let files = get_files_in_dir(&json_dir)?;
+  // for f in files.iter() {
+  //   let data: TestValue =
+  //     serde_json::from_str(&fs::read_to_string(f).unwrap()).unwrap();
+  //   let left = (data.remainder.as_str(), data.expected);
+  //   let right = section(&data.given).unwrap();
+  //   assert_eq!(left, right);
+  // }
+  Ok(())
+}
+
+fn test_files(path: &str) -> Result<Vec<PathBuf>> {
+  Ok(
+    WalkDir::new(path)
+      .into_iter()
+      .filter_map(|entry| entry.ok())
+      .filter(|entry| entry.file_type().is_file())
+      .filter(|entry| {
+        entry
+          .path()
+          .extension()
+          .and_then(|e| e.to_str())
+          .map(|e| e.eq_ignore_ascii_case("json"))
+          .unwrap_or(false)
+      })
+      .map(|entry| entry.into_path())
+      .collect(),
+  )
+}
+
+fn solo_tests() -> Result<Vec<PathBuf>> {
+  Ok(
+    test_files("tests/section")?
+      .into_iter()
+      .filter(|e| {
+        e.file_name()
+          .unwrap_or(OsStr::new(""))
+          .to_str()
+          .unwrap_or("")
+          .starts_with("solo")
+      })
+      .collect(),
+  )
 }

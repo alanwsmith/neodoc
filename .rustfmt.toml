@@ -1,2 +1,4 @@
-max_width = 80
-fn_call_width = 60
+fn_params_layout = "Vertical"
+max_width = 60
+newline_style = "Unix"
+tab_spaces = 2
