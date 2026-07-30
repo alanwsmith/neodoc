@@ -1,0 +1,18 @@
+{
+  "test": "Ends at end of input",
+  "given": "alfa bravo",
+  "status": {
+    "ok": {
+      "kind": "block",
+      "spans": [
+        {
+          "kind": "text",
+          "content": "alfa bravo"
+        }
+      ]
+    }
+  },
+  "remainder": "",
+  "skip": false,
+  "solo": false
+}
