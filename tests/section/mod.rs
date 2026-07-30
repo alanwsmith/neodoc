@@ -36,33 +36,27 @@ fn run_solo_tests() -> Result<()> {
         let right = section(&test.given).unwrap();
         assert_eq!(left, right);
       }
-      SectionTestStatus::Error(data) => {}
+      SectionTestStatus::Error(data) => {
+        panic!("set up for errors")
+      }
     }
-    // let left = (test.remainder.as_str(), test.expected);
-    // let right = section(&test.given).unwrap();
-
-    // let data: TestValue = serde_json::from_str(
-    // )
-    // .unwrap();
-    // let right = section(&data.given).unwrap();
-    // assert_eq!(left, right);
   }
 
-  // for test_json in test_jsons {
-  //   let file_name = test_json.file_name().ok_or(anyhow!(
-  //     "could not find file name for test file"
-  //   ));
-  // }
+  for test_file in non_solo_tests()? {
+    let content = &fs::read_to_string(test_file)?;
+    let test: SectionTest = serde_json::from_str(content)?;
+    match test.status {
+      SectionTestStatus::Ok(data) => {
+        let left = (test.remainder.as_str(), data);
+        let right = section(&test.given).unwrap();
+        assert_eq!(left, right);
+      }
+      SectionTestStatus::Error(data) => {
+        panic!("set up for errors")
+      }
+    }
+  }
 
-  //let json_dir = PathBuf::from("tests/section/jsons");
-  // let files = get_files_in_dir(&json_dir)?;
-  // for f in files.iter() {
-  //   let data: TestValue =
-  //     serde_json::from_str(&fs::read_to_string(f).unwrap()).unwrap();
-  //   let left = (data.remainder.as_str(), data.expected);
-  //   let right = section(&data.given).unwrap();
-  //   assert_eq!(left, right);
-  // }
   Ok(())
 }
 
@@ -91,6 +85,21 @@ fn solo_tests() -> Result<Vec<PathBuf>> {
       .into_iter()
       .filter(|e| {
         e.file_name()
+          .unwrap_or(OsStr::new(""))
+          .to_str()
+          .unwrap_or("")
+          .starts_with("solo")
+      })
+      .collect(),
+  )
+}
+
+fn non_solo_tests() -> Result<Vec<PathBuf>> {
+  Ok(
+    test_files("tests/section")?
+      .into_iter()
+      .filter(|e| {
+        !e.file_name()
           .unwrap_or(OsStr::new(""))
           .to_str()
           .unwrap_or("")

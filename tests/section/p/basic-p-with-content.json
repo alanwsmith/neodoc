@@ -1,27 +1,27 @@
 {
-  "test": "A basic test of a ``-- something p`` section with one paragraph in it",
-  "given": "-- something p\n\nHello, World",
-  "expected": {
-    "kind": "p",
-    "metadata": {
-      "attrs": [],
-      "bound": "full",
-      "flags": [],
-      "type": "something"
-    },
-    "sections": [
-      {
-        "kind": "block",
-        "spans": [
-          {
-            "attrs": [],
-            "category": "text",
-            "content": "Hello, World",
-            "flags": []
-          }
-        ]
-      }
-    ]
+  "test": "A basic test of a ``-- alfa p`` section with one paragraph in it",
+  "given": "-- alfa p\n\nHello, World",
+  "status": {
+    "ok": {
+      "kind": "p",
+      "metadata": {
+        "attrs": [],
+        "bound": "full",
+        "flags": [],
+        "type": "alfa"
+      },
+      "sections": [
+        {
+          "kind": "block",
+          "spans": [
+            {
+              "kind": "text",
+              "content": "Hello, World"
+            }
+          ]
+        }
+      ]
+    }
   },
   "remainder": ""
 }
