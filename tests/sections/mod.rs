@@ -10,5 +10,5 @@ fn basic_test() {
             .unwrap(),
     )
     .unwrap();
-    assert_eq!(data.expected, section(&data.given));
+    assert_eq!(data.expected, section(&data.given).unwrap().1);
 }
