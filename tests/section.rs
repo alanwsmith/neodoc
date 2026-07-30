@@ -25,7 +25,9 @@ fn my_test(path: &Path) -> datatest_stable::Result<()> {
   match test.status {
     Status::Ok(data) => {
       let left = (test.remainder.as_str(), data);
-      let right = section(&test.given).unwrap();
+      let result = section(&test.given).unwrap();
+      let right =
+        (result.0, serde_json::to_value(result.1).unwrap());
       assert_eq!(left, right);
     }
     Status::Error(_data) => {

@@ -20,18 +20,21 @@ enum Status {
 }
 
 fn my_test(path: &Path) -> datatest_stable::Result<()> {
-  // let content = &fs::read_to_string(path)?;
-  // let test: PayloadTest = serde_json::from_str(content)?;
-  // match test.status {
-  //   Status::Ok(data) => {
-  //     let left = (test.remainder.as_str(), data);
-  //     let right = section(&test.given).unwrap();
-  //     assert_eq!(left, right);
-  //   }
-  //   Status::Error(_data) => {
-  //     panic!("set up for errors")
-  //   }
-  // }
+  let content = &fs::read_to_string(path)?;
+  let test: PayloadTest = serde_json::from_str(content)?;
+  match test.status {
+    Status::Ok(data) => {
+      let left = (
+        test.remainder.as_str(),
+        data.get("sections").unwrap(),
+      );
+      let right = payload(&test.given).unwrap();
+      // assert_eq!(left, right);
+    }
+    Status::Error(_data) => {
+      panic!("set up for errors")
+    }
+  }
   Ok(())
 }
 
