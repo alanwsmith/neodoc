@@ -7,14 +7,14 @@ use serde_json::Value;
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(tag = "category", rename_all = "lowercase")]
-pub enum Container {
+pub enum Category {
     Section {
         attrs: Vec<Attr>,
         bound: Bound,
         flags: Vec<String>,
         r#type: String,
         kind: String,
-        children: Vec<Container>,
+        children: Vec<Category>,
     },
     Block {
         spans: Vec<Span>,
@@ -58,7 +58,7 @@ pub fn section(input: &str) -> IResult<&str, Value> {
     let (input, _) = line_ending(input)?;
     let (input, _) = empty_lines(input)?;
     let (input, block) = block(input)?;
-    let section = Container::Section {
+    let section = Category::Section {
         attrs: vec![],
         bound: Bound::Full,
         children: vec![block],
@@ -87,11 +87,11 @@ fn section_kind(input: &str) -> IResult<&str, &str> {
     Ok((input, result))
 }
 
-fn block(input: &str) -> IResult<&str, Container> {
+fn block(input: &str) -> IResult<&str, Category> {
     let (input, result) = rest(input)?;
     Ok((
         input,
-        Container::Block {
+        Category::Block {
             spans: vec![Span::Text {
                 attrs: vec![],
                 content: result.to_string(),
