@@ -1,0 +1,15 @@
+/Users/alan/workshop/neodoc/_archive/_holding_15/target/debug/deps/markup5ever-1d3eca06603bc7b3.d: /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/markup5ever-0.11.0/lib.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/markup5ever-0.11.0/data/mod.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/markup5ever-0.11.0/interface/mod.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/markup5ever-0.11.0/interface/tree_builder.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/markup5ever-0.11.0/serialize.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/markup5ever-0.11.0/util/buffer_queue.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/markup5ever-0.11.0/util/smallcharset.rs /Users/alan/workshop/neodoc/_archive/_holding_15/target/debug/build/markup5ever-62a8528244d5ea54/out/generated.rs /Users/alan/workshop/neodoc/_archive/_holding_15/target/debug/build/markup5ever-62a8528244d5ea54/out/named_entities.rs
+
+/Users/alan/workshop/neodoc/_archive/_holding_15/target/debug/deps/libmarkup5ever-1d3eca06603bc7b3.rmeta: /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/markup5ever-0.11.0/lib.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/markup5ever-0.11.0/data/mod.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/markup5ever-0.11.0/interface/mod.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/markup5ever-0.11.0/interface/tree_builder.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/markup5ever-0.11.0/serialize.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/markup5ever-0.11.0/util/buffer_queue.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/markup5ever-0.11.0/util/smallcharset.rs /Users/alan/workshop/neodoc/_archive/_holding_15/target/debug/build/markup5ever-62a8528244d5ea54/out/generated.rs /Users/alan/workshop/neodoc/_archive/_holding_15/target/debug/build/markup5ever-62a8528244d5ea54/out/named_entities.rs
+
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/markup5ever-0.11.0/lib.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/markup5ever-0.11.0/data/mod.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/markup5ever-0.11.0/interface/mod.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/markup5ever-0.11.0/interface/tree_builder.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/markup5ever-0.11.0/serialize.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/markup5ever-0.11.0/util/buffer_queue.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/markup5ever-0.11.0/util/smallcharset.rs:
+/Users/alan/workshop/neodoc/_archive/_holding_15/target/debug/build/markup5ever-62a8528244d5ea54/out/generated.rs:
+/Users/alan/workshop/neodoc/_archive/_holding_15/target/debug/build/markup5ever-62a8528244d5ea54/out/named_entities.rs:
+
+# env-dep:OUT_DIR=/Users/alan/workshop/neodoc/_archive/_holding_15/target/debug/build/markup5ever-62a8528244d5ea54/out

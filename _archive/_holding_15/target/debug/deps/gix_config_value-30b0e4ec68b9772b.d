@@ -1,0 +1,10 @@
+/Users/alan/workshop/neodoc/_archive/_holding_15/target/debug/deps/gix_config_value-30b0e4ec68b9772b.d: /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-config-value-0.12.5/src/lib.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-config-value-0.12.5/src/boolean.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-config-value-0.12.5/src/color.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-config-value-0.12.5/src/integer.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-config-value-0.12.5/src/path.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-config-value-0.12.5/src/types.rs
+
+/Users/alan/workshop/neodoc/_archive/_holding_15/target/debug/deps/libgix_config_value-30b0e4ec68b9772b.rmeta: /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-config-value-0.12.5/src/lib.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-config-value-0.12.5/src/boolean.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-config-value-0.12.5/src/color.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-config-value-0.12.5/src/integer.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-config-value-0.12.5/src/path.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-config-value-0.12.5/src/types.rs
+
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-config-value-0.12.5/src/lib.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-config-value-0.12.5/src/boolean.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-config-value-0.12.5/src/color.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-config-value-0.12.5/src/integer.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-config-value-0.12.5/src/path.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-config-value-0.12.5/src/types.rs:

@@ -1,0 +1,13 @@
+/Users/alan/workshop/neodoc/_archive/_holding_15/target/debug/deps/ignore-01e18caf731f225c.d: /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/lib.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/default_types.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/dir.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/gitignore.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/incremental.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/overrides.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/pathutil.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/types.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/walk.rs
+
+/Users/alan/workshop/neodoc/_archive/_holding_15/target/debug/deps/libignore-01e18caf731f225c.rmeta: /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/lib.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/default_types.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/dir.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/gitignore.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/incremental.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/overrides.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/pathutil.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/types.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/walk.rs
+
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/lib.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/default_types.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/dir.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/gitignore.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/incremental.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/overrides.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/pathutil.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/types.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ignore-0.4.31/src/walk.rs:

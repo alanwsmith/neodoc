@@ -1,0 +1,10 @@
+/Users/alan/workshop/neodoc/_archive/_holding_15/target/debug/deps/watchexec_events-9e7225d55af364d0.d: /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/watchexec-events-1.0.0/src/lib.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/watchexec-events-1.0.0/src/event.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/watchexec-events-1.0.0/src/fs.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/watchexec-events-1.0.0/src/keyboard.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/watchexec-events-1.0.0/src/process.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/watchexec-events-1.0.0/src/../README.md
+
+/Users/alan/workshop/neodoc/_archive/_holding_15/target/debug/deps/libwatchexec_events-9e7225d55af364d0.rmeta: /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/watchexec-events-1.0.0/src/lib.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/watchexec-events-1.0.0/src/event.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/watchexec-events-1.0.0/src/fs.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/watchexec-events-1.0.0/src/keyboard.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/watchexec-events-1.0.0/src/process.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/watchexec-events-1.0.0/src/../README.md
+
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/watchexec-events-1.0.0/src/lib.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/watchexec-events-1.0.0/src/event.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/watchexec-events-1.0.0/src/fs.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/watchexec-events-1.0.0/src/keyboard.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/watchexec-events-1.0.0/src/process.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/watchexec-events-1.0.0/src/../README.md:

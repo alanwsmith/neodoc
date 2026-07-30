@@ -178,8 +178,9 @@ pub fn sections(source: &str) -> IResult<&str, Vec<Section>> {
         // order matters here so things don't get flipped
         alt((notes, note, checklist)),
         alt((
-            aside, blockquote, closediv, code, css, endcode, hidden, html, hr, list,
-            image, opendiv, olist, pre, script, startcode, title, vimeo, youtube,
+            aside, blockquote, closediv, code, css, endcode, hidden, html, hr,
+            list, image, opendiv, olist, pre, script, startcode, title, vimeo,
+            youtube,
         )),
         alt((h, p)),
     )))(source)?;

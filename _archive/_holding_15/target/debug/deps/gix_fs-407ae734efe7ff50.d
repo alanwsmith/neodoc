@@ -1,0 +1,12 @@
+/Users/alan/workshop/neodoc/_archive/_holding_15/target/debug/deps/gix_fs-407ae734efe7ff50.d: /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/lib.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/capabilities.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/snapshot.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/symlink.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/dir/mod.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/dir/create.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/dir/remove.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/stack.rs
+
+/Users/alan/workshop/neodoc/_archive/_holding_15/target/debug/deps/libgix_fs-407ae734efe7ff50.rmeta: /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/lib.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/capabilities.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/snapshot.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/symlink.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/dir/mod.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/dir/create.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/dir/remove.rs /Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/stack.rs
+
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/lib.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/capabilities.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/snapshot.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/symlink.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/dir/mod.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/dir/create.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/dir/remove.rs:
+/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/gix-fs-0.1.1/src/stack.rs:
