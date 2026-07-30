@@ -1,6 +1,4 @@
 {
-  "skip": false,
-  "solo": false,
   "test": "TODO: Basic integration test. TODO: Add second section",
   "given": "-- alfa\n\nbravo",
   "status": {
@@ -27,5 +25,6 @@
       }]
     }
   },
-  "remainder": ""
+  "remainder": "",
+  "skip": false
 }

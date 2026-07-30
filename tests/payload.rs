@@ -9,7 +9,6 @@ use std::path::Path;
 #[allow(dead_code)]
 struct PayloadTest {
   skip: bool,
-  solo: bool,
   given: String,
   status: Status,
   remainder: String,
