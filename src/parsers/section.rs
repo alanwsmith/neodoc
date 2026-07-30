@@ -5,8 +5,6 @@ use crate::parsers::*;
 use crate::section::Section;
 use nom::character::complete::line_ending;
 use nom::{IResult, Parser};
-// use serde_json;
-// use serde_json::Value;
 
 pub fn section(input: &str) -> IResult<&str, Section> {
   let (input, _) = section_token.parse(input)?;
