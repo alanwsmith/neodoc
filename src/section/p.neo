@@ -1,0 +1,17 @@
+-- title
+
+P Section
+
+-- checklist
+
+[] TODO: Document how the
+``P`` Section kind works. 
+
+[] It's the default section kind.
+If no other section kind is defined
+and the section type isn't pre-defined
+to be another kind, it's a ``P``. 
+
+
+
+

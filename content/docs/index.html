@@ -5,13 +5,35 @@
 
 Out of Scope
 
-Any type of built-in access/privacy control.
+-- list
+
+- Any type of built-in access/privacy control.
 Everything published to the style.neodoc 
 lexicon is public. 
 
 (Using the neodoc format in other lexicons
 that add permissions/privacy layers is 
 totally acceptable and encouraged.)
+
+A specific point about this is that
+content items whose ``isDraft``
+flag is ``true`` are public. It's 
+up to apps to determine if/when/how
+they are to be shown. There is
+no enforcement of specific 
+criteria. 
+
+- Partial content parsing is out of 
+scope. Parsing either completes
+100% or an error is throw. 
+
+Focus on making the error message
+as clear as possible is a priority.
+The ideal is the Rust philosophy
+that it's a bug if the error messages 
+doesn't tell you how to fix the error.
+
+
 
 
 -- h2

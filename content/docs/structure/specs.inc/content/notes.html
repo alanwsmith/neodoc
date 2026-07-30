@@ -10,7 +10,7 @@ whatnot.
 
 [] TODO: Has an optional content warning message 
 
-[] TODO: Has a boolean ``stream`` flag that indicates
+[] TODO: Has a boolean ``inFeeds`` flag that indicates
 if the content should be picked up in feeds. 
 This is how zines can have home pages, index page,
 without them showing up in streams (assuming apps
@@ -25,8 +25,19 @@ an RFC 3339 datetime.
 [] TODO: Has an optional ``updated`` field
 with an RFC 3339 datetime. 
 
+[] Contains a boolean ``isDraft`` flag. The
+recommendation is for apps to ignore
+putting items whose ``isDraft`` is ``true``
+in default feeds. 
 
-
+There is not exclusion between ``isDraft``
+and ``inFeeds``. That is, both can 
+be ``true``. The recommendation is
+still that apps don't include them
+in default feeds. The recommendation
+is to prove feeds either specifically
+for drafts or that explicitly include
+both drafts and non drafts. 
 
 
 

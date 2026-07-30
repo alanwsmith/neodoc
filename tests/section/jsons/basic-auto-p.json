@@ -1,27 +1,29 @@
 {
   "test": "Generic sections (e.g. ``-- alfa``) with no explicit section kind are paragraph (p) types by default.",
   "given": "-- alfa\n\nHello, World",
-  "expected": {
-    "kind": "p",
-    "metadata": {
-      "attrs": [],
-      "bound": "full",
-      "flags": [],
-      "type": "alfa"
-    },
-    "sections": [
-      {
-        "kind": "block",
-        "spans": [
-          {
-            "attrs": [],
-            "category": "text",
-            "content": "Hello, World",
-            "flags": []
-          }
-        ]
-      }
-    ]
+  "status": {
+    "ok": {
+      "kind": "p",
+      "metadata": {
+        "attrs": [],
+        "bound": "full",
+        "flags": [],
+        "type": "alfa"
+      },
+      "sections": [
+        {
+          "kind": "block",
+          "spans": [
+            {
+              "attrs": [],
+              "category": "text",
+              "content": "Hello, World",
+              "flags": []
+            }
+          ]
+        }
+      ]
+    }
   },
   "remainder": ""
 }

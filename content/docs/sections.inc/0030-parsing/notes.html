@@ -1,0 +1,80 @@
+-- title
+
+Parsing
+
+-- checklist/
+
+
+[] TODO: Files are loaded as data
+on each pass and available for 
+includes in the ``d`` variable. 
+
+[] TODO: Multiple parsing passes are
+available. 
+
+[] TODO: Multiple passes are defined
+by adding a pair of square brackets
+to the NeoJinja tokens. For example, 
+to process things on the second pass:
+
+  -- list/
+
+  - ``[[@ @]]`` is used in place o
+    ``[@ @]``
+
+  - ``[[! !]]`` is used in place o
+    ``[! !]``
+
+  - ``[[# #]]`` is used in place o
+    ``[# #]``
+
+  -- /list
+
+
+[]  TODO: NeoJinja will process up to 
+100 parsing iterations. Anything more
+than that is an error. 
+
+
+[] TODO: The process is:
+
+  -- numbered/
+
+  - Process all files into ASTs that
+    can be included/queries as data. 
+
+  - Loop through files finding any
+    that have NeoJinja instructions
+    (expressions, tags, and comments).
+
+  - Generate an unprocessed copy of
+    any files with NeoJinja instructions.
+
+  - Reprocess the unprocessed files
+    with NeoJinja instructions. 
+
+  - Remove one level of instruction 
+    brackets. NOTE: This removal does
+    not happen on the first iteration. 
+    That's required because the loop
+    starts with that AST and 
+    re-generation. If the level was
+    removed, nothing with the default
+    set of tokens (i.e. ``[@ @]``, 
+    ``[! !]``, and ``[# #]``) would
+    be applied. 
+
+  - Go to step 1 until no files
+    with NeoJinja instructions are
+    found after a processing pass. 
+
+  -- /numbered
+
+
+
+
+
+
+
+
+-- /checklist
