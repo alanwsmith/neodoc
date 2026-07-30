@@ -5,6 +5,11 @@ use serde_json::Value;
 use std::fs;
 use std::path::Path;
 
+// TODO:
+// - Test an invalid section kind
+// (e.g. ``-- sample invalid``)
+//
+
 #[derive(Debug, Deserialize)]
 #[allow(dead_code)]
 struct SectionTest {

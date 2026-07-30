@@ -11,7 +11,8 @@ pub fn p(input: &str) -> IResult<&str, Section> {
   let (input, r#type) = section_type.parse(input)?;
   // TODO: verify `kind` is `p`. It should be
   // at this point since everything else should
-  // have fired.
+  // have fired. Otherwise, it's an invalid
+  // kind.
   let (input, _kind) = section_kind.parse(input)?;
   let (input, _) = empty_lines.parse(input)?;
   let (input, blocks) = many1(block).parse(input)?;
@@ -26,6 +27,5 @@ pub fn p(input: &str) -> IResult<&str, Section> {
     },
     sections: blocks,
   };
-
   Ok((input, section))
 }
