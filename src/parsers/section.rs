@@ -15,7 +15,6 @@ pub fn section(input: &str) -> IResult<&str, Value> {
     let (input, _) = line_ending(input)?;
     let (input, _) = empty_lines(input)?;
     let (input, block) = block(input)?;
-
     let section = match kind {
         Some(_k) => Section::P {
             metadata: {
@@ -43,5 +42,4 @@ pub fn section(input: &str) -> IResult<&str, Value> {
 
     let result = serde_json::to_value(&section).unwrap();
     Ok((input, result))
-    //Ok((input, Value::from_str("{}").unwrap()))
 }
