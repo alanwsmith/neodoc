@@ -1,0 +1,13 @@
+{
+  "test": "A single new line that's not followed by an empty line is converted to a space",
+  "given": "\nalfa",
+  "status": {
+    "ok": {
+      "kind": "text",
+      "content": " "
+    }
+  },
+  "remainder": "alfa",
+  "skip": false,
+  "solo": false
+}

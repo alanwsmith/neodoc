@@ -1,0 +1,25 @@
+{
+  "test": "Block with multiple lines",
+  "given": "alfa bravo\ncharlie delta",
+  "status": {
+    "ok": {
+      "kind": "block",
+      "spans": [
+        {
+          "kind": "text",
+          "content": "alfa bravo"
+        },
+        {
+          "kind": "text",
+          "content": " "
+        },
+        {
+          "kind": "text",
+          "content": "charlie delta"
+        }
+      ]
+    }
+  },
+  "remainder": "",
+  "skip": false
+}

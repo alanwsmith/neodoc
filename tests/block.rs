@@ -9,7 +9,6 @@ use std::path::Path;
 #[allow(dead_code)]
 struct BlockTest {
   skip: bool,
-  solo: bool,
   given: String,
   status: Status,
   remainder: String,
@@ -22,8 +21,6 @@ enum Status {
   Error(Value),
 }
 
-// TODO: Set up to run solo tests first
-// then everything else after.
 fn my_test(path: &Path) -> datatest_stable::Result<()> {
   let content = &fs::read_to_string(path)?;
   let test: BlockTest = serde_json::from_str(content)?;
@@ -44,4 +41,5 @@ fn my_test(path: &Path) -> datatest_stable::Result<()> {
 
 datatest_stable::harness! {
     { test = my_test, root = "tests/block", pattern = r".*\.json$" },
+    //{ test = my_test, root = "tests/block", pattern = r".*\.json$" },
 }
