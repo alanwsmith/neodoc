@@ -1,0 +1,7 @@
+{
+  "test": "Error on not enough dashes",
+  "given": "- x",
+  "result": {
+    "error": {}
+  }
+}
