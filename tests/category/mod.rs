@@ -11,6 +11,5 @@ fn basic_test() {
     )
     .unwrap();
     let _right = section(&data.given).unwrap();
-    //assert_eq!(1, 1);
     assert_eq!(data.expected, section(&data.given).unwrap().1);
 }
