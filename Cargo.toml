@@ -9,7 +9,7 @@ include_dir = {version = "0.7.4", features = ["glob"] }
 datatest-stable = "0.3.3"
 
 [[test]]
-name = "section"
+name = "block"
 harness = false
 
 [[test]]
@@ -17,8 +17,13 @@ name = "payload"
 harness = false
 
 [[test]]
-name = "block"
+name = "section"
 harness = false
+
+[[test]]
+name = "span"
+harness = false
+
 
 [dependencies]
 anyhow = "1.0.104"
