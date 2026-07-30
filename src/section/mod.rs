@@ -1,4 +1,6 @@
-use crate::attr::*;
+use crate::bound::*;
+use crate::metadata::*;
+use crate::span::*;
 use nom::bytes::complete::is_not;
 use nom::character::complete::line_ending;
 use nom::combinator::rest;
@@ -16,32 +18,6 @@ pub enum Section {
         metadata: Metadata,
         sections: Vec<Section>,
     },
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct Metadata {
-    attrs: Vec<Attr>,
-    bound: Bound,
-    flags: Vec<String>,
-    r#type: String,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-#[serde(tag = "category", rename_all = "lowercase")]
-pub enum Span {
-    Text {
-        attrs: Vec<Attr>,
-        content: String,
-        flags: Vec<String>,
-    },
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-#[serde(rename_all = "lowercase")]
-pub enum Bound {
-    Full,
-    Start,
-    End,
 }
 
 pub fn empty_lines(input: &str) -> IResult<&str, &str> {
