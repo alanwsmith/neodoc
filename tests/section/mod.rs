@@ -1,4 +1,4 @@
-use neodoc::section::*;
+use neodoc::parsers::*;
 use neodoc::test_json::TestJson;
 use pretty_assertions::assert_eq;
 use std::fs;
