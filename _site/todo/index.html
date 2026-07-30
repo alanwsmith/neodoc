@@ -81,8 +81,6 @@ the lexicon (not sure how
 this will work yet, but it's
 a primary focus)
 
-
-
 [] Set up a way to define standard
 template expectations (e.g. book-review
 could require title and have an 
@@ -129,6 +127,17 @@ multiple different private keys.
 (That's for way down the path
 and encryption might be out of scope based
 on security considerations)
+
+Like, would it be possible to set
+up something that artists could
+use to distribute their works
+for money. Not sure if this
+is really in scope, but worth 
+considering. 
+
+[] Look at this proposal
+for metadata - https://tangled.org/chrisshank.com/at-tags/
+
 
 [] PROBABLY NOT: Maybe do do a ``status`` but with
 only two values "draft" and "done"?
@@ -444,7 +453,98 @@ section categories. (e.g. ``-- custom-section raw``)
 what they represent. The specifics are
 backed into the AST to ensure consistency. 
 
+[] Create a way to add plugins so other things
+can extend it when the templates are being
+processed. There is no expectation that
+any given processor will have a certain 
+plugin. 
+
+[] All the data (e.g. JSON) and data from
+the `-- metadata` section is available 
+for use in the templates on the page. 
+
+[] TBD on including other files. Probably 
+want to make that happen (e.g. if
+you're going to build a website off it
+you should be able to have all the files
+without having to store anything on your
+server. 
+
+That also means it's probably necessary
+to do some of the ``filesInFolder`` type
+stuff to do things like make lists of 
+files? That may be trying to push things
+too far. Maybe includes are fine, but
+anything else should be a plugin. That
+would allow for different tools to 
+use different caching strategies, etc.
+
+Lots to dig into there, but probably they should
+only be able to be included off the
+same PDS in the neodoc lexicon. 
+
+[] MiniJinja is the default template engine
+that comes installed with the binary. 
+There's a set of tests that can be
+used to validate the inputs and outputs
+if other processes are built. 
+
+[] There are not actual files paths. Everything
+is stored at the root. Files an have a
+name attribute that can look like a path. 
+The expectation is that if there are tools
+like ``filesInFolder()`` all the folder
+level stuff is based of splitting on the `/`
+character.
+
+[] File paths can have white space between
+the separators (e.g. ``some / file / path``
+is the same as ``some/file/path``).
+
+[] The ``formatDate(DATE, FORMAT)`` takes
+an RFC3339 date and a format to transforms
+it into the requested output. 
+
+[] TODO: Look through other functions that
+should be built in beyond the defaults 
+provided by minijinja.
+
+
+
+
+
 -- /checklist
+
+-- list
+-- h2: Research Links
+
+- >>https://mu.social/>> via:
+>>https://bsky.app/profile/did:plc:fivmz34azxgjafrk6ogns7k5>>
+
+- >>https://semble.so/>> via: 
+>>https://bsky.app/profile/did:plc:k7wclckeajmuibxbamtbejjg>>
+
+
+- >>https://aturi.to/>> via: 
+>>https://bsky.app/profile/did:plc:qntsxa2i4sb24noi45fx4np2>>
+>>https://bsky.app/profile/did:plc:6teuhlkizzebk6wdp42633el>>
+
+- >>https://leaflet.pub/>>
+via: >>https://bsky.app/profile/did:plc:btxrwcaeyodrap5mnjw2fvmz>>
+
+- >>https://frontpage.fyi/>>
+via: >>https://bsky.app/profile/did:plc:klmr76mpewpv7rtm3xgpzd7x>>
+
+- >>https://pckt.blog/>>
+via: >>https://bsky.app/profile/did:plc:revjuqmkvrw6fnkxppqtszpv>>
+
+- >>https://standard.site/>>
+
+- >>https://offprint.app/>>
+
+
+
+
 
 
 
