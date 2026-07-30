@@ -2,14 +2,16 @@
   "test": "A basic test of a ``-- something p`` section with one paragraph in it",
   "given": "-- something p\n\nHello, World",
   "expected": {
-    "attrs": [],
-    "bound": "full",
-    "flags": [],
     "kind": "p",
-    "category": "section",
-    "children": [
+    "metadata": {
+      "attrs": [],
+      "bound": "full",
+      "flags": [],
+      "type": "something"
+    },
+    "sections": [
       {
-        "category": "block",
+        "kind": "block",
         "spans": [
           {
             "attrs": [],
@@ -19,7 +21,6 @@
           }
         ]
       }
-    ],
-    "type": "something"
+    ]
   }
 }

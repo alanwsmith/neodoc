@@ -6,20 +6,47 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
 #[derive(Debug, Deserialize, Serialize)]
-#[serde(tag = "category", rename_all = "lowercase")]
+#[serde(tag = "kind", rename_all = "lowercase")]
 pub enum Category {
-    Section {
-        attrs: Vec<Attr>,
-        bound: Bound,
-        flags: Vec<String>,
-        r#type: String,
-        kind: String,
-        children: Vec<Category>,
-    },
     Block {
         spans: Vec<Span>,
     },
+    P {
+        metadata: Metadata,
+        sections: Vec<Category>,
+    },
 }
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Metadata {
+    attrs: Vec<Attr>,
+    bound: Bound,
+    flags: Vec<String>,
+    r#type: String,
+}
+
+////////
+
+// Section {
+//     attrs: Vec<Attr>,
+//     bound: Bound,
+//     flags: Vec<String>,
+//     r#type: String,
+//     kind: SectionKind,
+// },
+// TODO: Add
+// CSV
+// JSON
+//
+// ListItem (and possibly ListBlock)
+// NumberedItem (and possibly NumberedBlock)
+// Raw (pre formatted)
+
+// #[derive(Debug, Deserialize, Serialize)]
+// #[serde(tag = "category", rename_all = "lowercase")]
+// pub enum SectionKind {
+//     P {},
+// }
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(tag = "category", rename_all = "lowercase")]
@@ -54,20 +81,33 @@ pub fn empty_lines(input: &str) -> IResult<&str, &str> {
 pub fn section(input: &str) -> IResult<&str, Value> {
     let (input, _) = section_token(input)?;
     let (input, r#type) = section_type(input)?;
-    let (input, kind) = section_kind(input)?;
+    let (input, _kind) = section_kind(input)?;
     let (input, _) = line_ending(input)?;
     let (input, _) = empty_lines(input)?;
     let (input, block) = block(input)?;
-    let section = Category::Section {
-        attrs: vec![],
-        bound: Bound::Full,
-        children: vec![block],
-        flags: vec![],
-        r#type: r#type.to_string(),
-        kind: kind.to_string(),
+    let section = Category::P {
+        metadata: {
+            Metadata {
+                attrs: vec![],
+                bound: Bound::Full,
+                flags: vec![],
+                r#type: r#type.to_string(),
+            }
+        },
+        sections: vec![block],
     };
+
+    // let section = Category::Section {
+    //     attrs: vec![],
+    //     bound: Bound::Full,
+    //     children: vec![block],
+    //     flags: vec![],
+    //     r#type: r#type.to_string(),
+    //     kind: SectionKind::P {},
+    // };
     let result = serde_json::to_value(&section).unwrap();
     Ok((input, result))
+    //Ok((input, Value::from_str("asdf").unwrap()))
 }
 
 fn section_token(input: &str) -> IResult<&str, &str> {
