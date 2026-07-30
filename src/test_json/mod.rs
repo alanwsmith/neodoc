@@ -6,4 +6,5 @@ pub struct TestJson {
     pub test: String,
     pub given: String,
     pub expected: Value,
+    pub remainder: String,
 }

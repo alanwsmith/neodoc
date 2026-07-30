@@ -1,0 +1,8 @@
+{
+  "test": "Section types are any character other than whitespace",
+  "given": "alfa~!@#$%^&*()bravo",
+  "expected": "alfa~!@#$%^&*()bravo",
+  "remainder": ""
+  }
+}
+

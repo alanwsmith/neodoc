@@ -1,0 +1,9 @@
+{
+  "test": "Chomp trailing space to newline",
+  "given": "alfa  \n",
+  "expected": "alfa",
+  "remainder": "\n"
+  }
+}
+
+

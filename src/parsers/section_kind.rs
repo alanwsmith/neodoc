@@ -1,9 +1,9 @@
-use nom::IResult;
 use nom::bytes::complete::is_not;
-use nom::character::complete::space1;
+use nom::combinator::opt;
+use nom::{IResult, Parser};
 
-pub fn section_kind(input: &str) -> IResult<&str, &str> {
-    let (input, _) = space1(input)?;
-    let (input, result) = is_not(" \t\r\n")(input)?;
+pub fn section_kind(input: &str) -> IResult<&str, Option<&str>> {
+    let (input, result) = opt(is_not(" \t\r\n")).parse(input)?;
+    // TODO: clear whitespace to newline
     Ok((input, result))
 }

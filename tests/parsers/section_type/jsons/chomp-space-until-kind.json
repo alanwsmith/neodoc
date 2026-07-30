@@ -1,0 +1,10 @@
+{
+  "test": "Chomp trailing space until kind",
+  "given": "alfa checklist\n",
+  "expected": "alfa",
+  "remainder": "checklist\n"
+  }
+}
+
+
+
