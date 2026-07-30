@@ -1,0 +1,17 @@
+{
+  "test": "Trialing spaces before newline is captured",
+  "given": "alfa bravo  \n\n\n",
+  "status": {
+    "ok": {
+      "kind": "block",
+      "spans": [
+        {
+          "kind": "text",
+          "content": "alfa bravo  "
+        }
+      ]
+    }
+  },
+  "remainder": "\n\n\n",
+  "skip": false
+}

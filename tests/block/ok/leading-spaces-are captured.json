@@ -1,0 +1,17 @@
+{
+  "test": "Leading spaces are captured",
+  "given": "  alfa bravo",
+  "status": {
+    "ok": {
+      "kind": "block",
+      "spans": [
+        {
+          "kind": "text",
+          "content": "  alfa bravo"
+        }
+      ]
+    }
+  },
+  "remainder": "",
+  "skip": false
+}
