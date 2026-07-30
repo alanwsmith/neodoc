@@ -1,6 +1,6 @@
 {
-  "test": "A basic test of a ``-- alfa p`` section with one paragraph in it",
-  "given": "-- alfa p\n\nHello, World",
+  "test": "Generic sections (e.g. ``-- alfa``) with no explicit section kind are paragraph (p) types by default.",
+  "given": "-- alfa\n\nbravo",
   "status": {
     "ok": {
       "kind": "p",
@@ -16,7 +16,7 @@
           "spans": [
             {
               "kind": "text",
-              "content": "Hello, World"
+              "content": "bravo"
             }
           ]
         }

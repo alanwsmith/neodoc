@@ -1,0 +1,27 @@
+{
+  "test": "Special Characters are fine",
+  "given": "-- ~!@#$%^&*()\n\nalfa",
+  "status": {
+    "ok": {
+      "kind": "p",
+      "metadata": {
+        "attrs": [],
+        "bound": "full",
+        "flags": [],
+        "type": "~!@#$%^&*()"
+      },
+      "sections": [
+        {
+          "kind": "block",
+          "spans": [
+            {
+              "kind": "text",
+              "content": "alfa"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "remainder": ""
+}

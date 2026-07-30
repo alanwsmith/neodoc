@@ -1,0 +1,27 @@
+{
+  "test": "Chomp whitespace between type and kind",
+  "given": "-- alfa        p\n\nbravo",
+  "status": {
+    "ok": {
+      "kind": "p",
+      "metadata": {
+        "attrs": [],
+        "bound": "full",
+        "flags": [],
+        "type": "alfa"
+      },
+      "sections": [
+        {
+          "kind": "block",
+          "spans": [
+            {
+              "kind": "text",
+              "content": "bravo"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "remainder": ""
+}
