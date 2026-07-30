@@ -6,6 +6,15 @@ edition = "2024"
 [dev-dependencies]
 pretty_assertions = "1.4.1"
 include_dir = {version = "0.7.4", features = ["glob"] }
+datatest-stable = "0.3.3"
+
+[[test]]
+name = "section"
+harness = false
+
+[[test]]
+name = "payload"
+harness = false
 
 [dependencies]
 anyhow = "1.0.104"
