@@ -1,0 +1,18 @@
+{
+  "test": "Single line with line ending followed by empty line",
+  "given": "alfa bravo\n\n\n",
+  "status": {
+    "ok": {
+      "kind": "block",
+      "spans": [
+        {
+          "kind": "text",
+          "content": "alfa bravo"
+        }
+      ]
+    }
+  },
+  "remainder": "",
+  "skip": false,
+  "solo": false
+}

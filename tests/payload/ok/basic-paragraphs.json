@@ -1,7 +1,7 @@
 {
   "skip": false,
   "solo": false,
-  "test": "Basic integration test",
+  "test": "TODO: Basic integration test. TODO: Add second section",
   "given": "-- alfa\n\nbravo",
   "status": {
     "ok": {
