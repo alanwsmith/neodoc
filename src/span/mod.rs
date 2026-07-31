@@ -1,4 +1,4 @@
-pub mod single_characters;
+pub mod single_character;
 pub mod text_span;
 pub mod word;
 

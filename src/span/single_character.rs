@@ -488,4 +488,3 @@ mod tests {
     assert!(single_equal_sign("==").is_err());
   }
 }
-
