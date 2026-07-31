@@ -1,15 +1,21 @@
 pub mod block_p;
+pub mod p;
 pub mod stand_alone;
 
 use crate::{metadata::Metadata, span::*};
 use block_p::*;
 use nom::{IResult, Parser, branch::alt};
+use p::*;
 use serde::{Deserialize, Serialize};
 use stand_alone::*;
 
 #[derive(Debug, Deserialize, PartialEq, Serialize)]
-#[serde(tag = "kind")]
+#[serde(tag = "kind", rename_all = "lowercase")]
 pub enum Section {
+  P {
+    metadata: Metadata,
+    sections: Vec<Section>,
+  },
   #[serde(rename = "standAlone")]
   StandAlone {
     metadata: Metadata,
@@ -25,6 +31,6 @@ pub enum Section {
 
 pub fn section(input: &str) -> IResult<&str, Section> {
   let (input, section) =
-    alt((stand_alone, block_p)).parse(input)?;
+    alt((p, stand_alone, block_p)).parse(input)?;
   Ok((input, section))
 }

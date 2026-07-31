@@ -51,4 +51,17 @@ mod tests {
         .unwrap();
     assert_eq!(left, right);
   }
+
+  #[test]
+  fn run_3() {
+    let input = include_str!("tests/3/input.neo").trim();
+    let left: Value = serde_json::from_str(include_str!(
+      "tests/3/target.json"
+    ))
+    .unwrap();
+    let right =
+      serde_json::to_value(payload(input).unwrap())
+        .unwrap();
+    assert_eq!(left, right);
+  }
 }
