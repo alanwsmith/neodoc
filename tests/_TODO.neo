@@ -20,6 +20,9 @@ don't become attrs).
 
 [] Don't capture ``-- alfa:\n`` as flag
 
+[] Add escape charater for flags to have
+a colon at the end of them. 
+
 [] Note that flags and attrs can't
 have empty lines in the. For example, these
 are all invalid:

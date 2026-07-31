@@ -6,13 +6,6 @@ use crate::parsers::section_token;
 use crate::span::span;
 use nom::{IResult, Parser, multi::many1};
 
-// #[derive(Debug, Deserialize, Serialize)]
-// #[serde(tag = "kind", rename = "attr")]
-// pub struct Attr {
-//   key: String,
-//   value: Vec<Span>,
-// }
-
 pub fn attr(input: &str) -> IResult<&str, FlagsAndAttrs> {
   let (input, key) = key.parse(input)?;
   let (input, value) = many1(span).parse(input)?;
