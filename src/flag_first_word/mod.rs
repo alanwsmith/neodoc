@@ -15,7 +15,8 @@ pub fn flag_first_word(input: &str) -> IResult<&str, Span> {
   dbg!(&text1);
   let (input, _) =
     not(pair(tag(":"), space1)).parse(input)?;
-  let (input, text2) = is_not(" \t\n\r").parse(input)?;
+  let (input, text2) =
+    opt(is_not(" \t\n\r")).parse(input)?;
   dbg!(&input);
 
   // = many1(pair(
@@ -23,7 +24,7 @@ pub fn flag_first_word(input: &str) -> IResult<&str, Span> {
   //   opt(pair(tag(":"), not(space1))),
   // ))
   let span = Span::Text {
-    content: format!("{}{}", text1, text2),
+    content: format!("{}{}", text1, text2.unwrap_or("")),
   };
   Ok((input, span))
 }
