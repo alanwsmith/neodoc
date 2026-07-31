@@ -1,7 +1,0 @@
-{
-  "test": "Error on too many dashes",
-  "given": "--- ",
-  "result": {
-    "error": {}
-  }
-}

@@ -1,0 +1,9 @@
+{
+  "test": "Error on too many dashes.",
+  "given": "--- p",
+  "status": {
+    "error": {}
+  },
+  "remainder": "",
+  "skip": false
+}

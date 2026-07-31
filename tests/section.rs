@@ -38,7 +38,7 @@ fn my_test(path: &Path) -> datatest_stable::Result<()> {
       assert_eq!(left, right);
     }
     Status::Error(_data) => {
-      panic!("set up for errors")
+      assert!(section(&test.given).is_err());
     }
   }
   Ok(())
