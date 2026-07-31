@@ -8,7 +8,6 @@ use std::path::Path;
 #[derive(Debug, Deserialize)]
 #[allow(dead_code)]
 struct AttrTest {
-  key: String,
   given: String,
   remainder: String,
   skip: Option<bool>,

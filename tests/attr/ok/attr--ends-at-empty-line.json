@@ -1,16 +1,16 @@
 {
-  "test": "Attr with text to end of file",
-  "given": "alfa: bravo charlie",
+  "test": "Attr ends at empty line",
+  "given": "alfa: bravo\n\ncharlie",
   "status": {
     "ok": {
       "key": "alfa",
       "value": [
         {
           "kind": "text",
-          "content": "bravo charlie"
+          "content": "bravo"
         }
       ]
     }
   },
-  "remainder": ""
+  "remainder": "\n\ncharlie"
 }

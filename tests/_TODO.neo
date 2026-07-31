@@ -2,7 +2,7 @@
 
 Tests To Do
 
--- checklist
+-- checklist/
 
 [] Section with invalid kind ``-- alfa invalid``.
 
@@ -20,6 +20,38 @@ don't become attrs).
 
 [] Don't capture ``-- alfa:\n`` as flag
 
+[] Note that flags and attrs can't
+have empty lines in the. For example, these
+are all invalid:
+
+  -- code/
+
+  <<span|some
+
+  text>>
+
+  -- /code
+
+
+  -- code/
+
+  <<span|key:
+
+  value>>
+
+  -- /code
+
+  -- code/
+
+  <<span
+
+  >>
+
+  -- /code
+
+
+
+-- /checklist
 
 
 -- notes list/

@@ -1,5 +1,4 @@
 {
-  "key": "attr",
   "test": "Attr with multiple lines to end of file",
   "given": "alfa: bravo\ncharlie",
   "status": {
