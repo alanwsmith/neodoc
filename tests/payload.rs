@@ -27,13 +27,22 @@ fn my_test(path: &Path) -> datatest_stable::Result<()> {
   match test.status {
     Status::Ok(data) => {
       let left = (test.remainder.as_str(), data);
-      let result = payload(&test.given).unwrap();
-      let right =
-        (result.0, serde_json::to_value(result.1).unwrap());
-      assert_eq!(left, right);
+      match payload(&test.given) {
+        Ok(result) => {
+          let right = (
+            result.0,
+            serde_json::to_value(result.1).unwrap(),
+          );
+          assert_eq!(left, right);
+        }
+        Err(e) => {
+          dbg!(e);
+          panic!("set up for errors");
+        }
+      };
     }
     Status::Error(_data) => {
-      panic!("set up for errors")
+      panic!("set up for errors");
     }
   }
   Ok(())

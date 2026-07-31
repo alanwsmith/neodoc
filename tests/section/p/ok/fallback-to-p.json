@@ -1,7 +1,7 @@
 {
   "skip": false,
   "test": "Generic sections (e.g. ``-- alfa``) with no explicit section kind are paragraph (p) types by default.",
-  "given": "-- alfa\n\nbravo",
+  "given": "-- alfa\n\nbravo\n\n",
   "status": {
     "ok": {
       "kind": "p",

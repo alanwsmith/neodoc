@@ -1,8 +1,10 @@
+pub mod p_block;
+
 use crate::bound::*;
 use crate::metadata::*;
 use crate::parsers::*;
 use crate::section::Section;
-use crate::section::*;
+use crate::section::p_block::p_block;
 use nom::multi::many1;
 use nom::{IResult, Parser};
 
@@ -15,7 +17,7 @@ pub fn p(input: &str) -> IResult<&str, Section> {
   // kind.
   let (input, _kind) = section_kind.parse(input)?;
   let (input, _) = many1(empty_line).parse(input)?;
-  let (input, blocks) = many1(block).parse(input)?;
+  let (input, blocks) = many1(p_block).parse(input)?;
   let section = Section::P {
     metadata: {
       Metadata {

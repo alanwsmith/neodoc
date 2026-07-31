@@ -1,9 +1,7 @@
-pub mod block;
 pub mod p;
 use crate::metadata::*;
 use nom::{IResult, Parser};
 
-pub use block::*;
 pub use p::*;
 
 use crate::span::*;

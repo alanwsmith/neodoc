@@ -1,6 +1,6 @@
 {
-  "test": "Basic integration test with two paragraphs",
-  "given": "-- alfa\n\nbravo\n\ncharlie",
+  "test": "Basic integration test with multiple setions",
+  "given": "-- alfa\n\nbravo\n\ncharlie\n\n-- delta\n\necho",
   "status": {
     "ok": {
       "sections": [
@@ -22,13 +22,32 @@
                 }
               ]
             },
-
             {
               "kind": "block",
               "spans": [
                 {
                   "kind": "text",
                   "content": "charlie"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "p",
+          "metadata": {
+            "attrs": [],
+            "bound": "full",
+            "flags": [],
+            "type": "delta"
+          },
+          "sections": [
+            {
+              "kind": "block",
+              "spans": [
+                {
+                  "kind": "text",
+                  "content": "echo"
                 }
               ]
             }

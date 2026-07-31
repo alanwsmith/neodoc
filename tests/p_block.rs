@@ -1,3 +1,4 @@
+use crate::p_block::p_block;
 use neodoc::section::*;
 use pretty_assertions::assert_eq;
 use serde::Deserialize;
@@ -27,7 +28,7 @@ fn my_test(path: &Path) -> datatest_stable::Result<()> {
   match test.status {
     Status::Ok(data) => {
       let left = (test.remainder.as_str(), data);
-      let result = block(&test.given).unwrap();
+      let result = p_block(&test.given).unwrap();
       let right =
         (result.0, serde_json::to_value(result.1).unwrap());
       assert_eq!(left, right);
@@ -41,5 +42,5 @@ fn my_test(path: &Path) -> datatest_stable::Result<()> {
 
 datatest_stable::harness! {
     // { test = my_test, root = "tests/block", pattern = r".*\solo.json$" },
-    { test = my_test, root = "tests/block", pattern = r".*\.json$" },
+    { test = my_test, root = "tests/p_block", pattern = r".*\.json$" },
 }
