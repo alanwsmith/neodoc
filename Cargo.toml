@@ -28,6 +28,10 @@ harness = false
 name = "section"
 harness = false
 
+[[test]]
+name = "span"
+harness = false
+
 [dependencies]
 anyhow = "1.0.104"
 nom = "8.0.0"

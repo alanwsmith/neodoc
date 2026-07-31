@@ -8,7 +8,7 @@ use std::path::Path;
 #[derive(Debug, Deserialize)]
 #[allow(dead_code)]
 struct SpanTest {
-  skip: bool,
+  skip: Option<bool>,
   given: String,
   status: Status,
   remainder: String,
@@ -24,16 +24,20 @@ enum Status {
 fn my_test(path: &Path) -> datatest_stable::Result<()> {
   let content = &fs::read_to_string(path)?;
   let test: SpanTest = serde_json::from_str(content)?;
-  match test.status {
-    Status::Ok(data) => {
-      let left = (test.remainder.as_str(), data);
-      let result = span(&test.given).unwrap();
-      let right =
-        (result.0, serde_json::to_value(result.1).unwrap());
-      assert_eq!(left, right);
-    }
-    Status::Error(_data) => {
-      panic!("set up for errors")
+  if !test.skip.unwrap_or(false) {
+    match test.status {
+      Status::Ok(data) => {
+        let left = (test.remainder.as_str(), data);
+        let result = span(&test.given).unwrap();
+        let right = (
+          result.0,
+          serde_json::to_value(result.1).unwrap(),
+        );
+        assert_eq!(left, right);
+      }
+      Status::Error(_data) => {
+        panic!("set up for errors")
+      }
     }
   }
   Ok(())

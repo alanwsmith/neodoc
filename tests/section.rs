@@ -27,7 +27,7 @@ enum Status {
 fn my_test(path: &Path) -> datatest_stable::Result<()> {
   let content = &fs::read_to_string(path)?;
   let test: SectionTest = serde_json::from_str(content)?;
-  if test.skip.is_none() {
+  if !test.skip.unwrap_or(false) {
     match test.status {
       Status::Ok(data) => match test.key.as_str() {
         "p" => {
