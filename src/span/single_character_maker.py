@@ -1,5 +1,14 @@
 #!/usr/bin/env python3
 
+# REMINDER: This is the process
+# that generates the `single_character.py`
+# file. It's gross, but it works. 
+
+# REMINDER: This does not cover
+# whitespace characters or an
+# escaped backslash. Those 
+# are handled elsewhere. 
+
 chars = [
         ("`", "backtic"),
         ("~", "tilde"),
@@ -96,7 +105,7 @@ fn test_single_{char[1]}_error() {{
 lines.append("""}""")
 
 
-with open("single_characters.rs", "w") as _out:
+with open("single_character.rs", "w") as _out:
     _out.write("\n".join(lines))
 
 
