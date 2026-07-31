@@ -1,4 +1,4 @@
-use crate::parsers::word::word;
+use crate::span::word::word;
 use nom::branch::alt;
 use nom::character::complete::space1;
 use nom::multi::many1;
@@ -7,7 +7,6 @@ use nom::{IResult, Parser};
 pub fn text_span(input: &str) -> IResult<&str, String> {
   let (input, results) =
     many1(alt((word, space1))).parse(input)?;
-  //dbg!(&results);
   Ok((input, results.join("")))
 }
 

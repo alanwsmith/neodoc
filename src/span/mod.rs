@@ -1,3 +1,6 @@
+pub mod text_span;
+pub mod word;
+
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, PartialEq, Serialize)]

@@ -1,7 +1,7 @@
 use crate::bound::*;
 use crate::metadata::*;
-use crate::parsers::text_span::text_span;
 use crate::section::*;
+use crate::span::text_span::text_span;
 use nom::multi::many1;
 use nom::{IResult, Parser};
 
