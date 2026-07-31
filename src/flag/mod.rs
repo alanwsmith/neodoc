@@ -1,3 +1,4 @@
+#![allow(warnings)]
 pub mod section_flag;
 
 use crate::span::{Span, span};

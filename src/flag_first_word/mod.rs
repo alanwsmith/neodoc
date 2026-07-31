@@ -1,30 +1,20 @@
-#![allow(warnings)]
-use crate::span::{Span, span};
-use nom::bytes::complete::tag;
-use nom::character::complete::space1;
-use nom::combinator::not;
-use nom::combinator::opt;
-use nom::sequence::pair;
-use nom::{
-  IResult, Parser, bytes::complete::is_not, multi::many1,
-};
-use serde::{Deserialize, Serialize};
+use crate::span::Span;
+use nom::bytes::complete::take_while1;
+use nom::combinator::verify;
+use nom::{IResult, Parser};
+
+fn is_word_char(c: char) -> bool {
+  !c.is_whitespace()
+}
 
 pub fn flag_first_word(input: &str) -> IResult<&str, Span> {
-  let (input, text1) = is_not(": \t\n\r").parse(input)?;
-  dbg!(&text1);
-  let (input, _) =
-    not(pair(tag(":"), space1)).parse(input)?;
-  let (input, text2) =
-    opt(is_not(" \t\n\r")).parse(input)?;
-  dbg!(&input);
-
-  // = many1(pair(
-  //   is_not(": \n\r\t"),
-  //   opt(pair(tag(":"), not(space1))),
-  // ))
+  let (input, text) =
+    verify(take_while1(is_word_char), |s: &str| {
+      !s.ends_with(':')
+    })
+    .parse(input)?;
   let span = Span::Text {
-    content: format!("{}{}", text1, text2.unwrap_or("")),
+    content: text.to_string(),
   };
   Ok((input, span))
 }

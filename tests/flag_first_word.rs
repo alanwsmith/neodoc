@@ -47,6 +47,6 @@ fn my_test(path: &Path) -> datatest_stable::Result<()> {
 }
 
 datatest_stable::harness! {
-     //{ test = my_test, root = "tests/flag_first_word", pattern = r".*solo\.json$" },
+    // { test = my_test, root = "tests/flag_first_word", pattern = r".*solo\.json$" },
     { test = my_test, root = "tests/flag_first_word", pattern = r".*\.json$" },
 }

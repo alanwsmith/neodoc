@@ -1,3 +1,4 @@
+#![allow(warnings)]
 use neodoc::flag::flag;
 use neodoc::flag::section_flag::section_flag;
 use pretty_assertions::assert_eq;
