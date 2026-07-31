@@ -1,6 +1,6 @@
 {
   "test": "Basic integration test with multiple setions",
-  "given": "-- alfa\n\nbravo\n\ncharlie\n\n-- delta\n\necho",
+  "given": "-- alfa\n\nbravo\n\ncharlie\n\n-- delta\n\necho\nfoxtrot",
   "status": {
     "ok": {
       "sections": [
@@ -48,6 +48,14 @@
                 {
                   "kind": "text",
                   "content": "echo"
+                },
+                {
+                  "kind": "text",
+                  "content": " "
+                },
+                {
+                  "kind": "text",
+                  "content": "foxtrot"
                 }
               ]
             }
