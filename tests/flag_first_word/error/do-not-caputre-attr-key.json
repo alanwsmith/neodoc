@@ -1,0 +1,9 @@
+{
+  "test": "Do not caputure attr key as first flag word",
+  "given": "alfa: ",
+  "status": {
+    "error": {
+    }
+  },
+  "remainder": ""
+}

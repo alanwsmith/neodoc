@@ -1,8 +1,14 @@
-pub mod multi_line_flag;
 pub mod section_flag;
-pub mod single_line_flag;
+
 use crate::span::{Span, span};
-use nom::{IResult, Parser, multi::many1};
+use nom::bytes::complete::tag;
+use nom::character::complete::space1;
+use nom::combinator::not;
+use nom::combinator::opt;
+use nom::sequence::pair;
+use nom::{
+  IResult, Parser, bytes::complete::is_not, multi::many1,
+};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -10,6 +16,7 @@ use serde::{Deserialize, Serialize};
 pub struct Flag {
   spans: Vec<Span>,
 }
+
 pub fn flag(input: &str) -> IResult<&str, Flag> {
   let (input, spans) = many1(span).parse(input)?;
   let f = Flag { spans };

@@ -18,6 +18,8 @@ don't become attrs).
 
 [] Section flag that spans multiple lines
 
+[] Don't capture ``-- alfa:\n`` as flag
+
 
 
 -- notes list/

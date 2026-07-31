@@ -1,5 +1,4 @@
 {
-  "key": "single_line_flag",
   "test": "single_line_flag",
   "given": "alfa bravo\n\ncharlie",
   "status": {

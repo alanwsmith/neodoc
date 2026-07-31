@@ -53,7 +53,7 @@ fn my_test(path: &Path) -> datatest_stable::Result<()> {
       // };
     }
     Status::Error(_data) => {
-      panic!("set up for errors")
+      assert!(attr(&test.given).is_err());
     }
   }
   Ok(())

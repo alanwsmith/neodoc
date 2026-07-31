@@ -1,5 +1,4 @@
 {
-  "key": "flag",
   "test": "multi-line flag to end of file",
   "given": "alfa\nbravo",
   "status": {

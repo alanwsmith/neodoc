@@ -1,0 +1,11 @@
+{
+  "test": "first flag word with colon to end of line",
+  "given": "https://www.example.com/",
+  "status": {
+    "ok": {
+      "kind": "text",
+      "content": "https://www.example.com/"
+    }
+  },
+  "remainder": ""
+}

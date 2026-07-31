@@ -1,0 +1,11 @@
+{
+  "test": "word to end of line",
+  "given": "alfa",
+  "status": {
+    "ok": {
+      "kind": "text",
+      "content": "alfa"
+    }
+  },
+  "remainder": ""
+}

@@ -1,7 +1,7 @@
 {
   "key": "attr",
   "test": "Attr with multiple lines to end of file",
-  "given": "alfa: bravo charlie",
+  "given": "alfa: bravo\ncharlie",
   "status": {
     "ok": {
       "kind": "attr",
@@ -9,7 +9,15 @@
       "value": [
         {
           "kind": "text",
-          "content": "bravo charlie"
+          "content": "bravo"
+        },
+        {
+          "kind": "text",
+          "content": " "
+        },
+        {
+          "kind": "text",
+          "content": "charlie"
         }
       ]
     }

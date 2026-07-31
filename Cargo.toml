@@ -12,6 +12,14 @@ datatest-stable = "0.3.3"
 name = "attr"
 harness = false
 
+[[test]]
+name = "flag"
+harness = false
+
+[[test]]
+name = "flag_first_word"
+harness = false
+
 [dependencies]
 anyhow = "1.0.104"
 nom = "8.0.0"
