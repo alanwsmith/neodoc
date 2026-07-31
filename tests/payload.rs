@@ -21,8 +21,6 @@ enum Status {
   Error(Value),
 }
 
-// TODO: Set up to run solo tests first
-// then everything else after.
 fn my_test(path: &Path) -> datatest_stable::Result<()> {
   let content = &fs::read_to_string(path)?;
   let test: PayloadTest = serde_json::from_str(content)?;

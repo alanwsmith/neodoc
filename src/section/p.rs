@@ -14,7 +14,7 @@ pub fn p(input: &str) -> IResult<&str, Section> {
   // have fired. Otherwise, it's an invalid
   // kind.
   let (input, _kind) = section_kind.parse(input)?;
-  let (input, _) = empty_lines.parse(input)?;
+  let (input, _) = many1(empty_line).parse(input)?;
   let (input, blocks) = many1(block).parse(input)?;
   let section = Section::P {
     metadata: {

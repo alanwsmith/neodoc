@@ -1,28 +1,40 @@
 {
-  "test": "TODO: Basic integration test. TODO: Add second section",
-  "given": "-- alfa\n\nbravo",
+  "test": "Basic integration test with two paragraphs",
+  "given": "-- alfa\n\nbravo\n\ncharlie",
   "status": {
     "ok": {
-      "sections": [{
-        "kind": "p",
-        "metadata": {
-          "attrs": [],
-          "bound": "full",
-          "flags": [],
-          "type": "alfa"
-        },
-        "sections": [
-          {
-            "kind": "block",
-            "spans": [
-              {
-                "kind": "text",
-                "content": "bravo"
-              }
-            ]
-          }
-        ]
-      }]
+      "sections": [
+        {
+          "kind": "p",
+          "metadata": {
+            "attrs": [],
+            "bound": "full",
+            "flags": [],
+            "type": "alfa"
+          },
+          "sections": [
+            {
+              "kind": "block",
+              "spans": [
+                {
+                  "kind": "text",
+                  "content": "bravo"
+                }
+              ]
+            },
+
+            {
+              "kind": "block",
+              "spans": [
+                {
+                  "kind": "text",
+                  "content": "charlie"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   "remainder": "",

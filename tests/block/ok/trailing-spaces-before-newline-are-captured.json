@@ -1,6 +1,6 @@
 {
   "test": "Trialing spaces before newline is captured",
-  "given": "alfa bravo  \n\n\n",
+  "given": "alfa bravo  \n\ncharlie",
   "status": {
     "ok": {
       "kind": "block",
@@ -12,6 +12,6 @@
       ]
     }
   },
-  "remainder": "\n\n\n",
+  "remainder": "charlie",
   "skip": false
 }
