@@ -177,9 +177,10 @@ let (input, _) = not(tag("=")).parse(input)?;
 #[cfg(test)]
 mod tests {
 use super::*;
+use pretty_assertions::assert_eq;
 
 #[test]
-fn test_singlebacktic() {
+fn test_single_backtic() {
       let left = ("", "`");
       let right = single_backtic("`").unwrap();
       assert_eq!(left, right);
@@ -187,7 +188,7 @@ fn test_singlebacktic() {
                  
 
 #[test]
-fn test_singletilde() {
+fn test_single_tilde() {
       let left = ("", "~");
       let right = single_tilde("~").unwrap();
       assert_eq!(left, right);
@@ -195,7 +196,7 @@ fn test_singletilde() {
                  
 
 #[test]
-fn test_singleexclamation() {
+fn test_single_exclamation() {
       let left = ("", "!");
       let right = single_exclamation("!").unwrap();
       assert_eq!(left, right);
@@ -203,7 +204,7 @@ fn test_singleexclamation() {
                  
 
 #[test]
-fn test_singleat_sing() {
+fn test_single_at_sing() {
       let left = ("", "@");
       let right = single_at_sing("@").unwrap();
       assert_eq!(left, right);
@@ -211,7 +212,7 @@ fn test_singleat_sing() {
                  
 
 #[test]
-fn test_singleoctothorpe() {
+fn test_single_octothorpe() {
       let left = ("", "#");
       let right = single_octothorpe("#").unwrap();
       assert_eq!(left, right);
@@ -219,7 +220,7 @@ fn test_singleoctothorpe() {
                  
 
 #[test]
-fn test_singledollar_sign() {
+fn test_single_dollar_sign() {
       let left = ("", "$");
       let right = single_dollar_sign("$").unwrap();
       assert_eq!(left, right);
@@ -227,7 +228,7 @@ fn test_singledollar_sign() {
                  
 
 #[test]
-fn test_singlepercent_sign() {
+fn test_single_percent_sign() {
       let left = ("", "%");
       let right = single_percent_sign("%").unwrap();
       assert_eq!(left, right);
@@ -235,7 +236,7 @@ fn test_singlepercent_sign() {
                  
 
 #[test]
-fn test_singlecaret() {
+fn test_single_caret() {
       let left = ("", "^");
       let right = single_caret("^").unwrap();
       assert_eq!(left, right);
@@ -243,7 +244,7 @@ fn test_singlecaret() {
                  
 
 #[test]
-fn test_singleampersand() {
+fn test_single_ampersand() {
       let left = ("", "&");
       let right = single_ampersand("&").unwrap();
       assert_eq!(left, right);
@@ -251,7 +252,7 @@ fn test_singleampersand() {
                  
 
 #[test]
-fn test_singleastrisk() {
+fn test_single_astrisk() {
       let left = ("", "*");
       let right = single_astrisk("*").unwrap();
       assert_eq!(left, right);
@@ -259,7 +260,7 @@ fn test_singleastrisk() {
                  
 
 #[test]
-fn test_singleopen_paren() {
+fn test_single_open_paren() {
       let left = ("", "(");
       let right = single_open_paren("(").unwrap();
       assert_eq!(left, right);
@@ -267,7 +268,7 @@ fn test_singleopen_paren() {
                  
 
 #[test]
-fn test_singleclose_paren() {
+fn test_single_close_paren() {
       let left = ("", ")");
       let right = single_close_paren(")").unwrap();
       assert_eq!(left, right);
@@ -275,7 +276,7 @@ fn test_singleclose_paren() {
                  
 
 #[test]
-fn test_singleopen_curly_bracket() {
+fn test_single_open_curly_bracket() {
       let left = ("", "{");
       let right = single_open_curly_bracket("{").unwrap();
       assert_eq!(left, right);
@@ -283,7 +284,7 @@ fn test_singleopen_curly_bracket() {
                  
 
 #[test]
-fn test_singleclose_curly_bracket() {
+fn test_single_close_curly_bracket() {
       let left = ("", "}");
       let right = single_close_curly_bracket("}").unwrap();
       assert_eq!(left, right);
@@ -291,7 +292,7 @@ fn test_singleclose_curly_bracket() {
                  
 
 #[test]
-fn test_singleopen_bracket() {
+fn test_single_open_bracket() {
       let left = ("", "[");
       let right = single_open_bracket("[").unwrap();
       assert_eq!(left, right);
@@ -299,7 +300,7 @@ fn test_singleopen_bracket() {
                  
 
 #[test]
-fn test_singleclose_bracket() {
+fn test_single_close_bracket() {
       let left = ("", "]");
       let right = single_close_bracket("]").unwrap();
       assert_eq!(left, right);
@@ -307,7 +308,7 @@ fn test_singleclose_bracket() {
                  
 
 #[test]
-fn test_singleless_than() {
+fn test_single_less_than() {
       let left = ("", "<");
       let right = single_less_than("<").unwrap();
       assert_eq!(left, right);
@@ -315,7 +316,7 @@ fn test_singleless_than() {
                  
 
 #[test]
-fn test_singlegreater_than() {
+fn test_single_greater_than() {
       let left = ("", ">");
       let right = single_greater_than(">").unwrap();
       assert_eq!(left, right);
@@ -323,7 +324,7 @@ fn test_singlegreater_than() {
                  
 
 #[test]
-fn test_singlecolon() {
+fn test_single_colon() {
       let left = ("", ":");
       let right = single_colon(":").unwrap();
       assert_eq!(left, right);
@@ -331,7 +332,7 @@ fn test_singlecolon() {
                  
 
 #[test]
-fn test_singlepipe() {
+fn test_single_pipe() {
       let left = ("", "|");
       let right = single_pipe("|").unwrap();
       assert_eq!(left, right);
@@ -339,7 +340,7 @@ fn test_singlepipe() {
                  
 
 #[test]
-fn test_singleunderscore() {
+fn test_single_underscore() {
       let left = ("", "_");
       let right = single_underscore("_").unwrap();
       assert_eq!(left, right);
@@ -347,7 +348,7 @@ fn test_singleunderscore() {
                  
 
 #[test]
-fn test_singlehyphen() {
+fn test_single_hyphen() {
       let left = ("", "-");
       let right = single_hyphen("-").unwrap();
       assert_eq!(left, right);
@@ -355,10 +356,148 @@ fn test_singlehyphen() {
                  
 
 #[test]
-fn test_singleequal_sign() {
+fn test_single_equal_sign() {
       let left = ("", "=");
       let right = single_equal_sign("=").unwrap();
       assert_eq!(left, right);
+    }
+                 
+
+#[test]
+fn test_single_backtic_error() {
+      assert!(single_backtic("``").is_err());
+    }
+                 
+
+#[test]
+fn test_single_tilde_error() {
+      assert!(single_tilde("~~").is_err());
+    }
+                 
+
+#[test]
+fn test_single_exclamation_error() {
+      assert!(single_exclamation("!!").is_err());
+    }
+                 
+
+#[test]
+fn test_single_at_sing_error() {
+      assert!(single_at_sing("@@").is_err());
+    }
+                 
+
+#[test]
+fn test_single_octothorpe_error() {
+      assert!(single_octothorpe("##").is_err());
+    }
+                 
+
+#[test]
+fn test_single_dollar_sign_error() {
+      assert!(single_dollar_sign("$$").is_err());
+    }
+                 
+
+#[test]
+fn test_single_percent_sign_error() {
+      assert!(single_percent_sign("%%").is_err());
+    }
+                 
+
+#[test]
+fn test_single_caret_error() {
+      assert!(single_caret("^^").is_err());
+    }
+                 
+
+#[test]
+fn test_single_ampersand_error() {
+      assert!(single_ampersand("&&").is_err());
+    }
+                 
+
+#[test]
+fn test_single_astrisk_error() {
+      assert!(single_astrisk("**").is_err());
+    }
+                 
+
+#[test]
+fn test_single_open_paren_error() {
+      assert!(single_open_paren("((").is_err());
+    }
+                 
+
+#[test]
+fn test_single_close_paren_error() {
+      assert!(single_close_paren("))").is_err());
+    }
+                 
+
+#[test]
+fn test_single_open_curly_bracket_error() {
+      assert!(single_open_curly_bracket("{{").is_err());
+    }
+                 
+
+#[test]
+fn test_single_close_curly_bracket_error() {
+      assert!(single_close_curly_bracket("}}").is_err());
+    }
+                 
+
+#[test]
+fn test_single_open_bracket_error() {
+      assert!(single_open_bracket("[[").is_err());
+    }
+                 
+
+#[test]
+fn test_single_close_bracket_error() {
+      assert!(single_close_bracket("]]").is_err());
+    }
+                 
+
+#[test]
+fn test_single_less_than_error() {
+      assert!(single_less_than("<<").is_err());
+    }
+                 
+
+#[test]
+fn test_single_greater_than_error() {
+      assert!(single_greater_than(">>").is_err());
+    }
+                 
+
+#[test]
+fn test_single_colon_error() {
+      assert!(single_colon("::").is_err());
+    }
+                 
+
+#[test]
+fn test_single_pipe_error() {
+      assert!(single_pipe("||").is_err());
+    }
+                 
+
+#[test]
+fn test_single_underscore_error() {
+      assert!(single_underscore("__").is_err());
+    }
+                 
+
+#[test]
+fn test_single_hyphen_error() {
+      assert!(single_hyphen("--").is_err());
+    }
+                 
+
+#[test]
+fn test_single_equal_sign_error() {
+      assert!(single_equal_sign("==").is_err());
     }
                  
 }

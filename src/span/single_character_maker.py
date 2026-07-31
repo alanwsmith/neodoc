@@ -75,16 +75,27 @@ let (input, _) = not(tag("{char[0]}")).parse(input)?;
 lines.append("""#[cfg(test)]""")
 lines.append("""mod tests {""")
 lines.append("use super::*;")
+lines.append("use pretty_assertions::assert_eq;")
+
 
 for char in chars:
     lines.append(f"""
 #[test]
-fn test_single{char[1]}() {{
+fn test_single_{char[1]}() {{
       let left = ("", "{char[0]}");
       let right = single_{char[1]}("{char[0]}").unwrap();
       assert_eq!(left, right);
     }}
                  """)
+
+for char in chars:
+    lines.append(f"""
+#[test]
+fn test_single_{char[1]}_error() {{
+      assert!(single_{char[1]}("{char[0]}{char[0]}").is_err());
+    }}
+                 """)
+
 
 
 lines.append("""}""")
