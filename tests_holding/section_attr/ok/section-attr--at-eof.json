@@ -1,0 +1,16 @@
+{
+  "test": "Section attr at EOF",
+  "given": "-- alfa: bravo",
+  "status": {
+    "ok": {
+      "key": "alfa",
+      "value": [
+        {
+          "kind": "text",
+          "content": "bravo"
+        }
+      ]
+    }
+  },
+  "remainder": ""
+}

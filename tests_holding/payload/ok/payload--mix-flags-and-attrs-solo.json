@@ -1,0 +1,8 @@
+{
+  "test": "Mix flags and attrs",
+  "given": "-- alfa\n-- bravo\n-- charlie: delta\n-- echo\n-- foxtrot: golf",
+  "status": {
+    "ok": {}
+  },
+  "remainder": ""
+}

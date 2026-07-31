@@ -1,5 +1,15 @@
-// this is the section that occurs where
-// as the first thing on the page without
-// an explicit section header. It can
-// exists on the page by itself or
-// it can be in front of other sections.
+use crate::bound::Bound;
+use crate::section::*;
+use nom::multi::many1;
+use nom::{IResult, Parser};
+
+pub fn stand_alone(input: &str) -> IResult<&str, Section> {
+  let metadata = Metadata {
+    attrs: vec![],
+    bound: Bound::Full,
+    flags: vec![],
+    r#type: "standAlone".to_string(),
+  };
+  let (input, sections) = many1(block_p).parse(input)?;
+  Ok((input, Section::StandAlone { metadata, sections }))
+}

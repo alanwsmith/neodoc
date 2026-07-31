@@ -1,24 +1,30 @@
-pub mod p;
-pub mod p_block;
-use crate::metadata::Metadata;
-use crate::section::p::p;
-use nom::{IResult, Parser};
+pub mod block_p;
+pub mod stand_alone;
 
-use crate::span::*;
+use crate::{metadata::Metadata, span::*};
+use block_p::*;
+use nom::{IResult, Parser, branch::alt};
 use serde::{Deserialize, Serialize};
+use stand_alone::*;
 
-#[derive(Debug, Deserialize, Serialize)]
-#[serde(tag = "kind", rename_all = "lowercase")]
+#[derive(Debug, Deserialize, PartialEq, Serialize)]
+#[serde(tag = "kind")]
 pub enum Section {
-  #[serde(rename = "block")]
-  PBlock { spans: Vec<Span> },
-  P {
+  #[serde(rename = "standAlone")]
+  StandAlone {
     metadata: Metadata,
     sections: Vec<Section>,
   },
+  #[serde(rename = "block")]
+  PBlock {
+    metadata: Metadata,
+    spans: Vec<Span>,
+  },
+  Placeholder,
 }
 
 pub fn section(input: &str) -> IResult<&str, Section> {
-  let (input, section) = p.parse(input)?;
+  let (input, section) =
+    alt((stand_alone, block_p)).parse(input)?;
   Ok((input, section))
 }

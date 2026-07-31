@@ -1,4 +1,5 @@
-use neodoc::payload::*;
+#![allow(warnings)]
+use neodoc::attr::section_attr;
 use pretty_assertions::assert_eq;
 use serde::Deserialize;
 use serde_json::Value;
@@ -7,11 +8,11 @@ use std::path::Path;
 
 #[derive(Debug, Deserialize)]
 #[allow(dead_code)]
-struct PayloadTest {
-  skip: Option<bool>,
+struct AttrTest {
   given: String,
-  status: Status,
   remainder: String,
+  skip: Option<bool>,
+  status: Status,
 }
 
 #[derive(Debug, Deserialize)]
@@ -23,27 +24,20 @@ enum Status {
 
 fn my_test(path: &Path) -> datatest_stable::Result<()> {
   let content = &fs::read_to_string(path)?;
-  let test: PayloadTest = serde_json::from_str(content)?;
+  let test: AttrTest = serde_json::from_str(content)?;
   if !test.skip.unwrap_or(false) {
     match test.status {
       Status::Ok(data) => {
         let left = (test.remainder.as_str(), data);
-        match payload(&test.given) {
-          Ok(result) => {
-            let right = (
-              result.0,
-              serde_json::to_value(result.1).unwrap(),
-            );
-            assert_eq!(left, right);
-          }
-          Err(e) => {
-            dbg!(e);
-            panic!("set up for errors");
-          }
-        };
+        let result = section_attr(&test.given).unwrap();
+        let right = (
+          result.0,
+          serde_json::to_value(result.1).unwrap(),
+        );
+        assert_eq!(left, right);
       }
       Status::Error(_data) => {
-        panic!("set up for errors");
+        assert!(section_attr(&test.given).is_err());
       }
     }
   }
@@ -51,5 +45,6 @@ fn my_test(path: &Path) -> datatest_stable::Result<()> {
 }
 
 datatest_stable::harness! {
-    { test = my_test, root = "tests/payload", pattern = r".*\.json$" },
+    // { test = my_test, root = "tests/section_attr", pattern = r".*\solo.json$" },
+    { test = my_test, root = "tests/section_attr", pattern = r".*\.json$" },
 }

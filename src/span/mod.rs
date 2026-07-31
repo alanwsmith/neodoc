@@ -1,29 +1,7 @@
-pub mod single_line_span;
-pub mod single_newline;
-pub mod text;
-
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize, PartialEq, Serialize)]
 #[serde(tag = "kind", rename_all = "lowercase")]
 pub enum Span {
   Text { content: String },
-  // Code
-  // Link
-  // Image
-  // Span
-  // Strong
-  // Emphasis
-  // Footnote
-  // Footref
-}
-
-use crate::span::single_newline::*;
-use crate::span::text::text;
-use nom::{IResult, Parser, branch::alt};
-
-pub fn span(input: &str) -> IResult<&str, Span> {
-  let (input, result) =
-    alt((text, single_newline)).parse(input)?;
-  Ok((input, result))
 }

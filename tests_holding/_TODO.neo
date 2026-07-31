@@ -53,6 +53,10 @@ are all invalid:
   -- /code
 
 
+[] Make sure to include ``<<br>>`` by default
+for break tags. 
+
+
 
 -- /checklist
 

@@ -1,0 +1,32 @@
+{
+  "ok": {
+    "sections": [
+      {
+        "kind": "standAlone",
+        "metadata": {
+          "attrs": [],
+          "bound": "full",
+          "flags": [],
+          "type": "standAlone"
+        },
+        "sections": [
+          {
+            "kind": "block",
+            "metadata": {
+              "attrs": [],
+              "bound": "full",
+              "flags": [],
+              "type": "block"
+            },
+            "spans": [
+              {
+                "kind": "text",
+                "content": "alfa"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

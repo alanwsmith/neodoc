@@ -17,6 +17,8 @@ pub fn section_attr(
   input: &str
 ) -> IResult<&str, FlagsAndAttrs> {
   let (input, _) = section_token.parse(input)?;
-  let (input, attr) = attr.parse(input)?;
+  let (input, key) = key.parse(input)?;
+  let (input, value) = many1(span).parse(input)?;
+  let attr = FlagsAndAttrs::Attr { key, value };
   Ok((input, attr))
 }

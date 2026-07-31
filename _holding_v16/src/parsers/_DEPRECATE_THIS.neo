@@ -1,0 +1,7 @@
+Deprecate this directory and move
+everything into ``parsers_str``
+and assemble Spans from the
+strings instead of doing them
+in the parser. 
+
+

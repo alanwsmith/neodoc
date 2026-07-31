@@ -1,0 +1,16 @@
+{
+  "test": "Section attr across newline",
+  "given": "-- alfa: bravo\n-- charlie",
+  "status": {
+    "ok": {
+      "key": "alfa",
+      "value": [
+        {
+          "kind": "text",
+          "content": "bravo"
+        }
+      ]
+    }
+  },
+  "remainder": "-- charlie"
+}
