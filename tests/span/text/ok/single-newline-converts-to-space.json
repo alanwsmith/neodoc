@@ -1,4 +1,5 @@
 {
+  "key": "span",
   "test": "A single new line that's not followed by an empty line is converted to a space",
   "given": "\nalfa",
   "status": {
@@ -7,6 +8,5 @@
       "content": " "
     }
   },
-  "remainder": "alfa",
-  "skip": false
+  "remainder": "alfa"
 }

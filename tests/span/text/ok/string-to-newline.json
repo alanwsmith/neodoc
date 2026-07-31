@@ -1,4 +1,5 @@
 {
+  "key": "span",
   "test": "String to end of input",
   "given": "alfa bravo\ncharlie",
   "status": {
@@ -7,6 +8,5 @@
       "content": "alfa bravo"
     }
   },
-  "remainder": "\ncharlie",
-  "skip": false
+  "remainder": "\ncharlie"
 }
