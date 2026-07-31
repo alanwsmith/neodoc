@@ -65,7 +65,7 @@ lines.append("""
 for char in chars:
     lines.append(f"""pub fn single_{char[1]}(input: &str) -> IResult<&str, &str> {{
 let (input, result) = tag("{char[0]}").parse(input)?;
-let (input, result) = not(tag("{char[0]}")).parse(input)?;
+let (input, _) = not(tag("{char[0]}")).parse(input)?;
   Ok((input, result))
   }}
 
@@ -74,6 +74,19 @@ let (input, result) = not(tag("{char[0]}")).parse(input)?;
 
 lines.append("""#[cfg(test)]""")
 lines.append("""mod tests {""")
+lines.append("use super::*;")
+
+for char in chars:
+    lines.append(f"""
+#[test]
+fn test_single{char[1]}() {{
+      let left = ("", "{char[0]}");
+      let right = single_{char[1]}("{char[0]}").unwrap();
+      assert_eq!(left, right);
+    }}
+                 """)
+
+
 lines.append("""}""")
 
 
