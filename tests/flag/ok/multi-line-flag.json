@@ -1,5 +1,5 @@
 {
-  "key": "flag",
+  "key": "multi_line_flag",
   "test": "Basic multi-line flag",
   "given": "alfa\nbravo",
   "status": {

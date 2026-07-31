@@ -1,0 +1,18 @@
+{
+  "key": "single_line_flag",
+  "test": "single_line_flag",
+  "given": "alfa bravo\ncharlie",
+  "status": {
+    "ok": {
+      "kind": "flag",
+      "spans": [
+        {
+          "kind": "text",
+          "content": "alfa bravo"
+        }
+      ]
+    }
+  },
+  "remainder": "\ncharlie",
+  "skip": false
+}

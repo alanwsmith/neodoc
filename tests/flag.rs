@@ -1,5 +1,6 @@
-use crate::section_flag::section_flag;
-use neodoc::flag::*;
+use neodoc::flag::multi_line_flag::multi_line_flag;
+use neodoc::flag::section_flag::section_flag;
+use neodoc::flag::single_line_flag::single_line_flag;
 use pretty_assertions::assert_eq;
 use serde::Deserialize;
 use serde_json::Value;
@@ -30,8 +31,9 @@ fn my_test(path: &Path) -> datatest_stable::Result<()> {
     Status::Ok(data) => {
       let left = (test.remainder.as_str(), data);
       match test.key.as_str() {
-        "flag" => {
-          let result = flag(&test.given).unwrap();
+        "multi_line_flag" => {
+          let result =
+            multi_line_flag(&test.given).unwrap();
           let right = (
             result.0,
             serde_json::to_value(result.1).unwrap(),
@@ -46,7 +48,16 @@ fn my_test(path: &Path) -> datatest_stable::Result<()> {
           );
           assert_eq!(left, right);
         }
-        _ => (),
+        "single_line_flag" => {
+          let result =
+            single_line_flag(&test.given).unwrap();
+          let right = (
+            result.0,
+            serde_json::to_value(result.1).unwrap(),
+          );
+          assert_eq!(left, right);
+        }
+        _ => panic!("tried to call unidentified flag type"),
       };
     }
     Status::Error(_data) => {
