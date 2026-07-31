@@ -1,7 +1,7 @@
 {
   "key": "flag",
-  "test": "Flag with single piece",
-  "given": "alfa",
+  "test": "Basic multi-line flag",
+  "given": "alfa\nbravo",
   "status": {
     "ok": {
       "kind": "flag",
@@ -9,6 +9,14 @@
         {
           "kind": "text",
           "content": "alfa"
+        },
+        {
+          "kind": "text",
+          "content": " "
+        },
+        {
+          "kind": "text",
+          "content": "bravo"
         }
       ]
     }

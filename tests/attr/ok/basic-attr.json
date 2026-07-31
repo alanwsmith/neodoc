@@ -1,7 +1,7 @@
 {
-  "key": "flag",
-  "test": "Flag with single piece",
-  "given": "alfa",
+  "key": "attr",
+  "test": "Single basic attr",
+  "given": "alfa: bravo",
   "status": {
     "ok": {
       "kind": "flag",

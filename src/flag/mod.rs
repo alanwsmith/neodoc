@@ -1,6 +1,6 @@
 pub mod section_flag;
 
-use crate::span::{Span, text::text};
+use crate::span::{Span, span};
 use nom::{IResult, Parser, multi::many1};
 use serde::{Deserialize, Serialize};
 
@@ -11,7 +11,7 @@ pub struct Flag {
 }
 
 pub fn flag(input: &str) -> IResult<&str, Flag> {
-  let (input, spans) = many1(text).parse(input)?;
+  let (input, spans) = many1(span).parse(input)?;
   let f = Flag { spans };
   Ok((input, f))
 }
