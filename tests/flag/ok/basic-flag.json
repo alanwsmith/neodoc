@@ -1,0 +1,17 @@
+{
+  "test": "Flag with single piece",
+  "given": "alfa\n",
+  "status": {
+    "ok": {
+      "kind": "flag",
+      "spans": [
+        {
+          "kind": "text",
+          "content": "alfa"
+        }
+      ]
+    }
+  },
+  "remainder": "\n",
+  "skip": false
+}

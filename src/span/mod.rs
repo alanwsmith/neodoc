@@ -1,7 +1,7 @@
 pub mod single_newline;
 pub mod text;
-use crate::span::single_newline::*;
 
+use crate::span::single_newline::*;
 use nom::{IResult, Parser, branch::alt};
 use serde::{Deserialize, Serialize};
 use text::*;
