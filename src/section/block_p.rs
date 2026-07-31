@@ -1,6 +1,7 @@
 use crate::bound::*;
 use crate::metadata::*;
-use crate::{parsers::word::*, section::*};
+use crate::parsers::text_span::text_span;
+use crate::section::*;
 use nom::multi::many1;
 use nom::{IResult, Parser};
 
@@ -11,7 +12,7 @@ pub fn block_p(input: &str) -> IResult<&str, Section> {
     flags: vec![],
     r#type: "block".to_string(),
   };
-  let (input, span_strs) = many1(word).parse(input)?;
+  let (input, span_strs) = many1(text_span).parse(input)?;
   let spans = span_strs
     .iter()
     .map(|x| Span::Text {

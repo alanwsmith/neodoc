@@ -27,10 +27,23 @@ mod tests {
   use serde_json::Value;
 
   #[test]
-  fn run_test() {
-    let input = "alfa";
+  fn run_1() {
+    let input = include_str!("tests/1/input.neo").trim();
     let left: Value = serde_json::from_str(include_str!(
       "tests/1/target.json"
+    ))
+    .unwrap();
+    let right =
+      serde_json::to_value(payload(input).unwrap())
+        .unwrap();
+    assert_eq!(left, right);
+  }
+
+  #[test]
+  fn run_2() {
+    let input = include_str!("tests/2/input.neo").trim();
+    let left: Value = serde_json::from_str(include_str!(
+      "tests/2/target.json"
     ))
     .unwrap();
     let right =
