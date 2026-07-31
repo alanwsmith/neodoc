@@ -183,4 +183,3 @@ pub fn single_equal_sign(
   let (input, result) = tag("=").parse(input)?;
   Ok((input, result))
 }
-

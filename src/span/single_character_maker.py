@@ -62,17 +62,23 @@ lines.append("""
   }
 """)
 
-
 for char in chars:
     lines.append(f"""pub fn single_{char[1]}(input: &str) -> IResult<&str, &str> {{
 let (input, result) = tag("{char[0]}").parse(input)?;
+let (input, result) = not(tag("{char[0]}")).parse(input)?;
   Ok((input, result))
   }}
+
              """)
+
+
+lines.append("""#[cfg(test)]""")
+lines.append("""mod tests {""")
+lines.append("""}""")
+
 
 with open("single_characters.rs", "w") as _out:
     _out.write("\n".join(lines))
-
 
 
 
