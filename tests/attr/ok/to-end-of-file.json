@@ -1,0 +1,18 @@
+{
+  "key": "attr",
+  "test": "Attr with text to end of file",
+  "given": "alfa: bravo charlie",
+  "status": {
+    "ok": {
+      "kind": "attr",
+      "key": "alfa",
+      "value": [
+        {
+          "kind": "text",
+          "content": "bravo charlie"
+        }
+      ]
+    }
+  },
+  "remainder": ""
+}
