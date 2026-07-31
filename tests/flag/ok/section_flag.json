@@ -1,7 +1,7 @@
 {
-  "key": "flag",
+  "key": "section_flag",
   "test": "Flag with single piece",
-  "given": "alfa\n",
+  "given": "-- alfa\n",
   "status": {
     "ok": {
       "kind": "flag",
@@ -13,6 +13,6 @@
       ]
     }
   },
-  "remainder": "\n",
+  "remainder": "",
   "skip": false
 }

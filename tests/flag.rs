@@ -1,3 +1,4 @@
+use crate::section_flag::section_flag;
 use neodoc::flag::*;
 use pretty_assertions::assert_eq;
 use serde::Deserialize;
@@ -8,6 +9,7 @@ use std::path::Path;
 #[derive(Debug, Deserialize)]
 #[allow(dead_code)]
 struct FlagTest {
+  key: String,
   skip: bool,
   given: String,
   status: Status,
@@ -27,10 +29,25 @@ fn my_test(path: &Path) -> datatest_stable::Result<()> {
   match test.status {
     Status::Ok(data) => {
       let left = (test.remainder.as_str(), data);
-      let result = flag(&test.given).unwrap();
-      let right =
-        (result.0, serde_json::to_value(result.1).unwrap());
-      assert_eq!(left, right);
+      match test.key.as_str() {
+        "flag" => {
+          let result = flag(&test.given).unwrap();
+          let right = (
+            result.0,
+            serde_json::to_value(result.1).unwrap(),
+          );
+          assert_eq!(left, right);
+        }
+        "section_flag" => {
+          let result = section_flag(&test.given).unwrap();
+          let right = (
+            result.0,
+            serde_json::to_value(result.1).unwrap(),
+          );
+          assert_eq!(left, right);
+        }
+        _ => (),
+      };
     }
     Status::Error(_data) => {
       panic!("set up for errors")

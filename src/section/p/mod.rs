@@ -1,10 +1,12 @@
 pub mod p_block;
 
 use crate::bound::*;
+use crate::flag::section_flag::*;
 use crate::metadata::*;
 use crate::parsers::*;
 use crate::section::Section;
 use crate::section::p_block::p_block;
+use nom::multi::many0;
 use nom::multi::many1;
 use nom::{IResult, Parser};
 
@@ -16,6 +18,7 @@ pub fn p(input: &str) -> IResult<&str, Section> {
   // have fired. Otherwise, it's an invalid
   // kind.
   let (input, _kind) = section_kind.parse(input)?;
+  let (input, flags) = many0(section_flag).parse(input)?;
   let (input, _) = many1(empty_line).parse(input)?;
   let (input, blocks) = many1(p_block).parse(input)?;
   let section = Section::P {
@@ -23,7 +26,7 @@ pub fn p(input: &str) -> IResult<&str, Section> {
       Metadata {
         attrs: vec![],
         bound: Bound::Full,
-        flags: vec![],
+        flags,
         r#type: r#type.to_string(),
       }
     },
