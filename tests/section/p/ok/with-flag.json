@@ -10,10 +10,7 @@
         "bound": "full",
         "flags": [
           {
-            "kind": "flag",
-            "spans": [
-              { "kind": "text", "content": "bravo" }
-            ]
+            "spans": [{ "kind": "text", "content": "bravo" }]
           }
         ],
         "type": "alfa"

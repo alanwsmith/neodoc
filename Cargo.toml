@@ -20,6 +20,14 @@ harness = false
 name = "flag_first_word"
 harness = false
 
+[[test]]
+name = "payload"
+harness = false
+
+[[test]]
+name = "section"
+harness = false
+
 [dependencies]
 anyhow = "1.0.104"
 nom = "8.0.0"

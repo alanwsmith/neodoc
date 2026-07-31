@@ -6,17 +6,16 @@
     "ok": {
       "kind": "p",
       "metadata": {
-        "attrs": [],
-        "bound": "full",
-        "flags": [
+        "attrs": [
           {
-            "kind": "attr",
             "key": "bravo",
             "value": [
               { "kind": "text", "content": "charlie" }
             ]
           }
         ],
+        "bound": "full",
+        "flags": [],
         "type": "alfa"
       },
       "sections": [

@@ -4,7 +4,6 @@
   "given": "alfa: bravo\ncharlie",
   "status": {
     "ok": {
-      "kind": "attr",
       "key": "alfa",
       "value": [
         {

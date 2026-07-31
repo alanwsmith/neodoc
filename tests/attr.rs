@@ -10,8 +10,9 @@ use std::path::Path;
 struct AttrTest {
   key: String,
   given: String,
-  status: Status,
   remainder: String,
+  skip: Option<bool>,
+  status: Status,
 }
 
 #[derive(Debug, Deserialize)]
@@ -24,36 +25,20 @@ enum Status {
 fn my_test(path: &Path) -> datatest_stable::Result<()> {
   let content = &fs::read_to_string(path)?;
   let test: AttrTest = serde_json::from_str(content)?;
-  match test.status {
-    Status::Ok(data) => {
-      let left = (test.remainder.as_str(), data);
-      let result = attr(&test.given).unwrap();
-      let right =
-        (result.0, serde_json::to_value(result.1).unwrap());
-      assert_eq!(left, right);
-
-      // match test.key.as_str() {
-      //   "multi_line_attr" => {
-      //     let result = attr(&test.given).unwrap();
-      //     let right = (
-      //       result.0,
-      //       serde_json::to_value(result.1).unwrap(),
-      //     );
-      //     assert_eq!(left, right);
-      //   }
-      //   "single_line_attr" => {
-      //     let result = attr(&test.given).unwrap();
-      //     let right = (
-      //       result.0,
-      //       serde_json::to_value(result.1).unwrap(),
-      //     );
-      //     assert_eq!(left, right);
-      //   }
-      //   _ => panic!("unknown key passed to attr test"),
-      // };
-    }
-    Status::Error(_data) => {
-      assert!(attr(&test.given).is_err());
+  if !test.skip.unwrap_or(false) {
+    match test.status {
+      Status::Ok(data) => {
+        let left = (test.remainder.as_str(), data);
+        let result = attr(&test.given).unwrap();
+        let right = (
+          result.0,
+          serde_json::to_value(result.1).unwrap(),
+        );
+        assert_eq!(left, right);
+      }
+      Status::Error(_data) => {
+        assert!(attr(&test.given).is_err());
+      }
     }
   }
   Ok(())

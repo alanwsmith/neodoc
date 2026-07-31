@@ -1,9 +1,8 @@
 {
-  "test": "multi-line flag to end of file",
-  "given": "alfa\nbravo",
+  "test": "single_line_flag",
+  "given": "alfa bravo charlie\n\ndelta",
   "status": {
     "ok": {
-      "kind": "flag",
       "spans": [
         {
           "kind": "text",
@@ -15,11 +14,10 @@
         },
         {
           "kind": "text",
-          "content": "bravo"
+          "content": "bravo charlie"
         }
       ]
     }
   },
-  "remainder": "",
-  "skip": false
+  "remainder": "\n\ndelta"
 }

@@ -1,0 +1,20 @@
+{
+  "test": "multi-line flag to end of file",
+  "given": "alfa\nbravo",
+  "status": {
+    "ok": {
+      "spans": [{
+        "kind": "text",
+        "content": "alfa"
+      }, {
+        "kind": "text",
+        "content": " "
+      }, {
+        "kind": "text",
+        "content": "bravo"
+      }]
+    }
+  },
+  "remainder": "",
+  "skip": false
+}
