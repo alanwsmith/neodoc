@@ -1,9 +1,9 @@
 {
-  "key": "single_line_flag",
+  "key": "flag",
   "test": "single_line_flag",
   "given": "alfa bravo\n\ncharlie",
   "status": {
-    "ok": {
+    "error": {
       "kind": "flag",
       "spans": [
         {

@@ -9,7 +9,7 @@ include_dir = {version = "0.7.4", features = ["glob"] }
 datatest-stable = "0.3.3"
 
 [[test]]
-name = "runner"
+name = "attr"
 harness = false
 
 [dependencies]

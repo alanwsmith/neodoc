@@ -1,5 +1,4 @@
 {
-  "skip": true,
   "key": "p",
   "test": "P section with attr",
   "given": "-- alfa\n-- bravo: charlie\n\ndelta",
@@ -14,7 +13,7 @@
             "kind": "attr",
             "key": "bravo",
             "value": [
-              { "kind": "text", "content": "bravo" }
+              { "kind": "text", "content": "charlie" }
             ]
           }
         ],

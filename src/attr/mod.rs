@@ -1,14 +1,10 @@
 pub mod key;
-// pub mod multi_line_attr;
-// pub mod single_line_attr;
-// pub mod single_list_section_attr;
 
+use crate::attr::key::key;
+use crate::parsers::section_token;
 use crate::span::Span;
 use crate::span::span;
-use nom::{
-  IResult, Parser, bytes::complete::is_not,
-  character::complete::space1, multi::many1,
-};
+use nom::{IResult, Parser, multi::many1};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -19,12 +15,14 @@ pub struct Attr {
 }
 
 pub fn attr(input: &str) -> IResult<&str, Attr> {
-  let (input, key) = is_not(": \n\r\t").parse(input)?;
-  let (input, _) = space1.parse(input)?;
+  let (input, key) = key.parse(input)?;
   let (input, value) = many1(span).parse(input)?;
-  let f = Attr {
-    key: key.to_string(),
-    value,
-  };
-  Ok((input, f))
+  let attr = Attr { key, value };
+  Ok((input, attr))
+}
+
+pub fn section_attr(input: &str) -> IResult<&str, Attr> {
+  let (input, _) = section_token.parse(input)?;
+  let (input, attr) = attr.parse(input)?;
+  Ok((input, attr))
 }
