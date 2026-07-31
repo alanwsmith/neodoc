@@ -1,4 +1,5 @@
 {
+  "key": "p_block",
   "test": "Leading spaces are captured",
   "given": "  alfa bravo",
   "status": {
@@ -12,6 +13,5 @@
       ]
     }
   },
-  "remainder": "",
-  "skip": false
+  "remainder": ""
 }

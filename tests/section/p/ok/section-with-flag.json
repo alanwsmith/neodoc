@@ -1,4 +1,5 @@
 {
+  "key": "p",
   "test": "Section with flag",
   "given": "-- alfa\n-- bravo\n\ncharlie",
   "status": {
@@ -30,6 +31,5 @@
       ]
     }
   },
-  "remainder": "",
-  "skip": false
+  "remainder": ""
 }

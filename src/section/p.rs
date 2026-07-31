@@ -1,11 +1,9 @@
-pub mod p_block;
-
 use crate::bound::*;
 use crate::flag::section_flag::*;
 use crate::metadata::*;
 use crate::parsers::*;
 use crate::section::Section;
-use crate::section::p_block::p_block;
+use crate::section::p_block::*;
 use nom::multi::many0;
 use nom::multi::many1;
 use nom::{IResult, Parser};

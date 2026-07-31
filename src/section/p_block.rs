@@ -11,5 +11,5 @@ pub fn p_block(input: &str) -> IResult<&str, Section> {
   let (input, result) =
     many1(multi_line_span).parse(input)?;
   let (input, _) = many0(empty_line).parse(input)?;
-  Ok((input, Section::Block { spans: result }))
+  Ok((input, Section::PBlock { spans: result }))
 }

@@ -1,4 +1,5 @@
 {
+  "key": "p_block",
   "test": "Trialing spaces before newline is captured",
   "given": "alfa bravo  \n\ncharlie",
   "status": {
@@ -12,6 +13,5 @@
       ]
     }
   },
-  "remainder": "charlie",
-  "skip": false
+  "remainder": "charlie"
 }

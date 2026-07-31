@@ -1,8 +1,8 @@
 pub mod p;
-use crate::metadata::*;
+pub mod p_block;
+use crate::metadata::Metadata;
+use crate::section::p::p;
 use nom::{IResult, Parser};
-
-pub use p::*;
 
 use crate::span::*;
 use serde::{Deserialize, Serialize};
@@ -10,9 +10,8 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(tag = "kind", rename_all = "lowercase")]
 pub enum Section {
-  Block {
-    spans: Vec<Span>,
-  },
+  #[serde(rename = "block")]
+  PBlock { spans: Vec<Span> },
   P {
     metadata: Metadata,
     sections: Vec<Section>,

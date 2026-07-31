@@ -1,5 +1,5 @@
 {
-  "skip": false,
+  "key": "p",
   "test": "A named p section",
   "given": "-- alfa p\n\nHello, World",
   "status": {

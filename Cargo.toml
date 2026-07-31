@@ -13,10 +13,6 @@ name = "attr"
 harness = false
 
 [[test]]
-name = "block"
-harness = false
-
-[[test]]
 name = "flag"
 harness = false
 

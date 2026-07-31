@@ -1,4 +1,5 @@
 {
+  "key": "p",
   "test": "Chomp leaing space before type",
   "given": "--     alfa\n\nbravo",
   "status": {
@@ -23,6 +24,5 @@
       ]
     }
   },
-  "remainder": "",
-  "skip": false
+  "remainder": ""
 }

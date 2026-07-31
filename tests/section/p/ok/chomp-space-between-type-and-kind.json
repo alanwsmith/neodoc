@@ -1,5 +1,5 @@
 {
-  "skip": false,
+  "key": "p",
   "test": "Chomp whitespace between type and kind",
   "given": "-- alfa        p\n\nbravo",
   "status": {

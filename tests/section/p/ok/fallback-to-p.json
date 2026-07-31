@@ -1,5 +1,5 @@
 {
-  "skip": false,
+  "key": "p",
   "test": "Generic sections (e.g. ``-- alfa``) with no explicit section kind are paragraph (p) types by default.",
   "given": "-- alfa\n\nbravo\n\n",
   "status": {

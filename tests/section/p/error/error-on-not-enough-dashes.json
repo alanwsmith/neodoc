@@ -1,9 +1,9 @@
 {
+  "key": "p",
   "test": "Error if not enough dashes.",
   "given": "- p",
   "status": {
     "error": {}
   },
-  "remainder": "",
-  "skip": false
+  "remainder": ""
 }
