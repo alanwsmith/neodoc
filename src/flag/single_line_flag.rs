@@ -1,3 +1,5 @@
+// DEPRECATED: delete next time you see this.
+//
 use crate::{
   flag::Flag, span::single_line_span::single_line_span,
 };

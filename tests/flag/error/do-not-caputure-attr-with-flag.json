@@ -1,16 +1,8 @@
 {
-  "test": "single_line_flag",
-  "given": "alfa bravo\n\ncharlie",
+  "test": "Do not captue flag that ends with colon which should be an attr",
+  "given": "alfa: ",
   "status": {
-    "error": {
-      "kind": "flag",
-      "spans": [
-        {
-          "kind": "text",
-          "content": "alfa bravo"
-        }
-      ]
-    }
+    "error": {}
   },
-  "remainder": "\n\ncharlie"
+  "remainder": ""
 }
