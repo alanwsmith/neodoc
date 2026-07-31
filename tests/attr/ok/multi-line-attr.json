@@ -1,6 +1,6 @@
 {
   "key": "attr",
-  "test": "Single basic multi-line attr",
+  "test": "Basic multi-line attr",
   "given": "alfa: bravo charlie\ndelta",
   "status": {
     "ok": {
@@ -10,6 +10,14 @@
         {
           "kind": "text",
           "content": "bravo charlie"
+        },
+        {
+          "kind": "text",
+          "content": " "
+        },
+        {
+          "kind": "text",
+          "content": "delta"
         }
       ]
     }
