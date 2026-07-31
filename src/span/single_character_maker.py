@@ -24,11 +24,6 @@ chars = [
         ("_", "underscore"),
         ("-", "hyphen"),
         ("=", "equal_sign"),
-        #(" ", "space"),
-        #("\n", "newline"),
-        # ("\r", "carriage return"),
-        # ("\t", "tab"),
-        # ("\\", "backslash")
         ]
 
 lines = [
