@@ -1,0 +1,59 @@
+-- title
+
+Tests To Do
+
+-- checklist
+
+[] Section with invalid kind ``-- alfa invalid``.
+
+[] P section with flags then attrs.
+
+[] P section with attrs then flags.
+
+[] Make sure section flags don't have 
+a colon after the first word (so they
+don't become attrs).
+
+[] Section attr that spans multiple lines
+
+[] Section flag that spans multiple lines
+
+
+
+-- notes list/
+
+- When turning the AST back into 
+a file the attrs and flags stay
+in the same order with their
+respective group, but the groups
+are separated. This is
+
+  -- code/
+
+  -- p
+  -- key1: value1part1 
+  -- flag1
+  -- key2: value2
+  -- flag2
+  -- key1: value1part2
+
+  -- /code
+
+  Becomes
+
+
+  -- code/
+
+  -- p
+  -- key1: value1part1 
+  -- key2: value2
+  -- key1: value1part2 
+  -- flag1
+  -- flag2
+
+  -- /code
+
+  The attrs go first. 
+
+
+-- /list

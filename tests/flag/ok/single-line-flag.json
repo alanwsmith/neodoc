@@ -1,7 +1,7 @@
 {
   "key": "single_line_flag",
   "test": "single_line_flag",
-  "given": "alfa bravo\ncharlie",
+  "given": "alfa bravo\n\ncharlie",
   "status": {
     "ok": {
       "kind": "flag",
@@ -13,6 +13,6 @@
       ]
     }
   },
-  "remainder": "\ncharlie",
+  "remainder": "\n\ncharlie",
   "skip": false
 }

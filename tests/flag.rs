@@ -1,4 +1,4 @@
-use neodoc::flag::multi_line_flag::multi_line_flag;
+use neodoc::flag::flag;
 use neodoc::flag::section_flag::section_flag;
 use neodoc::flag::single_line_flag::single_line_flag;
 use pretty_assertions::assert_eq;
@@ -31,9 +31,8 @@ fn my_test(path: &Path) -> datatest_stable::Result<()> {
     Status::Ok(data) => {
       let left = (test.remainder.as_str(), data);
       match test.key.as_str() {
-        "multi_line_flag" => {
-          let result =
-            multi_line_flag(&test.given).unwrap();
+        "flag" => {
+          let result = flag(&test.given).unwrap();
           let right = (
             result.0,
             serde_json::to_value(result.1).unwrap(),

@@ -1,6 +1,6 @@
 {
-  "key": "multi_line_flag",
-  "test": "Basic multi-line flag",
+  "key": "flag",
+  "test": "multi-line flag to end of file",
   "given": "alfa\nbravo",
   "status": {
     "ok": {

@@ -1,7 +1,8 @@
 {
+  "skip": true,
   "key": "p",
-  "test": "Section with flag",
-  "given": "-- alfa\n-- bravo\n\ncharlie",
+  "test": "P section with attr",
+  "given": "-- alfa\n-- bravo: charlie\n\ndelta",
   "status": {
     "ok": {
       "kind": "p",
@@ -10,8 +11,9 @@
         "bound": "full",
         "flags": [
           {
-            "kind": "flag",
-            "spans": [
+            "kind": "attr",
+            "key": "bravo",
+            "value": [
               { "kind": "text", "content": "bravo" }
             ]
           }
@@ -24,7 +26,7 @@
           "spans": [
             {
               "kind": "text",
-              "content": "charlie"
+              "content": "delta"
             }
           ]
         }

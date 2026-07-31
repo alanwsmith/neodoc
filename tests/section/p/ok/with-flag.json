@@ -1,0 +1,35 @@
+{
+  "key": "p",
+  "test": "P section with flag",
+  "given": "-- alfa\n-- bravo\n\ncharlie",
+  "status": {
+    "ok": {
+      "kind": "p",
+      "metadata": {
+        "attrs": [],
+        "bound": "full",
+        "flags": [
+          {
+            "kind": "flag",
+            "spans": [
+              { "kind": "text", "content": "bravo" }
+            ]
+          }
+        ],
+        "type": "alfa"
+      },
+      "sections": [
+        {
+          "kind": "block",
+          "spans": [
+            {
+              "kind": "text",
+              "content": "charlie"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "remainder": ""
+}
