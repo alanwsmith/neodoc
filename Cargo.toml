@@ -13,7 +13,7 @@ name = "flag"
 harness = false
 
 [[test]]
-name = "p_block"
+name = "block"
 harness = false
 
 [[test]]
