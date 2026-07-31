@@ -1,0 +1,9 @@
+{
+  "test": "Error on too many string.",
+  "given": "-- alfa p x",
+  "status": {
+    "error": {}
+  },
+  "remainder": "",
+  "skip": false
+}
