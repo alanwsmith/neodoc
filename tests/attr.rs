@@ -1,5 +1,4 @@
-use neodoc::attr::multi_line_attr::multi_line_attr;
-use neodoc::attr::single_line_attr::single_line_attr;
+use neodoc::attr::attr;
 use pretty_assertions::assert_eq;
 use serde::Deserialize;
 use serde_json::Value;
@@ -31,8 +30,7 @@ fn my_test(path: &Path) -> datatest_stable::Result<()> {
       let left = (test.remainder.as_str(), data);
       match test.key.as_str() {
         "multi_line_attr" => {
-          let result =
-            multi_line_attr(&test.given).unwrap();
+          let result = attr(&test.given).unwrap();
           let right = (
             result.0,
             serde_json::to_value(result.1).unwrap(),
@@ -40,8 +38,7 @@ fn my_test(path: &Path) -> datatest_stable::Result<()> {
           assert_eq!(left, right);
         }
         "single_line_attr" => {
-          let result =
-            single_line_attr(&test.given).unwrap();
+          let result = attr(&test.given).unwrap();
           let right = (
             result.0,
             serde_json::to_value(result.1).unwrap(),

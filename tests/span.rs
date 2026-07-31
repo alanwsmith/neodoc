@@ -1,4 +1,4 @@
-use neodoc::span::multi_line_span::multi_line_span;
+use neodoc::span::span;
 use pretty_assertions::assert_eq;
 use serde::Deserialize;
 use serde_json::Value;
@@ -27,7 +27,7 @@ fn my_test(path: &Path) -> datatest_stable::Result<()> {
   match test.status {
     Status::Ok(data) => {
       let left = (test.remainder.as_str(), data);
-      let result = multi_line_span(&test.given).unwrap();
+      let result = span(&test.given).unwrap();
       let right =
         (result.0, serde_json::to_value(result.1).unwrap());
       assert_eq!(left, right);

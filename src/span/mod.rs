@@ -1,4 +1,3 @@
-pub mod multi_line_span;
 pub mod single_line_span;
 pub mod single_newline;
 pub mod text;
@@ -17,4 +16,14 @@ pub enum Span {
   // Emphasis
   // Footnote
   // Footref
+}
+
+use crate::span::single_newline::*;
+use crate::span::text::text;
+use nom::{IResult, Parser, branch::alt};
+
+pub fn span(input: &str) -> IResult<&str, Span> {
+  let (input, result) =
+    alt((text, single_newline)).parse(input)?;
+  Ok((input, result))
 }
