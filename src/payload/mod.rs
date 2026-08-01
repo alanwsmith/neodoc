@@ -1,6 +1,6 @@
 use crate::section::*;
 use anyhow::Result;
-use nom::{multi::many1, Parser};
+use nom::{Parser, multi::many1};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, PartialEq, Serialize)]

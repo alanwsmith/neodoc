@@ -1,5 +1,3 @@
-#![allow(warnings)]
-
 use crate::flag_or_attr::FlagOrAttr;
 use crate::flag_or_attr::flag_first_word::flag_first_word;
 use crate::span::section_token;
@@ -9,7 +7,6 @@ use nom::branch::alt;
 use nom::character::complete::{line_ending, space1};
 use nom::combinator::opt;
 use nom::{IResult, Parser, multi::many0};
-use serde::{Deserialize, Serialize};
 
 pub fn section_flag(
   input: &str
@@ -21,7 +18,7 @@ pub fn section_flag(
       .parse(input)?;
   let (input, _) = opt(line_ending).parse(input)?;
   let bits = vec![first_word];
-  let flag = FlagOrAttr::Section(vec![Span::Text {
+  let flag = FlagOrAttr::SectionFlag(vec![Span::Text {
     content: [bits, more_words]
       .concat()
       .join("")

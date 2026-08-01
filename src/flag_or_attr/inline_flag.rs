@@ -15,7 +15,7 @@ pub fn inline_flag(
   let (input, more_words) =
     many0(alt((word, space1))).parse(input)?;
   let bits = vec![first_word];
-  let flag = FlagOrAttr::Inline(vec![Span::Text {
+  let flag = FlagOrAttr::InlineFlag(vec![Span::Text {
     content: [bits, more_words].concat().join(""),
   }]);
   Ok((input, flag))
