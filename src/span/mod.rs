@@ -1,4 +1,4 @@
-pub mod empty_line;
+pub mod empty_lines_or_eof;
 pub mod section_token;
 pub mod single_character;
 pub mod single_newline;

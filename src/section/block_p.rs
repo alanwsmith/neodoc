@@ -1,6 +1,7 @@
 use crate::bound::*;
 use crate::metadata::*;
 use crate::section::*;
+use crate::span::empty_lines_or_eof::empty_lines_or_eof;
 use crate::span::text_span::text_span;
 use nom::multi::many1;
 use nom::{IResult, Parser};
@@ -13,8 +14,7 @@ pub fn block_p(input: &str) -> IResult<&str, Section> {
     r#type: "block".to_string(),
   };
   let (input, span_strs) = many1(text_span).parse(input)?;
-  dbg!(&input);
-
+  let (input, _) = empty_lines_or_eof.parse(input)?;
   let spans = span_strs
     .iter()
     .map(|x| Span::Text {
@@ -44,7 +44,7 @@ mod tests {
         serde_json::to_value(spans).unwrap()
       );
     } else {
-      assert!(false);
+      panic!("Failed to get result");
     }
   }
 
@@ -62,7 +62,15 @@ mod tests {
         serde_json::to_value(spans).unwrap()
       );
     } else {
-      assert!(false);
+      panic!("Failed to get result");
     }
+  }
+
+  #[test]
+  fn block_p_multiple_lines_followed_by_empty_line() {
+    let input = "alfa bravo\ncharlie delta\n\nx";
+    let right = block_p.parse(input).unwrap().0;
+    let left = "x";
+    assert_eq!(left, right);
   }
 }

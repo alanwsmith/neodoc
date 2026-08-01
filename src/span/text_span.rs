@@ -24,6 +24,7 @@ mod tests {
   #[case("alfa bravo   \n   charlie delta", "alfa bravo charlie delta".to_string(), "")]
   #[case("alfa\nbravo\n\ncharlie delta", "alfa bravo".to_string(), "\n\ncharlie delta")]
   #[case("alfa      bravo", "alfa bravo".to_string(), "")]
+  #[case(" alfa ", " alfa ".to_string(), "")]
   fn text_span_runner(
     #[case] given: &str,
     #[case] expected: String,
