@@ -12,7 +12,15 @@
     }
     </style>
 
-    [! block styles !][! endblock !]
+    == set styles
+    [!- block styles !][! endblock -!]
+    == endset
+
+    == if styles
+<style>
+    [@ styles @]
+    </style>
+    == endif 
 
     == include "/templates.inc/metadata/default.html"
 

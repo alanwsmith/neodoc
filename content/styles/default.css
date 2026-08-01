@@ -23,6 +23,7 @@ body {
 
 a {
   color: goldenrod;
+  text-decoration: none;
 }
 
 a:hover {
@@ -99,7 +100,8 @@ header.default {
 
 main.default {
   max-width: min(46rem, calc(100vw - 3rem));
-  margin: auto;
+  margin-inline: auto;
+  margin-top: 4rem;
 }
 
 

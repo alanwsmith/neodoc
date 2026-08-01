@@ -8,58 +8,53 @@ status = "done"
 id = "asdf"
 == endblock
 
+== block styles
+== include dir("/styles.css")
+== endblock
+
 
 == block content
 == filter neo
--- title
+<strong>-- title</strong>
 
 Introducing NeoDoc
 
 Hey folks! 
 
-I'm Alan. I'd like to introduce you to 
-NeoDoc. A writing format for the
-Atmosphere^^1^^. 
+I'm Alan. I'd like to introduce you to NeoDoc. 
+A writing format for the Atmosphere<span class="token"><sup>^^<a id="fn-1-body" href="#fn-1">1</a>^^</sup></span>.
 
 
--- footnote
--- id: 1
+<strong>-- comment</strong>
 
-Well. NeoDoc was originally designed for my
-static site generator. But, damned if it's 
-not perfect the Atmosphere. 
+You're seeing the raw format of this
+post right now. That's because the NeoDoc
+parser hasn't been integrated into the 
+site yet. That's no problem. NeoDoc was
+designed to make creating content easy. 
+A big part of that was ensuring it's 
+easy to read too.
 
-
--- comment
-
-You're seeing the raw format right now. 
-That's because the parser hasn't been 
-integrated into the site yet. That's no 
-problem. NeoDoc is designed to make it
-easy to make content. A big part of
-that is ensuring it's readable as
-plain-text. 
-
-It's like >><a href="https://www.markdownguide.org/">Markdown|
-https://www.markdownguide.org/</a>>>. 
+It's like <span class="token">>></span><a href="https://www.markdownguide.org/">Markdown</a><span class="token">|</span>
+<span class="token">https://www.markdownguide.org/>></span>. 
 But, you can do way more with it.
 
-For example, when NeoDoc files
-are transformed into web pages the
-``-- comment`` sections are hidden. 
-So, this note will automatically  
-disappear when the parser is in place. 
-Appropriate, since you'll no longer 
-be seeing the raw text at that point. 
+For example, when NeoDoc files are 
+transformed into web pages the 
+<span class="token">``</span><span class="tmp-code">-- comment</span><span class="token">``</span> sections are hidden. So, 
+this note will automatically disappear 
+when the parser is in place. Appropriate, 
+since you'll no longer be seeing the raw 
+text at that point. 
 
 
--- h2
+<strong>-- h2</strong>
 
 How It Started
 
 Three years ago, I hit my breaking point
 with website tools. I was using 
-Next.js^^next^^ and tried to correct a 
+Next.js<span class="token">^^2^^</span> and tried to correct a 
 typo on my site. I changed a single
 character and everything broke. Some
 part of the process that built the site
@@ -73,63 +68,45 @@ re-examined every aspect. That included
 using Markdown for content.
 
 
--- footnote
--- id: next
+<strong>-- h2</strong>
 
-Look. I know lots of folks love 
->>Next|https://nextjs.org/>> and 
->>React|https://react.dev/>>.
-They're just way overkill for what I 
-do. The associated complexity causes 
-more issue than I'm willing to deal with.
-
-
--- h2
-
-Starting From Scratch
+From Scratch
 
 One of my favorite phrases is:
 
 
--- blockquote
+<strong>-- blockquote/</strong>
 
 Broken gets fixed. Shoddy is forever. 
 
+<strong>-- /blockquote</strong>
 
--- p
 
 As great as Markdown is for simple
 blog posts, it sucks at making 
 interesting pages. Anything beyond 
 basic formatting and you have to roll 
-to using HTML directly. 
+your own HTML. 
 
-For the longest time, I considred it
+For the longest time, I considered it
 a shoddy experience. As I thought
 about making content for the rest of 
-my life, I realized it's broken^^3^^. 
+my life, I realized it's broken. 
 
-
--- footnote
--- id: 3
-
-Or, at least, the wrong tool for the
+Or, at least, it's the wrong tool for the
 job. When you can't do interesting things
 in HTML without having to actually write
 the HTML, it's not up to snuff. 
 
-
--- p
-
-That realiztion started me down the path of 
-desining a new content format. Something as 
-easy to use as Markdown without sacraficing 
+The realization started me down the path of 
+designing a new content format. Something as 
+easy to use as Markdown without sacrificing 
 the power of the web's native language. 
 
-Three years later, the result is NeoDoc. 
+Three years later, NeoDoc is the result.
 
 
--- h2
+<strong>-- h2</strong>
 
 Where It's At
 
@@ -142,44 +119,52 @@ given the quality of the established
 website building options. 
 
 But, you know what doesn't have established
-options? The Atmosphere. 
+options yet? 
 
-It's the Wild West. Harkenoning back to the 
-early days of the web. Before everything got 
-forced into the conformity of corporste, siloed 
+<strong>**The Atmosphere**</strong>. 
+
+It's the Wild West. Harkening back to the 
+early days of the web. Before everything was 
+jammed into the conformity of corporate, siloed 
 social networks. 
 
-We're at an epoch. Standardization is still 
-under way. Once it takes hold, it'll be
-impossible to overcome. If we're not careful, 
-we'll end up with Markdown and siloed 
-content again. 
-
-It's up to us to make sure that doesn't
-happen. To take our best shots at improving
-things before they solidify. 
+It's awesome.
 
 
--- h2
+<strong>-- h2</strong>
 
 Taking A Swing
 
-And so, I'm offeing NeoDoc as a path 
-forward. Not just for websites, but as 
-an interoperatable format to underlie 
-the Atmosphere. The Personal Data Servers 
-of AT Proto give us control of our content. 
-We can move what we make between apps
-at our own volition. That's of little 
-use if they all require differnet formats. 
-The promise of freedom of movement is only 
-avaialbe if movemnet requires no effort. 
+We're at an epoch. Standards haven't been set. 
+Once they have, they'll be insurmountable. 
 
-That's what NeoDoc offers. The final
-piece of puzzle to complete the vision
-of the decentralized web. 
+Thanks to AT Proto, we don't have to worry 
+about siloed content. We can move what
+we make at our own volition. But, if we're 
+not careful, we'll end up with Markdown 
+again. Or, worse. We'll end up with no 
+standard at all. The promise of the freedom 
+of movement will be lost to a cacophony of 
+content formats. Apps unintentionally locking
+us in because no one else is set up process 
+content the way they store it. 
 
--a
+And so, I'm offering NeoDoc as a path forward. 
+Not just for websites, but as an interoperable 
+format to underlie the Atmosphere. A human
+readable way to make sure we can make the
+stuff we make go where we want. 
+
+If that sounds like the kinda thing
+you're into, you can follow along
+<span class="token">>></span><a href="/">on this site</a><span class="token">|/>></span> or <span class="token">>></span><a href="https://bsky.app/profile/neodoc.style">on Bluesky</a>
+<span class="token">|https://bsky.app/profile/neodoc.style>></span>.
+
+Until next time, I'll see you in the
+Atmosphere. 
+
+-<span class="token">>><a href="https://bsky.app/profile/alanwsmith.com">a</a>
+<span class="token">|https://bsky.app/profile/alanwsmith.com>></span>
 
 
 
@@ -193,12 +178,32 @@ of the decentralized web.
 
 I use NeoDoc on my personal site where
 it's responsible for
->><a href="https://www.alanwsmith.com/neo-files/report">three thousand or so pages</a>|
-<a href="https://www.alanwsmith.com/neo-files/report">https://www.alanwsmith.com/neo-files/report</a>>>.
+<span class="token">>></span><a href="https://www.alanwsmith.com/neo-files/report">three thousand or so pages</a>|
+<a href="https://www.alanwsmith.com/neo-files/report">https://www.alanwsmith.com/neo-files/report</a<span class="token">>></span>>.
 
 
+
+
+<strong>-- footnote
+-- id: 1</strong>
+
+Well. NeoDoc was originally designed for my
+static site generator. But, damned if it's 
+not perfect the Atmosphere.
 
  
+
+<strong>-- footnote
+-- id: 2</strong>
+
+Look. I know lots of folks love 
+<span class="token">>></span><a href="https://nextjs.org/">Next</a><span class="token">|https://nextjs.org/>></span> and 
+<span class="token">>></span><a href="https://react.dev/">React</a><span class="token">|https://react.dev/>></span>.
+They're just way overkill for what I 
+do. The associated complexity causes 
+more issue than I'm willing to deal with.
+
+
 
 -- metadata
 -- created: 2026-07-27T19:17:00-04:00
