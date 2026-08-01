@@ -21,34 +21,38 @@ Introducing NeoDoc
 
 Hey folks! 
 
-I'm Alan. I'd like to introduce you to NeoDoc. 
-A writing format for the Atmosphere<span class="token"><sup>^^<a id="fn-1-body" href="#fn-1">1</a>^^</sup></span>.
+I'm Alan, and this is an introduction to 
+NeoDoc. A content format for the 
+Atmosphere<span class="token"><sup>^^<a id="fn-1-body" href="#fn-1">1</a>^^</sup></span>.
 
 
 <strong>-- comment</strong>
 
-You're seeing the raw format of this
-post right now. That's because the NeoDoc
-parser hasn't been integrated into the 
-site yet. That's no problem. NeoDoc was
-designed to make creating content easy. 
-A big part of that was ensuring it's 
-easy to read too.
+NeoDoc is designed for authoring content 
+that gets turned into web pages and app 
+views. You generally don't publish the
+untransformed version of a NeoDoc file. 
+But, the app/parser that does the 
+conversions hasn't been wired into this 
+site yet. You're seeing the raw content 
+from behind the scenes as a result. 
 
-The format is like <span class="token">>></span><a href="https://www.markdownguide.org/">Markdown</a><span class="token">|</span>
-<span class="token">https://www.markdownguide.org/>></span>. 
-But, you can do way more with it.
+That's not a problem. NeoDoc was designed 
+to reduce the friction of authoring content. 
+A big part of that was making sure it's
+easy to read in its plain-text state. 
+It's in the spirit of <span class="token">>></span><a href="https://www.markdownguide.org/">Markdown</a><span class="token">|</span>
+<span class="token">https://www.markdownguide.org/>></span>,
+but way more powerful.
 
 For example, when NeoDoc files are 
-transformed into web pages the 
-<span class="token">``</span><span class="tmp-code">-- comment</span><span class="token">``</span> sections are hidden. So, 
+transformed into web pages 
+<span class="token">``</span><span class="tmp-code">-- comment</span><span class="token">``</span> sections get hidden. So, 
 this note will automatically disappear 
-when the parser is in place. Appropriate, 
-since at that point you'll no longer be
-seeing the raw text.
+when the parser is in place. That's 
+appropriate, since you'll no longer be 
+seeing the raw text at that point.
 
-Check out <span class="token">>></span><a href="/">the home page</a><span class="token">|/>></span> for 
-some more examples. 
 
 <strong>-- h2</strong>
 
@@ -57,24 +61,26 @@ How It Started
 Three years ago, I hit my breaking point
 with website tools. I was using 
 Next.js<span class="token"><sup>^^<a id="fn-2-body" href="#fn-2">2</a>^^</sup></span> and tried to correct a 
-typo on my site. I changed a single
-character and everything broke. Some
-part of the process that built the site
-simply stopped working. 
+typo. I changed <span class="token">``</span><span class="tmp-code">teh</span><span class="token">``</span> to <span class="token">``</span><span class="tmp-code">the</span><span class="token">``</span> and 
+everything broke. Some random part of 
+the builder simple stopped working.
 
 My site is 25 years old. I have no 
 desire to deal with that shit for the 
 next 25. So, I started building my own 
-tools. Since I had a blank slate, I 
-re-examined every aspect, including
-the use of Markdown for content.
+tools. I took the opportunity to 
+re-examine everything about my setup, 
+including the use of Markdown for content.
+
+That inspection did not go well for 
+the format. 
 
 
 <strong>-- h2</strong>
 
-From Scratch
+Scratching an Itch
 
-One of my favorite phrases is:
+One of my favorite truisms is:
 
 <strong>-- blockquote/</strong>
 
@@ -88,15 +94,16 @@ interesting pages. Anything beyond
 basic formatting and you have to roll 
 your own HTML. 
 
-For the longest time, I considered it
-a shoddy experience. As I thought
-about making content for the rest of 
-my life, I realized it's broken. 
+For the longest time, I considered that
+a shoddy experience. As I thought about 
+how I want to make content for the rest 
+of my life, I realized it's broken. 
 
-Or, at least, it's the wrong tool for the
-job. When you can't do interesting things
-in HTML without having to actually write
-the HTML, it's not up to snuff. 
+Or, at a minimum, not the right tool for
+the job. For what I make, not being able 
+to do interesting things with HTML without 
+having to write the HTML myself is a 
+critical fail. 
 
 The realization started me down the path of 
 designing a new content format. Something as 
@@ -111,14 +118,18 @@ Three years later, NeoDoc is the result.
 Where It's At
 
 The NeoDoc parser is currently embedded in
-my static site generator. Extracting it
-has been on the todo list forever. It just 
-wasn't a priority. Folks would have to 
-make new tools to use it. Not likely, 
-given the quality of the established 
-website building options. 
+my static site generator. It's fairly 
+well battled tested with the <span class="token">>></span><a href="https://www.alanwsmith.com/neo-files/report">three 
+thousand or so pages on the site</a><span class="token">|
+https://www.alanwsmith.com/neo-files/report>></span>.
 
-You know what doesn't have established
+Extracting the parser has been on the todo 
+list forever. It just wasn't a priority. 
+Folks would have to make new tools to use 
+it. Not likely, given the quality of the 
+established website building options. 
+
+But, you know what doesn't have established
 options yet? 
 
 <strong>**The Atmosphere**</strong>. 
@@ -135,29 +146,29 @@ It's awesome.
 
 Taking A Swing
 
-We're at an epoch. Standards haven't been set. 
+We're at an epoch. Standards haven't locked in. 
 Once they have, they'll be insurmountable. 
 
 Thanks to AT Proto, we don't have to worry 
-about siloed content. We can move what
-we make at our own volition. But, if we're 
-not careful, we'll end up with Markdown 
-again. Or, worse. We'll end up with no 
-standard at all. The promise of the freedom 
-of movement will be lost to a cacophony of 
-content formats. Apps unintentionally locking
-us in because no one else is set up process 
-content the way they store it. 
+about our content being locked away in silos. 
+We can move what we make at our own volition. 
+But, if we're not careful, we'll end up 
+standardizing on Markdown. 
 
-And so, I'm offering NeoDoc as a path forward. 
-Not just for websites, but as a portable 
-format to underlie the Atmosphere. A human
-readable way to ensure we can make the
-stuff we make go where we want. 
+Or, worse. We'll end up with no standard at 
+all. The theoretical freedom of movement will 
+be lost to the reality of incompatible formats. 
+Apps unintentionally locking us in because 
+no one else is set up process content 
+the way they store it. 
 
-If that sounds like the kinda thing
-you're into, you can follow along
-<span class="token">>></span><a href="/">on this site</a><span class="token">|/>></span> or <span class="token">>></span><a href="https://bsky.app/profile/neodoc.style">on Bluesky</a>
+And so, I'm offering NeoDoc to the Atmosphere. 
+A portable, human readable way to ensure we 
+can move our stuff wherever we want it to go.
+
+If that sounds like the kinda thing you're into, 
+you can follow along <span class="token">>></span><a href="/">on this site</a><span class="token">|/>></span> 
+or <span class="token">>></span><a href="https://bsky.app/profile/neodoc.style">on Bluesky</a>
 <span class="token">|https://bsky.app/profile/neodoc.style>></span>.
 
 Until next time, I'll see you in the
@@ -170,93 +181,107 @@ https://bsky.app/profile/alanwsmith.com>></span>
 
 <strong>-- endnote</strong>
 
+You can check out <span class="token">>></span><a href="/">the home page</a><span class="token">|/>></span> for
+more details on the format including some 
+examples that are actually rendered to HTML.
+
+
+<strong>-- endnote</strong>
+
 I'm not the only one thinking about making
 it easier for different apps to use the same
 content. The folks behind 
 <span class="token">>></span><a href="https://leaflet.pub/">Leaflet</a><span class="token">|https://leaflet.pub/>></span>,
 <span class="token">>></span><a href="https://offprint.app/?utm_source=standard.site">offprint</a><span class="token">|https://offprint.app/>></span>, and
-<span class="token">>></span><a href="https://pckt.blog/">pckt</a><span class="token">|https://pckt.blog/>></span> have made 
+<span class="token">>></span><a href="https://pckt.blog/">pckt</a><span class="token">|https://pckt.blog/>></span>
+have made 
 <span class="token">>></span><a href="https://standard.site/">standard.site</a><span class="token">|https://standard.site/>></span>. 
-The goal of which is to: make content easier 
-to discover, index, and move across 
-the ATmosphere.
+It's goal: to make content easier to discover, 
+index, and move across the Atmosphere.
 
-Learning about standard.site is what got
-me started thinking about brining NeoDoc 
-to the Atmosphere. Then, I heard
+Hell yeah.
+
+Learning about standard.site started me 
+thinking about brining NeoDoc to the 
+Atmosphere. Then, I heard
 <span class="token">>></span><a href="https://shoptalkshow.com/724/">an episode of ShotTalk Show</a><span class="token">|
 https://shoptalkshow.com/724/>></span> with
 <span class="token">>></span><a href="https://bsky.app/profile/danabra.mov">Dan Abramov</a><span class="token">|
 https://bsky.app/profile/danabra.mov>></span>
-talking about AT Proto and something
-clicked in my head. I've been thinking
-about it non-stop ever since. 
+talking about AT Proto and I had a
+vision of everything fitting together. 
+
+Legit <em>__I can see through time / Eureka__</em> 
+type shit. 
+
+I've been thinking about it non-stop 
+ever since. 
 
 
 <strong>-- endnote</strong>
 
 This is also not the first time I've been
 thinking big thoughts about the future
-of the web. I've got
-<span class="token">>></span><a href="https://www.alanwsmith.com/en/2v/xa/cn/vj/">an entire manifesto</a><span class="token">|
+of the internet. I've got <span class="token">>></span><a href="https://www.alanwsmith.com/en/2v/xa/cn/vj/">an entire manifesto</a><span class="token">|
 https://www.alanwsmith.com/en/2v/xa/cn/vj/>></span>
-banging ideas around. Lots of it 
-is pondering how to use RSS to make
-connections. The complexities of
-making that work are out of my scope. 
-I know now that AT Proto is what
-I was trying to articulate. 
+banging ideas around (there was also a 
+whole manic episode, but that's a story 
+for another day). My pondering was around 
+how to use RSS to make connections. The 
+complexities of making that work are 
+out of my scope. I know now that AT Proto 
+is what I was trying to articulate. 
 
-The good news is that with the 
-protocol set we can work on 
-interoperability of the content. 
-I'd love to see NeoDoc fill that roll. 
-More important is that __<em>something</em>__
-fills it. 
+The good news is that the foundation of
+AT Proto is set and proven. Now, we can 
+work on content interoperability. I'd 
+love to see NeoDoc fill that roll. I'll 
+be fine if it doesn't as long as
+__<em>something</em>__ steps up to the challenge.
 
-To be truly decentralized we can't
-accept vendor lock-in of our content. 
+We can't have a truly decentralized 
+internet if we accept vendors locking-in 
+our content, regardless of their 
+motivations.
 
 
 
 <strong>-- endnote</strong>
 
 NeoDoc is the spec for the plain-text
-file format. There's more to the
+file format. There's more to the overall 
 idea than that. Basically, the project
-is to create an AT Proto lexicon
-centered around the format that 
-includes a default set of templates
-for how to process specific sections
-and a way to send CSS payloads to style
-them. 
+is to create an AT Proto lexicon centered 
+around the format that includes a default 
+set of templates for how to process 
+specific sections and a way to send CSS 
+payloads to style them. 
 
 Every app that renders HTML with the defaults 
 will produce the same output. For example:
 
 <strong>-- code/
 -- neodoc</strong>
-
+<span class="tmp-code">
 -- h2
 
 Hello, World!
 
-Welcome to the Atmosphere.
+Welcome to the Atmosphere.</span>
 
 <strong>-- /code</strong>
-
 
 
 will render like this by default:
 
 <strong>-- code/
 -- html</strong>
-
+<span class="tmp-code">
 &lt;section class=&quot;neo-h2&quot;&gt;
   &lt;h2&gt;Hello, World!&lt;/h2&gt;
   &lt;p&gt;Welcome to the Atmosphere.&lt;/p&gt;
 &lt;/section&gt;
-
+</span>
 <strong>-- /code</strong>
 
 
@@ -267,15 +292,20 @@ will have a default set of styles that
 they can use if no user supplied style
 exists or if they decide to override it. 
 
+I'm glossing over a ton of details.
+I'll cover more in future posts. Hopefully 
+you get the gist in the mean time. 
 
 
 
--- endnote
+<strong>-- endnote</strong>
 
 The NeoDoc format includes templating
-tokens designed to be used with <span class="token">>></span><a href="https://docs.rs/minijinja/latest/minijinja/">MiniJinja</a><span class="token">|
+tokens designed to be used with 
+<span class="token">>></span><a href="https://docs.rs/minijinja/latest/minijinja/">MiniJinja</a><span class="token">|
 https://docs.rs/minijinja/latest/minijinja/>></span>
-(The Rust version of <span class="token">>></span><a href="https://jinja.palletsprojects.com/en/stable/">Python's Jinja template engine</a><span class="token">|
+(The Rust version of <span class="token">>></span><a href="https://jinja.palletsprojects.com/en/stable/">Python's Jinja 
+template engine</a><span class="token">|
 https://jinja.palletsprojects.com/en/stable/>></span>).
 
 The NeoDoc.style spec includes details on 
@@ -296,32 +326,79 @@ types and provided the templates to
 render them. 
 
 
--- endnote
+<strong>-- endnote</strong>
 
-I haven't mentioned moderation yet. 
+I haven't figure out how moderation
+works in the Atmosphere yet. I've 
+got some ideas but have lots more
+to learn about it. The full version
+of NeoDoc.style won't launch until 
+a solid moderation approach is
+in place. 
 
 
--- endnote
+<strong>-- endnote</strong>
 
-A final thing to mention in this
-post is the idea of using NeoDoc content
-as a free from database. For example, 
-if you have <span class="token">``</span><span class="tmp-code">-- book-review</span><span class="token">``</span>
-sections spread across your files 
-they can be aggregated into a single page. 
+Social features are also in the review 
+stage. Being able to like, follow, 
+quote, and reply will all be in the 
+mix. Other features will emerge as
+progress continues. 
+
+
+
+<strong>-- endnote</strong>
+
+NeoDoc content also works as a free from 
+database. It's maybe my favorite feature.
+For example, if you have <span class="token">``</span><span class="tmp-code">-- book-review</span><span class="token">``</span>
+sections spread across your files they 
+can be aggregated into a single page,
+sorted by date, or author, or rating, 
+or whatever. 
 
 If a bunch of folks use the same section
 setup, the can be collected across accounts. 
 You can make the next Good Reads simply by
 watching the firehose for specific sections. 
 
-They won't all have the same format. That's
-a feature. Not a bug. We've lived so long
-in a world where our content has been defined
-by database schemes we've forgotten what
-it's like for things to have a personal touch. 
+They won't all look the same. Custom styles
+and templates will ensure things go in
+different directions. That's a feature. 
+Not a bug. 
+
+We've lived so long in a world where our 
+content has been defined by database schemes 
+we've forgotten what it's like for things 
+to have a personal touch. 
 
 NeoDoc brings that back.
+
+
+<strong>-- endnote</strong>
+
+Finally, I'll mention that NeoDoc and
+NeoDoc.style are non-commercial endeavours.
+I need to do more research on licensing,
+but they'll be released under something
+as open as possible (possibly <span class="token">>></span><a href="https://wiki.creativecommons.org/wiki/CC0">CC0</a><span class="token">|
+https://wiki.creativecommons.org/wiki/CC0>></span>).
+
+I'm sure I could get venture capital funding
+or other sponsorship. I'm actively avoiding 
+that. Unless things go entirely to shit, I'm 
+in a position where I can self-fund the 
+work. That's the direction I'm going. 
+
+The web was able to become an amazing place 
+because HTML is free for everyone. When 
+<span class="token">>></span><a href="https://en.wikipedia.org/wiki/Tim_Berners-Lee">Tim_Berners-Lee</a><span class="token">|
+https://en.wikipedia.org/wiki/Tim_Berners-Lee>></span> 
+invented the language, he wasn't trying 
+to make money. He created it for sharing.  
+I can't think of a better role model 
+to follow. 
+
 
 
 <strong>-- footnote
