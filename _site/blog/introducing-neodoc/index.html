@@ -97,7 +97,7 @@ designed to make creating content easy.
 A big part of that was ensuring it's 
 easy to read too.
 
-It's like <span class="token">>></span><a href="https://www.markdownguide.org/">Markdown</a><span class="token">|</span>
+The format is like <span class="token">>></span><a href="https://www.markdownguide.org/">Markdown</a><span class="token">|</span>
 <span class="token">https://www.markdownguide.org/>></span>. 
 But, you can do way more with it.
 
@@ -109,6 +109,8 @@ when the parser is in place. Appropriate,
 since at that point you'll no longer be
 seeing the raw text.
 
+Check out <span class="token">>></span><a href="/">the home page</a><span class="token">|/>></span> for 
+some more examples. 
 
 <strong>-- h2</strong>
 
@@ -228,7 +230,7 @@ https://bsky.app/profile/alanwsmith.com>></span>
 
 
 
--- endnote
+<strong>-- endnote</strong>
 
 I'm not the only one thinking about making
 it easier for different apps to use the same
@@ -253,21 +255,49 @@ clicked in my head. I've been thinking
 about it non-stop ever since. 
 
 
--- endnote
+<strong>-- endnote</strong>
+
+This is also not the first time I've been
+thinking big thoughts about the future
+of the web. I've got
+<span class="token">>></span><a href="https://www.alanwsmith.com/en/2v/xa/cn/vj/">an entire manifesto</a><span class="token">|
+https://www.alanwsmith.com/en/2v/xa/cn/vj/>></span>
+banging ideas around. Lots of it 
+is pondering how to use RSS to make
+connections. The complexities of
+making that work are out of my scope. 
+I know now that AT Proto is what
+I was trying to articulate. 
+
+The good news is that with the 
+protocol set we can work on 
+interoperability of the content. 
+I'd love to see NeoDoc fill that roll. 
+More important is that __<em>something</em>__
+fills it. 
+
+To be truly decentralized we can't
+accept vendor lock-in of our content. 
+
+
+
+<strong>-- endnote</strong>
 
 NeoDoc is the spec for the plain-text
-file format. But, there's more to the
-idea than that. Basically, the idea
+file format. There's more to the
+idea than that. Basically, the project
 is to create an AT Proto lexicon
 centered around the format that 
 includes a default set of templates
-for how to process specific sections. 
+for how to process specific sections
+and a way to send CSS payloads to style
+them. 
 
-Every app that uses that defaults will
-render HTML output the same way. For example:
+Every app that renders HTML with the defaults 
+will produce the same output. For example:
 
--- code/
--- neodoc 
+<strong>-- code/
+-- neodoc</strong>
 
 -- h2
 
@@ -275,38 +305,85 @@ Hello, World!
 
 Welcome to the Atmosphere.
 
--- /code
-
-
-Will always render as:
-
--- code/
--- html
-
-<section class="neo-h1">
-  <h1>Hello, World!</h1>
-  <p>Welcome to the Atmosphere.</p>
-</section>
-
-
--- /code
+<strong>-- /code</strong>
 
 
 
+will render like this by default:
+
+<strong>-- code/
+-- html</strong>
+
+&lt;section class=&quot;neo-h2&quot;&gt;
+  &lt;h2&gt;Hello, World!&lt;/h2&gt;
+  &lt;p&gt;Welcome to the Atmosphere.&lt;/p&gt;
+&lt;/section&gt;
+
+<strong>-- /code</strong>
+
+
+Individual accounts can provide a default
+set of styles for there posts as well
+as overrides for individual posts. Apps
+will have a default set of styles that
+they can use if no user supplied style
+exists or if they decide to override it. 
 
 
 
 
-  <!--
 -- endnote
 
-I use NeoDoc on my personal site where
-it's responsible for
-<span class="token">>></span><a href="https://www.alanwsmith.com/neo-files/report">three thousand or so pages</a>|
-<a href="https://www.alanwsmith.com/neo-files/report">https://www.alanwsmith.com/neo-files/report</a<span class="token">>></span>>.
+The NeoDoc format includes templating
+tokens designed to be used with <span class="token">>></span><a href="https://docs.rs/minijinja/latest/minijinja/">MiniJinja</a><span class="token">|
+https://docs.rs/minijinja/latest/minijinja/>></span>
+(The Rust version of <span class="token">>></span><a href="https://jinja.palletsprojects.com/en/stable/">Python's Jinja template engine</a><span class="token">|
+https://jinja.palletsprojects.com/en/stable/>></span>).
 
--->
+The NeoDoc.style spec includes details on 
+how templating is handled. (The reference
+implementation will include template 
+rendering out of the box.)
 
+There's a bunch more detail there that
+will come in future posts and as the
+docs get built out. 
+
+The key takeaway is that NeoDoc ships
+with a default set of templates for
+a selection of section types (e.g.
+<span class="token">``</span><span class="tmp-code">-- title</span><span class="token">``</span>, <span class="token">``</span><span class="tmp-code">-- h1</span><span class="token">``</span>, <span class="token">``</span><span class="tmp-code">-- blockquote</span><span class="token">``</span>)
+but anyone can define their own section 
+types and provided the templates to 
+render them. 
+
+
+-- endnote
+
+I haven't mentioned moderation yet. 
+
+
+-- endnote
+
+A final thing to mention in this
+post is the idea of using NeoDoc content
+as a free from database. For example, 
+if you have <span class="token">``</span><span class="tmp-code">-- book-review</span><span class="token">``</span>
+sections spread across your files 
+they can be aggregated into a single page. 
+
+If a bunch of folks use the same section
+setup, the can be collected across accounts. 
+You can make the next Good Reads simply by
+watching the firehose for specific sections. 
+
+They won't all have the same format. That's
+a feature. Not a bug. We've lived so long
+in a world where our content has been defined
+by database schemes we've forgotten what
+it's like for things to have a personal touch. 
+
+NeoDoc brings that back.
 
 
 <strong>-- footnote
