@@ -1,14 +1,11 @@
-
 // This is where all the global and specific
 // attributes are defined for the enum
 
-
 #[derive(Debug, PartialEq)]
 pub enum Attribute {
-    Class(Vec<String>),
-    None
+  Class(Vec<String>),
+  None,
 }
-
 
 // pub mod attribute;
 // pub mod global;
