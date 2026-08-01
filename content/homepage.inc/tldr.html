@@ -25,10 +25,10 @@ it turns into this:
 == endfilter
 
 <style>
-== include template_dir("/examples/book-review/styles.css")
+== include dir("/examples/book-review/styles.css")
 </style>
 
-== include template_dir("/examples/book-review/content.html")
+== include dir("/examples/book-review/content.html")
 
 == filter md
 
@@ -52,7 +52,7 @@ reviews you've posted on a single page.
 Something like:
 
 == endfilter
-== include template_dir("/examples/book-list/content.html")
+== include dir("/examples/book-list/content.html")
 == filter md
 
 It doesn't have to be just your books. 

@@ -1,18 +1,552 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/default.css" />
+    <script type="module" src="&#x2f;scripts.raw&#x2f;bitty&#x2f;bitty-9.0.0-beta1.source.js"></script>
+    <style>
     body {
       background-color: black;
-      color: goldenrod;
-    } 
-  </style>
-</head>
-<body>
-could not render include: error in "/homepage.inc/tldr.html" (in /index.html:9)
-</body>
+      color: #ccc;
+    }
+    </style>
+
+    
+
+
+
+
+
+<title>neodoc.style</title>
+<meta property="og:title" content="neodoc.style" />
+<meta name="description" content="an upcoming content lexicon for the AT Proto Atmosphere" />
+<meta property="og:description" content="an upcoming content lexicon for the AT Proto Atmosphere" />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https:&#x2f;&#x2f;neodoc.style" />
+<meta property="og:image" content="https:&#x2f;&#x2f;neodoc.style&#x2f;og-image.jpg" />
+
+
+
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+<link rel="shortcut icon" href="/favicon/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="neodoc.style" />
+
+  </head>
+  <body>
+<header class="default">
+  <div class="left-right">
+    <div>
+      NeoDoc.Style
+
+  -
+
+  <a href="/blog/">blog</a>
+
+  -
+
+  <a href="/todo/">todo</a>
+
+      </div>
+    <div>
+
+  <a href="https://bsky.app/profile/neodoc.style">@neodoc.style</a>
+    </div>
+    </div>
+</header>    
+<main class="default default-flow">
+  <hgroup>
+    <h1>neodoc.style</h1>
+  </hgroup>
+
+<p>An upcoming lexicon for the AT Proto Atmosphere</p>
+
+<h2>Overview</h2>
+<p><strong>neodoc</strong> is a writing format for creating content.
+It focuses on being easy to use without
+sacrificing the ability to make full
+featured posts and pages.
+If you're familiar with <a href="https://www.markdownguide.org/">markdown</a>,
+it's like that, but on steroids.</p>
+<p><strong>neodoc.style</strong> is an upcoming<sup>1</sup>
+<a href="https://atproto.com/">AT Proto</a>
+<a href="https://atproto.com/specs/lexicon">lexicon</a>
+for publishing neodocs
+in the <a href="https://atmosphere.community/">Atmosphere</a>.
+Combined, they provide a new way to publish content
+for feeds and sites across the Atmosphere and
+the wider web.</p>
+<p>The rest of this page covers the basics. Check it
+out and <a href="https://bsky.app/profile/neodoc.style">hit me up on bluesky</a>
+if you've got questions.</p>
+
+  <div class="inline-footnote">
+    <sup>1</sup> the neodoc parser already exists. 
+    It's embedded in my static site generator and
+    takes care of the <a href="https://www.alanwsmith.com/neo-files/report">roughly
+      three thousand posts on my site</a>.
+    I'm pulling it out to create a stand-alone library
+    for the reference implementation to use
+    for the lexicon.
+  </div><h2>TL;DR</h2>
+<p>To give you a quick idea of how it works, this
+is a neodoc:</p>
+<div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text plain">-- book-review
+<span class="line-marker" data-line="2"></span>-- title: Dungeon Crawler Carl
+<span class="line-marker" data-line="3"></span>-- author: Matt Dinniman
+<span class="line-marker" data-line="4"></span>-- cover: dungeon-crawler-carl-cover.jpg
+<span class="line-marker" data-line="5"></span>
+<span class="line-marker" data-line="6"></span>First off, I did the audio book instead
+<span class="line-marker" data-line="7"></span>of the paper copy. I don&#39;t know how much
+<span class="line-marker" data-line="8"></span>I would have liked the physical version
+<span class="line-marker" data-line="9"></span>but the narrator for the audio book
+<span class="line-marker" data-line="10"></span>is absolute gold. 
+<span class="line-marker" data-line="11"></span>
+<span class="line-marker" data-line="12"></span>etc.</span></pre></div></div>
+<p>it turns into this:</p>
+
+<style>
+.book-review {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  gap: 1rem;
+  background-color: var(--faded-warning-color);
+  padding: var(--default-padding);
+  border-radius: var(--default-border-radius);
+  border: var(--faded-reverse-border);
+  margin: var(--default-margin);
+}
+
+.book-review .title {
+  font-weight: 900;
+}
+
+.book-review p {
+  margin-top: var(--default-margin);
+}
+
+.book-review img { 
+  max-width: 8rem;
+}
+
+.book-review .by {
+  color: var(--accent-color);
+}</style>
+
+<div class="book-review">
+  <div>
+    <img 
+      src="/images/dungeon-crawler-carl-cover.jpg"
+      alt="The book cover for Dungeon Crawler Carl"
+    />
+  </div>
+  <div>
+    <div class="title">Dungeon Crawler Carl</div>
+    <div class="by">by Matt Dinniman</div>
+    <p>
+      First off, I did the audio book instead
+      of the paper copy. I don't know how much
+      I would have liked the physical version
+      but the narrator for the audio book
+      is absolute gold. 
+    </p>
+    <p>
+      etc.
+    </p>
+  </div>
+</div>
+<p>The formatting comes in from the neodoc lexicon.
+It stores output templates and styles
+independently from the content. You can created layouts that apply
+to all your content and versions for individual
+pieces of content. Or, you can skip them all
+together and use defaults from wherever
+your content appears.</p>
+<h3>Alternate Perspectives</h3>
+<p>Separating content from layout means different
+apps can do different things with the same
+pieces of content.
+For example, instead of showing a basic
+timeline, an app could aggregate all the book
+reviews you've posted on a single page.
+Something like:</p>
+<style>
+.book-list {
+  background-color: var(--faded-warning-color);
+  padding: var(--default-padding);
+  border-radius: var(--default-border-radius);
+  border: var(--faded-reverse-border);
+  margin: var(--default-margin);
+}
+
+.book-list details > summary {
+  font-weight: 900;
+}
+
+.book-list img {
+  width: 7rem;
+}
+
+.book-list .subtitle {
+  font-style: italic;
+}
+
+.book-list .two-columns {
+  display: grid;
+  grid-template-columns: 1fr 8rem;
+}
+
+.book-list .two-columns > :first-child {
+  padding-left: 1.6rem;
+  padding-right: 2.2rem;
+  border-left: var(--faded-reverse-border);
+}</style>
+<div class="book-list default-flow">
+  <div class="heading">Alan's Book Reviews</div>
+<details><summary>Bird by Bird</summary>
+    <div class="two-columns">
+      <div>
+    <div class="subtitle">Some Instructions on Writing and Life</div>
+    <div>by: <strong>Anne Lamott</strong></div>
+    <p>First off, I did the audio book instead of the paper copy. I don&#x27;t know how much I would have liked the physical version but the narrator for the audio book is absolute gold.</p>
+    <p>etc.</p>
+      </div>
+      <div>
+        <div class="cover-image"><figure class="default"><img src="/images/homepage/bird-by-bird-cover.jpg" alt="The book cover for Bird by Bird" /></figure>
+            </div>
+      </div>
+    </div>
+</details>
+<details><summary>Dungeon Crawler Carl</summary>
+    <div class="two-columns">
+      <div>
+    <div>by: <strong>Matt Dinniman</strong></div>
+    <p>First off, I did the audio book instead of the paper copy. I don&#x27;t know how much I would have liked the physical version but the narrator for the audio book is absolute gold.</p>
+    <p>etc.</p>
+      </div>
+      <div>
+        <div class="cover-image"><figure class="default"><img src="/images/homepage/dungeon-crawler-carl-cover.jpg" alt="The book cover for Dungeon Crawler Carl" /></figure>
+            </div>
+      </div>
+    </div>
+</details>
+<details><summary>The Buddha Walks into a Bar</summary>
+    <div class="two-columns">
+      <div>
+    <div class="subtitle">A Guide to Life for a New Generation</div>
+    <div>by: <strong>Lodro Rinzler</strong></div>
+    <p>My therapist thought I&#x27;d like this one. She was right.</p>
+    <p>etc.</p>
+      </div>
+      <div>
+        <div class="cover-image"><figure class="default"><img src="/images/homepage/buddha-walks-into-a-bar-cover.jpg" alt="The book cover for The Buddha Walks into a Bar" /></figure>
+            </div>
+      </div>
+    </div>
+</details>
+<details><summary>Fool</summary>
+    <div class="two-columns">
+      <div>
+    <div>by: <strong>Christopher Mooer</strong></div>
+    <p>Know what&#x27;s good about having a fiend you&#x27;ve known since third grade? They give you killer books.</p>
+    <p>etc.</p>
+      </div>
+      <div>
+        <div class="cover-image"><figure class="default"><img src="/images/homepage/fool-cover.jpg" alt="The book cover for Fool" /></figure>
+            </div>
+      </div>
+    </div>
+</details>
+<details><summary>The Long Way to a Small, Angry Planet</summary>
+    <div class="two-columns">
+      <div>
+    <div>by: <strong>Becky Chambers</strong></div>
+    <p>This was my introduction to Becky Champbers. It was a good one.</p>
+    <p>etc.</p>
+      </div>
+      <div>
+        <div class="cover-image"><figure class="default"><img src="/images/homepage/long-way-cover.jpg" alt="The book cover for The Long Way to a Small, Angry Planet" /></figure>
+            </div>
+      </div>
+    </div>
+</details>
+</div><p>It doesn't have to be just your books.
+Apps could just as easily grab all the book
+reviews from all the folks you follow
+for the list.</p>
+<h3>Shorts Included</h3>
+<p>The book review example shows how to use
+neodoc for rich content. They can also
+be dead simple. For example, this
+is a perfectly acceptable neodoc:</p>
+<div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text plain">hey you. relax your shoulders.</span></pre></div></div>
+<p>No fuss. No muss. Just a post similar to
+one you'd find on <a href="https://bsky.app/">Bluesky</a>.</p>
+<h2>The Format</h2>
+<h3>Sections</h3>
+<p>Neodocs are made of sections. Each
+one starts with two dashes and a name.
+Content for the section follows below it.</p>
+<div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text plain">-- title
+<span class="line-marker" data-line="2"></span>
+<span class="line-marker" data-line="3"></span>A Neodoc Overview</span></pre></div></div>
+The section names can be pretty much anything
+as long as they don't contain spaces.
+<h3>Section Flags and Attributes</h3>
+<p>Sections can have metadata attached to them
+in the form of <strong>flags</strong> and <strong>attributes</strong>.</p>
+<p>Flags are pieces of text that start
+with two dashes on the lines below a
+section name. For example, this is
+an <strong>image</strong> section with a flag for the
+image's filename (the content portion of the section
+is used for the image's alt text).</p>
+<div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text plain">-- image 
+<span class="line-marker" data-line="2"></span>-- example-image.jpg
+<span class="line-marker" data-line="3"></span>
+<span class="line-marker" data-line="4"></span>The word &quot;example&quot; written in white text 
+<span class="line-marker" data-line="5"></span>on a dark read background.</span></pre></div></div>
+Attributes work the same as flags but
+start with a keyword followed by a colon. 
+For example, here's a "aside" section
+with a "class" attribute of "warning":
+<div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text plain">-- aside 
+<span class="line-marker" data-line="2"></span>-- class: warning
+<span class="line-marker" data-line="3"></span>
+<span class="line-marker" data-line="4"></span>There is where you can put something 
+<span class="line-marker" data-line="5"></span>that needs extra attention.</span></pre></div></div>
+<h3>Section Types</h3>
+<p>The content of each section is treated
+as paragraphs by default. This can be changed
+by adding a <strong>section type</strong> after
+the name. The <strong>list</strong> type is an example:</p>
+<div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text plain">-- notes list
+<span class="line-marker" data-line="2"></span>
+<span class="line-marker" data-line="3"></span>- A note about something. 
+<span class="line-marker" data-line="4"></span>
+<span class="line-marker" data-line="5"></span>- Another note about something else.</span></pre></div></div>
+<p>Another type is <strong>checklist</strong>:</p>
+<div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text plain">-- todo checklist 
+<span class="line-marker" data-line="2"></span>
+<span class="line-marker" data-line="3"></span>[] Something that needs to be done
+<span class="line-marker" data-line="4"></span>
+<span class="line-marker" data-line="5"></span>[x] Something that has been done.</span></pre></div></div>
+<details>
+  <summary>Check this out for more info on Section Types</summary>
+<p>The full list of section types is:</p>
+<ul>
+<li>
+<p>checklist - a collection of items
+with a status associated with them.</p>
+</li>
+<li>
+<p>csv - a collection of CSV data.</p>
+</li>
+<li>
+<p>json - a JSON object.</p>
+</li>
+<li>
+<p>list - a list that uses bullets for
+each item.</p>
+</li>
+<li>
+<p>numbered - a list that uses numbers
+for each item.</p>
+</li>
+<li>
+<p>p - paragraph based content.</p>
+</li>
+<li>
+<p>raw - a raw block of text with
+no addition processing.</p>
+</li>
+</ul>
+<p>Using a section type for the name of
+a section works too. For example,
+creating a generic numbered list is done with:</p>
+<div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text plain">-- numbered 
+<span class="line-marker" data-line="2"></span>
+<span class="line-marker" data-line="3"></span>1. A note about something. 
+<span class="line-marker" data-line="4"></span>
+<span class="line-marker" data-line="5"></span>2. Another note about something else.</span></pre></div></div>
+<p>There are also a few section names
+that are processed as <strong>raw</strong> instead
+of paragraphs by default. They are:</p>
+<ul>
+<li>
+<p>code</p>
+</li>
+<li>
+<p>css</p>
+</li>
+<li>
+<p>html</p>
+</li>
+<li>
+<p>script</p>
+</li>
+<li>
+<p>math</p>
+</li>
+<li>
+<p>pre</p>
+</li>
+<li>
+<p>svg</p>
+</li>
+<li>
+<p>template</p>
+</li>
+<li>
+<p>textarea</p>
+</li>
+</ul>
+
+</details>
+
+
+
+<h3>Spans</h3>
+<p>Section content can contain spans.
+They're snippets that wrap
+text to alter it in some way.</p>
+<p>A basic span looks like this:</p>
+<div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text plain">&lt;&lt;code|console.log()&gt;&gt;</span></pre></div></div>
+The parts are:
+<ul>
+<li>
+<p>A pair of less than signs (<code>&lt;&lt;</code>)
+that mark the start of the span.</p>
+</li>
+<li>
+<p>The type of span (e.g. <code>code</code> in the
+example above).</p>
+</li>
+<li>
+<p>A pipe (<code>|</code>) character that separates
+the span type from the span's content.</p>
+</li>
+<li>
+<p>The span's content itself.</p>
+</li>
+<li>
+<p>A pair of greter than signs (<code>&gt;&gt;</code>)
+that mark the end of the span.</p>
+</li>
+</ul>
+<p>Here's what a span looks like surrounded
+by more content:</p>
+<div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text plain">The JavaScript function 
+<span class="line-marker" data-line="2"></span>&lt;&lt;code|console.log()&gt;&gt;
+<span class="line-marker" data-line="3"></span>prints information to the developer console.</span></pre></div></div>
+When that content is turned into a web page
+the span turns into an HTML `&lt;code&gt;` tag
+like this:
+<div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text html basic">The JavaScript function 
+<span class="line-marker" data-line="2"></span><span class="meta tag inline any html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag inline any html">code</span><span class="punctuation definition tag end html">&gt;</span></span>console.log()<span class="meta tag inline any html"><span class="punctuation definition tag begin html">&lt;/</span><span class="entity name tag inline any html">code</span><span class="punctuation definition tag end html">&gt;</span></span>
+<span class="line-marker" data-line="3"></span>prints information to the developer console.</span></pre></div></div>
+<h3>Span Attributes</h3>
+<p>Spans can have attributes that further
+enhance their content. They're added
+by using additional pipes to separate
+them from the content. For example,
+a class attribute can be added to
+the span like this:</p>
+<div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text plain">&lt;&lt;code|console.log()|class: featured&gt;&gt;</span></pre></div></div>
+which outputs this HTML:
+<div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text html basic"><span class="meta tag inline any html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag inline any html">code</span> <span class="meta attribute-with-value class html"><span class="entity other attribute-name class html">class</span><span class="punctuation separator key-value html">=</span></span><span class="meta attribute-with-value class html"><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span></span></span><span class="meta attribute-with-value class html"><span class="string quoted double html"><span class="meta class-name html">featured</span><span class="punctuation definition string end html">&quot;</span></span></span><span class="punctuation definition tag end html">&gt;</span></span>console.log()<span class="meta tag inline any html"><span class="punctuation definition tag begin html">&lt;/</span><span class="entity name tag inline any html">code</span><span class="punctuation definition tag end html">&gt;</span></span></span></pre></div></div>
+Multiple attributes can be added by using
+more pipes. For example, this span (which
+also shows how spans can be split across lines)
+adds a `data-language` attribute that can be
+used to apply syntax highlighting to the
+code:
+<div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text plain">&lt;&lt;code
+<span class="line-marker" data-line="2"></span>  |console.log()
+<span class="line-marker" data-line="3"></span>  |class: featured
+<span class="line-marker" data-line="4"></span>  |data-language: javascript&gt;&gt;</span></pre></div></div>
+The output HTML looks like this:
+<div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text html basic"><span class="meta tag inline any html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag inline any html">code</span> 
+<span class="line-marker" data-line="2"></span>  <span class="meta attribute-with-value class html"><span class="entity other attribute-name class html">class</span><span class="punctuation separator key-value html">=</span></span><span class="meta attribute-with-value class html"><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span></span></span><span class="meta attribute-with-value class html"><span class="string quoted double html"><span class="meta class-name html">featured</span><span class="punctuation definition string end html">&quot;</span></span></span> 
+<span class="line-marker" data-line="3"></span>  <span class="meta attribute-with-value html"><span class="entity other attribute-name html">data-language</span><span class="punctuation separator key-value html">=</span></span><span class="meta attribute-with-value html"><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span>javascript<span class="punctuation definition string end html">&quot;</span></span></span>
+<span class="line-marker" data-line="4"></span>  <span class="punctuation definition tag end html">&gt;</span></span>console.log()<span class="meta tag inline any html"><span class="punctuation definition tag begin html">&lt;/</span><span class="entity name tag inline any html">code</span><span class="punctuation definition tag end html">&gt;</span></span></span></pre></div></div>
+<h3>Span Shorthands</h3>
+<p>There are shorthands for frequenly used
+span types. For example, backtics denote code
+spans. The orignal example from above:</p>
+<div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text plain">&lt;&lt;code
+<span class="line-marker" data-line="2"></span>  |console.log()
+<span class="line-marker" data-line="3"></span>  |class: featured
+<span class="line-marker" data-line="4"></span>  |language: javascript&gt;&gt;</span></pre></div></div>
+can also be written as:
+<div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text plain">``console.log()
+<span class="line-marker" data-line="2"></span>  |class: featured
+<span class="line-marker" data-line="3"></span>  |language: javascript``</span></pre></div></div>
+<details><summary>Here's some more info on Span Shorthands</summary>
+<p>The beta testing list of span shorthands is:</p>
+<ul>
+<li>
+<p>``TEXT`` - code span</p>
+</li>
+<li>
+<p>**TEXT** - bold span</p>
+</li>
+<li>
+<p>__TEXT__ - emphasis span</p>
+</li>
+<li>
+<p>~~TEXT~~ - strikethrough span</p>
+</li>
+<li>
+<p>^^TEXT^^ - footnote</p>
+</li>
+<li>
+<p>@@TEXT@@ - footref</p>
+</li>
+<li>
+<p>&gt;&gt;TEXT|URL&gt;&gt; - link</p>
+</li>
+<li>
+<p>[[FILEPATH|alt: ALT_TEXT]] - image span</p>
+</li>
+</ul>
+<p>NOTE: those are beta shorthands
+that are subject to change as movemnet
+towrards a final launch occurs.</p>
+</details>
+<h2>Next Steps</h2>
+<p>That's it for the format.
+There's not much to it. That's largely
+the point. It pushes to be as  minimal as possible
+without making it harder to make content.</p>
+<p>Writing up the details on how the
+lexicon will work and how content
+interacts with templates and styles
+is a work in progress. Same goes
+for the technical documentation.</p>
+<p>I'll be posting updates
+<a href="https://bsky.app/profile/neodoc.style">on bluesky</a>
+if you want to follow along.</p>
+<p>Cheers until next time,</p>
+<p>-<a 
+href="https://bsky.app/profile/alanwsmith.com"
+class="no-underline">a</a></p>
+
+</main>
+
+
+
+
+
+<footer class="default">
+  &copy; 2026 <a href="https://bsky.app/profile/neodoc.style">NeoDoc.Style</a>
+</footer>    <div class="page-templates" hidden>
+      <bitty-9 data-connect="/bits.raw/default.js"></bitty-9>
+    </div>
+  </body>
 </html>
-  

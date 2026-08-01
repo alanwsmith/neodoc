@@ -13,7 +13,7 @@ id = "asdf"
 
 
 <ul>
-== for f in file_list() 
+== for f in fileList() 
   == if f[1].status == "done"
   <li>
     --
@@ -33,8 +33,8 @@ id = "asdf"
 
 <hr />
 
-<pre>file_list()
-[@ file_list()|tojson(true) @]
+<pre>fileList()
+[@ fileList()|tojson(true) @]
 </pre>
 
 == endblock 

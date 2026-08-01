@@ -2,9 +2,9 @@
 [!- if file_path == "/index.html" -!]
 [@ d["/site.json"].rootURL @]
 [!- elif stem(file_path) == "index" -!]
-[@ d["/site.json"].rootURL @][@ template_dir() @]/
+[@ d["/site.json"].rootURL @][@ dir() @]/
 [!- else -!]
-[@ d["/site.json"].rootURL @][@ template_dir() @]/
+[@ d["/site.json"].rootURL @][@ dir() @]/
 [@ file_path @]
 [!- endif -!]
 [!- endset -!]
