@@ -11,12 +11,9 @@ pub fn empty_lines_or_eof(
   input: &str
 ) -> IResult<&str, &str> {
   let (input, _) = space0.parse(input)?;
-  let (input, _) = alt((
-    pair(opt(line_ending), eof).map(|_| ""),
+  let (input, _) =
     pair(line_ending, many1(pair(space0, line_ending)))
-      .map(|_| ""),
-  ))
-  .parse(input)?;
+      .parse(input)?;
   Ok((input, ""))
 }
 
@@ -27,9 +24,6 @@ mod tests {
   use rstest::rstest;
 
   #[rstest]
-  #[case("", "", "")]
-  #[case("   ", "", "")]
-  #[case("   \n", "", "")]
   #[case("\n\n", "", "")]
   #[case("  \n\n", "", "")]
   #[case("\n          \n", "", "")]

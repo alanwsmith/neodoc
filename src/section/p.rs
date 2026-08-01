@@ -13,6 +13,8 @@ pub fn p(input: &str) -> IResult<&str, Section> {
   let (input, _) = tag("p").parse(input)?;
   let (input, _) =
     pair(space0, line_ending).parse(input)?;
+  dbg!(&input);
+
   let bound = Bound::Full;
   let t = "p";
   let (input, md) =
@@ -37,6 +39,42 @@ mod tests {
 
   #[test]
   fn p_section_basic() {
+    let input = "-- p\n\nalfa";
+    let left: Value = serde_json::from_str(
+      r#"{
+      "kind": "p",
+      "metadata": {
+        "bound": "full",
+        "attrs": [],
+        "flags": [
+          [ { "kind": "text", "content": "alfa"} ]
+        ],
+        "type": "p" 
+      },
+      "sections": [
+        {
+        "kind": "block",
+        "metadata": {
+          "attrs": [],
+          "bound": "full",
+          "flags": [],
+          "type": "block"
+        },
+        "spans": [
+        {"kind": "text", "content": "bravo" }
+        ]
+        }
+      ]
+      }"#,
+    )
+    .unwrap();
+    let right =
+      serde_json::to_value(p(input).unwrap().1).unwrap();
+    assert_eq!(left, right);
+  }
+
+  #[test]
+  fn p_section_with_flag() {
     let input = "-- p\n-- alfa\n\nbravo";
     let left: Value = serde_json::from_str(
       r#"{

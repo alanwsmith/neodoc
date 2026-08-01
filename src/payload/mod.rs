@@ -15,7 +15,10 @@ pub fn payload(input: &str) -> Result<Payload> {
     Ok(sections) => Ok(Payload::Ok {
       sections: sections.1,
     }),
-    Err(_e) => Ok(Payload::Error {}),
+    Err(e) => {
+      dbg!(e);
+      Ok(Payload::Error {})
+    }
   }
 }
 
