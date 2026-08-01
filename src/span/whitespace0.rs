@@ -1,9 +1,16 @@
-use nom::character::complete::space1;
+use nom::character::complete::space0;
 use nom::{IResult, Parser};
 
-pub fn whitespace(input: &str) -> IResult<&str, &str> {
-  let (input, _) = space1.parse(input)?;
-  Ok((input, " "))
+// REMINDER: No spaces returns an empty string
+// One or more whitespace characters returns
+// a single space.
+pub fn whitespace0(input: &str) -> IResult<&str, &str> {
+  let (input, result) = space0.parse(input)?;
+  if result.is_empty() {
+    Ok((input, ""))
+  } else {
+    Ok((input, " "))
+  }
 }
 
 #[cfg(test)]
@@ -13,6 +20,7 @@ mod tests {
   use rstest::rstest;
 
   #[rstest]
+  #[case("", "", "")]
   #[case(" ", " ", "")]
   #[case("     ", " ", "")]
   #[case("  \t   ", " ", "")]
@@ -23,7 +31,7 @@ mod tests {
     #[case] remainder: &str,
   ) {
     let left = (remainder, expected);
-    let right = whitespace(given).unwrap();
+    let right = whitespace0(given).unwrap();
     assert_eq!(left, right);
   }
 }
