@@ -9,6 +9,9 @@
           "flags": [
             [
               { "kind": "text", "content": "alfa" }
+            ],
+            [
+              { "kind": "text", "content": "bravo charlie delta" }
             ]
           ],
           "type": "p"
@@ -25,7 +28,7 @@
             "spans": [
               {
                 "kind": "text",
-                "content": "bravo charlie"
+                "content": "echo foxtrot"
               }
             ]
           }
