@@ -1,7 +1,6 @@
 == extends "/templates.inc/switches/default.html"
 
 == block toml
-title = "neodoc.style todo list"
 created = 2026-07-27T19:32:00-04:00
 status = "draft"
 flags = ["skip"]
@@ -12,6 +11,29 @@ id = "asdasdff"
 
 == block content
 == filter neo
+-- title
+
+NeoDoc.Style TODO List
+
+
+-- comment
+
+Head's Up:
+
+This post is written in NeoDoc. 
+At press time, the NeoDoc parser
+hasn't been wired into this site yet.
+So, you're seeing it without its HTML
+web site formatting. That's okay, though. 
+It's designed to be read as plain-text. 
+It'll also give you an idea of what 
+the format looks like under the hood.
+
+[Something cool is that the default 
+output hides ``-- comment`` sections like
+this one. So, this message will disappear
+as soon as the HTML formatting is applied]
+
 -- h2
 
 Brain Dump
@@ -21,35 +43,53 @@ lexicon. There's a ton of stuff I don't
 know yet. This is the pile of things
 I'm investigating. 
 
-[These are very
-much work-in-progress scratch notes. 
-Contradictions and unclear thinking
-is to be expected. The order is
-also all over the place.]
 
 
 -- checklist/ 
--- h2: Things to Investigate
+-- h3: For Consideration
+-- prelude: These are very much 
+work-in-progress/scratch notes. 
+Contradictions and unclear thinking 
+are to be expected. The order doesn't
+involve any type of grouping or
+organization. I'm simply throwing 
+stuff at the top of the list as they 
+come do mind.
 
-[] Note that whitespace gets collapsed
+
+[] Default set of section attributes
+includes ``-- prelude`` which places
+text inside the section but before
+lists/checklist/etc. start. Allows
+for adding content before the lists
+that's inside the section tag without
+being part of the list itself.
+
+There's also one for text that
+comes after the main portion of the
+section. I'm not sure what the name of
+that is yet. ``-- postscript`` probably,
+but TBD.
+
+[] Default output templates have 
+``&lt;section class="neo-SECTION"&gt;`` 
+wrappers so CSS can be applied without
+having to mess with templating. 
+
+[] Whitespace gets collapsed
 to a single space (e.g. if there's a
 new line followed by more whitespace
 before text starts again it gets
-collapsed)
+collapsed).
 
 [] Define all the shorthand characters
 and their mappings then update
-the SINGLE_CHARACTER const in ``lib.rs``
-
-
+the SINGLE_CHARACTER const in ``lib.rs``.
 
 [] Standardise on camelCase
 (slightly easier to type than
 hitting underscore or dash and
-goes with the JSON theme
-
-
-
+goes with the JSON theme.
 
 [] Going back and forth on this,
 but what about a duplicate set
@@ -61,15 +101,13 @@ blobs with the expectation
 that apps will handle the
 security/encryption. 
 
-
-
 [] How does moderation work
 across the network. 
 
 [] Include moderation into 
 the lexicon (not sure how
 this will work yet, but it's
-a primary focus)
+a primary focus).
 
 [] Set up a way to define standard
 template expectations (e.g. book-review
@@ -78,6 +116,12 @@ optional author, etc.).
 
 The definitions would need to be
 name spaced. 
+
+[] Include ``hr`` as a section in
+the default templates. 
+
+[] Include ``br`` as an inline
+tag in default templates. 
 
 [] Provide the default set of 
 required templates that cover

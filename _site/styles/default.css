@@ -89,7 +89,12 @@ header.default {
   border-top: var(--faint-reverse-border);
   padding-inline: 4rem;
   padding-block: 1.4rem;
+}
 
+
+.left-right {
+  display: flex;
+  justify-content: space-between;
 }
 
 main.default {

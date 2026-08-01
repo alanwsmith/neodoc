@@ -1,5 +1,6 @@
 use crate::bound::*;
 use crate::flag_or_attr::FlagOrAttr;
+use crate::flag_or_attr::section_attr::section_attr;
 use crate::flag_or_attr::section_flag::section_flag;
 use nom::multi::many0;
 use nom::{IResult, Parser};
@@ -19,8 +20,9 @@ pub fn metadata<'a>(
   r#type: &'a str,
 ) -> IResult<&'a str, Metadata> {
   let (input, flags) = many0(section_flag).parse(input)?;
+  let (input, attrs) = many0(section_attr).parse(input)?;
   let md = Metadata {
-    attrs: vec![],
+    attrs,
     bound,
     flags,
     r#type: r#type.to_string(),

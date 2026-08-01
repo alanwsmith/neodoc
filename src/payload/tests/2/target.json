@@ -11,7 +11,7 @@
               { "kind": "text", "content": "alfa" }
             ],
             [
-              { "kind": "text", "content": "bravo charlie delta" }
+              { "kind": "text", "content": "bravo charlie delta echo" }
             ]
           ],
           "type": "p"

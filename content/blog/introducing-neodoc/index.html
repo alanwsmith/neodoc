@@ -1,0 +1,52 @@
+== extends "/templates.inc/switches/default.html"
+
+
+== block toml
+linkTitle = "Introducing NeoDoc"
+created = 2026-07-27T19:17:00-04:00
+status = "done"
+id = "asdf"
+== endblock
+
+
+== block content
+== filter neo
+-- title
+
+Introducing NeoDoc
+
+Hey folk! I'm Alan and I'd like to introduce
+you to NeoDoc. A writing format for the
+AT Proto Atmosphere^^1^^. 
+
+
+-- footnote
+-- id: 1
+
+Well. It was originally designed for my
+static site generator. But, it's a perfect 
+fit for the Atmosphere. 
+
+
+-- comment
+
+You're seeing the raw format right
+now. That's because the parser hasn't been 
+integrated into the site yet. That's no 
+problem. NeoDoc is designed to be readable 
+without extra formatting. If you're
+familiar with >>Markdown|
+https://www.markdownguide.org/>>, it's
+like that, but you can do way more
+stuff with it. 
+
+For example, ``-- comment`` sections 
+are hidden by default when NeoDocs are 
+transformed into web pages. So, this note 
+will disappear when the parser is put 
+in place. 
+
+
+
+== endfilter
+== endblock

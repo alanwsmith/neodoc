@@ -1,7 +1,7 @@
 == extends "/templates.inc/switches/default.html"
 
 == block toml
-title = "neodoc.style blog"
+title = "Neodoc.Style blog"
 status = "done"
 created = 2026-07-27T19:10:00-04:00
 flags = ["skip"]
@@ -9,7 +9,33 @@ tags = []
 id = "asdf"
 == endblock
 
-
 == block content
+
+
+<ul>
+== for f in file_list() 
+  == if f[1].status == "done"
+  <li>
+    --
+    <a href="[@ f[1].dir @]/">
+    == if f[1].title
+      [@ f[1].title @]
+    == elif f[1].linkTitle
+      [@ f[1].linkTitle @]
+    == else
+      Untitled post
+    == endif
+    </a>
+  </li>
+  == endif
+== endfor
+</ul>
+
+<hr />
+
+<pre>file_list()
+[@ file_list()|tojson(true) @]
+</pre>
+
 == endblock 
 

@@ -1,9 +1,21 @@
 <header class="default">
+  <div class="left-right">
+    <div>
   == if p.path == "/index.html"
     neodoc.style
   == else
-  <a href="/">neodoc.style</a>
+  <a href="/">NeoDoc.Style</a>
   == endif
+
+  -
+
+  == if p.path == "/blog/index.html"
+  blog 
+  == else
+  <a href="/blog/">blog</a>
+  == endif
+
+  -
 
   == if p.path == "/todo/index.html"
   todo
@@ -11,7 +23,10 @@
   <a href="/todo/">todo</a>
   == endif
 
-  |
+      </div>
+    <div>
 
   <a href="https://bsky.app/profile/neodoc.style">@neodoc.style</a>
+    </div>
+    </div>
 </header>
