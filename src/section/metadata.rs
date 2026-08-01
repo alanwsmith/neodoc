@@ -1,9 +1,7 @@
+use crate::bound::*;
 use crate::flag_or_attr::FlagOrAttr;
 use crate::flag_or_attr::section_flag::section_flag;
-use crate::span::Span;
-use crate::{bound::*, flag_or_attr::section_flag};
 use nom::multi::many0;
-use nom::multi::many1;
 use nom::{IResult, Parser};
 use serde::{Deserialize, Serialize};
 
@@ -14,13 +12,6 @@ pub struct Metadata {
   pub flags: Vec<FlagOrAttr>,
   pub r#type: String,
 }
-
-// #[derive(Debug, Deserialize, PartialEq, Serialize)]
-// #[serde(untagged)]
-// pub enum FlagsAndAttrs {
-//   Attr { key: String, value: Vec<Span> },
-//   Flag { spans: Vec<Span> },
-// }
 
 pub fn metadata<'a>(
   input: &'a str,
