@@ -12,8 +12,7 @@ pub fn empty_lines_or_eof(
   let (input, _) = space0.parse(input)?;
   let (input, _) = alt((
     eof,
-    pair(line_ending, many1(pair(space0, line_ending)))
-      .map(|_| ""),
+    many1(pair(space0, line_ending)).map(|_| ""),
   ))
   .parse(input)?;
   Ok((input, ""))

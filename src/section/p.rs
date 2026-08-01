@@ -20,6 +20,7 @@ pub fn p(input: &str) -> IResult<&str, Section> {
   let (input, md) =
     { |input| metadata(input, bound.clone(), t) }
       .parse(input)?;
+  dbg!(&input);
   let (input, _) = empty_lines_or_eof.parse(input)?;
   let (input, sections) = many0(block_p).parse(input)?;
   Ok((
