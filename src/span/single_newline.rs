@@ -3,6 +3,7 @@ use nom::combinator::not;
 use nom::{IResult, Parser};
 
 pub fn single_newline(input: &str) -> IResult<&str, &str> {
+  let (input, _) = space0.parse(input)?;
   let (input, _) = line_ending.parse(input)?;
   let (input, _) = space0.parse(input)?;
   let (input, _) = not(line_ending).parse(input)?;

@@ -47,4 +47,22 @@ mod tests {
       assert!(false);
     }
   }
+
+  #[test]
+  fn block_p_multiple_lines() {
+    let input = "alfa bravo\ncharlie delta";
+    let result = block_p.parse(input).unwrap().1;
+    let left: Value = serde_json::from_str(
+      r#"[ { "kind": "text", "content": "alfa bravo charlie delta" }]"#,
+    )
+    .unwrap();
+    if let Section::PBlock { spans, .. } = result {
+      assert_eq!(
+        left,
+        serde_json::to_value(spans).unwrap()
+      );
+    } else {
+      assert!(false);
+    }
+  }
 }
