@@ -16,12 +16,9 @@ id = "asdf"
 == for f in fileList() 
   == if f[1].status == "done"
   <li>
-    --
     <a href="[@ f[1].dir @]/">
-    == if f[1].title
-      [@ f[1].title @]
-    == elif f[1].linkTitle
-      [@ f[1].linkTitle @]
+    == if f[1].title or f[1].linkTitle
+      [@ f[1].title or f[1].linkTitle @]
     == else
       Untitled post
     == endif
@@ -30,12 +27,6 @@ id = "asdf"
   == endif
 == endfor
 </ul>
-
-<hr />
-
-<pre>fileList()
-[@ fileList()|tojson(true) @]
-</pre>
 
 == endblock 
 
