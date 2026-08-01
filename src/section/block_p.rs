@@ -13,6 +13,8 @@ pub fn block_p(input: &str) -> IResult<&str, Section> {
     r#type: "block".to_string(),
   };
   let (input, span_strs) = many1(text_span).parse(input)?;
+  dbg!(&input);
+
   let spans = span_strs
     .iter()
     .map(|x| Span::Text {
@@ -20,4 +22,29 @@ pub fn block_p(input: &str) -> IResult<&str, Section> {
     })
     .collect();
   Ok((input, Section::PBlock { metadata, spans }))
+}
+
+#[cfg(test)]
+mod tests {
+  use super::*;
+  use pretty_assertions::assert_eq;
+  use serde_json::Value;
+
+  #[test]
+  fn block_p_basic() {
+    let input = "alfa";
+    let result = block_p.parse(input).unwrap().1;
+    let left: Value = serde_json::from_str(
+      r#"[ { "kind": "text", "content": "alfa" }]"#,
+    )
+    .unwrap();
+    if let Section::PBlock { spans, .. } = result {
+      assert_eq!(
+        left,
+        serde_json::to_value(spans).unwrap()
+      );
+    } else {
+      assert!(false);
+    }
+  }
 }

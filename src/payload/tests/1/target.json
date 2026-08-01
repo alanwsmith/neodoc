@@ -21,7 +21,22 @@
             "spans": [
               {
                 "kind": "text",
-                "content": "alfa"
+                "content": "alfa bravo"
+              }
+            ]
+          },
+          {
+            "kind": "block",
+            "metadata": {
+              "attrs": [],
+              "bound": "full",
+              "flags": [],
+              "type": "block"
+            },
+            "spans": [
+              {
+                "kind": "text",
+                "content": "charlie delta"
               }
             ]
           }
