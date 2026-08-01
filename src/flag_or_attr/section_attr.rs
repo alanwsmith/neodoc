@@ -20,7 +20,8 @@ pub fn section_attr(
   let (input, key) = is_not(": \n\r\t").parse(input)?;
   let (input, _) = tag(":").parse(input)?;
   let (input, _) = space1.parse(input)?;
-  let (input, value) = many1(word).parse(input)?;
+  let (input, value) =
+    many1(alt((word, single_newline))).parse(input)?;
 
   // let (input, more_words) =
   //   many0(alt((word, space1, single_newline)))
@@ -30,7 +31,7 @@ pub fn section_attr(
   let flag = FlagOrAttr::SectionAttr {
     key: key.to_string(),
     value: vec![Span::Text {
-      content: "bravo".to_string(),
+      content: value.join("").trim().to_string(),
     }],
   };
   Ok((input, flag))
@@ -52,6 +53,38 @@ mod tests {
         key: "alfa".to_string(),
         value: vec![Span::Text {
           content: "bravo".to_string(),
+        }],
+      },
+    );
+    let right = section_attr.parse(input).unwrap();
+    assert_eq!(left, right);
+  }
+
+  #[test]
+  fn section_attr_2() {
+    let input = "-- alfa: bravo\n";
+    let left = (
+      "",
+      FlagOrAttr::SectionAttr {
+        key: "alfa".to_string(),
+        value: vec![Span::Text {
+          content: "bravo".to_string(),
+        }],
+      },
+    );
+    let right = section_attr.parse(input).unwrap();
+    assert_eq!(left, right);
+  }
+
+  #[test]
+  fn section_attr_3() {
+    let input = "-- alfa: bravo\ncharlie\n\n";
+    let left = (
+      "\n\n",
+      FlagOrAttr::SectionAttr {
+        key: "alfa".to_string(),
+        value: vec![Span::Text {
+          content: "bravo charlie".to_string(),
         }],
       },
     );
