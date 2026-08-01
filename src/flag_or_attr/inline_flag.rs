@@ -1,17 +1,23 @@
 #![allow(warnings)]
 
 use crate::flag_or_attr::FlagOrAttr;
+use crate::flag_or_attr::flag_first_word::flag_first_word;
 use crate::span::{Span, word::word};
-use nom::{IResult, Parser, multi::many1};
+use nom::branch::alt;
+use nom::character::complete::space1;
+use nom::{IResult, Parser, multi::many0};
 use serde::{Deserialize, Serialize};
 
 pub fn inline_flag(
   input: &str
 ) -> IResult<&str, FlagOrAttr> {
-  let (input, segments) = many1(word).parse(input)?;
+  let (input, first_word) = flag_first_word.parse(input)?;
+  let (input, more_words) =
+    many0(alt((word, space1))).parse(input)?;
+  let bits = vec![first_word];
   let flag = FlagOrAttr::Inline {
     spans: vec![Span::Text {
-      content: segments.join(""),
+      content: [bits, more_words].concat().join(""),
     }],
   };
   Ok((input, flag))
@@ -38,5 +44,27 @@ mod tests {
       serde_json::to_value(inline_flag("alfa").unwrap().1)
         .unwrap();
     assert_eq!(left, right);
+  }
+
+  #[test]
+  fn basic_test_2() {
+    let left: Value = serde_json::from_str(
+      r#"{
+        "spans": [
+          { "kind": "text", "content": "alfa bravo" }
+        ]
+      }"#,
+    )
+    .unwrap();
+    let right = serde_json::to_value(
+      inline_flag("alfa bravo").unwrap().1,
+    )
+    .unwrap();
+    assert_eq!(left, right);
+  }
+
+  #[test]
+  fn error_if_attr_key() {
+    assert!(inline_flag("alfa: ").is_err());
   }
 }
