@@ -11,7 +11,7 @@
 
 [!- set og_image -!]
   [!- if exists(p.dir + "/og-image.jpg") -!]
-[@ d["/site.json"].rootURL @][@ p.dir @]og-image.jpg
+[@ d["/site.json"].rootURL @][@ p.dir @]/og-image.jpg
   [!- elif exists(p.dir + "/og-image-auto.jpg") -!]
 [@ d["/site.json"].rootURL @][@ p.dir @]/og-image-auto.jpg
   [!- else -!]
