@@ -2,12 +2,12 @@
   "ok": {
     "sections": [
       {
-        "kind": "standAlone",
+        "kind": "p",
         "metadata": {
           "attrs": [],
           "bound": "full",
           "flags": [],
-          "type": "standAlone"
+          "type": "p"
         },
         "sections": [
           {

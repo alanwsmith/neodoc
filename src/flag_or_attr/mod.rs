@@ -8,6 +8,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Deserialize, PartialEq, Serialize)]
 #[serde(untagged, rename_all = "lowercase")]
 pub enum FlagOrAttr {
-  Section { spans: Vec<Span> },
+  Section(Vec<Span>),
   Inline { spans: Vec<Span> },
 }

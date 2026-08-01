@@ -1,9 +1,10 @@
-pub mod block_p;
+pub mod metadata;
 pub mod p;
 pub mod stand_alone;
 
-use crate::{metadata::Metadata, span::*};
-use block_p::*;
+use crate::block::block_p::*;
+use crate::section::metadata::*;
+use crate::span::*;
 use nom::{IResult, Parser, branch::alt};
 use p::*;
 use serde::{Deserialize, Serialize};

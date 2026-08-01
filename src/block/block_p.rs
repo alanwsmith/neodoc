@@ -1,6 +1,7 @@
 use crate::bound::*;
-use crate::metadata::*;
+use crate::section::metadata::*;
 use crate::section::*;
+use crate::span::Span;
 use crate::span::empty_lines_or_eof::empty_lines_or_eof;
 use crate::span::text_span::text_span;
 use nom::multi::many1;

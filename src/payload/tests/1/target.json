@@ -21,7 +21,7 @@
             "spans": [
               {
                 "kind": "text",
-                "content": "alfa bravo"
+                "content": "alfa bravo charlie delta"
               }
             ]
           },
@@ -36,7 +36,7 @@
             "spans": [
               {
                 "kind": "text",
-                "content": "charlie delta"
+                "content": "echo foxtrot"
               }
             ]
           }

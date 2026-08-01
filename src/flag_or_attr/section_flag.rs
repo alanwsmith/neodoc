@@ -17,11 +17,9 @@ pub fn section_flag(
   let (input, more_words) =
     many0(alt((word, space1))).parse(input)?;
   let bits = vec![first_word];
-  let flag = FlagOrAttr::Inline {
-    spans: vec![Span::Text {
-      content: [bits, more_words].concat().join(""),
-    }],
-  };
+  let flag = FlagOrAttr::Section(vec![Span::Text {
+    content: [bits, more_words].concat().join(""),
+  }]);
   Ok((input, flag))
 }
 
@@ -39,11 +37,7 @@ mod tests {
     )
     .unwrap();
     let left: Value = serde_json::from_str(
-      r#"{
-        "spans": [
-          { "kind": "text", "content": "alfa" }
-        ]
-      }"#,
+      r#"[{ "kind": "text", "content": "alfa" }]"#,
     )
     .unwrap();
     assert_eq!(left, right);
@@ -56,11 +50,7 @@ mod tests {
     )
     .unwrap();
     let left: Value = serde_json::from_str(
-      r#"{
-        "spans": [
-          { "kind": "text", "content": "alfa bravo" }
-        ]
-      }"#,
+      r#"[{ "kind": "text", "content": "alfa bravo" }]"#,
     )
     .unwrap();
     assert_eq!(left, right);
