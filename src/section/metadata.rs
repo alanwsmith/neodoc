@@ -1,36 +1,40 @@
-use crate::bound::*;
+use crate::flag_or_attr::FlagOrAttr;
+use crate::flag_or_attr::section_flag::section_flag;
 use crate::span::Span;
+use crate::{bound::*, flag_or_attr::section_flag};
+use nom::multi::many0;
+use nom::multi::many1;
 use nom::{IResult, Parser};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, PartialEq, Serialize)]
 pub struct Metadata {
-  pub attrs: Vec<FlagsAndAttrs>,
+  pub attrs: Vec<FlagOrAttr>,
   pub bound: Bound,
-  pub flags: Vec<FlagsAndAttrs>,
+  pub flags: Vec<FlagOrAttr>,
   pub r#type: String,
 }
 
-#[derive(Debug, Deserialize, PartialEq, Serialize)]
-#[serde(untagged)]
-pub enum FlagsAndAttrs {
-  Attr { key: String, value: Vec<Span> },
-  Flag { spans: Vec<Span> },
-}
+// #[derive(Debug, Deserialize, PartialEq, Serialize)]
+// #[serde(untagged)]
+// pub enum FlagsAndAttrs {
+//   Attr { key: String, value: Vec<Span> },
+//   Flag { spans: Vec<Span> },
+// }
 
 pub fn metadata<'a>(
   input: &'a str,
   bound: Bound,
   r#type: &'a str,
 ) -> IResult<&'a str, Metadata> {
-  //let (input, _)
+  let (input, flags) = many0(section_flag).parse(input)?;
   let md = Metadata {
     attrs: vec![],
     bound,
-    flags: vec![],
+    flags,
     r#type: r#type.to_string(),
   };
-  Ok(("", md))
+  Ok((input, md))
 }
 
 #[cfg(test)]
