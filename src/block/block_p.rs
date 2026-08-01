@@ -4,6 +4,7 @@ use crate::section::*;
 use crate::span::Span;
 use crate::span::empty_lines_or_eof::empty_lines_or_eof;
 use crate::span::text_span::text_span;
+use nom::character::complete::line_ending;
 use nom::multi::many1;
 use nom::{IResult, Parser};
 

@@ -46,9 +46,7 @@ mod tests {
       "metadata": {
         "bound": "full",
         "attrs": [],
-        "flags": [
-          [ { "kind": "text", "content": "alfa"} ]
-        ],
+        "flags": [],
         "type": "p" 
       },
       "sections": [
@@ -61,7 +59,7 @@ mod tests {
           "type": "block"
         },
         "spans": [
-        {"kind": "text", "content": "bravo" }
+        {"kind": "text", "content": "alfa" }
         ]
         }
       ]
@@ -75,7 +73,7 @@ mod tests {
 
   #[test]
   fn p_section_with_flag() {
-    let input = "-- p\n-- alfa\n\nbravo";
+    let input = "-- p\n-- bravo\n\ncharlie";
     let left: Value = serde_json::from_str(
       r#"{
       "kind": "p",
@@ -83,7 +81,7 @@ mod tests {
         "bound": "full",
         "attrs": [],
         "flags": [
-          [ { "kind": "text", "content": "alfa"} ]
+          [ { "kind": "text", "content": "bravo"} ]
         ],
         "type": "p" 
       },
@@ -97,7 +95,7 @@ mod tests {
           "type": "block"
         },
         "spans": [
-        {"kind": "text", "content": "bravo" }
+        {"kind": "text", "content": "charlie" }
         ]
         }
       ]

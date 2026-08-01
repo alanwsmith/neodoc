@@ -1,5 +1,7 @@
+use nom::branch::alt;
 use nom::character::complete::line_ending;
 use nom::character::complete::space0;
+use nom::combinator::eof;
 use nom::multi::many1;
 use nom::sequence::pair;
 use nom::{IResult, Parser};
@@ -8,9 +10,12 @@ pub fn empty_lines_or_eof(
   input: &str
 ) -> IResult<&str, &str> {
   let (input, _) = space0.parse(input)?;
-  let (input, _) =
+  let (input, _) = alt((
+    eof,
     pair(line_ending, many1(pair(space0, line_ending)))
-      .parse(input)?;
+      .map(|_| ""),
+  ))
+  .parse(input)?;
   Ok((input, ""))
 }
 
