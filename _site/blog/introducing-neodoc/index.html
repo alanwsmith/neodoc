@@ -106,8 +106,8 @@ transformed into web pages the
 <span class="token">``</span><span class="tmp-code">-- comment</span><span class="token">``</span> sections are hidden. So, 
 this note will automatically disappear 
 when the parser is in place. Appropriate, 
-since you'll no longer be seeing the raw 
-text at that point. 
+since at that point you'll no longer be
+seeing the raw text.
 
 
 <strong>-- h2</strong>
@@ -116,7 +116,7 @@ How It Started
 
 Three years ago, I hit my breaking point
 with website tools. I was using 
-Next.js<span class="token">^^2^^</span> and tried to correct a 
+Next.js<span class="token"><sup>^^<a id="fn-2-body" href="#fn-2">2</a>^^</sup></span> and tried to correct a 
 typo on my site. I changed a single
 character and everything broke. Some
 part of the process that built the site
@@ -126,8 +126,8 @@ My site is 25 years old. I have no
 desire to deal with that shit for the 
 next 25. So, I started building my own 
 tools. Since I had a blank slate, I 
-re-examined every aspect. That included 
-using Markdown for content.
+re-examined every aspect, including
+the use of Markdown for content.
 
 
 <strong>-- h2</strong>
@@ -136,13 +136,11 @@ From Scratch
 
 One of my favorite phrases is:
 
-
 <strong>-- blockquote/</strong>
 
 Broken gets fixed. Shoddy is forever. 
 
 <strong>-- /blockquote</strong>
-
 
 As great as Markdown is for simple
 blog posts, it sucks at making 
@@ -180,7 +178,7 @@ make new tools to use it. Not likely,
 given the quality of the established 
 website building options. 
 
-But, you know what doesn't have established
+You know what doesn't have established
 options yet? 
 
 <strong>**The Atmosphere**</strong>. 
@@ -212,9 +210,9 @@ us in because no one else is set up process
 content the way they store it. 
 
 And so, I'm offering NeoDoc as a path forward. 
-Not just for websites, but as an interoperable 
+Not just for websites, but as a portable 
 format to underlie the Atmosphere. A human
-readable way to make sure we can make the
+readable way to ensure we can make the
 stuff we make go where we want. 
 
 If that sounds like the kinda thing
@@ -225,8 +223,73 @@ you're into, you can follow along
 Until next time, I'll see you in the
 Atmosphere. 
 
--<span class="token">>><a href="https://bsky.app/profile/alanwsmith.com">a</a>
-<span class="token">|https://bsky.app/profile/alanwsmith.com>></span>
+-<span class="token">>></span><a href="https://bsky.app/profile/alanwsmith.com">a</a><span class="token">|
+https://bsky.app/profile/alanwsmith.com>></span>
+
+
+
+-- endnote
+
+I'm not the only one thinking about making
+it easier for different apps to use the same
+content. The folks behind 
+<span class="token">>></span><a href="https://leaflet.pub/">Leaflet</a><span class="token">|https://leaflet.pub/>></span>,
+<span class="token">>></span><a href="https://offprint.app/?utm_source=standard.site">offprint</a><span class="token">|https://offprint.app/>></span>, and
+<span class="token">>></span><a href="https://pckt.blog/">pckt</a><span class="token">|https://pckt.blog/>></span> have made 
+<span class="token">>></span><a href="https://standard.site/">standard.site</a><span class="token">|https://standard.site/>></span>. 
+The goal of which is to: make content easier 
+to discover, index, and move across 
+the ATmosphere.
+
+Learning about standard.site is what got
+me started thinking about brining NeoDoc 
+to the Atmosphere. Then, I heard
+<span class="token">>></span><a href="https://shoptalkshow.com/724/">an episode of ShotTalk Show</a><span class="token">|
+https://shoptalkshow.com/724/>></span> with
+<span class="token">>></span><a href="https://bsky.app/profile/danabra.mov">Dan Abramov</a><span class="token">|
+https://bsky.app/profile/danabra.mov>></span>
+talking about AT Proto and something
+clicked in my head. I've been thinking
+about it non-stop ever since. 
+
+
+-- endnote
+
+NeoDoc is the spec for the plain-text
+file format. But, there's more to the
+idea than that. Basically, the idea
+is to create an AT Proto lexicon
+centered around the format that 
+includes a default set of templates
+for how to process specific sections. 
+
+Every app that uses that defaults will
+render HTML output the same way. For example:
+
+-- code/
+-- neodoc 
+
+-- h2
+
+Hello, World!
+
+Welcome to the Atmosphere.
+
+-- /code
+
+
+Will always render as:
+
+-- code/
+-- html
+
+<section class="neo-h1">
+  <h1>Hello, World!</h1>
+  <p>Welcome to the Atmosphere.</p>
+</section>
+
+
+-- /code
 
 
 
@@ -234,8 +297,7 @@ Atmosphere.
 
 
 
-
-
+  <!--
 -- endnote
 
 I use NeoDoc on my personal site where
@@ -243,11 +305,12 @@ it's responsible for
 <span class="token">>></span><a href="https://www.alanwsmith.com/neo-files/report">three thousand or so pages</a>|
 <a href="https://www.alanwsmith.com/neo-files/report">https://www.alanwsmith.com/neo-files/report</a<span class="token">>></span>>.
 
+-->
 
 
 
 <strong>-- footnote
--- id: 1</strong>
+-- id: <a id="fn-1" href="#fn-1-body">1</a></strong>
 
 Well. NeoDoc was originally designed for my
 static site generator. But, damned if it's 
@@ -256,7 +319,7 @@ not perfect the Atmosphere.
  
 
 <strong>-- footnote
--- id: 2</strong>
+-- id: <a id="fn-2" href="#fn-2-body">2</a></strong>
 
 Look. I know lots of folks love 
 <span class="token">>></span><a href="https://nextjs.org/">Next</a><span class="token">|https://nextjs.org/>></span> and 
