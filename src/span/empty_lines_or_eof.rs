@@ -1,8 +1,5 @@
-use nom::branch::alt;
 use nom::character::complete::line_ending;
 use nom::character::complete::space0;
-use nom::combinator::eof;
-use nom::combinator::opt;
 use nom::multi::many1;
 use nom::sequence::pair;
 use nom::{IResult, Parser};
