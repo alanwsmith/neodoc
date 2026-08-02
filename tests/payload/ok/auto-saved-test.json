@@ -1,0 +1,94 @@
+{
+  "given": "-- p\n-- alfa\n-- lima: mike\n-- bravo charlie\ndelta echo\n-- foxtrot: golf\nhotel india\n\njuliett kilo\n\n\n-- p\n\nmore",
+  "status": {
+    "ok": {
+      "sections": [
+        {
+          "kind": "p",
+          "metadata": {
+            "attrs": [
+              {
+                "key": "lima",
+                "value": [
+                  {
+                    "content": "mike",
+                    "kind": "text"
+                  }
+                ]
+              },
+              {
+                "key": "foxtrot",
+                "value": [
+                  {
+                    "content": "golf hotel",
+                    "kind": "text"
+                  }
+                ]
+              }
+            ],
+            "bound": "full",
+            "flags": [
+              [
+                {
+                  "content": "alfa",
+                  "kind": "text"
+                }
+              ],
+              [
+                {
+                  "content": "bravo charlie delta echo",
+                  "kind": "text"
+                }
+              ]
+            ],
+            "type": "p"
+          },
+          "sections": [
+            {
+              "kind": "block",
+              "metadata": {
+                "attrs": [],
+                "bound": "full",
+                "flags": [],
+                "type": "block"
+              },
+              "spans": [
+                {
+                  "content": "juliett kilo",
+                  "kind": "text"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "p",
+          "metadata": {
+            "attrs": [],
+            "bound": "full",
+            "flags": [],
+            "type": "p"
+          },
+          "sections": [
+            {
+              "kind": "block",
+              "metadata": {
+                "attrs": [],
+                "bound": "full",
+                "flags": [],
+                "type": "block"
+              },
+              "spans": [
+                {
+                  "content": "more",
+                  "kind": "text"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "test": "Auto-Saved test"
+}

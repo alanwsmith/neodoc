@@ -3,6 +3,7 @@ use anyhow::Result;
 use nom::{Parser, error::context, multi::many1};
 // use nom_language::error::convert_error;
 use serde::{Deserialize, Serialize};
+use serde_json::Value;
 
 #[derive(Debug, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "lowercase")]
@@ -24,12 +25,19 @@ pub fn payload(input: &str) -> Result<Payload> {
   }
 }
 
+#[derive(Debug, Deserialize, PartialEq, Serialize)]
+pub struct TestSaver {
+  given: String,
+  status: Value,
+  test: String,
+}
+
 #[cfg(test)]
 mod tests {
   use super::*;
   use pretty_assertions::assert_eq;
   use serde_json;
-  use serde_json::Value;
+  use std::fs;
 
   #[test]
   fn integration() {
@@ -42,9 +50,19 @@ mod tests {
       serde_json::to_value(payload(input).unwrap())
         .unwrap();
     assert_eq!(left, right);
-
     if left.eq(&right) {
-      dbg!("HERE");
+      let test_save_path =
+        "tests/payload/ok/auto-saved-test.json";
+      let test_output = TestSaver {
+        test: "Auto-Saved test".to_string(),
+        given: input.to_string(),
+        status: left,
+      };
+      fs::write(
+        test_save_path,
+        serde_json::to_string_pretty(&test_output).unwrap(),
+      )
+      .unwrap();
     }
   }
 }
