@@ -1,5 +1,6 @@
 {
   "given": "-- p\n-- alfa\n-- lima: mike\n-- bravo charlie\ndelta echo\n-- foxtrot: golf\nhotel india\n\njuliett kilo\n\n\n-- p\n\nmore",
+  "remainder": "",
   "status": {
     "ok": {
       "sections": [

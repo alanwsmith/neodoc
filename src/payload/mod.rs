@@ -1,7 +1,7 @@
 use crate::section::*;
-use anyhow::Result;
+use nom::IResult;
 use nom::{Parser, error::context, multi::many1};
-// use nom_language::error::convert_error;
+use nom_language::error::VerboseError;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
@@ -12,22 +12,18 @@ pub enum Payload {
   Error {},
 }
 
-pub fn payload(input: &str) -> Result<Payload> {
-  match context("payload", many1(section)).parse(input) {
-    Ok(sections) => Ok(Payload::Ok {
-      sections: sections.1,
-    }),
-    Err(e) => {
-      dbg!(e);
-      //dbg!(convert_error(input, Err(e).unwrap()));
-      Ok(Payload::Error {})
-    }
-  }
+pub fn payload(
+  input: &str
+) -> IResult<&str, Payload, VerboseError<&str>> {
+  let (input, sections) = many1(section).parse(input)?;
+  let payload = Payload::Ok { sections };
+  Ok((input, payload))
 }
 
 #[derive(Debug, Deserialize, PartialEq, Serialize)]
 pub struct TestSaver {
   given: String,
+  remainder: String,
   status: Value,
   test: String,
 }
@@ -46,17 +42,17 @@ mod tests {
       "tests/1/target.json"
     ))
     .unwrap();
-    let right =
-      serde_json::to_value(payload(input).unwrap())
-        .unwrap();
+    let result = payload(input).unwrap();
+    let right = serde_json::to_value(result.1).unwrap();
     assert_eq!(left, right);
     if left.eq(&right) {
       let test_save_path =
-        "tests/payload/ok/auto-saved-test.json";
+        "tests/integration/ok/auto-saved-test.json";
       let test_output = TestSaver {
-        test: "Auto-Saved test".to_string(),
         given: input.to_string(),
-        status: left,
+        remainder: result.0.to_string(),
+        status: right,
+        test: "Auto-Saved test".to_string(),
       };
       fs::write(
         test_save_path,
