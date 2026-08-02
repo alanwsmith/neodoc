@@ -1,10 +1,7 @@
 use nom::bytes::complete::is_not;
 use nom::{IResult, Parser};
-use nom_language::error::VerboseError;
 
-pub fn word(
-  input: &str
-) -> IResult<&str, &str, VerboseError<&str>> {
+pub fn word(input: &str) -> IResult<&str, &str> {
   let (input, result) =
     is_not("`~!@#$%^&*(){}[]<>:|_-= \n\r\t\\")
       .parse(input)?;

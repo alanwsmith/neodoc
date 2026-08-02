@@ -11,30 +11,26 @@ use nom::character::complete::{line_ending, space1};
 use nom::combinator::opt;
 use nom::multi::many1;
 use nom::{IResult, Parser, multi::many0};
-use nom_language::error::VerboseError;
 use serde::{Deserialize, Serialize};
 
 pub fn section_attr(
   input: &str
-) -> IResult<&str, FlagOrAttr, VerboseError<&str>> {
+) -> IResult<&str, FlagOrAttr> {
   let (input, _) = section_token.parse(input)?;
   let (input, key) = is_not(": \n\r\t").parse(input)?;
   let (input, _) = tag(":").parse(input)?;
   let (input, _) = space1.parse(input)?;
-  // let (input, value) =
-  //   many1(alt((word, single_newline))).parse(input)?;
-  //let value = vec![];
-
-  // let (input, more_words) =
-  //   many0(alt((word, space1, single_newline)))
-  //     .parse(input)?;
-  // let (input, _) = opt(line_ending).parse(input)?;
-  // let bits = vec![first_word];
+  let (input, value) =
+    many1(alt((word, single_newline))).parse(input)?;
+  let (input, more_words) =
+    many0(alt((word, space1, single_newline)))
+      .parse(input)?;
+  let (input, _) = opt(line_ending).parse(input)?;
+  //  let bits = vec![first_word];
   let flag = FlagOrAttr::SectionAttr {
     key: key.to_string(),
     value: vec![Span::Text {
-      //   content: value.join("").trim().to_string(),
-      content: "tmphoding".to_string(),
+      content: value.join("").trim().to_string(),
     }],
   };
   Ok((input, flag))

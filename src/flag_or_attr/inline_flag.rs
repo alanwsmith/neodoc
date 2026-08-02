@@ -4,12 +4,11 @@ use crate::span::{Span, word::word};
 use nom::branch::alt;
 use nom::character::complete::space1;
 use nom::{IResult, Parser, multi::many0};
-use nom_language::error::VerboseError;
-use serde::{Deserialize, Serialize};
+// use serde::{Deserialize, Serialize};
 
 pub fn inline_flag(
   input: &str
-) -> IResult<&str, FlagOrAttr, VerboseError<&str>> {
+) -> IResult<&str, FlagOrAttr> {
   let (input, first_word) = flag_first_word.parse(input)?;
   let (input, more_words) =
     many0(alt((word, space1))).parse(input)?;

@@ -1,6 +1,7 @@
 use crate::section::*;
 use anyhow::Result;
-use nom::{Parser, multi::many1};
+use nom::{Parser, error::context, multi::many1};
+// use nom_language::error::convert_error;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, PartialEq, Serialize)]
@@ -11,12 +12,13 @@ pub enum Payload {
 }
 
 pub fn payload(input: &str) -> Result<Payload> {
-  match many1(section).parse(input) {
+  match context("payload", many1(section)).parse(input) {
     Ok(sections) => Ok(Payload::Ok {
       sections: sections.1,
     }),
     Err(e) => {
       dbg!(e);
+      //dbg!(convert_error(input, Err(e).unwrap()));
       Ok(Payload::Error {})
     }
   }
