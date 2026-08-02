@@ -80,7 +80,7 @@ mod tests {
   fn section_attr_3() {
     let input = "-- alfa: bravo\ncharlie\n\n";
     let left = (
-      "\n\n",
+      "\n",
       FlagOrAttr::SectionAttr {
         key: "alfa".to_string(),
         value: vec![Span::Text {
