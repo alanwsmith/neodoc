@@ -2,12 +2,32 @@
   "ok": {
     "sections": [
       {
-        "kind": "standAlone",
+        "kind": "p",
         "metadata": {
-          "attrs": [],
+          "attrs": [
+            {
+              "key": "lima",
+              "value": [
+                { "kind": "text", "content": "mike" }
+              ]
+            },
+            {
+              "key": "foxtrot",
+              "value": [
+                { "kind": "text", "content": "golf hotel" }
+              ]
+            }
+          ],
           "bound": "full",
-          "flags": [],
-          "type": "standAlone"
+          "flags": [
+            [
+              { "kind": "text", "content": "alfa" }
+            ],
+            [
+              { "kind": "text", "content": "bravo charlie delta echo" }
+            ]
+          ],
+          "type": "p"
         },
         "sections": [
           {
@@ -21,26 +41,32 @@
             "spans": [
               {
                 "kind": "text",
-                "content": "alfa bravo charlie delta"
-              }
-            ]
-          },
-          {
-            "kind": "block",
-            "metadata": {
-              "attrs": [],
-              "bound": "full",
-              "flags": [],
-              "type": "block"
-            },
-            "spans": [
-              {
-                "kind": "text",
-                "content": "echo foxtrot"
+                "content": "juliett kilo"
               }
             ]
           }
         ]
+      },
+      {
+        "kind": "p",
+        "metadata": {
+          "attrs": [],
+          "bound": "full",
+          "flags": [],
+          "type": "p"
+        },
+        "sections": [{
+          "kind": "block",
+          "metadata": {
+            "attrs": [],
+            "bound": "full",
+            "flags": [],
+            "type": "block"
+          },
+          "spans": [
+            { "kind": "text", "content": "more" }
+          ]
+        }]
       }
     ]
   }
