@@ -4,6 +4,7 @@ use crate::flag_or_attr::section_attr::section_attr;
 use crate::flag_or_attr::section_flag::section_flag;
 use nom::multi::many0;
 use nom::{IResult, Parser};
+use nom_language::error::VerboseError;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, PartialEq, Serialize)]
@@ -18,7 +19,7 @@ pub fn metadata<'a>(
   input: &'a str,
   bound: Bound,
   r#type: &'a str,
-) -> IResult<&'a str, Metadata> {
+) -> IResult<&'a str, Metadata, VerboseError<&'a str>> {
   let (input, flags) = many0(section_flag).parse(input)?;
   let (input, attrs) = many0(section_attr).parse(input)?;
   let md = Metadata {

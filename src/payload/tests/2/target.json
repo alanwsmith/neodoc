@@ -4,7 +4,14 @@
       {
         "kind": "p",
         "metadata": {
-          "attrs": [],
+          "attrs": [
+            {
+              "key": "foxtrot",
+              "value": [
+                { "kind": "text", "content": "golf hotel" }
+              ]
+            }
+          ],
           "bound": "full",
           "flags": [
             [

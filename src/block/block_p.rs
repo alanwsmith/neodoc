@@ -7,8 +7,11 @@ use crate::span::text_span::text_span;
 use nom::character::complete::line_ending;
 use nom::multi::many1;
 use nom::{IResult, Parser};
+use nom_language::error::VerboseError;
 
-pub fn block_p(input: &str) -> IResult<&str, Section> {
+pub fn block_p(
+  input: &str
+) -> IResult<&str, Section, VerboseError<&str>> {
   let metadata = Metadata {
     attrs: vec![],
     bound: Bound::Full,

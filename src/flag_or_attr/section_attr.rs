@@ -11,11 +11,12 @@ use nom::character::complete::{line_ending, space1};
 use nom::combinator::opt;
 use nom::multi::many1;
 use nom::{IResult, Parser, multi::many0};
+use nom_language::error::VerboseError;
 use serde::{Deserialize, Serialize};
 
 pub fn section_attr(
   input: &str
-) -> IResult<&str, FlagOrAttr> {
+) -> IResult<&str, FlagOrAttr, VerboseError<&str>> {
   let (input, _) = section_token.parse(input)?;
   let (input, key) = is_not(": \n\r\t").parse(input)?;
   let (input, _) = tag(":").parse(input)?;

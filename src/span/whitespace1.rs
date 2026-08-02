@@ -1,7 +1,10 @@
 use nom::character::complete::space1;
 use nom::{IResult, Parser};
+use nom_language::error::VerboseError;
 
-pub fn whitespace1(input: &str) -> IResult<&str, &str> {
+pub fn whitespace1(
+  input: &str
+) -> IResult<&str, &str, VerboseError<&str>> {
   let (input, _) = space1.parse(input)?;
   Ok((input, " "))
 }

@@ -39,10 +39,11 @@ lines = [
         """use nom::{
   IResult, Parser, branch::alt, bytes::complete::tag, combinator::not
 };
+use nom_language::error::VerboseError;
 
 pub fn single_character(
   input: &str
-) -> IResult<&str, &str> {
+) -> IResult<&str, &str, VerboseError<&str>> {
   let (input, result) = alt(("""
         ]
 
@@ -67,7 +68,7 @@ lines.append("""
 """)
 
 for char in chars:
-    lines.append(f"""pub fn single_{char[1]}(input: &str) -> IResult<&str, &str> {{
+    lines.append(f"""pub fn single_{char[1]}(input: &str) -> IResult<&str, &str, VerboseError<&str>> {{
 let (input, result) = tag("{char[0]}").parse(input)?;
 let (input, _) = not(tag("{char[0]}")).parse(input)?;
   Ok((input, result))

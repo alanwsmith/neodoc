@@ -5,10 +5,11 @@ use nom::combinator::eof;
 use nom::multi::many1;
 use nom::sequence::pair;
 use nom::{IResult, Parser};
+use nom_language::error::VerboseError;
 
 pub fn empty_lines_or_eof(
   input: &str
-) -> IResult<&str, &str> {
+) -> IResult<&str, &str, VerboseError<&str>> {
   let (input, _) = space0.parse(input)?;
   let (input, _) = alt((
     eof,

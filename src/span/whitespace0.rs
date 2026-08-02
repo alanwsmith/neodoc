@@ -1,10 +1,13 @@
 use nom::character::complete::space0;
 use nom::{IResult, Parser};
+use nom_language::error::VerboseError;
 
 // REMINDER: No spaces returns an empty string
 // One or more whitespace characters returns
 // a single space.
-pub fn whitespace0(input: &str) -> IResult<&str, &str> {
+pub fn whitespace0(
+  input: &str
+) -> IResult<&str, &str, VerboseError<&str>> {
   let (input, result) = space0.parse(input)?;
   if result.is_empty() {
     Ok((input, ""))

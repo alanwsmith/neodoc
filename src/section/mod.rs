@@ -6,6 +6,7 @@ use crate::block::block_p::*;
 use crate::section::metadata::*;
 use crate::span::*;
 use nom::{IResult, Parser, branch::alt};
+use nom_language::error::VerboseError;
 use p::*;
 use serde::{Deserialize, Serialize};
 use stand_alone::*;
@@ -30,7 +31,9 @@ pub enum Section {
   Placeholder,
 }
 
-pub fn section(input: &str) -> IResult<&str, Section> {
+pub fn section(
+  input: &str
+) -> IResult<&str, Section, VerboseError<&str>> {
   let (input, section) =
     alt((p, stand_alone, block_p)).parse(input)?;
   Ok((input, section))

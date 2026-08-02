@@ -1,8 +1,11 @@
 use nom::character::complete::{line_ending, space0};
 use nom::combinator::not;
 use nom::{IResult, Parser};
+use nom_language::error::VerboseError;
 
-pub fn single_newline(input: &str) -> IResult<&str, &str> {
+pub fn single_newline(
+  input: &str
+) -> IResult<&str, &str, VerboseError<&str>> {
   let (input, _) = space0.parse(input)?;
   let (input, _) = line_ending.parse(input)?;
   let (input, _) = space0.parse(input)?;
