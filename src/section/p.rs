@@ -7,8 +7,11 @@ use nom::character::complete::{line_ending, space0};
 use nom::multi::many0;
 use nom::sequence::pair;
 use nom::{IResult, Parser};
+use nom_language::error::VerboseError;
 
-pub fn p(input: &str) -> IResult<&str, Section> {
+pub fn p(
+  input: &str
+) -> IResult<&str, Section, VerboseError<&str>> {
   let (input, _) = section_token.parse(input)?;
   let (input, _) = tag("p").parse(input)?;
   let (input, _) =
@@ -21,13 +24,13 @@ pub fn p(input: &str) -> IResult<&str, Section> {
     { |input| metadata(input, bound.clone(), t) }
       .parse(input)?;
   dbg!(&input);
-  let (input, _) = empty_lines_or_eof.parse(input)?;
-  let (input, sections) = many0(block_p).parse(input)?;
+  // let (input, _) = empty_lines_or_eof.parse(input)?;
+  // let (input, sections) = many0(block_p).parse(input)?;
   Ok((
     input,
     Section::P {
       metadata: md,
-      sections,
+      sections: vec![],
     },
   ))
 }

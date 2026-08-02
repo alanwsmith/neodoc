@@ -7,23 +7,24 @@ use nom::branch::alt;
 use nom::character::complete::{line_ending, space1};
 use nom::combinator::opt;
 use nom::{IResult, Parser, multi::many0};
+use nom_language::error::VerboseError;
 
 pub fn section_flag(
   input: &str
-) -> IResult<&str, FlagOrAttr> {
+) -> IResult<&str, FlagOrAttr, VerboseError<&str>> {
   let (input, _) = section_token.parse(input)?;
-  let (input, first_word) = flag_first_word.parse(input)?;
-  let (input, more_words) =
-    many0(alt((word, space1, single_newline)))
-      .parse(input)?;
-  let (input, _) = opt(line_ending).parse(input)?;
-  let bits = vec![first_word];
+  // let (input, first_word) = flag_first_word.parse(input)?;
+  // let (input, more_words) =
+  //   many0(alt((word, space1, single_newline)))
+  //     .parse(input)?;
+  // let (input, _) = opt(line_ending).parse(input)?;
+  // let bits = vec![first_word];
   let flag = FlagOrAttr::SectionFlag(vec![Span::Text {
-    content: [bits, more_words]
-      .concat()
-      .join("")
-      .trim()
-      .to_string(),
+    content: "saf".to_string(), // content: [bits, more_words]
+                                //   .concat()
+                                //   .join("")
+                                //   .trim()
+                                //   .to_string(),
   }]);
   Ok((input, flag))
 }

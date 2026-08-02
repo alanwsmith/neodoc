@@ -39,6 +39,7 @@ harness = false
 [dependencies]
 anyhow = "1.0.104"
 nom = "8.0.0"
+nom-language = "0.1.0"
 pretty_assertions = "1.4.1"
 rstest = "0.26.1"
 serde = { version = "1.0.229", features = ["derive"] }

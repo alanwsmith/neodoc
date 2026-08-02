@@ -5,7 +5,9 @@ pub mod stand_alone;
 use crate::block::block_p::*;
 use crate::section::metadata::*;
 use crate::span::*;
+use nom::error::context;
 use nom::{IResult, Parser, branch::alt};
+use nom_language::error::VerboseError;
 use p::*;
 use serde::{Deserialize, Serialize};
 use stand_alone::*;
@@ -30,8 +32,12 @@ pub enum Section {
   Placeholder,
 }
 
-pub fn section(input: &str) -> IResult<&str, Section> {
+pub fn section(
+  input: &str
+) -> IResult<&str, Section, VerboseError<&str>> {
   let (input, section) =
-    alt((p, stand_alone, block_p)).parse(input)?;
+    //context("HERE", alt((p, stand_alone, block_p)))
+    context("HERE", alt((p, )))
+      .parse(input)?;
   Ok((input, section))
 }

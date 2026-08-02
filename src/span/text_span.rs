@@ -4,8 +4,11 @@ use crate::span::word::word;
 use nom::branch::alt;
 use nom::multi::many1;
 use nom::{IResult, Parser};
+use nom_language::error::VerboseError;
 
-pub fn text_span(input: &str) -> IResult<&str, String> {
+pub fn text_span(
+  input: &str
+) -> IResult<&str, String, VerboseError<&str>> {
   let (input, results) =
     many1(alt((word, single_newline, whitespace1)))
       .parse(input)?;
