@@ -71,13 +71,15 @@ pub fn section_flag(
 mod tests {
   use super::*;
   use pretty_assertions::assert_eq;
-  // use serde_json;
-  // use serde_json::Value;
+  use rstest::rstest;
 
-  #[test]
-  fn section_flag_singe_word() {
-    let content = "-- alfa";
-    let target1 = "alfa";
+  #[rstest]
+  #[case("-- alfa", "alfa")]
+  #[case("-- alfa bravo charlie", "alfa bravo charlie")]
+  fn section_flag_runner(
+    #[case] content: &str,
+    #[case] target1: &str,
+  ) {
     let target2 =
       FlagOrAttr::SectionFlag(vec![Span::Text {
         content: target1.to_string(),
@@ -105,6 +107,22 @@ mod tests {
   }
 
   #[test]
+  fn section_flag_multiple_words_followed_by_more_metadata()
+  {
+    let content = "-- alfa bravo \n-- charlie";
+    let target1 = "alfa bravo";
+    let target2 =
+      FlagOrAttr::SectionFlag(vec![Span::Text {
+        content: target1.to_string(),
+      }]);
+    let input = Text::new_extra(content, "");
+    let result = section_flag(input).unwrap();
+    let left = target2;
+    let right = result.1;
+    assert_eq!(left, right,);
+  }
+
+  #[test]
   fn section_flag_multiple_lines() {
     let content = "-- alfa bravo\ncharlie delta";
     let target1 = "alfa bravo charlie delta";
@@ -118,21 +136,6 @@ mod tests {
     let right = result.1;
     assert_eq!(left, right,);
   }
-
-  // #[test]
-  // fn section_flag_3() {
-  //   let result =
-  //     section_flag("-- alfa bravo\ncharlie").unwrap();
-  //   let right = serde_json::to_value(result.1).unwrap();
-  //   let left: Value = serde_json::from_str(
-  //     r#"[{ "kind": "text", "content": "alfa bravo charlie" }]"#,
-  //   )
-  //   .unwrap();
-  //   assert_eq!(left, right);
-  //   let right2 = result.0;
-  //   let left2 = "";
-  //   assert_eq!(left2, right2);
-  // }
 
   // #[test]
   // fn section_flag_4() {
