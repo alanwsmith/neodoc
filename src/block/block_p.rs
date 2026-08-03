@@ -21,7 +21,7 @@ pub fn block_p(mut input: Text) -> IResult<Text, Section> {
     input,
     Section::PBlock {
       content,
-      r#type: "p".to_string(),
+      r#type: "block".to_string(),
     },
   ))
 }

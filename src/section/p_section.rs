@@ -51,14 +51,58 @@ mod tests {
     "paragraph with no type with single block at end of file",
     "-- p\n\nalfa",
     r#"{ 
-    "attrs": [], "bound": "full",
-    "content": [{
-      "kind": "block",
-      "content": [ {"content": "alfa", "kind": "span", "type": "text"} ],
-      "type": "p"
-    }],
-    "flags": [], "kind": "p", "type": "p" }"#
+      "attrs": [], "bound": "full",
+      "content": [
+        {
+          "content": [ {"content": "alfa", "kind": "span", "type": "text"} ],
+          "kind": "block",
+          "type": "block"
+        }
+      ],
+      "flags": [], 
+      "kind": "p", 
+      "type": "p" 
+    }"#
   )]
+  #[case(
+    "paragraph section with flag at end of file",
+    "-- p\n-- alfa",
+    r#"{ 
+      "attrs": [], "bound": "full",
+      "content": [],
+      "flags": [
+        [ { "content": "alfa", "kind": "span", "type": "text" } ]
+      ], 
+      "kind": "p", 
+      "type": "p" 
+    }"#
+  )]
+  #[case(
+    "paragraph section with flag followed by content",
+    "-- p\n-- alfa\n\nbravo",
+    r#"{ 
+      "attrs": [], "bound": "full",
+      "content": [
+        {
+          "content": [
+            {
+              "content": "bravo",
+              "kind": "span",
+              "type": "text"
+            }
+          ],
+          "kind": "block",
+          "type": "block"
+        }
+      ],
+      "flags": [
+        [ { "content": "alfa", "kind": "span", "type": "text" } ]
+      ], 
+      "kind": "p", 
+      "type": "p" 
+    }"#
+  )]
+
   fn p_section_runner(
     #[case] description: &str,
     #[case] content: &str,
