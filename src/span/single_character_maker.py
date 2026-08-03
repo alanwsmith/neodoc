@@ -114,7 +114,3 @@ lines.append("""}""")
 with open("single_character.rs", "w") as _out:
     _out.write("\n".join(lines))
 
-
-
-
-# pub fn word(input: &str) -> IResult<&str, &str> {
