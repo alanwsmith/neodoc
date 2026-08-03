@@ -73,7 +73,8 @@ mod tests {
 
   // #[test]
   // fn p_section_with_flag() {
-  //   let input = "-- p\n-- bravo\n\ncharlie";
+  //   let content = "-- p\n-- bravo\n\ncharlie";
+  //   let input = Text::new_extra(content, "");
   //   let left: Value = serde_json::from_str(
   //     r#"{
   //     "kind": "p",

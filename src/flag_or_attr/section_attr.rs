@@ -1,8 +1,5 @@
-#![allow(warnings)]
-
 use crate::Text;
 use crate::flag_or_attr::FlagOrAttr;
-use crate::flag_or_attr::flag_first_word::flag_first_word;
 use crate::span::section_token;
 use crate::span::single_newline::single_newline;
 use crate::span::{Span, word::word};
@@ -11,8 +8,7 @@ use nom::bytes::complete::{is_not, tag};
 use nom::character::complete::{line_ending, space1};
 use nom::combinator::opt;
 use nom::multi::many1;
-use nom::{IResult, Parser, multi::many0};
-use serde::{Deserialize, Serialize};
+use nom::{IResult, Parser};
 
 pub fn section_attr(
   input: Text
@@ -22,19 +18,19 @@ pub fn section_attr(
   let (input, _) = tag(":").parse(input)?;
   let (input, _) = space1.parse(input)?;
   let (input, value) =
-    many1(alt((word, single_newline))).parse(input)?;
-  let (input, more_words) =
-    many0(alt((word, space1, single_newline)))
+    many1(alt((word, space1, single_newline)))
       .parse(input)?;
+  let content = value
+    .iter()
+    .map(|v| *v.fragment())
+    .collect::<Vec<_>>()
+    .join("")
+    .trim()
+    .to_string();
   let (input, _) = opt(line_ending).parse(input)?;
-  //  let bits = vec![first_word];
-
-  dbg!(value);
   let flag = FlagOrAttr::SectionAttr {
     key: key.to_string(),
-    value: vec![Span::Text {
-      content: "".to_string(), //      content: value.join("").trim().to_string(),
-    }],
+    value: vec![Span::Text { content }],
   };
   Ok((input, flag))
 }
@@ -44,23 +40,29 @@ mod tests {
   use super::*;
   use pretty_assertions::assert_eq;
   use serde_json;
-  use serde_json::Value;
 
-  // #[test]
-  // fn section_attr_1() {
-  //   let input = "-- alfa: bravo";
-  //   let left = (
-  //     "",
-  //     FlagOrAttr::SectionAttr {
-  //       key: "alfa".to_string(),
-  //       value: vec![Span::Text {
-  //         content: "bravo".to_string(),
-  //       }],
-  //     },
-  //   );
-  //   let right = section_attr.parse(input).unwrap();
-  //   assert_eq!(left, right);
-  // }
+  #[test]
+  fn section_attr_1() {
+    let content = "-- alfa: bravo";
+    let target1 = "alfa";
+    let target2 = "bravo";
+    let target3 = FlagOrAttr::SectionAttr {
+      key: target1.to_string(),
+      value: vec![Span::Text {
+        content: target2.to_string(),
+      }],
+    };
+    let input = Text::new_extra(content, "");
+    let result = section_attr(input).unwrap();
+    let left = target3;
+    let right = result.1;
+    assert_eq!(
+      left,
+      right,
+      // "{}",
+      // format!("\n\n{:?}\n\n{:?}", input, result.0)
+    );
+  }
 
   // #[test]
   // fn section_attr_2() {
