@@ -1,4 +1,5 @@
 use crate::Text;
+use nom::branch::alt;
 use nom::character::complete::line_ending;
 use nom::character::complete::space0;
 use nom::combinator::eof;
@@ -11,13 +12,13 @@ pub fn empty_lines_or_eof(
   mut input: Text
 ) -> IResult<Text, Text> {
   input.extra = "empty_lines_or_eof";
-  let (input, _) = space0.parse(input)?;
-  let (input, _) =
-    pair(space0, line_ending).parse(input)?;
-  let (input, _) =
-    opt(many1(pair(space0, line_ending))).parse(input)?;
+  let (input, _) = alt((
+    pair(space0, eof).map(|_| ""),
+    many1(pair(space0, line_ending)).map(|_| ""),
+  ))
+  .parse(input)?;
   let (input, _) = opt(eof).parse(input)?;
-  Ok((input, Text::new_extra("", "")))
+  Ok((input, Text::new_extra("", "empty_lines_or_eof")))
 }
 
 #[cfg(test)]
@@ -58,6 +59,7 @@ mod tests {
   #[test]
   fn empty_lines_error_if_not_empty() {
     let input = Text::new_extra("  asdf\n", "");
-    assert!(empty_lines_or_eof.parse(input).is_err());
+    let result = empty_lines_or_eof.parse(input);
+    assert!(result.is_err());
   }
 }
