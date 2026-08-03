@@ -13,37 +13,13 @@ pub fn section_flag(
   mut input: Text
 ) -> IResult<Text, FlagOrAttr> {
   input.extra = "section_flag";
-  // dbg!(&input);
   let (input, _) = section_token.parse(input)?;
-  // dbg!(&input);
   let (input, first_word) = flag_first_word.parse(input)?;
-  // dbg!(&input);
-  // dbg!("HERE1");
-  //let (input, _) = space1.parse(input)?;
-  // dbg!("HERE2");
-  // dbg!(&input);
-
   let (input, more_words) =
     many0(alt((word, space1, single_newline)))
       .parse(input)?;
-  // dbg!(&input);
-
-  // dbg!(&first_word);
-  // dbg!(&more_words);
-
   let (input, _) = opt(line_ending).parse(input)?;
   let starter = vec![first_word];
-
-  // let testing_alfa = [starter, more_words]
-  //   .concat()
-  //   .into_iter()
-  //   .map(|x| *x.fragment())
-  //   .collect::<Vec<_>>()
-  //   .join("")
-  //   .trim()
-  //   .to_string();
-  // dbg!(testing_alfa);
-
   let flag = FlagOrAttr::SectionFlag(vec![Span::Text {
     content: [starter, more_words]
       .concat()
@@ -54,17 +30,6 @@ pub fn section_flag(
       .trim()
       .to_string(),
   }]);
-
-  // let flag = FlagOrAttr::SectionFlag(vec![Span::Text {
-  //   content: [starter, more_words]
-  //     .concat()
-  //     .join("")
-  //     .trim()
-  //     .to_string(),
-  // }]);
-  //let tmp_flag = FlagOrAttr::SectionFlag(vec![]);
-
-  // Ok((input, tmp_flag))
   Ok((input, flag))
 }
 
@@ -145,11 +110,6 @@ mod tests {
       description
     );
   }
-
-  // #[test]
-  // fn error_if_attr_key() {
-  //   assert!(section_flag("-- alfa: ").is_err());
-  // }
 
   //
 }
