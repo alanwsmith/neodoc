@@ -1,7 +1,7 @@
+use crate::Text;
 use crate::section::*;
 use nom::IResult;
-use nom::{Parser, error::context, multi::many1};
-use nom_language::error::VerboseError;
+use nom::{Parser, multi::many1};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
@@ -12,11 +12,9 @@ pub enum Payload {
   Error {},
 }
 
-pub fn payload(
-  input: &str
-) -> IResult<&str, Payload, VerboseError<&str>> {
+pub fn payload(input: Text) -> IResult<Text, Payload> {
   let (input, sections) = many1(section).parse(input)?;
-  let payload = Payload::Ok { sections };
+  let payload = Payload::Ok { sections: vec![] };
   Ok((input, payload))
 }
 
@@ -37,7 +35,10 @@ mod tests {
 
   #[test]
   fn integration() {
-    let input = include_str!("tests/1/input.neo").trim();
+    let input =
+      Text::new_extra("prelude\nspacer target", "");
+
+    //    let input = include_str!("tests/1/input.neo").trim();
     let left: Value = serde_json::from_str(include_str!(
       "tests/1/target.json"
     ))

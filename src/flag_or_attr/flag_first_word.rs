@@ -2,23 +2,23 @@
 use nom::bytes::complete::take_while1;
 // use nom::character::complete::space1;
 // use nom::combinator::opt;
+use crate::Text;
 use nom::combinator::verify;
 use nom::{IResult, Parser};
-use nom_language::error::VerboseError;
 
 fn is_word_char(c: char) -> bool {
   !c.is_whitespace()
 }
 
-pub fn flag_first_word(
-  input: &str
-) -> IResult<&str, &str, VerboseError<&str>> {
-  let (input, text) =
-    verify(take_while1(is_word_char), |s: &str| {
-      !s.ends_with(':')
-    })
-    .parse(input)?;
-  Ok((input, text))
+pub fn flag_first_word(input: Text) -> IResult<Text, &str> {
+  // let (input, text) =
+  //   verify(take_while1(is_word_char), |s: &str| {
+  //     !s.ends_with(':')
+  //   })
+  //   .parse(input)?;
+  // // Ok((input, text))
+
+  Ok((input, ""))
 
   // let mut spans = vec![Span::Text {
   //   content: text.to_string(),

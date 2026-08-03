@@ -5,6 +5,10 @@ pub mod payload;
 pub mod section;
 pub mod span;
 
+use nom_locate::LocatedSpan;
+
 #[allow(dead_code)]
 const SINGLE_CHARACTERS: [u8; 23] =
   *b"`~!@#$%^&*(){}[]<>:|_-=";
+
+pub type Text<'a> = LocatedSpan<&'a str, &'a str>;
