@@ -11,24 +11,16 @@ use nom::{IResult, Parser};
 pub fn p(input: Text) -> IResult<Text, Section> {
   let (input, _) = section_token.parse(input)?;
   let (input, _) = tag("p").parse(input)?;
-  dbg!("aaaaaaaaaaaaaaaaaaaaaaaaa");
   let (input, _) =
     pair(space0, line_ending).parse(input)?;
   let bound = Bound::Full;
   let t = "p";
-  dbg!("bbbbbbbbbbbbbbbbbbbbbbbb");
   let (input, md) = {
     |input| metadata(input, bound.clone(), t.to_string())
   }
   .parse(input)?;
-  dbg!("cccccccccccccccccccc");
-  dbg!(&input);
   let (input, _) = empty_lines_or_eof.parse(input)?;
-  dbg!("dddddddddddddddddddddddddd");
-  dbg!(&input);
   let (input, sections) = many0(block_p).parse(input)?;
-  dbg!("eeeeeeeeeeeeeeeeeeeeeee");
-  dbg!(&input);
   Ok((
     input,
     Section::P {
