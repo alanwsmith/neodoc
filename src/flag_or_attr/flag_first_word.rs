@@ -29,12 +29,7 @@ mod tests {
     let result = flag_first_word(input).unwrap();
     let left = target;
     let right = result.1.fragment();
-    assert_eq!(
-      &left,
-      right,
-      // "{}",
-      // format!("\n\n{:?}\n\n{:?}", input, result)
-    );
+    assert_eq!(&left, right,);
   }
 
   #[test]
@@ -45,12 +40,7 @@ mod tests {
     let result = flag_first_word(input).unwrap();
     let left = target;
     let right = result.1.fragment();
-    assert_eq!(
-      &left,
-      right,
-      // "{}",
-      // format!("\n\n{:?}\n\n{:?}", input, result.0)
-    );
+    assert_eq!(&left, right,);
   }
 
   #[test]
@@ -61,12 +51,7 @@ mod tests {
     let result = flag_first_word(input).unwrap();
     let left = target;
     let right = result.1.fragment();
-    assert_eq!(
-      &left,
-      right,
-      // "{}",
-      // format!("\n\n{:?}\n\n{:?}", input, result.0)
-    );
+    assert_eq!(&left, right,);
   }
 
   #[test]
