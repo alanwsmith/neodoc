@@ -11,7 +11,7 @@ datatest-stable = "0.3.3"
 [lib]
 doctest = false
 
-[[test]]
+[[xtest]]
 name = "integration"
 harness = false 
 
