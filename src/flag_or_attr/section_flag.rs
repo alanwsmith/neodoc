@@ -10,8 +10,9 @@ use nom::combinator::opt;
 use nom::{IResult, Parser, multi::many0};
 
 pub fn section_flag(
-  input: Text
+  mut input: Text
 ) -> IResult<Text, FlagOrAttr> {
+  input.extra = "section_flag";
   // dbg!(&input);
   let (input, _) = section_token.parse(input)?;
   // dbg!(&input);
@@ -74,26 +75,36 @@ mod tests {
   use rstest::rstest;
 
   #[rstest]
-  #[case("-- alfa", "alfa", "single word section flag")]
+  #[case("single word section flag", "-- alfa", "alfa")]
   #[case(
+    "multi word section flag",
     "-- alfa bravo charlie",
-    "alfa bravo charlie",
-    "multi word section flag"
+    "alfa bravo charlie"
   )]
   #[case(
+    "section flag with more metadata below it",
     "-- alfa bravo \n-- charlie",
-    "alfa bravo",
-    "section flag with more metadata below it"
+    "alfa bravo"
   )]
   #[case(
+    "multi line section flag",
     "-- alfa bravo\ncharlie delta",
-    "alfa bravo charlie delta",
-    "multi line section flag"
+    "alfa bravo charlie delta"
+  )]
+  #[case(
+    "multie line with trailing content",
+    "-- alfa bravo\ncharlie\n\nx",
+    "alfa bravo charlie"
+  )]
+  #[case(
+    "single flag with line ending then end of file",
+    "-- alfa bravo\n",
+    "alfa bravo"
   )]
   fn section_flag_runner(
+    #[case] description: &str,
     #[case] content: &str,
     #[case] target1: &str,
-    #[case] description: &str,
   ) {
     let target2 =
       FlagOrAttr::SectionFlag(vec![Span::Text {
@@ -106,34 +117,34 @@ mod tests {
     assert_eq!(left, right, "{}", description);
   }
 
-  // #[test]
-  // fn section_flag_4() {
-  //   let result =
-  //     section_flag("-- alfa bravo\ncharlie\n\nx").unwrap();
-  //   let right = serde_json::to_value(result.1).unwrap();
-  //   let left: Value = serde_json::from_str(
-  //     r#"[{ "kind": "text", "content": "alfa bravo charlie" }]"#,
-  //   )
-  //   .unwrap();
-  //   assert_eq!(left, right);
-  //   let right2 = result.0;
-  //   let left2 = "\nx";
-  //   assert_eq!(left2, right2);
-  // }
-
-  // #[test]
-  // fn section_flag_5() {
-  //   let result = section_flag("-- alfa bravo\n").unwrap();
-  //   let right = serde_json::to_value(result.1).unwrap();
-  //   let left: Value = serde_json::from_str(
-  //     r#"[{ "kind": "text", "content": "alfa bravo" }]"#,
-  //   )
-  //   .unwrap();
-  //   assert_eq!(left, right);
-  //   let right2 = result.0;
-  //   let left2 = "";
-  //   assert_eq!(left2, right2);
-  // }
+  #[rstest]
+  #[case(
+    "section_flag error if first word ends in colon and end of file",
+    "-- alfa:"
+  )]
+  #[case(
+    "section_flag error if first word ends in colon and space",
+    "-- alfa: "
+  )]
+  #[case(
+    "section_flag error if first word ends in colon and single line ending",
+    "-- alfa:\n"
+  )]
+  #[case(
+    "section_flag error if first word ends in colon and empty line",
+    "-- alfa:\n\nx"
+  )]
+  fn section_flag_error_confirmation(
+    #[case] description: &str,
+    #[case] content: &str,
+  ) {
+    let input = Text::new_extra(content, "");
+    assert!(
+      section_flag(input).is_err(),
+      "{}",
+      description
+    );
+  }
 
   // #[test]
   // fn error_if_attr_key() {
