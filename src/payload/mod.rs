@@ -8,13 +8,13 @@ use serde_json::Value;
 #[derive(Debug, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "lowercase")]
 pub enum Payload {
-  Ok { sections: Vec<Section> },
+  Ok { content: Vec<Section> },
   Error {},
 }
 
 pub fn payload(input: Text) -> IResult<Text, Payload> {
-  let (input, sections) = many1(section).parse(input)?;
-  let payload = Payload::Ok { sections };
+  let (input, content) = many1(section).parse(input)?;
+  let payload = Payload::Ok { content };
   Ok((input, payload))
 }
 

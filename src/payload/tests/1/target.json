@@ -20,11 +20,11 @@
         "content": [
           {
             "kind": "block",
-            "type": "p",
+            "type": "block",
             "content": [
               {
-                "kind": "span",
                 "content": "juliett kilo",
+                "kind": "span",
                 "type": "text"
               }
             ]
@@ -50,9 +50,9 @@
         "bound": "full",
         "content": [{
           "kind": "block",
-          "type": "p",
-          "spans": [
-            { "kind": "text", "content": "more" }
+          "type": "block",
+          "content": [
+            { "content": "more", "kind": "span", "type": "text" }
           ]
         }],
         "flags": [],
