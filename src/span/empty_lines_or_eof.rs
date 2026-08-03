@@ -54,23 +54,11 @@ mod tests {
       "{}",
       format!("\n\n{:?}\n\n{:?}", input, result)
     );
-
-    // let mut leftover = Text::new_extra(remainder, "");
-    // let left = (
-    //   leftover,
-    //   Text::new_extra(expected, "empty_lines_or_eof"),
-    // );
-    // let right = empty_lines_or_eof
-    //   .parse(Text::new_extra(given, ""))
-    //   .unwrap();
-    // assert_eq!(left, right);
   }
 
-  // #[test]
-  // fn empty_lines_error_if_not_empty() {
-  //   let input = Text::new_extra("  asdf\n", "");
-  //   assert!(empty_lines_or_eof.parse(input).is_err());
-  // }
-
-  //
+  #[test]
+  fn empty_lines_error_if_not_empty() {
+    let input = Text::new_extra("  asdf\n", "");
+    assert!(empty_lines_or_eof.parse(input).is_err());
+  }
 }
