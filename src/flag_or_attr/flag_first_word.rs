@@ -32,8 +32,56 @@ mod tests {
     assert_eq!(
       &left,
       right,
-      "{}",
-      format!("\n\n{:?}\n\n{:?}", input, result)
+      // "{}",
+      // format!("\n\n{:?}\n\n{:?}", input, result)
     );
+  }
+
+  #[test]
+  fn flag_first_word_2() {
+    let content = "bravo ";
+    let target = "bravo";
+    let input = Text::new_extra(content, "");
+    let result = flag_first_word(input).unwrap();
+    let left = target;
+    let right = result.1.fragment();
+    assert_eq!(
+      &left,
+      right,
+      // "{}",
+      // format!("\n\n{:?}\n\n{:?}", input, result.0)
+    );
+  }
+
+  #[test]
+  fn flag_first_word_3() {
+    let content = "charlie:delta";
+    let target = "charlie:delta";
+    let input = Text::new_extra(content, "");
+    let result = flag_first_word(input).unwrap();
+    let left = target;
+    let right = result.1.fragment();
+    assert_eq!(
+      &left,
+      right,
+      // "{}",
+      // format!("\n\n{:?}\n\n{:?}", input, result.0)
+    );
+  }
+
+  #[test]
+  fn flag_first_word_error_on_colon() {
+    let content = "echo:";
+    let input = Text::new_extra(content, "");
+    let result = flag_first_word(input);
+    assert!(result.is_err());
+  }
+
+  #[test]
+  fn flag_first_word_error_on_colon_2() {
+    let content = "foxtrot:golf: ";
+    let input = Text::new_extra(content, "");
+    let result = flag_first_word(input);
+    assert!(result.is_err());
   }
 }
