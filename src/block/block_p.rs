@@ -35,8 +35,7 @@ mod tests {
   #[test]
   fn block_p_basic() {
     let content = "alfa";
-    let target =
-      r#"[ { "kind": "text", "content": "alfa" }]"#;
+    let target = r#"[ { "kind": "span", "content": "alfa", "type": "text" }]"#;
     let input = Text::new_extra(content, "");
     let result = block_p.parse(input).unwrap().1;
     let left: Value = serde_json::from_str(target).unwrap();
@@ -55,7 +54,7 @@ mod tests {
   #[test]
   fn block_p_multi_line() {
     let content = "alfa bravo\ncharlie delta";
-    let target = r#"[ { "kind": "text", "content": "alfa bravo charlie delta" }]"#;
+    let target = r#"[ { "kind": "span", "content": "alfa bravo charlie delta" , "type": "text" }]"#;
     let input = Text::new_extra(content, "");
     let result = block_p.parse(input).unwrap().1;
     let left: Value = serde_json::from_str(target).unwrap();
@@ -74,7 +73,7 @@ mod tests {
   #[test]
   fn block_p_multi_line_followed_by_empty_line() {
     let content = "alfa bravo\ncharlie delta\n\nx";
-    let target = r#"[ { "kind": "text", "content": "alfa bravo charlie delta" }]"#;
+    let target = r#"[ { "kind": "span", "content": "alfa bravo charlie delta", "type": "text"}]"#;
     let input = Text::new_extra(content, "");
     let result = block_p.parse(input).unwrap().1;
     let left: Value = serde_json::from_str(target).unwrap();
