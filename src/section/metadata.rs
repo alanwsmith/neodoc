@@ -27,11 +27,11 @@ pub fn metadata(
 
   dbg!(&items);
 
-  // let attrs = items
-  //   .clone()
-  //   .into_iter()
-  //   .filter(|x| matches!(x, FlagOrAttr::SectionAttr { .. }))
-  //   .collect();
+  let attrs = items
+    .clone()
+    .into_iter()
+    .filter(|x| matches!(x, FlagOrAttr::SectionAttr { .. }))
+    .collect();
   // let flags = items
   //   .into_iter()
   //   .filter(|x| matches!(x, FlagOrAttr::SectionFlag { .. }))
@@ -41,7 +41,7 @@ pub fn metadata(
   // let (input, attrs) = many0(section_attr).parse(input)?;
 
   let md = Metadata {
-    attrs: vec![],
+    attrs,
     bound,
     flags: vec![],
     r#type,

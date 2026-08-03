@@ -44,7 +44,6 @@ pub fn section_attr(
 mod tests {
   use super::*;
   use pretty_assertions::assert_eq;
-  use serde_json;
 
   #[test]
   fn section_attr_1() {

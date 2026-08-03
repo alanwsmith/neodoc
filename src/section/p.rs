@@ -71,42 +71,40 @@ mod tests {
     assert_eq!(left, right);
   }
 
-  // #[test]
-  // fn p_section_with_flag() {
-  //   let content = "-- p\n-- bravo\n\ncharlie";
-  //   let input = Text::new_extra(content, "");
-  //   let left: Value = serde_json::from_str(
-  //     r#"{
-  //     "kind": "p",
-  //     "metadata": {
-  //       "bound": "full",
-  //       "attrs": [],
-  //       "flags": [
-  //         [ { "kind": "text", "content": "bravo"} ]
-  //       ],
-  //       "type": "p"
-  //     },
-  //     "sections": [
-  //       {
-  //       "kind": "block",
-  //       "metadata": {
-  //         "attrs": [],
-  //         "bound": "full",
-  //         "flags": [],
-  //         "type": "block"
-  //       },
-  //       "spans": [
-  //       {"kind": "text", "content": "charlie" }
-  //       ]
-  //       }
-  //     ]
-  //     }"#,
-  //   )
-  //   .unwrap();
-  //   let right =
-  //     serde_json::to_value(p(input).unwrap().1).unwrap();
-  //   assert_eq!(left, right);
-  // }
+  #[test]
+  fn p_section_with_flag() {
+    let content = "-- p\n-- bravo\n\ncharlie";
+    let input = Text::new_extra(content, "");
+    let left: Value = serde_json::from_str(
+      r#"{
+      "kind": "p",
+      "metadata": {
+        "bound": "full",
+        "attrs": [],
+        "flags": [
+          [ { "kind": "text", "content": "bravo"} ]
+        ],
+        "type": "p"
+      },
+      "sections": [
+        {
+        "kind": "block",
+        "metadata": {
+          "attrs": [],
+          "bound": "full",
+          "flags": [],
+          "type": "block"
+        },
+        "spans": [ {"kind": "text", "content": "charlie" } ]
+        }
+      ]
+      }"#,
+    )
+    .unwrap();
+    let right =
+      serde_json::to_value(p(input).unwrap().1).unwrap();
+    assert_eq!(left, right);
+  }
 
   //
 }

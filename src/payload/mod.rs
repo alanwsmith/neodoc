@@ -35,8 +35,8 @@ mod tests {
 
   #[test]
   fn integration() {
-    let content = include_str!("tests/2/input.neo").trim();
-    let check = include_str!("tests/2/target.json");
+    let content = include_str!("tests/1/input.neo").trim();
+    let check = include_str!("tests/1/target.json");
     let input = Text::new_extra(content, "");
     let left: Value = serde_json::from_str(check).unwrap();
     let result = payload(input).unwrap();

@@ -74,6 +74,26 @@ mod tests {
   use serde_json;
   use serde_json::Value;
 
+  #[test]
+  fn section_flag_1() {
+    let content = "-- alfa";
+    let target1 = "alfa";
+    let target2 =
+      FlagOrAttr::SectionFlag(vec![Span::Text {
+        content: target1.to_string(),
+      }]);
+    let input = Text::new_extra(content, "");
+    let result = section_flag(input).unwrap();
+    let left = target2;
+    let right = result.1;
+    assert_eq!(
+      left,
+      right,
+      // "{}",
+      // format!("\n\n{:?}\n\n{:?}", input, result.0)
+    );
+  }
+
   // #[test]
   // fn section_flag_1() {
   //   let right = serde_json::to_value(
