@@ -3,20 +3,22 @@ use nom::branch::alt;
 use nom::character::complete::line_ending;
 use nom::character::complete::space0;
 use nom::combinator::eof;
+use nom::combinator::opt;
 use nom::multi::many1;
 use nom::sequence::pair;
 use nom::{IResult, Parser};
 
 pub fn empty_lines_or_eof(
-  input: Text
-) -> IResult<Text, &str> {
+  mut input: Text
+) -> IResult<Text, Text> {
+  input.extra = "empty_lines_or_eof";
   let (input, _) = space0.parse(input)?;
-  // let (input, _) = alt((
-  //   eof,
-  //   many1(pair(space0, line_ending)).map(|_| ""),
-  // ))
-  // .parse(input)?;
-  Ok((input, ""))
+  let (input, _) =
+    pair(space0, line_ending).parse(input)?;
+  let (input, _) =
+    opt(many1(pair(space0, line_ending))).parse(input)?;
+  let (input, _) = opt(eof).parse(input)?;
+  Ok((input, Text::new_extra("", "")))
 }
 
 #[cfg(test)]
@@ -25,26 +27,48 @@ mod tests {
   use pretty_assertions::assert_eq;
   use rstest::rstest;
 
-  // #[rstest]
-  // #[case("\n\n", "", "")]
-  // #[case("  \n\n", "", "")]
-  // #[case("\n          \n", "", "")]
-  // #[case(" \n  \n      \n x", "", " x")]
-  // #[case("\n\nx", "", "x")]
-  // #[case("\n\n  x", "", "  x")]
-  // fn empty_lines_pass_if_empty(
-  //   #[case] given: &str,
-  //   #[case] expected: &str,
-  //   #[case] remainder: &str,
-  // ) {
-  //   let left = (remainder, expected);
-  //   let right = empty_lines_or_eof.parse(given).unwrap();
-  //   assert_eq!(left, right);
-  // }
+  #[rstest]
+  #[case("\n\n", "", "")]
+  #[case("  \n\n", "", "")]
+  #[case("\n          \n", "", "")]
+  #[case(" \n  \n      \n x", "", " x")]
+  #[case("\n\nx", "", "x")]
+  #[case("\n\n  x", "", "  x")]
+  fn empty_lines_pass_if_empty(
+    #[case] given: &str,
+    #[case] expected: &str,
+    #[case] remainder: &str,
+  ) {
+    let input = Text::new_extra(given, "");
+    let result = empty_lines_or_eof.parse(input).unwrap();
+    assert_eq!(
+      &expected,
+      result.1.fragment(),
+      "{}",
+      format!("\n\n{:?}\n\n{:?}", input, result)
+    );
+
+    assert_eq!(
+      &remainder,
+      result.0.fragment(),
+      "{}",
+      format!("\n\n{:?}\n\n{:?}", input, result)
+    );
+
+    // let mut leftover = Text::new_extra(remainder, "");
+    // let left = (
+    //   leftover,
+    //   Text::new_extra(expected, "empty_lines_or_eof"),
+    // );
+    // let right = empty_lines_or_eof
+    //   .parse(Text::new_extra(given, ""))
+    //   .unwrap();
+    // assert_eq!(left, right);
+  }
 
   // #[test]
   // fn empty_lines_error_if_not_empty() {
-  //   let input = "  asdf\n";
+  //   let input = Text::new_extra("  asdf\n", "");
   //   assert!(empty_lines_or_eof.parse(input).is_err());
   // }
 

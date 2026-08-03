@@ -35,15 +35,12 @@ mod tests {
 
   #[test]
   fn integration() {
-    let input = Text::new_extra(
-      include_str!("tests/2/input.neo").trim(),
-      "",
-    );
+    let content = include_str!("tests/2/input.neo").trim();
+    let check = include_str!("tests/2/target.json");
+
+    let input = Text::new_extra(content, "");
     //    let input = include_str!("tests/1/input.neo").trim();
-    let left: Value = serde_json::from_str(include_str!(
-      "tests/2/target.json"
-    ))
-    .unwrap();
+    let left: Value = serde_json::from_str(check).unwrap();
     let result = payload(input).unwrap();
     let right = serde_json::to_value(result.1).unwrap();
     assert_eq!(left, right);

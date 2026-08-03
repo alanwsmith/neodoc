@@ -10,9 +10,19 @@ pub fn text_span(input: Text) -> IResult<Text, String> {
   let (input, results) =
     many1(alt((word, single_newline, whitespace1)))
       .parse(input)?;
-  //  dbg!(results);
+
+  let output = results
+    .iter()
+    .map(|v| *v.fragment())
+    .collect::<Vec<_>>()
+    .join("")
+    .to_string();
+
+  //dbg!(&output);
+
+  //dbg!(results);
   //  Ok((input, results.join("")))
-  Ok((input, "".to_string()))
+  Ok((input, output))
 }
 
 #[cfg(test)]

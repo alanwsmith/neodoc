@@ -11,13 +11,12 @@ fn is_word_char(c: char) -> bool {
 }
 
 pub fn flag_first_word(input: Text) -> IResult<Text, Text> {
-  dbg!(&input);
   let (input, text) =
     verify(take_while1(is_word_char), |s: &Text| {
       !s.ends_with(':')
     })
     .parse(input)?;
-  dbg!(&text);
+  Ok((input, text))
 
   // let (input, text) =
   //   verify(take_while1(is_word_char), |s: &Text| {
@@ -30,7 +29,6 @@ pub fn flag_first_word(input: Text) -> IResult<Text, Text> {
   //     !s.ends_with(':')
   //   })
   //   .parse(input)?;
-  Ok((input, text))
 
   //Ok((input, ""))
 
@@ -43,4 +41,27 @@ pub fn flag_first_word(input: Text) -> IResult<Text, Text> {
   //     content: " ".to_string(),
   //   })
   // }
+}
+
+#[cfg(test)]
+mod tests {
+  use super::*;
+  use pretty_assertions::assert_eq;
+
+  #[test]
+  fn flag_first_word_1() {
+    let left = Text::new_extra("alfa", "");
+    let right =
+      flag_first_word(Text::new_extra("alfa", ""))
+        .unwrap()
+        .1;
+    assert_eq!(left, right);
+  }
+
+  #[test]
+  fn flag_first_word_2() {
+    let left = Text::new_extra("bravo", "");
+    let right = Text::new_extra("bravo", "");
+    assert_eq!(left, right);
+  }
 }
