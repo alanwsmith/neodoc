@@ -29,11 +29,6 @@ pub fn metadata(input: Text) -> IResult<Text, Metadata> {
     .filter(|x| matches!(x, FlagOrAttr::SectionFlag(_)))
     .collect();
 
-  // let flags = items
-  //   .into_iter()
-  //   .filter(|x| matches!(x, FlagOrAttr::SectionFlag { .. }))
-  //   .collect();
-
   // let (input, flags) = many0(section_flag).parse(input)?;
   // let (input, attrs) = many0(section_attr).parse(input)?;
 
