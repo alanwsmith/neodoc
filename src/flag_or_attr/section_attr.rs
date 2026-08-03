@@ -139,21 +139,5 @@ mod tests {
     );
   }
 
-  // #[test]
-  // fn section_attr_3() {
-  //   let input = "-- alfa: bravo\ncharlie\n\n";
-  //   let left = (
-  //     "\n",
-  //     FlagOrAttr::SectionAttr {
-  //       key: "alfa".to_string(),
-  //       value: vec![Span::Text {
-  //         content: "bravo charlie".to_string(),
-  //       }],
-  //     },
-  //   );
-  //   let right = section_attr.parse(input).unwrap();
-  //   assert_eq!(left, right);
-  // }
-
   //
 }
