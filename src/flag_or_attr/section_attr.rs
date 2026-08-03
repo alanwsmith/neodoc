@@ -1,6 +1,7 @@
 use crate::Text;
 use crate::flag_or_attr::FlagOrAttr;
 use crate::span::section_token;
+use crate::span::single_character::single_colon;
 use crate::span::single_newline::single_newline;
 use crate::span::{Span, word::word};
 use nom::branch::alt;
@@ -17,9 +18,13 @@ pub fn section_attr(
   let (input, key) = is_not(": \n\r\t").parse(input)?;
   let (input, _) = tag(":").parse(input)?;
   let (input, _) = space1.parse(input)?;
-  let (input, value) =
-    many1(alt((word, space1, single_newline)))
-      .parse(input)?;
+  let (input, value) = many1(alt((
+    word,
+    space1,
+    single_newline,
+    single_colon,
+  )))
+  .parse(input)?;
   let content = value
     .iter()
     .map(|v| *v.fragment())
@@ -92,6 +97,30 @@ mod tests {
     let content = "-- alfa: bravo\ncharlie\n\nx";
     let target1 = "alfa";
     let target2 = "bravo charlie";
+    let target3 = FlagOrAttr::SectionAttr {
+      key: target1.to_string(),
+      value: vec![Span::Text {
+        content: target2.to_string(),
+      }],
+    };
+    let input = Text::new_extra(content, "");
+    let result = section_attr(input).unwrap();
+    let left = target3;
+    let right = result.1;
+    assert_eq!(
+      left,
+      right,
+      // "{}",
+      // format!("\n\n{:?}\n\n{:?}", input, result.0)
+    );
+  }
+
+  #[test]
+  fn section_attr_multi_line_with_trailing_string_with_colons()
+   {
+    let content = "-- alfa: bravo: https://www.example.com\ncharlie\n\nx";
+    let target1 = "alfa";
+    let target2 = "bravo: https://www.example.com charlie";
     let target3 = FlagOrAttr::SectionAttr {
       key: target1.to_string(),
       value: vec![Span::Text {
