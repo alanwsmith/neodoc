@@ -1,5 +1,4 @@
 use crate::Text;
-use crate::bound::*;
 use crate::flag_or_attr::FlagOrAttr;
 use crate::flag_or_attr::section_attr::section_attr;
 use crate::flag_or_attr::section_flag::section_flag;
@@ -11,27 +10,25 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Deserialize, PartialEq, Serialize)]
 pub struct Metadata {
   pub attrs: Vec<FlagOrAttr>,
-  pub bound: Bound,
   pub flags: Vec<FlagOrAttr>,
-  pub r#type: String,
 }
 
-pub fn metadata(
-  input: Text,
-  bound: Bound,
-  r#type: String,
-) -> IResult<Text, Metadata> {
+pub fn metadata(input: Text) -> IResult<Text, Metadata> {
   let (input, items) =
     many0(alt((section_flag, section_attr)))
       .parse(input)?;
-
-  dbg!(&items);
-
   let attrs = items
     .clone()
     .into_iter()
     .filter(|x| matches!(x, FlagOrAttr::SectionAttr { .. }))
     .collect();
+
+  let flags = items
+    .clone()
+    .into_iter()
+    .filter(|x| matches!(x, FlagOrAttr::SectionFlag(_)))
+    .collect();
+
   // let flags = items
   //   .into_iter()
   //   .filter(|x| matches!(x, FlagOrAttr::SectionFlag { .. }))
@@ -40,12 +37,7 @@ pub fn metadata(
   // let (input, flags) = many0(section_flag).parse(input)?;
   // let (input, attrs) = many0(section_attr).parse(input)?;
 
-  let md = Metadata {
-    attrs,
-    bound,
-    flags: vec![],
-    r#type,
-  };
+  let md = Metadata { attrs, flags };
   Ok((input, md))
 }
 
@@ -53,7 +45,34 @@ pub fn metadata(
 mod tests {
   use super::*;
   use pretty_assertions::assert_eq;
+  use rstest::rstest;
   use serde_json::Value;
+
+  // #[rstest]
+  // #[case(
+  //   "metadata single flag",
+  //   "-- alfa",
+  //   r#"
+  // { "attrs": [], "bound": "full", "flags": [
+  //  [ { "kind": "text", "content": "alfa"} ]
+  // ],
+  // "#
+  // )]
+  // fn metadata_runner(
+  //   #[case] description: &str,
+  //   #[case] content: &str,
+  //   #[case] target1: &str,
+  // ) {
+  //   let target2 =
+  //     FlagOrAttr::SectionFlag(vec![Span::Text {
+  //       content: target1.to_string(),
+  //     }]);
+  //   let input = Text::new_extra(content, "");
+  //   let result = section_flag(input).unwrap();
+  //   let left = target2;
+  //   let right = result.1;
+  //   assert_eq!(left, right, "{}", description);
+  // }
 
   // #[test]
   // fn metadata_basic() {

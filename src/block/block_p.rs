@@ -1,6 +1,4 @@
 use crate::Text;
-use crate::bound::*;
-use crate::section::metadata::*;
 use crate::section::*;
 use crate::span::Span;
 use crate::span::empty_lines_or_eof::empty_lines_or_eof;
@@ -10,21 +8,22 @@ use nom::{IResult, Parser};
 
 pub fn block_p(mut input: Text) -> IResult<Text, Section> {
   input.extra = "block_p";
-  let metadata = Metadata {
-    attrs: vec![],
-    bound: Bound::Full,
-    flags: vec![],
-    r#type: "block".to_string(),
-  };
   let (input, span_strs) = many1(text_span).parse(input)?;
   let (input, _) = empty_lines_or_eof.parse(input)?;
-  let spans = span_strs
+  let content = span_strs
     .iter()
     .map(|x| Span::Text {
       content: x.to_string(),
+      kind: "span".to_string(),
     })
     .collect();
-  Ok((input, Section::PBlock { metadata, spans }))
+  Ok((
+    input,
+    Section::PBlock {
+      content,
+      r#type: "p".to_string(),
+    },
+  ))
 }
 
 #[cfg(test)]
@@ -41,10 +40,10 @@ mod tests {
     let input = Text::new_extra(content, "");
     let result = block_p.parse(input).unwrap().1;
     let left: Value = serde_json::from_str(target).unwrap();
-    if let Section::PBlock { ref spans, .. } = result {
+    if let Section::PBlock { ref content, .. } = result {
       assert_eq!(
         left,
-        serde_json::to_value(spans).unwrap(),
+        serde_json::to_value(content).unwrap(),
         "{}",
         format!("\n\n{:?}\n\n{:?}", input, result)
       );
@@ -60,10 +59,10 @@ mod tests {
     let input = Text::new_extra(content, "");
     let result = block_p.parse(input).unwrap().1;
     let left: Value = serde_json::from_str(target).unwrap();
-    if let Section::PBlock { ref spans, .. } = result {
+    if let Section::PBlock { ref content, .. } = result {
       assert_eq!(
         left,
-        serde_json::to_value(spans).unwrap(),
+        serde_json::to_value(content).unwrap(),
         "{}",
         format!("\n\n{:?}\n\n{:?}", input, result)
       );
@@ -79,10 +78,10 @@ mod tests {
     let input = Text::new_extra(content, "");
     let result = block_p.parse(input).unwrap().1;
     let left: Value = serde_json::from_str(target).unwrap();
-    if let Section::PBlock { ref spans, .. } = result {
+    if let Section::PBlock { ref content, .. } = result {
       assert_eq!(
         left,
-        serde_json::to_value(spans).unwrap(),
+        serde_json::to_value(content).unwrap(),
         "{}",
         format!("\n\n{:?}\n\n{:?}", input, result)
       );

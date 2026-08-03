@@ -29,6 +29,7 @@ pub fn section_flag(
       .join("")
       .trim()
       .to_string(),
+    kind: "span".to_string(),
   }]);
   Ok((input, flag))
 }
@@ -74,6 +75,7 @@ mod tests {
     let target2 =
       FlagOrAttr::SectionFlag(vec![Span::Text {
         content: target1.to_string(),
+        kind: "span".to_string(),
       }]);
     let input = Text::new_extra(content, "");
     let result = section_flag(input).unwrap();

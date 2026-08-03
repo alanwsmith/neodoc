@@ -35,7 +35,10 @@ pub fn section_attr(
   let (input, _) = opt(line_ending).parse(input)?;
   let flag = FlagOrAttr::SectionAttr {
     key: key.to_string(),
-    value: vec![Span::Text { content }],
+    value: vec![Span::Text {
+      content,
+      kind: "span".to_string(),
+    }],
   };
   Ok((input, flag))
 }
@@ -54,18 +57,14 @@ mod tests {
       key: target1.to_string(),
       value: vec![Span::Text {
         content: target2.to_string(),
+        kind: "span".to_string(),
       }],
     };
     let input = Text::new_extra(content, "");
     let result = section_attr(input).unwrap();
     let left = target3;
     let right = result.1;
-    assert_eq!(
-      left,
-      right,
-      // "{}",
-      // format!("\n\n{:?}\n\n{:?}", input, result.0)
-    );
+    assert_eq!(left, right,);
   }
 
   #[test]
@@ -77,18 +76,14 @@ mod tests {
       key: target1.to_string(),
       value: vec![Span::Text {
         content: target2.to_string(),
+        kind: "span".to_string(),
       }],
     };
     let input = Text::new_extra(content, "");
     let result = section_attr(input).unwrap();
     let left = target3;
     let right = result.1;
-    assert_eq!(
-      left,
-      right,
-      // "{}",
-      // format!("\n\n{:?}\n\n{:?}", input, result.0)
-    );
+    assert_eq!(left, right,);
   }
 
   #[test]
@@ -100,18 +95,14 @@ mod tests {
       key: target1.to_string(),
       value: vec![Span::Text {
         content: target2.to_string(),
+        kind: "span".to_string(),
       }],
     };
     let input = Text::new_extra(content, "");
     let result = section_attr(input).unwrap();
     let left = target3;
     let right = result.1;
-    assert_eq!(
-      left,
-      right,
-      // "{}",
-      // format!("\n\n{:?}\n\n{:?}", input, result.0)
-    );
+    assert_eq!(left, right,);
   }
 
   #[test]
@@ -124,18 +115,14 @@ mod tests {
       key: target1.to_string(),
       value: vec![Span::Text {
         content: target2.to_string(),
+        kind: "span".to_string(),
       }],
     };
     let input = Text::new_extra(content, "");
     let result = section_attr(input).unwrap();
     let left = target3;
     let right = result.1;
-    assert_eq!(
-      left,
-      right,
-      // "{}",
-      // format!("\n\n{:?}\n\n{:?}", input, result.0)
-    );
+    assert_eq!(left, right,);
   }
 
   //
