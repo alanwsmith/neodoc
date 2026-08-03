@@ -2,9 +2,9 @@ use crate::Text;
 use nom::character::complete::space1;
 use nom::{IResult, Parser};
 
-pub fn whitespace1(input: Text) -> IResult<Text, &str> {
+pub fn whitespace1(input: Text) -> IResult<Text, Text> {
   let (input, _) = space1.parse(input)?;
-  Ok((input, " "))
+  Ok((input, Text::new_extra(" ", "")))
 }
 
 #[cfg(test)]

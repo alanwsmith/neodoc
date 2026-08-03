@@ -14,7 +14,7 @@ pub enum Payload {
 
 pub fn payload(input: Text) -> IResult<Text, Payload> {
   let (input, sections) = many1(section).parse(input)?;
-  let payload = Payload::Ok { sections: vec![] };
+  let payload = Payload::Ok { sections };
   Ok((input, payload))
 }
 
@@ -35,12 +35,13 @@ mod tests {
 
   #[test]
   fn integration() {
-    let input =
-      Text::new_extra("prelude\nspacer target", "");
-
+    let input = Text::new_extra(
+      include_str!("tests/2/input.neo").trim(),
+      "",
+    );
     //    let input = include_str!("tests/1/input.neo").trim();
     let left: Value = serde_json::from_str(include_str!(
-      "tests/1/target.json"
+      "tests/2/target.json"
     ))
     .unwrap();
     let result = payload(input).unwrap();

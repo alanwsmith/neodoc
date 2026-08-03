@@ -4,9 +4,9 @@ use nom::character::complete::space1;
 use nom::sequence::pair;
 use nom::{IResult, Parser};
 
-pub fn section_token(input: Text) -> IResult<Text, &str> {
+pub fn section_token(input: Text) -> IResult<Text, Text> {
   let (input, _) = pair(tag("--"), space1).parse(input)?;
-  Ok((input, ""))
+  Ok((input, Text::new_extra("", "")))
 }
 
 #[cfg(test)]

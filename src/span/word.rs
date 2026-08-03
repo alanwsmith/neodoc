@@ -2,11 +2,11 @@ use crate::Text;
 use nom::bytes::complete::is_not;
 use nom::{IResult, Parser};
 
-pub fn word(input: Text) -> IResult<Text, &str> {
+pub fn word(input: Text) -> IResult<Text, Text> {
   let (input, result) =
     is_not("`~!@#$%^&*(){}[]<>:|_-= \n\r\t\\")
       .parse(input)?;
-  Ok((input, &result))
+  Ok((input, result))
 }
 
 #[cfg(test)]

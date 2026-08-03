@@ -21,9 +21,12 @@ pub fn metadata(
   bound: Bound,
   r#type: String,
 ) -> IResult<Text, Metadata> {
-  // let (input, items) =
-  //   many0(alt((section_flag, section_attr)))
-  //     .parse(input)?;
+  let (input, items) =
+    many0(alt((section_flag, section_attr)))
+      .parse(input)?;
+
+  dbg!(&items);
+
   // let attrs = items
   //   .clone()
   //   .into_iter()

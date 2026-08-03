@@ -3,12 +3,12 @@ use nom::character::complete::{line_ending, space0};
 use nom::combinator::not;
 use nom::{IResult, Parser};
 
-pub fn single_newline(input: Text) -> IResult<Text, &str> {
+pub fn single_newline(input: Text) -> IResult<Text, Text> {
   let (input, _) = space0.parse(input)?;
   let (input, _) = line_ending.parse(input)?;
   let (input, _) = space0.parse(input)?;
   let (input, _) = not(line_ending).parse(input)?;
-  Ok((input, " "))
+  Ok((input, Text::new_extra(" ", "")))
 }
 
 #[cfg(test)]

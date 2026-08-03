@@ -23,15 +23,17 @@ pub fn section_attr(
   let (input, _) = space1.parse(input)?;
   let (input, value) =
     many1(alt((word, single_newline))).parse(input)?;
-  // let (input, more_words) =
-  //   many0(alt((word, space1, single_newline)))
-  //     .parse(input)?;
+  let (input, more_words) =
+    many0(alt((word, space1, single_newline)))
+      .parse(input)?;
   let (input, _) = opt(line_ending).parse(input)?;
   //  let bits = vec![first_word];
+
+  dbg!(value);
   let flag = FlagOrAttr::SectionAttr {
     key: key.to_string(),
     value: vec![Span::Text {
-      content: value.join("").trim().to_string(),
+      content: "".to_string(), //      content: value.join("").trim().to_string(),
     }],
   };
   Ok((input, flag))

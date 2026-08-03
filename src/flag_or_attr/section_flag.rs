@@ -12,24 +12,59 @@ use nom::{IResult, Parser, multi::many0};
 pub fn section_flag(
   input: Text
 ) -> IResult<Text, FlagOrAttr> {
+  // dbg!(&input);
   let (input, _) = section_token.parse(input)?;
+  // dbg!(&input);
   let (input, first_word) = flag_first_word.parse(input)?;
-  // let (input, more_words) =
-  //   many0(alt((word, space1, single_newline)))
-  //     .parse(input)?;
+  // dbg!(&input);
+  // dbg!("HERE1");
+  //let (input, _) = space1.parse(input)?;
+  // dbg!("HERE2");
+  // dbg!(&input);
+
+  let (input, more_words) =
+    many0(alt((word, space1, single_newline)))
+      .parse(input)?;
+  // dbg!(&input);
+
+  // dbg!(&first_word);
+  // dbg!(&more_words);
+
   let (input, _) = opt(line_ending).parse(input)?;
-  let bits = vec![first_word];
+  let starter = vec![first_word];
+
+  // let testing_alfa = [starter, more_words]
+  //   .concat()
+  //   .into_iter()
+  //   .map(|x| *x.fragment())
+  //   .collect::<Vec<_>>()
+  //   .join("")
+  //   .trim()
+  //   .to_string();
+  // dbg!(testing_alfa);
+
+  let flag = FlagOrAttr::SectionFlag(vec![Span::Text {
+    content: [starter, more_words]
+      .concat()
+      .into_iter()
+      .map(|x| *x.fragment())
+      .collect::<Vec<_>>()
+      .join("")
+      .trim()
+      .to_string(),
+  }]);
+
   // let flag = FlagOrAttr::SectionFlag(vec![Span::Text {
-  //   content: [bits, more_words]
+  //   content: [starter, more_words]
   //     .concat()
   //     .join("")
   //     .trim()
   //     .to_string(),
   // }]);
+  //let tmp_flag = FlagOrAttr::SectionFlag(vec![]);
 
-  let tmp_flag = FlagOrAttr::SectionFlag(vec![]);
-
-  Ok((input, tmp_flag))
+  // Ok((input, tmp_flag))
+  Ok((input, flag))
 }
 
 #[cfg(test)]

@@ -1,0 +1,32 @@
+{
+  "ok": {
+    "sections": [
+      {
+        "kind": "p",
+        "metadata": {
+          "attrs": [],
+          "bound": "full",
+          "flags": [],
+          "type": "p"
+        },
+        "sections": [
+          {
+            "kind": "block",
+            "metadata": {
+              "attrs": [],
+              "bound": "full",
+              "flags": [],
+              "type": "block"
+            },
+            "spans": [
+              {
+                "kind": "text",
+                "content": "hello world"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
