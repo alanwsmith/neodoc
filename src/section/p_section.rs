@@ -8,7 +8,10 @@ use nom::multi::many0;
 use nom::sequence::pair;
 use nom::{IResult, Parser};
 
-pub fn p_section(input: Text) -> IResult<Text, Section> {
+pub fn p_section(
+  mut input: Text
+) -> IResult<Text, Section> {
+  input.extra = "p_section";
   let (input, _) = section_token.parse(input)?;
   let (input, _) = tag("p").parse(input)?;
   let (input, _) =
@@ -18,6 +21,8 @@ pub fn p_section(input: Text) -> IResult<Text, Section> {
   let (input, metadata) = metadata.parse(input)?;
   let (input, _) = empty_lines_or_eof.parse(input)?;
   let (input, content) = many0(block_p).parse(input)?;
+
+  //  let (input, _) = empty_lines_or_eof.parse(input)?;
 
   // let t = "p";
   // let (input, md) = {
@@ -42,6 +47,7 @@ pub fn p_section(input: Text) -> IResult<Text, Section> {
 #[cfg(test)]
 mod tests {
   use super::*;
+  use crate::parsing_report::*;
   use pretty_assertions::assert_eq;
   use rstest::rstest;
   use serde_json::Value;
@@ -51,10 +57,40 @@ mod tests {
     "paragraph with no type with single block at end of file",
     "-- p\n\nalfa",
     r#"{ 
-      "attrs": [], "bound": "full",
+      "attrs": [], 
+      "bound": "full",
       "content": [
         {
-          "content": [ {"content": "alfa", "kind": "span", "type": "text"} ],
+          "content": [ 
+            {"content": "alfa", "kind": "span", "type": "text"} 
+          ],
+          "kind": "block",
+          "type": "block"
+        }
+      ],
+      "flags": [], 
+      "kind": "p", 
+      "type": "p" 
+    }"#
+  )]
+  #[case(
+    "paragraph with multiple blocks",
+    "-- p\n\nalfa bravo\ncharlie delta\n\necho foxtrot\ngolf hotel",
+    r#"{ 
+      "attrs": [], 
+      "bound": "full",
+      "content": [
+        {
+          "content": [ 
+            { "content": "alfa bravo charlie delta", "kind": "span", "type": "text"}
+          ],
+          "kind": "block",
+          "type": "block"
+        },
+        {
+          "content": [ 
+            { "content": "echo foxtrot golf hotel", "kind": "span", "type": "text"}
+          ],
           "kind": "block",
           "type": "block"
         }
@@ -68,7 +104,8 @@ mod tests {
     "paragraph section with flag at end of file",
     "-- p\n-- alfa",
     r#"{ 
-      "attrs": [], "bound": "full",
+      "attrs": [], 
+      "bound": "full",
       "content": [],
       "flags": [
         [ { "content": "alfa", "kind": "span", "type": "text" } ]
@@ -80,77 +117,43 @@ mod tests {
   #[case(
     "paragraph section with flag followed by content",
     "-- p\n-- alfa\n\nbravo",
-    r#"{ 
-      "attrs": [], "bound": "full",
+    r#"{
+      "attrs": [],
+      "bound": "full",
       "content": [
         {
           "content": [
-            {
-              "content": "bravo",
-              "kind": "span",
-              "type": "text"
-            }
+            { "content": "bravo", "kind": "span", "type": "text" }
           ],
           "kind": "block",
           "type": "block"
         }
       ],
       "flags": [
-        [ { "content": "alfa", "kind": "span", "type": "text" } ]
-      ], 
-      "kind": "p", 
-      "type": "p" 
+        [
+          { "content": "alfa", "kind": "span", "type": "text" }
+        ]
+      ],
+      "kind": "p",
+      "type": "p"
     }"#
   )]
-
   fn p_section_runner(
     #[case] description: &str,
     #[case] content: &str,
     #[case] target1: &str,
   ) {
+    // dbg!(&description);
     let input = Text::new_extra(content, "");
     let target2: Value =
       serde_json::from_str(target1).unwrap();
-    let result = p_section(input).unwrap();
+    let result = p_section(input);
+    // report_section(result);
     let left = target2;
-    let right = serde_json::to_value(result.1).unwrap();
+    let right =
+      serde_json::to_value(result.unwrap().1).unwrap();
     assert_eq!(left, right, "{}", description);
   }
-
-  // #[test]
-  // fn p_section_with_flag() {
-  //   let content = "-- p\n-- bravo\n\ncharlie";
-  //   let input = Text::new_extra(content, "");
-  //   let left: Value = serde_json::from_str(
-  //     r#"{
-  //     "kind": "p",
-  //     "metadata": {
-  //       "bound": "full",
-  //       "attrs": [],
-  //       "flags": [
-  //         [ { "kind": "text", "content": "bravo"} ]
-  //       ],
-  //       "type": "p"
-  //     },
-  //     "sections": [
-  //       {
-  //       "kind": "block",
-  //       "metadata": {
-  //         "attrs": [],
-  //         "bound": "full",
-  //         "flags": [],
-  //         "type": "block"
-  //       },
-  //       "spans": [ {"kind": "text", "content": "charlie" } ]
-  //       }
-  //     ]
-  //     }"#,
-  //   )
-  //   .unwrap();
-  //   let right =
-  //     serde_json::to_value(p(input).unwrap().1).unwrap();
-  //   assert_eq!(left, right);
-  // }
 
   //
 }

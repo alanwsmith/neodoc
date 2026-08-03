@@ -1,6 +1,7 @@
 pub mod block;
 pub mod bound;
 pub mod flag_or_attr;
+pub mod parsing_report;
 pub mod payload;
 pub mod section;
 pub mod span;
