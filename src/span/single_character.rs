@@ -432,4 +432,188 @@ fn test_single_equal_sign() {
       assert_eq!(&left, right);
     }
                  
+
+#[test]
+fn test_single_backtic_error() {
+    let content = "``";
+    let input = Text::new_extra(content, "");
+    assert!(single_backtic(input).is_err());
+    }
+                 
+
+#[test]
+fn test_single_tilde_error() {
+    let content = "~~";
+    let input = Text::new_extra(content, "");
+    assert!(single_tilde(input).is_err());
+    }
+                 
+
+#[test]
+fn test_single_exclamation_error() {
+    let content = "!!";
+    let input = Text::new_extra(content, "");
+    assert!(single_exclamation(input).is_err());
+    }
+                 
+
+#[test]
+fn test_single_at_sing_error() {
+    let content = "@@";
+    let input = Text::new_extra(content, "");
+    assert!(single_at_sing(input).is_err());
+    }
+                 
+
+#[test]
+fn test_single_octothorpe_error() {
+    let content = "##";
+    let input = Text::new_extra(content, "");
+    assert!(single_octothorpe(input).is_err());
+    }
+                 
+
+#[test]
+fn test_single_dollar_sign_error() {
+    let content = "$$";
+    let input = Text::new_extra(content, "");
+    assert!(single_dollar_sign(input).is_err());
+    }
+                 
+
+#[test]
+fn test_single_percent_sign_error() {
+    let content = "%%";
+    let input = Text::new_extra(content, "");
+    assert!(single_percent_sign(input).is_err());
+    }
+                 
+
+#[test]
+fn test_single_caret_error() {
+    let content = "^^";
+    let input = Text::new_extra(content, "");
+    assert!(single_caret(input).is_err());
+    }
+                 
+
+#[test]
+fn test_single_ampersand_error() {
+    let content = "&&";
+    let input = Text::new_extra(content, "");
+    assert!(single_ampersand(input).is_err());
+    }
+                 
+
+#[test]
+fn test_single_astrisk_error() {
+    let content = "**";
+    let input = Text::new_extra(content, "");
+    assert!(single_astrisk(input).is_err());
+    }
+                 
+
+#[test]
+fn test_single_open_paren_error() {
+    let content = "((";
+    let input = Text::new_extra(content, "");
+    assert!(single_open_paren(input).is_err());
+    }
+                 
+
+#[test]
+fn test_single_close_paren_error() {
+    let content = "))";
+    let input = Text::new_extra(content, "");
+    assert!(single_close_paren(input).is_err());
+    }
+                 
+
+#[test]
+fn test_single_open_curly_bracket_error() {
+    let content = "{{";
+    let input = Text::new_extra(content, "");
+    assert!(single_open_curly_bracket(input).is_err());
+    }
+                 
+
+#[test]
+fn test_single_close_curly_bracket_error() {
+    let content = "}}";
+    let input = Text::new_extra(content, "");
+    assert!(single_close_curly_bracket(input).is_err());
+    }
+                 
+
+#[test]
+fn test_single_open_bracket_error() {
+    let content = "[[";
+    let input = Text::new_extra(content, "");
+    assert!(single_open_bracket(input).is_err());
+    }
+                 
+
+#[test]
+fn test_single_close_bracket_error() {
+    let content = "]]";
+    let input = Text::new_extra(content, "");
+    assert!(single_close_bracket(input).is_err());
+    }
+                 
+
+#[test]
+fn test_single_less_than_error() {
+    let content = "<<";
+    let input = Text::new_extra(content, "");
+    assert!(single_less_than(input).is_err());
+    }
+                 
+
+#[test]
+fn test_single_greater_than_error() {
+    let content = ">>";
+    let input = Text::new_extra(content, "");
+    assert!(single_greater_than(input).is_err());
+    }
+                 
+
+#[test]
+fn test_single_colon_error() {
+    let content = "::";
+    let input = Text::new_extra(content, "");
+    assert!(single_colon(input).is_err());
+    }
+                 
+
+#[test]
+fn test_single_pipe_error() {
+    let content = "||";
+    let input = Text::new_extra(content, "");
+    assert!(single_pipe(input).is_err());
+    }
+                 
+
+#[test]
+fn test_single_underscore_error() {
+    let content = "__";
+    let input = Text::new_extra(content, "");
+    assert!(single_underscore(input).is_err());
+    }
+                 
+
+#[test]
+fn test_single_hyphen_error() {
+    let content = "--";
+    let input = Text::new_extra(content, "");
+    assert!(single_hyphen(input).is_err());
+    }
+                 
+
+#[test]
+fn test_single_equal_sign_error() {
+    let content = "==";
+    let input = Text::new_extra(content, "");
+    assert!(single_equal_sign(input).is_err());
+    }
+                 
 }

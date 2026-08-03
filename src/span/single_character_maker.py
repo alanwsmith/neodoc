@@ -98,13 +98,15 @@ fn test_single_{char[1]}() {{
     }}
                  """)
 
-#for char in chars:
-#    lines.append(f"""
-##[test]
-#fn test_single_{char[1]}_error() {{
-#      assert!(single_{char[1]}("{char[0]}{char[0]}").is_err());
-#    }}
-#                 """)
+for char in chars:
+    lines.append(f"""
+#[test]
+fn test_single_{char[1]}_error() {{
+    let content = "{char[0]}{char[0]}";
+    let input = Text::new_extra(content, "");
+    assert!(single_{char[1]}(input).is_err());
+    }}
+                 """)
 
 lines.append("""}""")
 
