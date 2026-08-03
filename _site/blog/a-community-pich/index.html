@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/default.css" />
+    <script type="module" src="&#x2f;scripts.raw&#x2f;bitty&#x2f;bitty-9.0.0-beta1.source.js"></script>
+    <style>
+    body {
+      background-color: black;
+      color: #ccc;
+    }
+    </style>
+
+
+
+
+
+
+
+<title>neodoc.style</title>
+<meta property="og:title" content="neodoc.style" />
+<meta name="description" content="from neodoc.style" />
+<meta property="og:description" content="from neodoc.style" />
+
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https:&#x2f;&#x2f;neodoc.style/templates.inc/metadata/" />
+<meta property="og:image" content="https:&#x2f;&#x2f;neodoc.style/og-image.jpg" />
+
+
+
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+<link rel="shortcut icon" href="/favicon/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="neodoc.style" />
+
+  </head>
+  <body>
+<header class="default">
+  <div class="left-right">
+    <div>
+  <a href="/">NeoDoc.Style</a>
+
+  -
+
+  <a href="/blog/">blog</a>
+
+  -
+
+  <a href="/todo/">todo</a>
+
+      </div>
+    <div>
+
+  <a href="https://bsky.app/profile/neodoc.style">@neodoc.style</a>
+    </div>
+    </div>
+</header>    
+<main class="default default-flow">
+  <hgroup>
+    <h1></h1>
+  </hgroup>
+
+<pre class="tmp-neo">-- prelude
+
+This is the contents of the post
+I wrote to start a thread on 
+>>discourse.atmosphere.community|
+https://discourse.atmosphere.community>>
+to start a discussion about NeoDoc.
+
+
+-- tldr
+
+I designed a content format to replace 
+Markdown. It lets you add attributes to 
+content. You can do all kinds of stuff 
+with them without having to mess with HTML.
+
+I've been using it on my site for the 
+past few years. I think it would work 
+great as an interoperable content format 
+for the atmosphere (the goal being to help 
+ensure the stuff we make is as portable 
+as possible). So, I'm offering it up.
+
+You can learn more about it at
+>>neodoc.style|https://neodoc.style/>>
+
+
+-- title
+
+A Community Pitch
+
+Hey folks,
+
+I've been on Bluesky for a bit. It's only 
+recently that I learned enough about the 
+Atmosphere to start getting what it's about. 
+I don't remember the last time I was this 
+excited about new tech. 
+
+I saw standard.site kicking around a couple 
+weeks ago. I jumped on it^^1^^. It's the kind 
+of stuff I dream about^^2^^. 
+
+One thing the leaflet post^^3^^ on standard.site 
+mentions is it's not a content standard. 
+The only post^^4^^ I've seen on a content 
+standard for the Atmosphere has to do with 
+a wordpress lexicon for publishing HTML. 
+
+I submit that HTML could work as a standardized 
+content format. It's a battle tested standard 
+that renders natively in browsers without 
+modification. There are a couple things to 
+recommend against it, though.
+
+
+-- numbered
+
+1. It's not friendly to writing by hand. 
+Unless you're hard-core it's not something 
+most folks are into. Tooling would be necessary 
+to convert content from plain-text into HTML 
+before storage. 
+
+2. It's tough to standardize content types. 
+Microformats^^5^^ were an attempt. They never 
+took off. That's at least partially because they 
+lock the data into the rendering layer. Sure, 
+you can do all kinds of things with CSS, but 
+you have to set up a parser if you want to use 
+the data independently. 
+
+
+-- p
+
+Markdown is another option. It's easy to learn 
+and already has huge market share in the 
+developer community. It's great for blog posts, 
+but kinda sucks for anything beyond. (I mean,
+you can always roll your own HTML, but that
+justs add the complexity of dealing with 
+HTML on to the handling. 
+
+Markdown also lacks the ability to add 
+metadata to content. For example, say you 
+to apply a custom style to one of the ``H2`` 
+elements on a page. There's no mechanism to 
+do that in native Markdown. You have to 
+switch to inline HTML.
+
+
+
+
+
+
+-- footnote
+-- id: 1
+
+I've still got some work to do to get 
+standard.site connections up and running 
+for my site. The requiremnet to veirfy
+every page individually is a non-trivial
+amount or work that I don't have the
+spoons for. 
+
+
+-- footnote
+-- id: 2
+
+>>A Vision For The Web|
+https://www.alanwsmith.com/en/2v/xa/cn/vj/>>
+(originally titled "A Website Manifesto") 
+is a draft where I was kicking around ideas 
+for a more interconnected web. 
+
+Basically, I was trying to figure out
+how to build the Atmosphere using
+RSS. Not something that needs to happen
+given the existance of the Atmosphere
+itself. 
+
+
+-- footnote
+-- id: 3
+
+>>Leaflet, standard.site, and open social publishing!
+|https://lab.leaflet.pub/3md4qsktbms24>>
+
+
+-- footnote
+-- id: 4
+
+>>Automatically syncing your blog to atproto 
+and standard.site|
+https://jola.dev/posts/automatically-syncing-your-blog-atproto-standard-site>>
+is the post that mentions the wordpress 
+HTML lexicon. 
+
+At least, I think it's in reference to a lexicon. 
+I don't yet know where to look to figure that out. 
+
+
+-- footnote
+-- id: 5
+
+>>Microformats|https://indieweb.org/microformats>>
+
+The IndieWeb's attempt at standardization content
+that never quite made.
+
+
+
+
+</pre></main>
+
+
+
+
+
+<footer class="default">
+  &copy; 2026 <a href="https://bsky.app/profile/neodoc.style">NeoDoc.Style</a>
+</footer>
+    <div>
+    </div>
+    <div class="page-templates" hidden>
+      <bitty-9 data-connect="/bits.raw/default.js"></bitty-9>
+    </div>
+  </body>
+</html>

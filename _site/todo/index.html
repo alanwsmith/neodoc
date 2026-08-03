@@ -109,6 +109,68 @@ organization. I'm simply throwing
 stuff at the top of the list as they 
 come do mind.
 
+[] Store all the templates for each
+app, author, and content piece
+in a single record with key
+values pairs for the name so they
+can be fetched with a single call. 
+
+
+[] Probably don't include the ability
+to add template instructions in the
+first version. That adds a ton
+of complexity and requirement for
+the parsing and processing. 
+
+By dropping it, there's no need
+to do the reprocessing and loading
+external data, etc.
+
+The goal with adding that is to make
+it easier to build full web sites
+off the storage. That should
+be a secondary goal/project. 
+
+(Templates will still be applied
+to the neodoc files. They just
+won't be able to have neojinja
+instructions in them directly)
+
+[] If there are errors on a page it
+should do everything possible to render 
+as much as possible including
+a solid error message. 
+
+[] Errors across all files are
+be collected and linked to when
+a full site is built 
+
+[] Errors are cascaded back. For example,
+if a function that doesn't exist
+is called in a for loop the first
+thing that's reported is the function. 
+An internal version of the page
+is generated up to the point where
+the error occurred and another attempt
+is made. Since the end of the for 
+loop will have been removed by
+truncating the file it will case
+a new error. This is the second
+one reported. And so on until
+some portion of the page
+renders and the error stack
+can be displayed. 
+
+TBD on the default output for
+errors. Probably a ``details``
+section that's collapsed
+with a list of the errors inside
+with the content of each one
+inside another ``details``
+section so it's not as
+overwhelming when you first
+open it. 
+
 [] Standard sections to consider
 beyond the ones I already use:
 ``-- postscript``. 
@@ -669,7 +731,10 @@ via: >>https://bsky.app/profile/did:plc:revjuqmkvrw6fnkxppqtszpv>>
 
 <footer class="default">
   &copy; 2026 <a href="https://bsky.app/profile/neodoc.style">NeoDoc.Style</a>
-</footer>    <div class="page-templates" hidden>
+</footer>
+    <div>
+    </div>
+    <div class="page-templates" hidden>
       <bitty-9 data-connect="/bits.raw/default.js"></bitty-9>
     </div>
   </body>
