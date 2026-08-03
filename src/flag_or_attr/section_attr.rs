@@ -64,21 +64,51 @@ mod tests {
     );
   }
 
-  // #[test]
-  // fn section_attr_2() {
-  //   let input = "-- alfa: bravo\n";
-  //   let left = (
-  //     "",
-  //     FlagOrAttr::SectionAttr {
-  //       key: "alfa".to_string(),
-  //       value: vec![Span::Text {
-  //         content: "bravo".to_string(),
-  //       }],
-  //     },
-  //   );
-  //   let right = section_attr.parse(input).unwrap();
-  //   assert_eq!(left, right);
-  // }
+  #[test]
+  fn section_attr_with_trailing_metadata() {
+    let content = "-- alfa: bravo\n-- x";
+    let target1 = "alfa";
+    let target2 = "bravo";
+    let target3 = FlagOrAttr::SectionAttr {
+      key: target1.to_string(),
+      value: vec![Span::Text {
+        content: target2.to_string(),
+      }],
+    };
+    let input = Text::new_extra(content, "");
+    let result = section_attr(input).unwrap();
+    let left = target3;
+    let right = result.1;
+    assert_eq!(
+      left,
+      right,
+      // "{}",
+      // format!("\n\n{:?}\n\n{:?}", input, result.0)
+    );
+  }
+
+  #[test]
+  fn section_attr_multi_line_with_trailing_content() {
+    let content = "-- alfa: bravo\ncharlie\n\nx";
+    let target1 = "alfa";
+    let target2 = "bravo charlie";
+    let target3 = FlagOrAttr::SectionAttr {
+      key: target1.to_string(),
+      value: vec![Span::Text {
+        content: target2.to_string(),
+      }],
+    };
+    let input = Text::new_extra(content, "");
+    let result = section_attr(input).unwrap();
+    let left = target3;
+    let right = result.1;
+    assert_eq!(
+      left,
+      right,
+      // "{}",
+      // format!("\n\n{:?}\n\n{:?}", input, result.0)
+    );
+  }
 
   // #[test]
   // fn section_attr_3() {
