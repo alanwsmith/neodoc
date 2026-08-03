@@ -74,11 +74,26 @@ mod tests {
   use rstest::rstest;
 
   #[rstest]
-  #[case("-- alfa", "alfa")]
-  #[case("-- alfa bravo charlie", "alfa bravo charlie")]
+  #[case("-- alfa", "alfa", "single word section flag")]
+  #[case(
+    "-- alfa bravo charlie",
+    "alfa bravo charlie",
+    "multi word section flag"
+  )]
+  #[case(
+    "-- alfa bravo \n-- charlie",
+    "alfa bravo",
+    "section flag with more metadata below it"
+  )]
+  #[case(
+    "-- alfa bravo\ncharlie delta",
+    "alfa bravo charlie delta",
+    "multi line section flag"
+  )]
   fn section_flag_runner(
     #[case] content: &str,
     #[case] target1: &str,
+    #[case] description: &str,
   ) {
     let target2 =
       FlagOrAttr::SectionFlag(vec![Span::Text {
@@ -88,53 +103,7 @@ mod tests {
     let result = section_flag(input).unwrap();
     let left = target2;
     let right = result.1;
-    assert_eq!(left, right,);
-  }
-
-  #[test]
-  fn section_flag_multiple_words() {
-    let content = "-- alfa bravo charlie";
-    let target1 = "alfa bravo charlie";
-    let target2 =
-      FlagOrAttr::SectionFlag(vec![Span::Text {
-        content: target1.to_string(),
-      }]);
-    let input = Text::new_extra(content, "");
-    let result = section_flag(input).unwrap();
-    let left = target2;
-    let right = result.1;
-    assert_eq!(left, right,);
-  }
-
-  #[test]
-  fn section_flag_multiple_words_followed_by_more_metadata()
-  {
-    let content = "-- alfa bravo \n-- charlie";
-    let target1 = "alfa bravo";
-    let target2 =
-      FlagOrAttr::SectionFlag(vec![Span::Text {
-        content: target1.to_string(),
-      }]);
-    let input = Text::new_extra(content, "");
-    let result = section_flag(input).unwrap();
-    let left = target2;
-    let right = result.1;
-    assert_eq!(left, right,);
-  }
-
-  #[test]
-  fn section_flag_multiple_lines() {
-    let content = "-- alfa bravo\ncharlie delta";
-    let target1 = "alfa bravo charlie delta";
-    let target2 =
-      FlagOrAttr::SectionFlag(vec![Span::Text {
-        content: target1.to_string(),
-      }]);
-    let input = Text::new_extra(content, "");
-    let result = section_flag(input).unwrap();
-    let left = target2;
-    let right = result.1;
-    assert_eq!(left, right,);
+    assert_eq!(left, right, "{}", description);
   }
 
   // #[test]
