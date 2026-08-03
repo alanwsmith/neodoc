@@ -50,23 +50,14 @@ mod tests {
   #[case(
     "paragraph with no type with single block at end of file",
     "-- p\n\nalfa",
-    r#"
-{
-  "attrs": [],
-  "bound": "full",
-  "content": [
-    {
+    r#"{ 
+    "attrs": [], "bound": "full",
+    "content": [{
       "kind": "block",
-      "content": [
-        {"content": "alfa", "kind": "span", "type": "text"}
-      ],
+      "content": [ {"content": "alfa", "kind": "span", "type": "text"} ],
       "type": "p"
-    }
-  ],
-  "flags": [],
-  "kind": "p",
-  "type": "p"
-}"#
+    }],
+    "flags": [], "kind": "p", "type": "p" }"#
   )]
   fn p_section_runner(
     #[case] description: &str,
@@ -81,41 +72,6 @@ mod tests {
     let right = serde_json::to_value(result.1).unwrap();
     assert_eq!(left, right, "{}", description);
   }
-
-  // #[test]
-  // fn p_section_basic() {
-  //   dbg!("HERE1");
-  //   let input = "-- p\n\nalfa";
-  //   let left: Value = serde_json::from_str(
-  //     r#"{
-  //     "kind": "p",
-  //     "metadata": {
-  //       "bound": "full",
-  //       "attrs": [],
-  //       "flags": [],
-  //       "type": "p"
-  //     },
-  //     "sections": [
-  //       {
-  //       "kind": "block",
-  //       "metadata": {
-  //         "attrs": [],
-  //         "bound": "full",
-  //         "flags": [],
-  //         "type": "block"
-  //       },
-  //       "spans": [ {"kind": "text", "content": "alfa" } ]
-  //       }
-  //     ]
-  //     }"#,
-  //   )
-  //   .unwrap();
-  //   let right = serde_json::to_value(
-  //     p(Text::new_extra(input, "")).unwrap().1,
-  //   )
-  //   .unwrap();
-  //   assert_eq!(left, right);
-  // }
 
   // #[test]
   // fn p_section_with_flag() {
