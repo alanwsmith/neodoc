@@ -71,11 +71,11 @@ pub fn section_flag(
 mod tests {
   use super::*;
   use pretty_assertions::assert_eq;
-  use serde_json;
-  use serde_json::Value;
+  // use serde_json;
+  // use serde_json::Value;
 
   #[test]
-  fn section_flag_1() {
+  fn section_flag_singe_word() {
     let content = "-- alfa";
     let target1 = "alfa";
     let target2 =
@@ -86,39 +86,38 @@ mod tests {
     let result = section_flag(input).unwrap();
     let left = target2;
     let right = result.1;
-    assert_eq!(
-      left,
-      right,
-      // "{}",
-      // format!("\n\n{:?}\n\n{:?}", input, result.0)
-    );
+    assert_eq!(left, right,);
   }
 
-  // #[test]
-  // fn section_flag_1() {
-  //   let right = serde_json::to_value(
-  //     section_flag("-- alfa").unwrap().1,
-  //   )
-  //   .unwrap();
-  //   let left: Value = serde_json::from_str(
-  //     r#"[{ "kind": "text", "content": "alfa" }]"#,
-  //   )
-  //   .unwrap();
-  //   assert_eq!(left, right);
-  // }
+  #[test]
+  fn section_flag_multiple_words() {
+    let content = "-- alfa bravo charlie";
+    let target1 = "alfa bravo charlie";
+    let target2 =
+      FlagOrAttr::SectionFlag(vec![Span::Text {
+        content: target1.to_string(),
+      }]);
+    let input = Text::new_extra(content, "");
+    let result = section_flag(input).unwrap();
+    let left = target2;
+    let right = result.1;
+    assert_eq!(left, right,);
+  }
 
-  // #[test]
-  // fn section_flag_2() {
-  //   let right = serde_json::to_value(
-  //     section_flag("-- alfa bravo").unwrap().1,
-  //   )
-  //   .unwrap();
-  //   let left: Value = serde_json::from_str(
-  //     r#"[{ "kind": "text", "content": "alfa bravo" }]"#,
-  //   )
-  //   .unwrap();
-  //   assert_eq!(left, right);
-  // }
+  #[test]
+  fn section_flag_multiple_lines() {
+    let content = "-- alfa bravo\ncharlie delta";
+    let target1 = "alfa bravo charlie delta";
+    let target2 =
+      FlagOrAttr::SectionFlag(vec![Span::Text {
+        content: target1.to_string(),
+      }]);
+    let input = Text::new_extra(content, "");
+    let result = section_flag(input).unwrap();
+    let left = target2;
+    let right = result.1;
+    assert_eq!(left, right,);
+  }
 
   // #[test]
   // fn section_flag_3() {
