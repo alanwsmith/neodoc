@@ -229,30 +229,30 @@ HTML. The format breaks down like this:
 
 - NeoDocs are built from sections. Each 
 one starts with two dashes and a name. For 
-example, we're currently in a ``list`` 
+example, we're currently in a <span class="token">``</span><span class="tmp-code">list</span><span class="token">``</span>
 section. 
 
-Section names that don't end with a ``/``
+Section names that don't end with a <span class="token">``</span><span class="tmp-code">/</span><span class="token">``</span>
 keep going until the next section starts. 
 
-Section names that have a ``/`` at the end
+Section names that have a <span class="token">``</span><span class="tmp-code">/</span><span class="token">``</span>at the end
 can wrap other sections. They go until they 
 hit the matching tag that closes them 
-(e.g. the ``-- /list`` for this section 
+(e.g. the <span class="token">``</span><span class="tmp-code">-- /list</span><span class="token">``</span>for this section 
 that you'll see below).
 
 - Sections can have attributes like the
-``-- h3: The Details`` above. They're
+<span class="token">``</span><span class="tmp-code">-- h3: The Details</span><span class="token">``</span>above. They're
 available during rendering to do thing
-like adding an ``H3`` tag with specific 
+like adding an <span class="token">``</span><span class="tmp-code">H3</span><span class="token">``</span>tag with specific 
 text above a list (which is what this one 
 does when this page is rendered to HTML).
 
 - There's a pre-defined set of sections like:
-``list``, ``checklist``, and ``numbered``. 
+<span class="token">``</span><span class="tmp-code">list</span><span class="token">``</span>, <span class="token">``</span><span class="tmp-code">checklist</span><span class="token">``</span>, and <span class="token">``</span><span class="tmp-code">numbered</span><span class="token">``</span>. 
 You can also make ad hoc sections simply by 
 naming them. For example, you can make a 
-``-- book-review`` section.
+<span class="token">``</span><span class="tmp-code">-- book-review</span><span class="token">``</span>section.
 
 - Custom sections can have attributes just 
 like the pre-defined ones. So, we can make 
@@ -275,13 +275,13 @@ a book review like this:
 - Inline formatting and shorthands are
 available for spans of text. For example, 
 you can wrap text in asterisks that
-convert to HTML ``strong`` tags during
+convert to HTML <span class="token">``</span><span class="tmp-code">strong</span><span class="token">``</span>tags during
 rendering like:
 
 <strong>**Alfa Bravo Charlie**</strong>
 
 - Inline spans can also have attributes. 
-For example, here's a ``class`` attribute 
+For example, here's a <span class="token">``</span><span class="tmp-code">class</span><span class="token">``</span>attribute 
 with the strong shorthand syntax:
 
 <span class="green">**Alfa Bravo Charlie | class: green**</span>
@@ -357,7 +357,7 @@ and attribute approach NeoDoc uses effectively
 turn content into a free-form database. 
 
 For example, you can aggregate all your
-``-- book-review`` content in one place. 
+<span class="token">``</span><span class="tmp-code">-- book-review</span><span class="token">``</span>content in one place. 
 Or, build something like Goodreads by 
 watching the firehose for those sections 
 and building social features around them
