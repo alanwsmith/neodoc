@@ -6,6 +6,12 @@
   color: #886;
 }
 
+.green {
+  color: green;
+  font-weight: 900;
+}
+
 strong {
   color: white;
 }
+
