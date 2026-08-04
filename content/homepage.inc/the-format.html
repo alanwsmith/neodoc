@@ -95,19 +95,37 @@ with a status associated with them.
 - json - a JSON object. 
 
 - list - a list that uses bullets for
-each item. 
+  each item. 
+
+- markdown - for transforming 
+  markdown content
 
 - numbered - a list that uses numbers
-for each item. 
+  for each item. 
 
 - p - paragraph based content. 
 
 - raw - a raw block of text with 
-no addition processing. 
+  no addition processing. 
 
-Using a section type for the name of
+  Using a section type for the name of
   a section works too. For example, 
   creating a generic numbered list is done with:
+
+- yaml - for turning chunks of yaml
+  into a data object.
+
+
+(Plugins are under consideration, but they
+  add a bunch of complexity and security concerns.
+  They'd also increase the burden on apps
+  who would have to deal with their own
+  security decisions and installations. 
+  Apps could decided not to allow plugins
+  which means fundamental rendering differences
+  would occur. So, the current thinking
+  is plugins won't be part of the spec)
+
 
 == filter highlight("neo", class="code-block")
 -- numbered 
@@ -124,15 +142,15 @@ There are also a few section names
 
 - code
 
-- css 
-
 - html
-
-- script
 
 - math
 
 - pre
+
+- script
+
+- style
 
 - svg 
 
@@ -140,7 +158,7 @@ There are also a few section names
 
 - textarea 
 
-  == endfilter
+== endfilter
 
 </details>
 

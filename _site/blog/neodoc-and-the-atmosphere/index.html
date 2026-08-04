@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/default.css" />
+    <script type="module" src="&#x2f;scripts.raw&#x2f;bitty&#x2f;bitty-9.0.0-beta1.source.js"></script>
+    <style>
+    body {
+      background-color: black;
+      color: #ccc;
+    }
+    </style>
+
+
+<style>
+    .token {
+  color: #555;
+}
+
+.tmp-code {
+  color: #886;
+}
+
+strong {
+  color: white;
+}
+    </style>
+
+
+
+
+
+<title>neodoc.style</title>
+<meta property="og:title" content="neodoc.style" />
+<meta name="description" content="from neodoc.style" />
+<meta property="og:description" content="from neodoc.style" />
+
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https:&#x2f;&#x2f;neodoc.style/templates.inc/metadata/" />
+<meta property="og:image" content="https:&#x2f;&#x2f;neodoc.style/og-image.jpg" />
+
+
+
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+<link rel="shortcut icon" href="/favicon/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="neodoc.style" />
+
+  </head>
+  <body>
+<header class="default">
+  <div class="left-right">
+    <div>
+  <a href="/">NeoDoc.Style</a>
+
+  -
+
+  <a href="/blog/">blog</a>
+
+  -
+
+  <a href="/todo/">todo</a>
+
+      </div>
+    <div>
+
+  <a href="https://bsky.app/profile/neodoc.style">@neodoc.style</a>
+    </div>
+    </div>
+</header>    
+<main class="default default-flow">
+  <hgroup>
+    <h1></h1>
+  </hgroup>
+
+<pre class="tmp-neo"><strong>-- prelude</strong>
+
+This post was originally published on
+<span class="token">>></span><a href="https://discourse.atmosphere.community"> discourse.atmosphere.community</a><span class="token"> 
+| https://discourse.atmosphere.community >></span>
+It's copied here for the sake of posterity. 
+
+
+<strong>-- tldr</strong>
+
+I believe content portability is critical 
+to fulfill the promise of a decentralized 
+internet. After all, being able to move your 
+content doesn't do much good if no one else 
+can use it. You're implicitly locked-in, even 
+if you seemingly have control<sup class="footnote-link" id="footnote-link-control"><span class="token">^^</span><a href="#footnote-ref-control">control</a><span class="token">^^</span></sup>.
+
+A few years ago, I designed a plain-text 
+content format to replace Markdown on 
+<span class="token">>></span><a href="https://links.alanwsmith.com/"> my sites</a><span class="token"> | https://links.alanwsmith.com/ >></span>
+It's called NeoDoc and it offers a potential 
+solution for portable, human-readable content 
+in the Atmosphere.
+
+You can learn more about it at
+<span class="token">>></span><a href="https://neodoc.style/"> neodoc.style</a><span class="token"> | https://neodoc.style/ >></span>
+
+(You can also check out a version of this
+post with syntax highlighting and active
+footnotes <span class="token">>> </span><a href="https://neodoc.style/blog/neodoc-and-the-atmosphere/">here</a><span class="token"> |
+https://neodoc.style/blog/neodoc-and-the-atmosphere/ >></span>)
+
+
+<strong>-- title</strong>
+
+NeoDoc and The Atmosphere
+
+Hey folks,
+
+While I've been on Bluesky for a bit, I 
+didn't really know about the Atmosphere until 
+recently. The more I learn about it, the more 
+it has my attention. I don't remember the 
+last time I was this excited about new tech. 
+
+My introduction was standard.site<sup class="footnote-link" id="footnote-link-standard"><span class="token">^^</span><a href="#footnote-ref-standard">standard</a><span class="token">^^</span></sup>.
+It made several appearances in my feed over 
+the past few weeks. I jumped on it<sup class="footnote-link" id="footnote-link-jump"><span class="token">^^</span><a href="#footnote-ref-jump">jump</a><span class="token">^^</span></sup>.
+It's the kind of stuff I dream about<sup class="footnote-link" id="footnote-link-manifesto"><span class="token">^^</span><a href="#footnote-ref-manifesto">manifesto</a><span class="token">^^</span></sup>.
+
+I wasn't entirely sure how content worked with
+it and looked around for details. One thing 
+the leaflet<sup class="footnote-link" id="footnote-link-leaflet"><span class="token">^^</span><a href="#footnote-ref-leaflet">leaflet</a><span class="token">^^</span></sup> post I found points out 
+is that the lexicon is for content discovery 
+and social features, but
+
+  -- blockquote/
+
+  <em>Importantly, [it] is not a standard for 
+  site content.</em>
+
+  -- /blockquote
+
+
+The only other<sup class="footnote-link" id="footnote-link-other"><span class="token">^^</span><a href="#footnote-ref-other">other</a><span class="token">^^</span></sup> post I've seen on a 
+content standard for the Atmosphere has to do 
+with a wordpress lexicon for publishing HTML. 
+
+I submit that HTML could work as a standardized 
+content format. It's a battle tested standard 
+that renders natively in browsers without 
+modification. There are, however, a couple 
+things that recommend against it.
+
+  -- numbered/
+
+  1. It's not friendly to write by hand. 
+  Unless you're hard-core, it's not something 
+  most folks are into.
+
+  2. It's tough to standardize HTML content 
+  types. Microformats<sup class="footnote-link" id="footnote-link-micro"><span class="token">^^</span><a href="#footnote-ref-micro">micro</a><span class="token">^^</span></sup> were an attempt. 
+  They never took off. That's at least in part 
+  because they lock the content into the 
+  rendering layer. You can do all kinds of 
+  things with CSS, but your locked into a 
+  specific set of elements and have to set 
+  up a parser if you want to use the data 
+  independently. 
+
+  -- /numbered
+
+Markdown<sup class="footnote-link" id="footnote-link-md"><span class="token">^^</span><a href="#footnote-ref-md">md</a><span class="token">^^</span></sup> is another option. It's easy to 
+learn. It also has huge market share in the 
+developer community. It's great for blog posts, 
+but sucks for anything beyond that. You can
+always roll your own HTML to do interesting 
+stuff. But, your back to its unwieldy nature 
+and parsing complexity at that point.
+
+Markdown also lacks the ability to add 
+metadata to content. For example, say you want
+to apply a custom style to an ``H2`` element 
+on a page. There's no mechanism to do that 
+in native Markdown. You have to switch to 
+inline HTML.
+
+
+-- h2
+
+Introducing NeoDoc
+
+There are other content formats out there. I 
+reviewed a bunch when I got fed up with Markdown 
+and decided to switch to something else for 
+<span class="token">>> </span><a href="https://links.alanwsmith.com/">my sites</a><span class="token"> | https://links.alanwsmith.com/ >></span>.
+None offered the combination of flexibility 
+and ease of use I was after. So, I designed 
+a new format. It's called NeoDoc and you're 
+reading it right now<sup class="footnote-link" id="footnote-link-maybe"><span class="token">^^</span><a href="#footnote-ref-maybe">maybe</a><span class="token">^^</span></sup>.
+
+The format is designed to be as simple as 
+possible without sacrificing horsepower. 
+It breaks down like this:
+
+
+-- list/
+-- class: example
+
+- NeoDocs are build from sections. Each 
+one starts with two dashes and a name. 
+For example, we're current in a ``-- list`` 
+section. (The trailing ``/`` lets other 
+sections nest inside the list which we 
+want for the ``code`` section below.)
+
+- Sections can have attributes like the
+``-- class: example`` above. They can be
+used as basic metadata about the section 
+or added as attributes to the HTML output. 
+
+- There's a pre-defined set of sections like:
+``-- list``, ``-- checklist``, and
+``-- numbered``. You can also make ad hoc 
+sections simply by naming them. For example,
+you can make a ``-- book-review`` section 
+to collect and format your book reviews.
+
+- Inline formatting and shorthands are
+available for spans of text. For example, 
+you can wrap text in asterisks which
+convert to HTML ``strong`` tags.
+
+  -- code/
+
+  **Alfa Bravo Charlie**
+
+  -- /code
+
+- Inline spans can also have attributes. 
+For example, here's a ``class`` attribute 
+with the shorthand: 
+
+  -- code/
+
+  **Alfa Bravo Charlie | class: red**
+
+  -- /code
+
+-- /list
+
+
+That's pretty much it. 
+
+The rest of it comes down to processing. 
+Details on that and how the everything works 
+are on the <span class="token">>> </span><a href="https://neodoc.style/">NeoDoc site</a><span class="token"> |
+https://neodoc.style/ >></span>.
+
+
+-- h2
+
+
+The Offering
+
+I started working on NeoDoc three years 
+ago. It's currently embedded in my personal 
+static site generator. It powers the 
+<span class="token">>> </span><a href="https://www.alanwsmith.com/neo-files/report">three thousand or so pages I've posted there</a><span class="token"> 
+| https://www.alanwsmith.com/neo-files/report >></span>.
+
+The format feels like a natural fit for 
+the Atmosphere. So, I'm extracting the 
+NeoDoc tools to make them independently 
+available. Once they're ready, I'll make 
+them open source so anyone can use them.
+
+
+-- h2
+
+Outro
+
+I'm incredibly excited about the Atmosphere. 
+I hope NeoDoc can become a part of it. 
+Because, if I'm right, the ability to 
+easily move the stuff we make to wherever 
+we want will be key to practical 
+decentralization. I believe NeoDoc can be 
+instrumental in making that happen. 
+
+If you've got questions or feedback, 
+I'm all ears:
+
+<span class="token">>> </span><a href="https://bsky.app/profile/al9000.com">@al9000.com</a><span class="token"> |
+https://bsky.app/profile/al9000.com >></span>
+
+-alan
+
+
+
+
+-- endnote
+
+I'd love to see NeoDoc become an active
+participant in the Atmosphere. However, it's 
+way more important to me that content gets
+standardized on <em>__something__</em>, regardless of 
+what it is. 
+
+There will always be a need for custom formats 
+for specific applications. For everything else, 
+if we can't move it, it fails the promise 
+and potential of decentralization. 
+
+
+-- endnote/
+
+The reference NeoDoc app (when it's extracted 
+from my static site generator) performs
+three functions:
+
+  -- numbered/
+
+  1. Takes a NeoDoc formatted input and 
+  transforms it into a JSON formatted AST. 
+
+  2. Transforms a NeoDoc AST into HTML 
+  based on a standardized set of default 
+  templates. 
+
+  3. Accepts optional templates that override
+  the defaults when generating output. 
+
+  -- /numbered
+
+More details on how all that works will
+be in the docs. 
+
+-- /endnote
+
+
+-- endnote
+
+Another thing Markdown suffers from is lack 
+of an official standard. Lots of different, 
+competing standars have cropped up as a result. 
+NeoDoc's development includes a standard in 
+the form of a comprehensive test suite for 
+use in validating complicance with format 
+parsing and outputs. 
+
+
+-- endnote
+
+NeoDoc isn't a theoretical idea. I've
+been using it in production on my site
+for years. The fundamentals are solid. 
+I expect feedback from other folks will
+lead to some modifications during a 
+beta period of adaptation. I don't foresee 
+anything that would significantly change 
+its potential. 
+
+
+Work on extracting NeoDoc from my site 
+builder is underway. I don't have a specific
+target date, but it won't be that long
+until it's ready for other folks to
+start poking at. 
+
+
+
+
+-- footnote
+-- id: <a class="footnote-ref" id="footnote-ref-control" href="#footnote-link-control">control</a>
+
+It is, of course, possible to migrate data from
+one format to another. However, that's a non-trivial 
+amount of friction most folks would need someone 
+else to set up for them (e.g. most folks aren't 
+going to build their own ETL systems).
+
+
+-- footnote
+-- id: <a class="footnote-ref" id="footnote-ref-standard" href="#footnote-link-standard">standard</a>
+
+<span class="token">>> </span><a href="https://standard.site/">Standard.site</a><span class="token"> | https://standard.site/ >></span>
+
+The shared lexicons for long-form 
+publishing on AT Protocol.
+
+
+-- footnote
+-- id: <a class="footnote-ref" id="footnote-ref-jump" href="#footnote-link-jump">jump</a>
+
+I've still got some work to do to get 
+standard.site connections up and running 
+for my site. The requiremnet to veirfy
+every page individually is a non-trivial
+amount or work that I don't have the
+spoons for. 
+
+
+-- footnote
+-- id: <a class="footnote-ref" id="footnote-ref-manifesto" href="#footnote-link-manifesto">manifesto</a>
+
+<span class="token">>></span><a href="https://www.alanwsmith.com/en/2v/xa/cn/vj/">A Vision for the Web</a><span class="token"> |
+https://www.alanwsmith.com/en/2v/xa/cn/vj/>></span>
+(originally titled "A Website Manifesto") 
+is a draft where I kicked around ideas 
+for a more interconnected web. 
+
+Basically, I was trying to figure out
+how to build the Atmosphere using
+RSS. It's not something I put much
+though into now that I know the 
+Atmosphere exists. 
+
+
+-- footnote
+-- id: <a class="footnote-ref" id="footnote-ref-leaflet" href="#footnote-link-leaflet">leaflet</a>
+
+<span class="token">>></span> <a href="https://lab.leaflet.pub/3md4qsktbms24">Leaflet, standard.site, and open social publishing!</a><span class="token"> |
+https://lab.leaflet.pub/3md4qsktbms24 >></span>
+
+
+-- footnote
+-- id: <a class="footnote-ref" id="footnote-ref-other" href="#footnote-link-other">other</a>
+
+<span class="token">>> </span><a href="https://jola.dev/posts/automatically-syncing-your-blog-atproto-standard-site">Automatically syncing your blog to atproto 
+and standard.site</a><span class="token"> |
+https://jola.dev/posts/automatically-syncing-your-blog-atproto-standard-site >></span>
+which mentions the wordpress HTML lexicon. 
+
+At least, I think it's referencing a lexicon. I'm 
+not sure and don't yet know where to look to 
+figure that out. 
+
+
+-- footnote
+-- id: <a class="footnote-ref" id="footnote-ref-micro" href="#footnote-link-micro">micro</a>
+
+<span class="token">>> </span><a href="https://indieweb.org/microformats">Microformats</a><span class="token"> | https://indieweb.org/microformats >></span> 
+The <span class="token">>> </span><a href="https://indieweb.org/">IndieWeb's</a><span class="token"> | https://indieweb.org/ >></span> 
+attempt at standardizing content that never quite 
+made it.
+
+
+-- footnote
+-- id: <a class="footnote-ref" id="footnote-ref-md" href="#footnote-link-md">md</a>
+
+<span class="token">>> </span><a href="https://www.markdownguide.org/">Markdown</a><span class="token"> | https://www.markdownguide.org/ >></span>
+The de facto standard for static site generators
+everywhere. Great at what it does, but limited 
+in what it can acheive. 
+
+
+-- footnote
+-- id: <a class="footnote-ref" id="footnote-ref-maybe" href="#footnote-link-maybe">maybe</a>
+
+Assuming a processor wasn't used to render
+this content that transformed the content 
+to straight HTML.
+
+
+
+-- metadata
+-- created: 2026-08-03T16:22:00-04:00
+-- id: 01/n7/1y/38
+-- tags: neodoc
+-- status: done
+
+
+
+
+</pre></main>
+
+
+
+
+
+<footer class="default">
+  &copy; 2026 <a href="https://bsky.app/profile/neodoc.style">NeoDoc.Style</a>
+</footer>
+    <div>
+    </div>
+    <div class="page-templates" hidden>
+      <bitty-9 data-connect="/bits.raw/default.js"></bitty-9>
+    </div>
+  </body>
+</html>

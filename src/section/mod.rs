@@ -12,6 +12,36 @@ use p_section::p_section;
 use serde::{Deserialize, Serialize};
 use stand_alone::*;
 
+// Section Kinds (which will be renamed
+// to ``type`` with ``subType`` becoming
+// the second level
+//
+// [] Checklist
+//
+// [] CSV
+//
+// [] JSON
+//
+// [] List
+//
+// [] Markdown
+//
+// [] Numbered
+//
+// [] P (Default)
+//
+// [] Raw
+//
+// [] Template - a NeoJinja template that
+// can be accessed via its ``-- id: `` attribute
+// which will override an existing template with
+// the same name if one exists.
+//
+// [] YAML
+//
+// NOTE: Plugins are out of scope at this point due
+// to their added complexity
+
 #[derive(Debug, Deserialize, PartialEq, Serialize)]
 #[serde(tag = "kind", rename_all = "lowercase")]
 pub enum Section {

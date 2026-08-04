@@ -87,6 +87,9 @@ output hides ``-- comment`` sections like
 this one. So, this message will disappear
 as soon as the HTML formatting is applied]
 
+
+
+
 -- h2
 
 Brain Dump
@@ -108,6 +111,219 @@ involve any type of grouping or
 organization. I'm simply throwing 
 stuff at the top of the list as they 
 come do mind.
+
+[] Trim leading and trailing whitespace
+in spans. 
+
+[] Provide an escape character for
+whitespace to add it to spans
+(this allows adding space at
+the front and end of a span
+as well as adding non-collapsing
+whitespace in general)
+
+
+[] What if the NeoJinja templates 
+were included directly in the
+content file instead of separately
+in the lexicon. That probably makes
+a ton of sense as the keeps everything
+in one place which provides for
+total portability (minus external
+calls to images, etc...) via just the
+text file itself. And, dealing
+with external calls is the 
+responsibility of the App. 
+
+[] The generator feature of NeoDoc
+needs to include a file object
+and a site object for things the
+individual output needs to reference
+(e.g. images or other data). 
+
+Thinking about that, it should
+also have the capability of
+transforming multiple files in one
+shot so that it doesn't have to
+spin up the environment each 
+time from multiple files in the
+same site. 
+
+That's leading me to the idea
+of accepting a few different types
+of input, but always providing
+the same output, but that output
+is at the site level. If an
+stand-alone, individual piece 
+of NeoDoc content get transformed
+it'll just come back as the
+first item in the output slot.
+
+Accepting an input payload for sites
+has always been in play. The new
+idea here is that the output 
+will always have the shape of a site
+even if there's only one thing in
+it. 
+
+
+[] Spec out a ``-- table`` section 
+that's a subType of CSV. It should
+include something like 
+``-- headerRows: #`` to define 
+the number of rows to use as headers. 
+
+It shouldn't try to do much more 
+than that. Styling can be done
+by adding a standard ``-- class``
+but anything more advanced should
+jump out to using a JSON section
+with a render (e.g. 
+if different cells should have 
+independent classes on them).
+
+
+[] Figure out an approach to using
+plugins. Possibly: https://fair.pm/
+Though, I'm not sure plugins
+should be in scope. If the only use
+case for NeoDoc was feeds, it
+feels less likely, but since the
+goal is generally to have websites
+built off it too, it lends to
+the idea that plugins should
+be included. 
+
+[] Thinking more about the use
+case. I do want to make sure
+that full websites can be
+built from a collection of
+NeoDoc files. You shouldn't
+have to keep somethings in NeoDoc
+and something in another location,
+or format, or whatever to 
+build a site off it. 
+
+Also, the output generation will 
+have to be able to reference other
+content in order for image calls
+to work with only the name
+which is a priority. 
+
+
+[] Change section keys in the 
+AST so it's ``type`` and ``subType``
+to help clarify instead of ``kind``
+and ``type`` which is confusing
+about which one is the parent.
+
+Or, you could do it as an array?
+``"type": ["p", "title"]`` but that
+feels weird. Also, it's less explicit
+so don't do that. 
+
+[] Make a Markdown to NeoDoc 
+conversion tool.
+
+[] Figure out how to do something
+so you can have references to links
+that are stored elsewhere in the file
+so the URLs can be split apart
+from the content. Maybe a ``-- links``
+section that uses attrs to store
+they keys and URLs that get matched
+in the file for links.
+
+But, maybe not ``-- links`` since
+that seems like a section that might
+get some usage. There's already
+``-- ref`` so maybe ``-- refs``.
+Or, just ``-- urls``.
+
+This would require multiple step
+processing, but that's fine. It's
+no different than the same requirement
+for markdown. The key is that 
+everything has to be on the page. 
+
+[] Maybe that opens templates back up?
+If there is gonna be some processing
+why not let it process across all 
+the data in the file? Difference
+from prior thoughts is that it
+would only be what's in the file
+itself and not across the
+larger set of files. Though....
+If you're gonna do the processing
+maybe it is worth opening that up?
+
+I think this is gonna come down
+to needing a prototype to make
+a decision. 
+
+
+
+[] If you hit an empty line that closes a
+block while a span is still open, then
+close it automatically. 
+
+[] Send a signal up that warns if 
+any errors occurred that were recoverable
+and didn't cause a complete break of the
+parser. (Goal is to render as much as 
+possible)
+
+
+[] Set up so that multiple start/ending sections 
+can be smushed together without 
+requiring an empty line between them.
+For example, instead of this:
+
+
+-- code/
+-- neodoc
+
+    -- div/
+
+        -- div/
+
+        Content
+    
+        -- /div
+
+        -- div/
+
+        More
+
+        -- /div
+
+    -- /div
+
+-- /code
+
+
+You could do this:
+
+-- code/
+-- neodoc
+
+    -- div/
+        -- div/
+
+        Content
+
+        -- /div
+        -- div/ 
+
+        More
+
+        -- /div
+    -- /div
+
+-- /code
+
+
+
 
 [] Store all the templates for each
 app, author, and content piece

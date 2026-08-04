@@ -13,6 +13,19 @@
     </style>
 
 
+<style>
+    .token {
+  color: #555;
+}
+
+.tmp-code {
+  color: #886;
+}
+
+strong {
+  color: white;
+}
+    </style>
 
 
 
@@ -64,71 +77,76 @@
     <h1></h1>
   </hgroup>
 
-<pre class="tmp-neo">-- prelude
+<pre class="tmp-neo"><strong>-- prelude</strong>
 
 This is the contents of the post
-I wrote to start a thread on 
->>discourse.atmosphere.community|
-https://discourse.atmosphere.community>>
+I wrote on <span class="token">>></span><a href="https://discourse.atmosphere.community">discourse.atmosphere.community</a><span class="token">|
+https://discourse.atmosphere.community>></span>
 to start a discussion about NeoDoc.
 
 
--- tldr
+<strong>-- tldr</strong>
 
-I designed a content format to replace 
-Markdown. It lets you add attributes to 
-content. You can do all kinds of stuff 
-with them without having to mess with HTML.
+I believe content portability is critical 
+for a successful decentralized system. 
+After all, being able to move your content 
+doesn't do any good if no one else can 
+use it. You're implicitly locked-in even 
+though it looks like you're in control.
 
-I've been using it on my site for the 
-past few years. I think it would work 
-great as an interoperable content format 
-for the atmosphere (the goal being to help 
-ensure the stuff we make is as portable 
-as possible). So, I'm offering it up.
+A few years ago, I designed a plain-text 
+content format to replace Markdown on 
+<span class="token">>></span><a href="https://links.alanwsmith.com/">my sites</a><span class="token">| https://links.alanwsmith.com/ >></span>
+I'm offering it as a potential option for
+making portable, human-readable content 
+in the Atmosphere. 
 
 You can learn more about it at
->>neodoc.style|https://neodoc.style/>>
+<span class="token">>></span><a href="https://neodoc.style/">neodoc.style</a><span class="token">| https://neodoc.style/ >></span>
 
 
--- title
+<strong>-- title</strong>
 
-A Community Pitch
+NeoDoc and The Atmosphere
 
 Hey folks,
 
 I've been on Bluesky for a bit. It's only 
 recently that I learned enough about the 
-Atmosphere to start getting what it's about. 
-I don't remember the last time I was this 
-excited about new tech. 
+Atmosphere to start getting what it's all 
+about. I don't remember the last time I 
+was this excited about new tech. 
 
 I saw standard.site kicking around a couple 
 weeks ago. I jumped on it^^1^^. It's the kind 
 of stuff I dream about^^2^^. 
 
-One thing the leaflet post^^3^^ on standard.site 
-mentions is it's not a content standard. 
-The only post^^4^^ I've seen on a content 
-standard for the Atmosphere has to do with 
-a wordpress lexicon for publishing HTML. 
+One thing the leaflet post^^3^^ I saw about 
+on standard.site mentions is that standard.site 
+isn't a content standard. The only post^^4^^ 
+I've seen on a content standard for the 
+Atmosphere has to do with a wordpress lexicon 
+for publishing HTML. 
 
 I submit that HTML could work as a standardized 
 content format. It's a battle tested standard 
 that renders natively in browsers without 
-modification. There are a couple things to 
-recommend against it, though.
+modification. However, there are a couple 
+things that recommend against it.
 
 
 -- numbered
 
-1. It's not friendly to writing by hand. 
-Unless you're hard-core it's not something 
-most folks are into. Tooling would be necessary 
-to convert content from plain-text into HTML 
-before storage. 
+1. It's not friendly to write by hand. 
+Unless you're hard-core, it's not something 
+most folks are into. Offering the ability
+for folks to write in plain text would
+require putting tools in place to 
+transform into HTML before storage. 
+The algorithms for those transformations
+would have be be standardized themselves. 
 
-2. It's tough to standardize content types. 
+2. It's tough to standardize HTML content types. 
 Microformats^^5^^ were an attempt. They never 
 took off. That's at least partially because they 
 lock the data into the rendering layer. Sure, 
@@ -142,19 +160,169 @@ the data independently.
 Markdown is another option. It's easy to learn 
 and already has huge market share in the 
 developer community. It's great for blog posts, 
-but kinda sucks for anything beyond. (I mean,
-you can always roll your own HTML, but that
-justs add the complexity of dealing with 
-HTML on to the handling. 
+but kinda sucks for anything beyond that. I 
+mean, you can always roll your own HTML, but 
+then your back to its unwieldy nature and
+parsing complexity. 
 
 Markdown also lacks the ability to add 
-metadata to content. For example, say you 
-to apply a custom style to one of the ``H2`` 
-elements on a page. There's no mechanism to 
-do that in native Markdown. You have to 
-switch to inline HTML.
+metadata to content. For example, say you want
+to apply a custom style to an ``H2`` element 
+on a page. There's no mechanism to do that 
+in native Markdown. You have to switch to 
+inline HTML.
 
 
+-- h2
+
+Introducing NeoDoc
+
+There are other content formats out there. I 
+reviewed a bunch when I got fed up with Markdown 
+and decided to switch to something else for 
+>>my sites| https://links.alanwsmith.com/ >>.
+None offered the combination of flexibility 
+and ease of use I was after. So, I designed 
+a new one. It's called NeoDoc and you're 
+reading it right now^^6^^.
+
+The format is designed to be as
+simple as possible without sacrificing 
+horsepower. It breaks down like this:
+
+
+-- list/
+-- class: example
+
+- NeoDocs are based on sections. Each one
+starts with two dashes and a name. For 
+example, the ``-- list`` from a few 
+lines up. 
+
+- Sections can have attributes like the
+``-- class: example`` on this list
+section. 
+
+- There's a pre-defined set of sections like:
+``-- list``, ``-- checklist``, and
+``-- numbered``. 
+
+- You can also make arbitrary sections 
+types. For example, you can make a 
+``-- book-review`` section for your
+book reviews. 
+
+- There's inline formatting and shorthands 
+for spans of text. For example, you can
+use astrisks to wrap a span in HTML strong
+tags like this:
+
+  -- code/
+
+  **Alfa Bravo Charlie**
+
+  -- /code
+
+
+- The inline spans can have attributes as
+well. For example, here's a class attribute
+for the same strong shorthand:
+
+  -- code/
+
+  **Alfa Bravo Charlie|class: title**
+
+  -- /code
+
+-- /list
+
+
+That's pretty much it. 
+
+The rest of it comes down to processing. 
+Details on that and how the everything works 
+are on >>the NeoDoc site| https://neodoc.style >>.
+
+
+-- h2
+
+
+The Offering
+
+I started working on NeoDoc three years 
+ago. It's currently embedded in my personal 
+static site generator. It powers the 
+>>three thousand or so pages I've posted there|
+https://www.alanwsmith.com/neo-files/report >>.
+
+The format feels like a natural fit for 
+the Atmosphere. So, I'm extracting it to 
+make it generally available. Once it's 
+ready, I'll make it open source so anyone 
+can use it. 
+
+
+-- h2
+
+Outro
+
+I'm incredibly excited about the potential 
+of the Atmosphere. I hope NeoDoc can become 
+a part of it. Because, if I'm right, the 
+ability to easily move the stuff we make 
+to wherever we want will be key to practical 
+decentralization. And, I think NeoDoc
+can fit that bill.
+
+If you've got questions or feedback, 
+I'm all ears:
+
+>>@al9000.com|
+https://bsky.app/profile/al9000.com >>
+
+-a
+
+
+
+
+-- endnote
+
+I'd love to see NeoDoc become an active
+participant in the Atmosphere. However, it's 
+way more important to me that content gets
+standardized on __something__, regardless of 
+what it is. 
+
+There will always be a need for custom formats 
+for specific applications. For everything else, 
+if we can't move it, it fails the promise 
+and potential of decentralization. 
+
+
+-- endnote/
+
+The reference NeoDoc app (when it's extracted 
+from my static site generator) performs
+three functions:
+
+  -- numbered/
+
+  1. Takes a NeoDoc formatted input and 
+  transforms it into a JSON formatted AST. 
+
+  2. Transforms a NeoDoc AST into HTML 
+  based on a standardized set of default 
+  templates. 
+
+  3. Accepts optional templates that override
+  the defaults when generating output. 
+
+  -- /numbered
+
+More details on how all that works will
+be in the docs. 
+
+-- /endnote
 
 
 
@@ -213,6 +381,13 @@ I don't yet know where to look to figure that out.
 
 The IndieWeb's attempt at standardization content
 that never quite made.
+
+
+-- footnote
+-- id: 6
+
+Assuming a processor wasn't added that 
+transformed this content into HTML.
 
 
 

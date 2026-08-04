@@ -355,6 +355,10 @@ with a status associated with them.</p>
 each item.</p>
 </li>
 <li>
+<p>markdown - for transforming
+markdown content</p>
+</li>
+<li>
 <p>numbered - a list that uses numbers
 for each item.</p>
 </li>
@@ -364,11 +368,24 @@ for each item.</p>
 <li>
 <p>raw - a raw block of text with
 no addition processing.</p>
-</li>
-</ul>
 <p>Using a section type for the name of
 a section works too. For example,
 creating a generic numbered list is done with:</p>
+</li>
+<li>
+<p>yaml - for turning chunks of yaml
+into a data object.</p>
+</li>
+</ul>
+<p>(Plugins are under consideration, but they
+add a bunch of complexity and security concerns.
+They'd also increase the burden on apps
+who would have to deal with their own
+security decisions and installations.
+Apps could decided not to allow plugins
+which means fundamental rendering differences
+would occur. So, the current thinking
+is plugins won't be part of the spec)</p>
 <div class="highlight-wrapper"><div class="code-block"><pre><span class="line-marker" data-line="1"></span><span class="text plain">-- numbered 
 <span class="line-marker" data-line="2"></span>
 <span class="line-marker" data-line="3"></span>1. A note about something. 
@@ -382,19 +399,19 @@ of paragraphs by default. They are:</p>
 <p>code</p>
 </li>
 <li>
-<p>css</p>
-</li>
-<li>
 <p>html</p>
-</li>
-<li>
-<p>script</p>
 </li>
 <li>
 <p>math</p>
 </li>
 <li>
 <p>pre</p>
+</li>
+<li>
+<p>script</p>
+</li>
+<li>
+<p>style</p>
 </li>
 <li>
 <p>svg</p>
