@@ -3,7 +3,7 @@ use crate::flag_or_attr::FlagOrAttr;
 use crate::span::flag_first_word::flag_first_word;
 use crate::span::section_metadata_text_span::section_metadata_text_span;
 use crate::span_parts::section_token::section_token;
-use nom::character::complete::line_ending;
+use nom::character::complete::{line_ending, space0};
 use nom::combinator::opt;
 use nom::{IResult, Parser, multi::many0};
 
@@ -61,6 +61,21 @@ mod tests {
     "alfa",
     " bravo"
   )]
+  #[case(
+    "First word can have colons in it as long as they aren't at the end.",
+    "-- :alfa:bravo",
+    ":alfa:bravo",
+    ""
+  )]
+  #[case(
+    "Chomp trailing whitespace",
+    "-- alfa ",
+    "alfa",
+    ""
+  )]
+
+  // TODO: Add escaped character for colon at the end of the
+  // first word
   fn section_flag_runner(
     #[case] description: &str,
     #[case] content: &str,

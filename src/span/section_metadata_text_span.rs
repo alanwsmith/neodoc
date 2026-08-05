@@ -8,7 +8,13 @@ use crate::span_parts::word_part::word_part;
 use nom::branch::alt;
 use nom::multi::many1;
 use nom::{IResult, Parser};
+use nom_locate::LocatedSpan;
 
+// REMINDER: if the only thing that's returned
+// is an empty space it returns an error instead.
+// The goal is to prevent extra whitespace from
+// being returned. If there are whitespace
+// issues this is the first place to look.
 pub fn section_metadata_text_span(
   mut input: Text
 ) -> IResult<Text, Span> {
@@ -27,6 +33,12 @@ pub fn section_metadata_text_span(
     .collect::<Vec<_>>()
     .join("")
     .to_string();
+  if content == " " {
+    return Err(nom::Err::Error(nom::error::Error::new(
+      LocatedSpan::new_extra("", ""),
+      nom::error::ErrorKind::Fail,
+    )));
+  }
   let output = Span::Text {
     attributes: vec![],
     content,
