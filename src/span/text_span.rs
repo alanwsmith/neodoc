@@ -2,15 +2,20 @@ use crate::Text;
 use crate::span::single_newline::single_newline;
 use crate::span::whitespace1::whitespace1;
 use crate::span::word_part::word_part;
+use crate::span_parts::one_or_more_dashes::one_or_more_dashes;
 use nom::branch::alt;
 use nom::multi::many1;
 use nom::{IResult, Parser};
 
 pub fn text_span(mut input: Text) -> IResult<Text, String> {
   input.extra = "text_span";
-  let (input, results) =
-    many1(alt((word_part, single_newline, whitespace1)))
-      .parse(input)?;
+  let (input, results) = many1(alt((
+    word_part,
+    single_newline,
+    whitespace1,
+    one_or_more_dashes,
+  )))
+  .parse(input)?;
 
   let output = results
     .iter()

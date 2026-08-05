@@ -26,17 +26,41 @@ mod tests {
   use super::*;
   use pretty_assertions::assert_eq;
   use rstest::rstest;
-
   #[rstest]
-  #[case("\n\n", "", "")]
-  #[case("  \n\n", "", "")]
-  #[case("\n          \n", "", "")]
-  #[case(" \n  \n      \n x", "", " x")]
-  #[case("\n\nx", "", "x")]
-  #[case("\n\n  x", "", "  x")]
-  #[case("\n\n  x", "", "  x")]
-  #[case("", "", "")]
+  #[case(
+    "two new lines in a row followed by eof",
+    "\n\n",
+    "",
+    ""
+  )]
+  #[case("whitespace then two new lines", "  \n\n", "", "")]
+  #[case(
+    "newline then whitespace then newline",
+    "\n          \n",
+    "",
+    ""
+  )]
+  #[case(
+    "whitespace newline whitespace newline whitespacespace new",
+    " \n  \n      \n x",
+    "",
+    " x"
+  )]
+  #[case(
+    "two newlines followed by content",
+    "\n\nx",
+    "",
+    "x"
+  )]
+  #[case(
+    "two newlines followed by content with leading whitespace which is kept",
+    "\n\n  x",
+    "",
+    "  x"
+  )]
+  #[case("end of file", "", "", "")]
   fn empty_lines_or_eof_test_runner(
+    #[case] description: &str,
     #[case] given: &str,
     #[case] expected: &str,
     #[case] remainder: &str,
@@ -46,26 +70,27 @@ mod tests {
     assert_eq!(
       &expected,
       result.1.fragment(),
-      "{}",
-      format!("\n\n{:?}\n\n{:?}", input, result)
+      "\n\n{}\n\n",
+      description
     );
     assert_eq!(
       &remainder,
       result.0.fragment(),
-      "{}",
-      format!("\n\n{:?}\n\n{:?}", input, result)
+      "\n\n{}\n\n",
+      description
     );
   }
 
   #[rstest]
-  #[case("x\n")]
-  #[case(" x\n")]
+  #[case("TODO: Description", "x\n")]
+  #[case("TODO: Description", " x\n")]
   fn empty_lines_or_eof_error_test_runner(
-    #[case] given: &str
+    #[case] description: &str,
+    #[case] given: &str,
   ) {
     let input = Text::new_extra(given, "");
     let result = empty_lines_or_eof.parse(input);
-    assert!(result.is_err());
+    assert!(result.is_err(), "{}", description);
   }
 
   //

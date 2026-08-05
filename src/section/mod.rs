@@ -54,8 +54,11 @@ pub enum Section {
   },
   #[serde(rename = "standAlone")]
   StandAlone {
-    metadata: Metadata,
-    sections: Vec<Section>,
+    attrs: Vec<FlagOrAttr>,
+    bound: Bound,
+    content: Vec<Section>,
+    flags: Vec<FlagOrAttr>,
+    name: String,
   },
   #[serde(rename = "block")]
   PBlock {
@@ -67,6 +70,7 @@ pub enum Section {
 
 pub fn section(input: Text) -> IResult<Text, Section> {
   let (input, section) =
-    alt((p_section, stand_alone, block_p)).parse(input)?;
+    alt((p_section, stand_alone_section, block_p))
+      .parse(input)?;
   Ok((input, section))
 }

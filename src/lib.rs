@@ -5,6 +5,7 @@ pub mod parsing_report;
 pub mod payload;
 pub mod section;
 pub mod span;
+pub mod span_parts;
 
 use nom_locate::LocatedSpan;
 
