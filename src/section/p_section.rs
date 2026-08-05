@@ -65,7 +65,7 @@ mod tests {
             {"content": "alfa", "kind": "span", "type": "text"} 
           ],
           "kind": "block",
-          "type": "block"
+          "name": "p"
         }
       ],
       "flags": [], 
@@ -85,14 +85,14 @@ mod tests {
             { "content": "alfa bravo charlie delta", "kind": "span", "type": "text"}
           ],
           "kind": "block",
-          "type": "block"
+          "name": "p"
         },
         {
           "content": [ 
             { "content": "echo foxtrot golf hotel", "kind": "span", "type": "text"}
           ],
           "kind": "block",
-          "type": "block"
+          "name": "p"
         }
       ],
       "flags": [], 
@@ -126,7 +126,7 @@ mod tests {
             { "content": "bravo", "kind": "span", "type": "text" }
           ],
           "kind": "block",
-          "type": "block"
+          "name": "p"
         }
       ],
       "flags": [

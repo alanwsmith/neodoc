@@ -20,7 +20,7 @@
         "content": [
           {
             "kind": "block",
-            "type": "block",
+            "name": "p",
             "content": [
               {
                 "content": "juliett kilo",
@@ -50,7 +50,7 @@
         "bound": "full",
         "content": [{
           "kind": "block",
-          "type": "block",
+          "name": "p",
           "content": [
             { "content": "more", "kind": "span", "type": "text" }
           ]
