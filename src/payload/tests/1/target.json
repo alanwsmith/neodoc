@@ -2,12 +2,12 @@
   "ok": {
     "content": [
       {
-        "attrs": [
+        "attributes": [
           {
             "key": "lima",
             "value": [
               {
-                "attrs": [],
+                "attributes": [],
                 "content": "mike",
                 "flags": [],
                 "kind": "span",
@@ -20,7 +20,7 @@
             "key": "foxtrot",
             "value": [
               {
-                "attrs": [],
+                "attributes": [],
                 "content": "golf hotel india",
                 "flags": [],
                 "kind": "span",
@@ -35,7 +35,7 @@
           {
             "content": [
               {
-                "attrs": [],
+                "attributes": [],
                 "content": "juliett kilo",
                 "flags": [],
                 "kind": "span",
@@ -51,7 +51,7 @@
         "flags": [
           [
             {
-              "attrs": [],
+              "attributes": [],
               "content": "alfa",
               "flags": [],
               "kind": "span",
@@ -61,8 +61,16 @@
           ],
           [
             {
-              "attrs": [],
-              "content": "bravo charlie delta echo",
+              "attributes": [],
+              "content": "bravo",
+              "flags": [],
+              "kind": "span",
+              "name": "text",
+              "template": "default"
+            },
+            {
+              "attributes": [],
+              "content": " charlie delta echo",
               "flags": [],
               "kind": "span",
               "name": "text",
@@ -75,13 +83,13 @@
         "template": "default"
       },
       {
-        "attrs": [],
+        "attributes": [],
         "bound": "full",
         "content": [
           {
             "content": [
               {
-                "attrs": [],
+                "attributes": [],
                 "content": "more",
                 "flags": [],
                 "kind": "span",

@@ -45,7 +45,7 @@ use stand_alone::*;
 #[serde(tag = "kind", rename_all = "lowercase")]
 pub enum Section {
   P {
-    attrs: Vec<FlagOrAttr>,
+    attributes: Vec<FlagOrAttr>,
     bound: Bound,
     content: Vec<Section>,
     flags: Vec<FlagOrAttr>,
@@ -54,7 +54,7 @@ pub enum Section {
   },
   #[serde(rename = "standAlone")]
   StandAlone {
-    attrs: Vec<FlagOrAttr>,
+    attributes: Vec<FlagOrAttr>,
     bound: Bound,
     content: Vec<Section>,
     flags: Vec<FlagOrAttr>,

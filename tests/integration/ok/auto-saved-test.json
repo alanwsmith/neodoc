@@ -5,12 +5,14 @@
     "ok": {
       "content": [
         {
-          "attrs": [
+          "attributes": [
             {
               "key": "lima",
               "value": [
                 {
+                  "attributes": [],
                   "content": "mike",
+                  "flags": [],
                   "kind": "span",
                   "name": "text",
                   "template": "default"
@@ -21,7 +23,9 @@
               "key": "foxtrot",
               "value": [
                 {
+                  "attributes": [],
                   "content": "golf hotel india",
+                  "flags": [],
                   "kind": "span",
                   "name": "text",
                   "template": "default"
@@ -34,7 +38,9 @@
             {
               "content": [
                 {
+                  "attributes": [],
                   "content": "juliett kilo",
+                  "flags": [],
                   "kind": "span",
                   "name": "text",
                   "template": "default"
@@ -48,7 +54,9 @@
           "flags": [
             [
               {
+                "attributes": [],
                 "content": "alfa",
+                "flags": [],
                 "kind": "span",
                 "name": "text",
                 "template": "default"
@@ -56,7 +64,17 @@
             ],
             [
               {
-                "content": "bravo charlie delta echo",
+                "attributes": [],
+                "content": "bravo",
+                "flags": [],
+                "kind": "span",
+                "name": "text",
+                "template": "default"
+              },
+              {
+                "attributes": [],
+                "content": " charlie delta echo",
+                "flags": [],
                 "kind": "span",
                 "name": "text",
                 "template": "default"
@@ -68,13 +86,15 @@
           "template": "default"
         },
         {
-          "attrs": [],
+          "attributes": [],
           "bound": "full",
           "content": [
             {
               "content": [
                 {
+                  "attributes": [],
                   "content": "more",
+                  "flags": [],
                   "kind": "span",
                   "name": "text",
                   "template": "default"

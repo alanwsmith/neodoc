@@ -11,7 +11,7 @@ pub fn stand_alone_section(
   Ok((
     input,
     Section::StandAlone {
-      attrs: vec![],
+      attributes: vec![],
       bound: Bound::Full,
       content,
       flags: vec![],
