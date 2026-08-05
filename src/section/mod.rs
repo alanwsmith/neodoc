@@ -65,6 +65,7 @@ pub enum Section {
   PBlock {
     content: Vec<Span>,
     name: String,
+    template: String,
   },
   Placeholder,
 }

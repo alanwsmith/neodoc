@@ -27,6 +27,7 @@ pub fn p_block(mut input: Text) -> IResult<Text, Section> {
     Section::PBlock {
       content,
       name: "p".to_string(),
+      template: "default".to_string(),
     },
   ))
 }
@@ -78,7 +79,7 @@ mod tests {
     let input = Text::new_extra(given, "");
     let result = p_block.parse(input).unwrap();
     let left: Value = serde_json::from_str(&format!(
-      r#"{{ "content": {}, "kind": "block", "name": "p" }}"#,
+      r#"{{ "content": {}, "kind": "block", "name": "p", "template": "default" }}"#,
       expected
     ))
     .unwrap();

@@ -41,7 +41,8 @@
                 }
               ],
               "kind": "block",
-              "name": "p"
+              "name": "p",
+              "template": "default"
             }
           ],
           "flags": [
@@ -80,7 +81,8 @@
                 }
               ],
               "kind": "block",
-              "name": "p"
+              "name": "p",
+              "template": "default"
             }
           ],
           "flags": [],

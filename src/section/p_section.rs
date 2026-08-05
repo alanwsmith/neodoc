@@ -74,7 +74,8 @@ mod tests {
             } 
           ],
           "kind": "block",
-          "name": "p"
+          "name": "p",
+          "template": "default"
         }
       ],
       "flags": [], 
@@ -100,7 +101,8 @@ mod tests {
               }
           ],
           "kind": "block",
-          "name": "p"
+          "name": "p",
+          "template": "default"
         },
         {
           "content": [ 
@@ -112,7 +114,8 @@ mod tests {
               }
           ],
           "kind": "block",
-          "name": "p"
+          "name": "p",
+          "template": "default"
         }
       ],
       "flags": [], 
@@ -148,7 +151,8 @@ mod tests {
             { "content": "bravo", "kind": "span", "name": "text", "template": "default" }
           ],
           "kind": "block",
-          "name": "p"
+          "name": "p",
+          "template": "default"
         }
       ],
       "flags": [
