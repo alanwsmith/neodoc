@@ -17,15 +17,36 @@ mod tests {
   use pretty_assertions::assert_eq;
   use rstest::rstest;
 
-  //   #[rstest]
-  //   #[case("\n", " ", "")]
-  //   fn run_test(
-  //     #[case] given: &str,
-  //     #[case] expected: &str,
-  //     #[case] remainder: &str,
-  //   ) {
-  //     let left = (remainder, expected);
-  //     let right = single_newline(given).unwrap();
-  //     assert_eq!(left, right);
-  //   }
+  #[rstest]
+  #[case("\n", " ", "")]
+  #[case("\nx", " ", "x")]
+  fn single_newline_test_runner(
+    #[case] given: &str,
+    #[case] expected: &str,
+    #[case] remainder: &str,
+  ) {
+    let input = Text::new_extra(given, "");
+    let result = single_newline.parse(input).unwrap();
+    assert_eq!(
+      &expected,
+      result.1.fragment(),
+      "{}",
+      format!("\n\n{:?}\n\n{:?}", input, result)
+    );
+    assert_eq!(
+      &remainder,
+      result.0.fragment(),
+      "{}",
+      format!("\n\n{:?}\n\n{:?}", input, result)
+    );
+  }
+
+  #[test]
+  fn single_newline_error_test_runner() {
+    let input = Text::new_extra("\n\n", "");
+    let result = single_newline.parse(input);
+    assert!(result.is_err());
+  }
+
+  //
 }

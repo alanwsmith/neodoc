@@ -43,29 +43,13 @@ mod tests {
       "{}",
       format!("\n\n{:?}\n\n{:?}", input, result)
     );
-    // assert_eq!(
-    //   &remainder,
-    //   result.0.fragment(),
-    //   "{}",
-    //   format!("\n\n{:?}\n\n{:?}", input, result)
-    // );
+    assert_eq!(
+      &remainder,
+      result.0.fragment(),
+      "{}",
+      format!("\n\n{:?}\n\n{:?}", input, result)
+    );
   }
-
-  // #[rstest]
-  // #[case("", "", "")]
-  // #[case(" ", " ", "")]
-  // #[case("     ", " ", "")]
-  // #[case("  \t   ", " ", "")]
-  // #[case("     x", " ", "x")]
-  // fn whitespace_test(
-  //   #[case] given: &str,
-  //   #[case] expected: &str,
-  //   #[case] remainder: &str,
-  // ) {
-  //   let left = (remainder, expected);
-  //   let right = whitespace0(given).unwrap();
-  //   assert_eq!(left, right);
-  // }
 
   //
 }

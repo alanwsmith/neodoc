@@ -61,4 +61,6 @@ mod tests {
     let result = empty_lines_or_eof.parse(input);
     assert!(result.is_err());
   }
+
+  //
 }

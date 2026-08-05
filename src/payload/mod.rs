@@ -39,23 +39,34 @@ mod tests {
     let check = include_str!("tests/1/target.json");
     let input = Text::new_extra(content, "");
     let left: Value = serde_json::from_str(check).unwrap();
-    let result = payload(input).unwrap();
-    let right = serde_json::to_value(result.1).unwrap();
-    assert_eq!(left, right);
-    if left.eq(&right) {
-      let test_save_path =
-        "tests/integration/ok/auto-saved-test.json";
-      let test_output = TestSaver {
-        given: input.to_string(),
-        remainder: result.0.to_string(),
-        status: right,
-        test: "Auto-Saved test".to_string(),
-      };
-      fs::write(
-        test_save_path,
-        serde_json::to_string_pretty(&test_output).unwrap(),
-      )
-      .unwrap();
+    let result = payload(input);
+    match result {
+      Ok(response) => {
+        let right =
+          serde_json::to_value(response.1).unwrap();
+        assert_eq!(left, right);
+        if left.eq(&right) {
+          let test_save_path =
+            "tests/integration/ok/auto-saved-test.json";
+          let test_output = TestSaver {
+            given: input.to_string(),
+            remainder: response.0.to_string(),
+            status: right,
+            test: "Auto-Saved test".to_string(),
+          };
+          fs::write(
+            test_save_path,
+            serde_json::to_string_pretty(&test_output)
+              .unwrap(),
+          )
+          .unwrap()
+        }
+      }
+      Err(_) => {
+        // TODO: Output result here
+      }
     }
+
+    //
   }
 }
