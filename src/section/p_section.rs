@@ -62,7 +62,7 @@ mod tests {
       "content": [
         {
           "content": [ 
-            {"content": "alfa", "kind": "span", "type": "text"} 
+            {"content": "alfa", "kind": "span", "name": "text"} 
           ],
           "kind": "block",
           "name": "p"
@@ -82,14 +82,14 @@ mod tests {
       "content": [
         {
           "content": [ 
-            { "content": "alfa bravo charlie delta", "kind": "span", "type": "text"}
+            { "content": "alfa bravo charlie delta", "kind": "span", "name": "text"}
           ],
           "kind": "block",
           "name": "p"
         },
         {
           "content": [ 
-            { "content": "echo foxtrot golf hotel", "kind": "span", "type": "text"}
+            { "content": "echo foxtrot golf hotel", "kind": "span", "name": "text"}
           ],
           "kind": "block",
           "name": "p"
@@ -108,7 +108,7 @@ mod tests {
       "bound": "full",
       "content": [],
       "flags": [
-        [ { "content": "alfa", "kind": "span", "type": "text" } ]
+        [ { "content": "alfa", "kind": "span", "name": "text" } ]
       ], 
       "kind": "p", 
       "type": "p" 
@@ -123,7 +123,7 @@ mod tests {
       "content": [
         {
           "content": [
-            { "content": "bravo", "kind": "span", "type": "text" }
+            { "content": "bravo", "kind": "span", "name": "text" }
           ],
           "kind": "block",
           "name": "p"
@@ -131,7 +131,7 @@ mod tests {
       ],
       "flags": [
         [
-          { "content": "alfa", "kind": "span", "type": "text" }
+          { "content": "alfa", "kind": "span", "name": "text" }
         ]
       ],
       "kind": "p",

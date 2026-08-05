@@ -41,31 +41,31 @@ mod tests {
   #[case(
     "single word, eof",
     "alfa",
-    r#"[ { "kind": "span", "content": "alfa", "type": "text" }]"#,
+    r#"[ { "kind": "span", "content": "alfa", "name": "text" }]"#,
     ""
   )]
   #[case(
     "multiple words, eof",
     "alfa bravo charlie",
-    r#"[ { "kind": "span", "content": "alfa bravo charlie", "type": "text" }]"#,
+    r#"[ { "kind": "span", "content": "alfa bravo charlie", "name": "text" }]"#,
     ""
   )]
   #[case(
     "words, single newline, words, eof",
     "alfa bravo\ncharlie delta",
-    r#"[ { "kind": "span", "content": "alfa bravo charlie delta", "type": "text" }]"#,
+    r#"[ { "kind": "span", "content": "alfa bravo charlie delta", "name": "text" }]"#,
     ""
   )]
   #[case(
     "stop at empty line before words",
     "alfa bravo\n\ncharlie delta",
-    r#"[ { "kind": "span", "content": "alfa bravo", "type": "text" }]"#,
+    r#"[ { "kind": "span", "content": "alfa bravo", "name": "text" }]"#,
     "charlie delta"
   )]
   #[case(
     "stop at empty line before new section",
     "alfa bravo\n\n-- x",
-    r#"[ { "kind": "span", "content": "alfa bravo", "type": "text" }]"#,
+    r#"[ { "kind": "span", "content": "alfa bravo", "name": "text" }]"#,
     "-- x"
   )]
   fn p_block_test_runner(

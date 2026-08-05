@@ -6,13 +6,13 @@
           {
             "key": "lima",
             "value": [
-              { "content": "mike", "kind": "span", "type": "text" }
+              { "content": "mike", "kind": "span", "name": "text" }
             ]
           },
           {
             "key": "foxtrot",
             "value": [
-              { "content": "golf hotel india", "kind": "span", "type": "text" }
+              { "content": "golf hotel india", "kind": "span", "name": "text" }
             ]
           }
         ],
@@ -25,20 +25,20 @@
               {
                 "content": "juliett kilo",
                 "kind": "span",
-                "type": "text"
+                "name": "text"
               }
             ]
           }
         ],
         "flags": [
           [
-            { "content": "alfa", "kind": "span", "type": "text" }
+            { "content": "alfa", "kind": "span", "name": "text" }
           ],
           [
             {
               "content": "bravo charlie delta echo",
               "kind": "span",
-              "type": "text"
+              "name": "text"
             }
           ]
         ],
@@ -52,7 +52,7 @@
           "kind": "block",
           "name": "p",
           "content": [
-            { "content": "more", "kind": "span", "type": "text" }
+            { "content": "more", "kind": "span", "name": "text" }
           ]
         }],
         "flags": [],

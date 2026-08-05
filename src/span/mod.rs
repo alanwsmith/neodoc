@@ -15,7 +15,7 @@ use serde::{Deserialize, Serialize};
 #[derive(
   Clone, Debug, Deserialize, PartialEq, Serialize,
 )]
-#[serde(tag = "type", rename_all = "lowercase")]
+#[serde(tag = "name", rename_all = "lowercase")]
 pub enum Span {
   Text { content: String, kind: String },
 }
