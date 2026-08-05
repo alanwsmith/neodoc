@@ -49,7 +49,7 @@ pub enum Section {
     bound: Bound,
     content: Vec<Section>,
     flags: Vec<FlagOrAttr>,
-    r#type: String,
+    name: String,
   },
   #[serde(rename = "standAlone")]
   StandAlone {

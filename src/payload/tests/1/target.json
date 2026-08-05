@@ -60,7 +60,7 @@
           ]
         ],
         "kind": "p",
-        "type": "p"
+        "name": "p"
       },
       {
         "attrs": [],
@@ -81,8 +81,9 @@
         ],
         "flags": [],
         "kind": "p",
-        "type": "p"
+        "name": "p"
       }
     ]
   }
 }
+

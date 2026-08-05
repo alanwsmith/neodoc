@@ -17,7 +17,7 @@ pub fn p_section(
   let (input, _) =
     pair(space0, line_ending).parse(input)?;
   let bound = Bound::Full;
-  let r#type = "p".to_string();
+  let name = "p".to_string();
   let (input, metadata) = metadata.parse(input)?;
   let (input, _) = empty_lines_or_eof.parse(input)?;
   let (input, content) = many0(p_block).parse(input)?;
@@ -39,7 +39,7 @@ pub fn p_section(
       bound,
       content,
       flags: metadata.flags,
-      r#type,
+      name,
     },
   ))
 }
@@ -47,14 +47,14 @@ pub fn p_section(
 #[cfg(test)]
 mod tests {
   use super::*;
-  use crate::parsing_report::*;
+  // use crate::parsing_report::*;
   use pretty_assertions::assert_eq;
   use rstest::rstest;
   use serde_json::Value;
 
   #[rstest]
   #[case(
-    "paragraph with no type with single block at end of file",
+    "paragraph with no name with single block at end of file",
     "-- p\n\nalfa",
     r#"{ 
       "attrs": [], 
@@ -75,7 +75,7 @@ mod tests {
       ],
       "flags": [], 
       "kind": "p", 
-      "type": "p" 
+      "name": "p" 
     }"#
   )]
   #[case(
@@ -112,7 +112,7 @@ mod tests {
       ],
       "flags": [], 
       "kind": "p", 
-      "type": "p" 
+      "name": "p" 
     }"#
   )]
   #[case(
@@ -126,7 +126,7 @@ mod tests {
         [ { "content": "alfa", "kind": "span", "name": "text", "template": "default" } ]
       ], 
       "kind": "p", 
-      "type": "p" 
+      "name": "p" 
     }"#
   )]
   #[case(
@@ -151,7 +151,7 @@ mod tests {
         ]
       ],
       "kind": "p",
-      "type": "p"
+      "name": "p"
     }"#
   )]
   fn p_section_runner(
