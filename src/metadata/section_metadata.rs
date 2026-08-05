@@ -1,38 +1,39 @@
 use crate::Text;
-use crate::flag_or_attr::FlagOrAttr;
-use crate::flag_or_attr::section_attr::section_attr;
-use crate::flag_or_attr::section_flag::section_flag;
+// use crate::flag_or_attr::FlagOrAttr;
+// use crate::flag_or_attr::section_attr::section_attr;
+// use crate::flag_or_attr::section_flag::section_flag;
+use crate::metadata::{
+  Metadata, MetadataLoader,
+  section_attribute_metadata::section_attribute_metadata,
+  section_flag_metadata::section_flag_metadata,
+};
 use nom::branch::alt;
 use nom::multi::many0;
 use nom::{IResult, Parser};
-use serde::{Deserialize, Serialize};
+//use serde::{Deserialize, Serialize};
 
 // REMINDER: This pulls in the attrs and flags
 // regardless of order and delivers them
 // as independent packages
 
-#[derive(Debug, Deserialize, PartialEq, Serialize)]
-pub struct MetadataLoader {
-  pub attrs: Vec<FlagOrAttr>,
-  pub flags: Vec<FlagOrAttr>,
-}
-
-pub fn metadata_loader(
+pub fn section_metadata(
   input: Text
 ) -> IResult<Text, MetadataLoader> {
-  let (input, items) =
-    many0(alt((section_flag, section_attr)))
-      .parse(input)?;
+  let (input, items) = many0(alt((
+    section_flag_metadata,
+    section_attribute_metadata,
+  )))
+  .parse(input)?;
   let attrs = items
     .clone()
     .into_iter()
-    .filter(|x| matches!(x, FlagOrAttr::SectionAttr { .. }))
+    .filter(|x| matches!(x, Metadata::Attribute { .. }))
     .collect();
 
   let flags = items
     .clone()
     .into_iter()
-    .filter(|x| matches!(x, FlagOrAttr::SectionFlag(_)))
+    .filter(|x| matches!(x, Metadata::Flag(_)))
     .collect();
 
   // let (input, flags) = many0(section_flag).parse(input)?;
@@ -44,10 +45,10 @@ pub fn metadata_loader(
 
 #[cfg(test)]
 mod tests {
-  use super::*;
-  use pretty_assertions::assert_eq;
-  use rstest::rstest;
-  use serde_json::Value;
+  // use super::*;
+  // use pretty_assertions::assert_eq;
+  // use rstest::rstest;
+  // use serde_json::Value;
 
   // #[rstest]
   // #[case(

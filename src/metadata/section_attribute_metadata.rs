@@ -1,5 +1,5 @@
 use crate::Text;
-use crate::flag_or_attr::FlagOrAttr;
+use crate::metadata::Metadata;
 use crate::span::section_metadata_text_span::section_metadata_text_span;
 use crate::span_parts::section_token::section_token;
 use nom::bytes::complete::{is_not, tag};
@@ -8,9 +8,9 @@ use nom::combinator::opt;
 use nom::multi::many1;
 use nom::{IResult, Parser};
 
-pub fn section_attr(
+pub fn section_attribute_metadata(
   input: Text
-) -> IResult<Text, FlagOrAttr> {
+) -> IResult<Text, Metadata> {
   let (input, _) = section_token.parse(input)?;
   let (input, key) = is_not(": \n\r\t").parse(input)?;
   let (input, _) = tag(":").parse(input)?;
@@ -36,7 +36,7 @@ pub fn section_attr(
 
   let (input, _) = opt(line_ending).parse(input)?;
 
-  let flag = FlagOrAttr::SectionAttr {
+  let flag = Metadata::Attribute {
     key: key.to_string(),
     value, // value: vec![Span::Text {
            //   content,
@@ -89,7 +89,7 @@ mod tests {
     ""
   )]
 
-  fn section_attribute_runner(
+  fn section_attribute_metedata_runner(
     #[case] description: &str,
     #[case] given: &str,
     #[case] expected_key: &str,
@@ -97,7 +97,8 @@ mod tests {
     #[case] remainder: &str,
   ) {
     let input = Text::new_extra(given, "");
-    let result = section_attr.parse(input).unwrap();
+    let result =
+      section_attribute_metadata.parse(input).unwrap();
     let left: Value = serde_json::from_str(&format!(
       r#"{{
       "key": "{}",
@@ -122,7 +123,7 @@ mod tests {
     let content = "-- alfa: bravo\n-- x";
     let target1 = "alfa";
     let target2 = "bravo";
-    let target3 = FlagOrAttr::SectionAttr {
+    let target3 = Metadata::Attribute {
       key: target1.to_string(),
       value: vec![Span::Text {
         attributes: vec![],
@@ -133,7 +134,7 @@ mod tests {
       }],
     };
     let input = Text::new_extra(content, "");
-    let result = section_attr(input).unwrap();
+    let result = section_attribute_metadata(input).unwrap();
     let left = target3;
     let right = result.1;
     assert_eq!(left, right,);
@@ -144,7 +145,7 @@ mod tests {
     let content = "-- alfa: bravo\ncharlie\n\nx";
     let target1 = "alfa";
     let target2 = "bravo charlie";
-    let target3 = FlagOrAttr::SectionAttr {
+    let target3 = Metadata::Attribute {
       key: target1.to_string(),
       value: vec![Span::Text {
         attributes: vec![],
@@ -155,7 +156,7 @@ mod tests {
       }],
     };
     let input = Text::new_extra(content, "");
-    let result = section_attr(input).unwrap();
+    let result = section_attribute_metadata(input).unwrap();
     let left = target3;
     let right = result.1;
     assert_eq!(left, right,);
@@ -167,7 +168,7 @@ mod tests {
     let content = "-- alfa: bravo: https://www.example.com\ncharlie\n\nx";
     let target1 = "alfa";
     let target2 = "bravo: https://www.example.com charlie";
-    let target3 = FlagOrAttr::SectionAttr {
+    let target3 = Metadata::Attribute {
       key: target1.to_string(),
       value: vec![Span::Text {
         attributes: vec![],
@@ -178,7 +179,7 @@ mod tests {
       }],
     };
     let input = Text::new_extra(content, "");
-    let result = section_attr(input).unwrap();
+    let result = section_attribute_metadata(input).unwrap();
     let left = target3;
     let right = result.1;
     assert_eq!(left, right,);

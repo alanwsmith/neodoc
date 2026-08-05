@@ -1,5 +1,5 @@
 use crate::bound::Bound;
-use crate::section::metadata::metadata_loader;
+use crate::metadata::section_metadata::section_metadata;
 use crate::section::*;
 use crate::span_parts::empty_lines_or_eof::empty_lines_or_eof;
 use crate::span_parts::section_token::section_token;
@@ -18,22 +18,10 @@ pub fn p_section(
   let (input, _) =
     pair(space0, line_ending).parse(input)?;
   let bound = Bound::Full;
-  let (input, metadata) = metadata_loader.parse(input)?;
+  let (input, metadata) = section_metadata.parse(input)?;
   let (input, _) = empty_lines_or_eof.parse(input)?;
   let (input, content) = many0(p_block).parse(input)?;
-
-  // TODO: Pull these dynamically
   let template = "default".to_string();
-
-  //  let (input, _) = empty_lines_or_eof.parse(input)?;
-
-  // let (input, md) = {
-  //   |input| metadata(input, bound.clone(), t.to_string())
-  // }
-  // .parse(input)?;
-  // let (input, _) = empty_lines_or_eof.parse(input)?;
-  // let (input, sections) = many0(p_block).parse(input)?;
-
   Ok((
     input,
     Section::P {
@@ -50,10 +38,17 @@ pub fn p_section(
 #[cfg(test)]
 mod tests {
   use super::*;
-  // use crate::parsing_report::*;
   use pretty_assertions::assert_eq;
   use rstest::rstest;
   use serde_json::Value;
+
+  // TODO:
+  //
+  // - Update the template dynamically based off the
+  // metadata.
+  //
+  // - Set the name of the section dynamically
+  // if there's a name
 
   #[rstest]
   #[case(
@@ -202,7 +197,6 @@ mod tests {
     let target2: Value =
       serde_json::from_str(target1).unwrap();
     let result = p_section(input);
-    // report_section(result);
     let left = target2;
     let right =
       serde_json::to_value(result.unwrap().1).unwrap();

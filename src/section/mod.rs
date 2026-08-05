@@ -1,11 +1,11 @@
-pub mod metadata;
 pub mod p_section;
 pub mod stand_alone;
 
+use crate::Text;
 use crate::block::p_block::p_block;
 use crate::bound::Bound;
+use crate::metadata::Metadata;
 use crate::span::*;
-use crate::{Text, flag_or_attr::FlagOrAttr};
 use nom::{IResult, Parser, branch::alt};
 use p_section::p_section;
 use serde::{Deserialize, Serialize};
@@ -45,19 +45,19 @@ use stand_alone::*;
 #[serde(tag = "type", rename_all = "lowercase")]
 pub enum Section {
   P {
-    attributes: Vec<FlagOrAttr>,
+    attributes: Vec<Metadata>,
     bound: Bound,
     content: Vec<Section>,
-    flags: Vec<FlagOrAttr>,
+    flags: Vec<Metadata>,
     name: String,
     template: String,
   },
   #[serde(rename = "standAlone")]
   StandAlone {
-    attributes: Vec<FlagOrAttr>,
+    attributes: Vec<Metadata>,
     bound: Bound,
     content: Vec<Section>,
-    flags: Vec<FlagOrAttr>,
+    flags: Vec<Metadata>,
     name: String,
     template: String,
   },

@@ -50,17 +50,36 @@ mod tests {
   use rstest::rstest;
 
   #[rstest]
-  #[case("one word", "``alfa``", "alfa", "")]
+  #[case(
+    "one word", "``alfa``", "alfa", "[]", "[]", "default",
+    ""
+  )]
   #[case(
     "space inside the backtics is trimmed",
     "`` alfa ``",
     "alfa",
+    "[]",
+    "[]",
+    "default",
     ""
   )]
+  // #[case(
+  //   "Accepts a flag",
+  //   "``alfa|bravo``",
+  //   "alfa",
+  //   "[]",
+  //   "[]",
+  //   "default",
+  //   ""
+  // )]
+
   fn code_span_for_block_runner(
     #[case] description: &str,
     #[case] given: &str,
     #[case] expected: &str,
+    #[case] attrs: &str,
+    #[case] flags: &str,
+    #[case] template: &str,
     #[case] remainder: &str,
   ) {
     let input = Text::new_extra(given, "");

@@ -1,15 +1,15 @@
 use crate::Text;
-use crate::flag_or_attr::FlagOrAttr;
+use crate::metadata::Metadata;
 use crate::span::flag_first_word::flag_first_word;
 use crate::span::section_metadata_text_span::section_metadata_text_span;
 use crate::span_parts::section_token::section_token;
-use nom::character::complete::{line_ending, space0};
+use nom::character::complete::line_ending;
 use nom::combinator::opt;
 use nom::{IResult, Parser, multi::many0};
 
-pub fn section_flag(
+pub fn section_flag_metadata(
   mut input: Text
-) -> IResult<Text, FlagOrAttr> {
+) -> IResult<Text, Metadata> {
   input.extra = "section_flag";
   let (input, _) = section_token.parse(input)?;
   let (input, first_word) = flag_first_word.parse(input)?;
@@ -18,7 +18,7 @@ pub fn section_flag(
   let (input, _) = opt(line_ending).parse(input)?;
   let first_word_vec = vec![first_word];
   let content = [first_word_vec, more_words].concat();
-  let flag = FlagOrAttr::SectionFlag(content);
+  let flag = Metadata::Flag(content);
   Ok((input, flag))
 }
 
@@ -76,7 +76,7 @@ mod tests {
 
   // TODO: Add escaped character for colon at the end of the
   // first word
-  fn section_flag_runner(
+  fn section_flag_metedata_runner(
     #[case] description: &str,
     #[case] content: &str,
     #[case] expected1: &str,
@@ -98,9 +98,9 @@ mod tests {
         template: "default".to_string(),
       })
     };
-    let target = FlagOrAttr::SectionFlag(spans);
+    let target = Metadata::Flag(spans);
     let input = Text::new_extra(content, "");
-    let result = section_flag(input).unwrap();
+    let result = section_flag_metadata(input).unwrap();
     let left = target;
     let right = result.1;
     assert_eq!(
@@ -133,7 +133,7 @@ mod tests {
   ) {
     let input = Text::new_extra(content, "");
     assert!(
-      section_flag(input).is_err(),
+      section_flag_metadata(input).is_err(),
       "\n\nFAILED: {}\n\n",
       description
     );

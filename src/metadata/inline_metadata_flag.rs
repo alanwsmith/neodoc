@@ -1,6 +1,7 @@
 #![allow(warnings)]
 use crate::Text;
-use crate::flag_or_attr::FlagOrAttr;
+use crate::metadata::Metadata;
+//use crate::flag_or_attr::FlagOrAttr;
 use crate::span::Span;
 use crate::span::flag_first_word::flag_first_word;
 use crate::span_parts::word_part::word_part;
@@ -8,9 +9,7 @@ use nom::branch::alt;
 use nom::character::complete::space1;
 use nom::{IResult, Parser, multi::many0};
 
-pub fn inline_flag(
-  input: Text
-) -> IResult<Text, FlagOrAttr> {
+pub fn inline_flag(input: Text) -> IResult<Text, Metadata> {
   let (input, first_word) = flag_first_word.parse(input)?;
 
   // TODO: Wire this up for real
@@ -24,7 +23,7 @@ pub fn inline_flag(
   //Ok((input, flag))
   //
 
-  Ok((input, FlagOrAttr::InlineFlag(vec![])))
+  Ok((input, Metadata::Flag(vec![])))
 }
 
 #[cfg(test)]
