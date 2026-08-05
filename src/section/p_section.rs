@@ -17,10 +17,13 @@ pub fn p_section(
   let (input, _) =
     pair(space0, line_ending).parse(input)?;
   let bound = Bound::Full;
-  let name = "p".to_string();
   let (input, metadata) = metadata.parse(input)?;
   let (input, _) = empty_lines_or_eof.parse(input)?;
   let (input, content) = many0(p_block).parse(input)?;
+
+  // TODO: Pull these dynamically
+  let name = "p".to_string();
+  let template = "default".to_string();
 
   //  let (input, _) = empty_lines_or_eof.parse(input)?;
 
@@ -40,6 +43,7 @@ pub fn p_section(
       content,
       flags: metadata.flags,
       name,
+      template,
     },
   ))
 }
@@ -75,7 +79,8 @@ mod tests {
       ],
       "flags": [], 
       "kind": "p", 
-      "name": "p" 
+      "name": "p",
+      "template": "default"
     }"#
   )]
   #[case(
@@ -112,7 +117,8 @@ mod tests {
       ],
       "flags": [], 
       "kind": "p", 
-      "name": "p" 
+      "name": "p",
+      "template": "default"
     }"#
   )]
   #[case(
@@ -126,7 +132,8 @@ mod tests {
         [ { "content": "alfa", "kind": "span", "name": "text", "template": "default" } ]
       ], 
       "kind": "p", 
-      "name": "p" 
+      "name": "p",
+      "template": "default"
     }"#
   )]
   #[case(
@@ -151,7 +158,8 @@ mod tests {
         ]
       ],
       "kind": "p",
-      "name": "p"
+      "name": "p",
+      "template": "default"
     }"#
   )]
   fn p_section_runner(
@@ -159,7 +167,6 @@ mod tests {
     #[case] content: &str,
     #[case] target1: &str,
   ) {
-    // dbg!(&description);
     let input = Text::new_extra(content, "");
     let target2: Value =
       serde_json::from_str(target1).unwrap();

@@ -50,6 +50,7 @@ pub enum Section {
     content: Vec<Section>,
     flags: Vec<FlagOrAttr>,
     name: String,
+    template: String,
   },
   #[serde(rename = "standAlone")]
   StandAlone {
@@ -58,6 +59,7 @@ pub enum Section {
     content: Vec<Section>,
     flags: Vec<FlagOrAttr>,
     name: String,
+    template: String,
   },
   #[serde(rename = "block")]
   PBlock {

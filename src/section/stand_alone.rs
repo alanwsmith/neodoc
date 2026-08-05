@@ -16,6 +16,7 @@ pub fn stand_alone_section(
       content,
       flags: vec![],
       name: "standalone".to_string(),
+      template: "default".to_string(),
     },
   ))
 }
