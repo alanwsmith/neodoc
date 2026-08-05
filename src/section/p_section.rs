@@ -67,7 +67,9 @@ mod tests {
         {
           "content": [ 
             {
+              "attributes": [],
               "content": "alfa", 
+              "flags": [],
               "kind": "span", 
               "name": "text", 
               "template": "default"
@@ -94,11 +96,13 @@ mod tests {
         {
           "content": [ 
             { 
+              "attributes": [],
               "content": "alfa bravo charlie delta", 
               "kind": "span", 
+              "flags": [],
               "name": "text",
               "template": "default"
-              }
+            }
           ],
           "kind": "block",
           "name": "p",
@@ -107,11 +111,13 @@ mod tests {
         {
           "content": [ 
             { 
+              "attributes": [],
               "content": "echo foxtrot golf hotel", 
+              "flags": [],
               "kind": "span", 
               "name": "text", 
               "template": "default"
-              }
+            }
           ],
           "kind": "block",
           "name": "p",
@@ -132,7 +138,16 @@ mod tests {
       "bound": "full",
       "content": [],
       "flags": [
-        [ { "content": "alfa", "kind": "span", "name": "text", "template": "default" } ]
+        [ 
+          { 
+            "attributes": [],
+            "content": "alfa", 
+            "flags": [],
+            "kind": "span", 
+            "name": "text", 
+            "template": "default" 
+          } 
+        ]
       ], 
       "kind": "p", 
       "name": "p",
@@ -148,7 +163,14 @@ mod tests {
       "content": [
         {
           "content": [
-            { "content": "bravo", "kind": "span", "name": "text", "template": "default" }
+            { 
+              "attributes": [],
+              "content": "bravo", 
+              "flags": [],
+              "kind": "span", 
+              "name": "text", 
+              "template": "default" 
+            }
           ],
           "kind": "block",
           "name": "p",
@@ -158,7 +180,13 @@ mod tests {
       "flags": [
         [
           { 
-            "content": "alfa", "kind": "span", "name": "text", "template": "default" }
+            "attributes": [],
+            "content": "alfa", 
+            "flags": [],
+            "kind": "span", 
+            "name": "text", 
+            "template": "default" 
+          }
         ]
       ],
       "kind": "p",
