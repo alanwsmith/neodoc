@@ -40,7 +40,7 @@ mod tests {
         "attributes": [],
         "content": "alfa", 
         "flags": [],
-        "kind": "span", 
+        "type": "span", 
         "name": "text", 
         "template": "default" 
       }
@@ -55,7 +55,7 @@ mod tests {
         "attributes": [],
         "content": "alfa bravo charlie", 
         "flags": [],
-        "kind": "span", 
+        "type": "span", 
         "name": "text", 
         "template": "default" 
       }
@@ -70,7 +70,7 @@ mod tests {
         "attributes": [],
         "content": "alfa bravo charlie delta", 
         "flags": [],
-        "kind": "span", 
+        "type": "span", 
         "name": "text", 
         "template": "default" 
       }
@@ -85,7 +85,7 @@ mod tests {
         "attributes": [],
         "content": "alfa bravo", 
         "flags": [],
-        "kind": "span", 
+        "type": "span", 
         "name": "text", 
         "template": "default" 
       }
@@ -100,7 +100,7 @@ mod tests {
         "attributes": [],
         "content": "alfa bravo", 
         "flags": [],
-        "kind": "span", 
+        "type": "span", 
         "name": "text", 
         "template": "default" 
       }
@@ -116,7 +116,7 @@ mod tests {
     let input = Text::new_extra(given, "");
     let result = p_block.parse(input).unwrap();
     let left: Value = serde_json::from_str(&format!(
-      r#"{{ "content": {}, "kind": "block", "name": "p", "template": "default" }}"#,
+      r#"{{ "content": {}, "type": "block", "name": "p", "template": "default" }}"#,
       expected
     ))
     .unwrap();

@@ -69,18 +69,18 @@ mod tests {
               "attributes": [],
               "content": "alfa", 
               "flags": [],
-              "kind": "span", 
+              "type": "span", 
               "name": "text", 
               "template": "default"
             } 
           ],
-          "kind": "block",
+          "type": "block",
           "name": "p",
           "template": "default"
         }
       ],
       "flags": [], 
-      "kind": "p", 
+      "type": "p", 
       "name": "p",
       "template": "default"
     }"#
@@ -97,13 +97,13 @@ mod tests {
             { 
               "attributes": [],
               "content": "alfa bravo charlie delta", 
-              "kind": "span", 
+              "type": "span", 
               "flags": [],
               "name": "text",
               "template": "default"
             }
           ],
-          "kind": "block",
+          "type": "block",
           "name": "p",
           "template": "default"
         },
@@ -113,18 +113,18 @@ mod tests {
               "attributes": [],
               "content": "echo foxtrot golf hotel", 
               "flags": [],
-              "kind": "span", 
+              "type": "span", 
               "name": "text", 
               "template": "default"
             }
           ],
-          "kind": "block",
+          "type": "block",
           "name": "p",
           "template": "default"
         }
       ],
       "flags": [], 
-      "kind": "p", 
+      "type": "p", 
       "name": "p",
       "template": "default"
     }"#
@@ -142,13 +142,13 @@ mod tests {
             "attributes": [],
             "content": "alfa", 
             "flags": [],
-            "kind": "span", 
+            "type": "span", 
             "name": "text", 
             "template": "default" 
           } 
         ]
       ], 
-      "kind": "p", 
+      "type": "p", 
       "name": "p",
       "template": "default"
     }"#
@@ -166,12 +166,12 @@ mod tests {
               "attributes": [],
               "content": "bravo", 
               "flags": [],
-              "kind": "span", 
+              "type": "span", 
               "name": "text", 
               "template": "default" 
             }
           ],
-          "kind": "block",
+          "type": "block",
           "name": "p",
           "template": "default"
         }
@@ -182,13 +182,13 @@ mod tests {
             "attributes": [],
             "content": "alfa", 
             "flags": [],
-            "kind": "span", 
+            "type": "span", 
             "name": "text", 
             "template": "default" 
           }
         ]
       ],
-      "kind": "p",
+      "type": "p",
       "name": "p",
       "template": "default"
     }"#

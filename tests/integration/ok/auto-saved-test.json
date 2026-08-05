@@ -13,9 +13,9 @@
                   "attributes": [],
                   "content": "mike",
                   "flags": [],
-                  "kind": "span",
                   "name": "text",
-                  "template": "default"
+                  "template": "default",
+                  "type": "span"
                 }
               ]
             },
@@ -26,9 +26,9 @@
                   "attributes": [],
                   "content": "golf hotel india",
                   "flags": [],
-                  "kind": "span",
                   "name": "text",
-                  "template": "default"
+                  "template": "default",
+                  "type": "span"
                 }
               ]
             }
@@ -41,14 +41,14 @@
                   "attributes": [],
                   "content": "juliett kilo",
                   "flags": [],
-                  "kind": "span",
                   "name": "text",
-                  "template": "default"
+                  "template": "default",
+                  "type": "span"
                 }
               ],
-              "kind": "block",
               "name": "p",
-              "template": "default"
+              "template": "default",
+              "type": "block"
             }
           ],
           "flags": [
@@ -57,9 +57,9 @@
                 "attributes": [],
                 "content": "alfa",
                 "flags": [],
-                "kind": "span",
                 "name": "text",
-                "template": "default"
+                "template": "default",
+                "type": "span"
               }
             ],
             [
@@ -67,23 +67,23 @@
                 "attributes": [],
                 "content": "bravo",
                 "flags": [],
-                "kind": "span",
                 "name": "text",
-                "template": "default"
+                "template": "default",
+                "type": "span"
               },
               {
                 "attributes": [],
                 "content": " charlie delta echo",
                 "flags": [],
-                "kind": "span",
                 "name": "text",
-                "template": "default"
+                "template": "default",
+                "type": "span"
               }
             ]
           ],
-          "kind": "p",
           "name": "p",
-          "template": "default"
+          "template": "default",
+          "type": "p"
         },
         {
           "attributes": [],
@@ -95,20 +95,20 @@
                   "attributes": [],
                   "content": "more",
                   "flags": [],
-                  "kind": "span",
                   "name": "text",
-                  "template": "default"
+                  "template": "default",
+                  "type": "span"
                 }
               ],
-              "kind": "block",
               "name": "p",
-              "template": "default"
+              "template": "default",
+              "type": "block"
             }
           ],
           "flags": [],
-          "kind": "p",
           "name": "p",
-          "template": "default"
+          "template": "default",
+          "type": "p"
         }
       ]
     }

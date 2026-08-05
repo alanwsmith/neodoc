@@ -19,7 +19,7 @@ pub fn flag_first_word(input: Text) -> IResult<Text, Span> {
     Span::Text {
       attributes: vec![],
       content: text.to_string(),
-      kind: "span".to_string(),
+      r#type: "span".to_string(),
       flags: vec![],
       template: "default".to_string(),
     },

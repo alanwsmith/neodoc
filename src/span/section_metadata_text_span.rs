@@ -43,7 +43,7 @@ pub fn section_metadata_text_span(
     attributes: vec![],
     content,
     flags: vec![],
-    kind: "span".to_string(),
+    r#type: "span".to_string(),
     template: "default".to_string(),
   };
   Ok((input, output))
@@ -136,7 +136,7 @@ mod tests {
       attributes: vec![],
       content: expected.to_string(),
       flags: vec![],
-      kind: "span".to_string(),
+      r#type: "span".to_string(),
       template: "default".to_string(),
     };
     assert_eq!(left, result.1, "\n\n{}\n\n", description,);

@@ -15,7 +15,7 @@ pub enum Span {
     attributes: Vec<Metadata>,
     content: String,
     flags: Vec<Metadata>,
-    kind: String,
+    r#type: String,
     template: String,
   },
 }

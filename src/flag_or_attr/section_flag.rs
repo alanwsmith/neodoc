@@ -86,7 +86,7 @@ mod tests {
       attributes: vec![],
       content: expected1.to_string(),
       flags: vec![],
-      kind: "span".to_string(),
+      r#type: "span".to_string(),
       template: "default".to_string(),
     }];
     if !expected2.is_empty() {
@@ -94,7 +94,7 @@ mod tests {
         attributes: vec![],
         content: expected2.to_string(),
         flags: vec![],
-        kind: "span".to_string(),
+        r#type: "span".to_string(),
         template: "default".to_string(),
       })
     };

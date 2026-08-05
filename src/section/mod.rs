@@ -42,7 +42,7 @@ use stand_alone::*;
 // to their added complexity
 
 #[derive(Debug, Deserialize, PartialEq, Serialize)]
-#[serde(tag = "kind", rename_all = "lowercase")]
+#[serde(tag = "type", rename_all = "lowercase")]
 pub enum Section {
   P {
     attributes: Vec<FlagOrAttr>,

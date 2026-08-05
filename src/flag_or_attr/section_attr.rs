@@ -65,7 +65,7 @@ mod tests {
       "attributes": [], 
       "content": "bravo", 
       "flags": [],
-      "kind": "span", 
+      "type": "span", 
       "name": "text", 
       "template": "default"
     }
@@ -81,7 +81,7 @@ mod tests {
       "attributes": [], 
       "content": "bravo", 
       "flags": [],
-      "kind": "span", 
+      "type": "span", 
       "name": "text", 
       "template": "default"
     }
@@ -128,7 +128,7 @@ mod tests {
         attributes: vec![],
         content: target2.to_string(),
         flags: vec![],
-        kind: "span".to_string(),
+        r#type: "span".to_string(),
         template: "default".to_string(),
       }],
     };
@@ -150,7 +150,7 @@ mod tests {
         attributes: vec![],
         content: target2.to_string(),
         flags: vec![],
-        kind: "span".to_string(),
+        r#type: "span".to_string(),
         template: "default".to_string(),
       }],
     };
@@ -173,7 +173,7 @@ mod tests {
         attributes: vec![],
         content: target2.to_string(),
         flags: vec![],
-        kind: "span".to_string(),
+        r#type: "span".to_string(),
         template: "default".to_string(),
       }],
     };
