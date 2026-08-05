@@ -16,18 +16,12 @@ pub fn text_span(mut input: Text) -> IResult<Text, String> {
     one_or_more_dashes,
   )))
   .parse(input)?;
-
   let output = results
     .iter()
     .map(|v| *v.fragment())
     .collect::<Vec<_>>()
     .join("")
     .to_string();
-
-  //dbg!(&output);
-
-  //dbg!(results);
-  //  Ok((input, results.join("")))
   Ok((input, output))
 }
 

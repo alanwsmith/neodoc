@@ -21,6 +21,7 @@ pub fn section_flag(
   let (input, _) = opt(line_ending).parse(input)?;
   let starter = vec![first_word];
   let flag = FlagOrAttr::SectionFlag(vec![Span::Text {
+    template: "default".to_string(),
     content: [starter, more_words]
       .concat()
       .into_iter()
@@ -76,6 +77,7 @@ mod tests {
       FlagOrAttr::SectionFlag(vec![Span::Text {
         content: target1.to_string(),
         kind: "span".to_string(),
+        template: "default".to_string(),
       }]);
     let input = Text::new_extra(content, "");
     let result = section_flag(input).unwrap();

@@ -38,6 +38,7 @@ pub fn section_attr(
     value: vec![Span::Text {
       content,
       kind: "span".to_string(),
+      template: "default".to_string(),
     }],
   };
   Ok((input, flag))
@@ -58,6 +59,7 @@ mod tests {
       value: vec![Span::Text {
         content: target2.to_string(),
         kind: "span".to_string(),
+        template: "default".to_string(),
       }],
     };
     let input = Text::new_extra(content, "");
@@ -77,6 +79,7 @@ mod tests {
       value: vec![Span::Text {
         content: target2.to_string(),
         kind: "span".to_string(),
+        template: "default".to_string(),
       }],
     };
     let input = Text::new_extra(content, "");
@@ -96,6 +99,7 @@ mod tests {
       value: vec![Span::Text {
         content: target2.to_string(),
         kind: "span".to_string(),
+        template: "default".to_string(),
       }],
     };
     let input = Text::new_extra(content, "");
@@ -116,6 +120,7 @@ mod tests {
       value: vec![Span::Text {
         content: target2.to_string(),
         kind: "span".to_string(),
+        template: "default".to_string(),
       }],
     };
     let input = Text::new_extra(content, "");

@@ -6,13 +6,23 @@
           {
             "key": "lima",
             "value": [
-              { "content": "mike", "kind": "span", "name": "text" }
+              {
+                "content": "mike",
+                "kind": "span",
+                "name": "text",
+                "template": "default"
+              }
             ]
           },
           {
             "key": "foxtrot",
             "value": [
-              { "content": "golf hotel india", "kind": "span", "name": "text" }
+              {
+                "content": "golf hotel india",
+                "kind": "span",
+                "name": "text",
+                "template": "default"
+              }
             ]
           }
         ],
@@ -25,20 +35,27 @@
               {
                 "content": "juliett kilo",
                 "kind": "span",
-                "name": "text"
+                "name": "text",
+                "template": "default"
               }
             ]
           }
         ],
         "flags": [
           [
-            { "content": "alfa", "kind": "span", "name": "text" }
+            {
+              "content": "alfa",
+              "kind": "span",
+              "name": "text",
+              "template": "default"
+            }
           ],
           [
             {
               "content": "bravo charlie delta echo",
               "kind": "span",
-              "name": "text"
+              "name": "text",
+              "template": "default"
             }
           ]
         ],
@@ -48,13 +65,20 @@
       {
         "attrs": [],
         "bound": "full",
-        "content": [{
-          "kind": "block",
-          "name": "p",
-          "content": [
-            { "content": "more", "kind": "span", "name": "text" }
-          ]
-        }],
+        "content": [
+          {
+            "kind": "block",
+            "name": "p",
+            "content": [
+              {
+                "content": "more",
+                "kind": "span",
+                "name": "text",
+                "template": "default"
+              }
+            ]
+          }
+        ],
         "flags": [],
         "kind": "p",
         "type": "p"

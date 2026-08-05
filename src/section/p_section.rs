@@ -62,7 +62,12 @@ mod tests {
       "content": [
         {
           "content": [ 
-            {"content": "alfa", "kind": "span", "name": "text"} 
+            {
+              "content": "alfa", 
+              "kind": "span", 
+              "name": "text", 
+              "template": "default"
+            } 
           ],
           "kind": "block",
           "name": "p"
@@ -82,14 +87,24 @@ mod tests {
       "content": [
         {
           "content": [ 
-            { "content": "alfa bravo charlie delta", "kind": "span", "name": "text"}
+            { 
+              "content": "alfa bravo charlie delta", 
+              "kind": "span", 
+              "name": "text",
+              "template": "default"
+              }
           ],
           "kind": "block",
           "name": "p"
         },
         {
           "content": [ 
-            { "content": "echo foxtrot golf hotel", "kind": "span", "name": "text"}
+            { 
+              "content": "echo foxtrot golf hotel", 
+              "kind": "span", 
+              "name": "text", 
+              "template": "default"
+              }
           ],
           "kind": "block",
           "name": "p"
@@ -108,7 +123,7 @@ mod tests {
       "bound": "full",
       "content": [],
       "flags": [
-        [ { "content": "alfa", "kind": "span", "name": "text" } ]
+        [ { "content": "alfa", "kind": "span", "name": "text", "template": "default" } ]
       ], 
       "kind": "p", 
       "type": "p" 
@@ -123,7 +138,7 @@ mod tests {
       "content": [
         {
           "content": [
-            { "content": "bravo", "kind": "span", "name": "text" }
+            { "content": "bravo", "kind": "span", "name": "text", "template": "default" }
           ],
           "kind": "block",
           "name": "p"
@@ -131,7 +146,8 @@ mod tests {
       ],
       "flags": [
         [
-          { "content": "alfa", "kind": "span", "name": "text" }
+          { 
+            "content": "alfa", "kind": "span", "name": "text", "template": "default" }
         ]
       ],
       "kind": "p",

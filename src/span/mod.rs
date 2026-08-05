@@ -17,5 +17,9 @@ use serde::{Deserialize, Serialize};
 )]
 #[serde(tag = "name", rename_all = "lowercase")]
 pub enum Span {
-  Text { content: String, kind: String },
+  Text {
+    content: String,
+    kind: String,
+    template: String,
+  },
 }

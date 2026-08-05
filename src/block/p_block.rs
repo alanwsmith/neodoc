@@ -19,6 +19,7 @@ pub fn p_block(mut input: Text) -> IResult<Text, Section> {
     .map(|x| Span::Text {
       content: x.to_string(),
       kind: "span".to_string(),
+      template: "default".to_string(),
     })
     .collect();
   Ok((
@@ -41,31 +42,31 @@ mod tests {
   #[case(
     "single word, eof",
     "alfa",
-    r#"[ { "kind": "span", "content": "alfa", "name": "text" }]"#,
+    r#"[ { "kind": "span", "content": "alfa", "name": "text", "template": "default" }]"#,
     ""
   )]
   #[case(
     "multiple words, eof",
     "alfa bravo charlie",
-    r#"[ { "kind": "span", "content": "alfa bravo charlie", "name": "text" }]"#,
+    r#"[ { "kind": "span", "content": "alfa bravo charlie", "name": "text", "template": "default" }]"#,
     ""
   )]
   #[case(
     "words, single newline, words, eof",
     "alfa bravo\ncharlie delta",
-    r#"[ { "kind": "span", "content": "alfa bravo charlie delta", "name": "text" }]"#,
+    r#"[ { "kind": "span", "content": "alfa bravo charlie delta", "name": "text", "template": "default" }]"#,
     ""
   )]
   #[case(
     "stop at empty line before words",
     "alfa bravo\n\ncharlie delta",
-    r#"[ { "kind": "span", "content": "alfa bravo", "name": "text" }]"#,
+    r#"[ { "kind": "span", "content": "alfa bravo", "name": "text", "template": "default" }]"#,
     "charlie delta"
   )]
   #[case(
     "stop at empty line before new section",
     "alfa bravo\n\n-- x",
-    r#"[ { "kind": "span", "content": "alfa bravo", "name": "text" }]"#,
+    r#"[ { "kind": "span", "content": "alfa bravo", "name": "text", "template": "default" }]"#,
     "-- x"
   )]
   fn p_block_test_runner(

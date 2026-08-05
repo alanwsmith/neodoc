@@ -12,7 +12,8 @@
                 {
                   "content": "mike",
                   "kind": "span",
-                  "name": "text"
+                  "name": "text",
+                  "template": "default"
                 }
               ]
             },
@@ -22,7 +23,8 @@
                 {
                   "content": "golf hotel india",
                   "kind": "span",
-                  "name": "text"
+                  "name": "text",
+                  "template": "default"
                 }
               ]
             }
@@ -34,7 +36,8 @@
                 {
                   "content": "juliett kilo",
                   "kind": "span",
-                  "name": "text"
+                  "name": "text",
+                  "template": "default"
                 }
               ],
               "kind": "block",
@@ -46,14 +49,16 @@
               {
                 "content": "alfa",
                 "kind": "span",
-                "name": "text"
+                "name": "text",
+                "template": "default"
               }
             ],
             [
               {
                 "content": "bravo charlie delta echo",
                 "kind": "span",
-                "name": "text"
+                "name": "text",
+                "template": "default"
               }
             ]
           ],
@@ -69,7 +74,8 @@
                 {
                   "content": "more",
                   "kind": "span",
-                  "name": "text"
+                  "name": "text",
+                  "template": "default"
                 }
               ],
               "kind": "block",
