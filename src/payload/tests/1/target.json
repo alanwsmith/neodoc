@@ -46,6 +46,21 @@
             "name": "p",
             "template": "default",
             "type": "block"
+          },
+          {
+            "content": [
+              {
+                "attributes": [],
+                "content": "november oscar",
+                "flags": [],
+                "name": "text",
+                "template": "default",
+                "type": "span"
+              }
+            ],
+            "name": "p",
+            "template": "default",
+            "type": "block"
           }
         ],
         "flags": [

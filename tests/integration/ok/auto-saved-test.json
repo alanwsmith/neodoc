@@ -1,5 +1,5 @@
 {
-  "given": "-- p\n-- alfa\n-- lima: mike\n-- bravo charlie\ndelta echo\n-- foxtrot: golf\nhotel india\n\njuliett kilo\n\n\n-- p\n\nmore",
+  "given": "-- p\n-- alfa\n-- lima: mike\n-- bravo charlie\ndelta echo\n-- foxtrot: golf\nhotel india\n\njuliett kilo\n\nnovember oscar\n\n-- p\n\nmore",
   "remainder": "",
   "status": {
     "ok": {
@@ -40,6 +40,21 @@
                 {
                   "attributes": [],
                   "content": "juliett kilo",
+                  "flags": [],
+                  "name": "text",
+                  "template": "default",
+                  "type": "span"
+                }
+              ],
+              "name": "p",
+              "template": "default",
+              "type": "block"
+            },
+            {
+              "content": [
+                {
+                  "attributes": [],
+                  "content": "november oscar",
                   "flags": [],
                   "name": "text",
                   "template": "default",
