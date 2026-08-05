@@ -36,7 +36,23 @@
             "content": [
               {
                 "attributes": [],
-                "content": "juliett kilo",
+                "content": "juliett ",
+                "flags": [],
+                "name": "text",
+                "template": "default",
+                "type": "span"
+              },
+              {
+                "attributes": [],
+                "content": "example",
+                "flags": [],
+                "name": "code",
+                "template": "default",
+                "type": "span"
+              },
+              {
+                "attributes": [],
+                "content": " kilo",
                 "flags": [],
                 "name": "text",
                 "template": "default",

@@ -34,7 +34,7 @@ mod tests {
   use std::fs;
 
   #[test]
-  #[ignore]
+  //#[ignore]
   fn integration() {
     let content = include_str!("tests/1/input.neo").trim();
     let check = include_str!("tests/1/target.json");

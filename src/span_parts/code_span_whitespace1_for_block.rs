@@ -3,7 +3,7 @@ use nom::bytes::complete::tag;
 use nom::combinator::not;
 use nom::{IResult, Parser, character::complete::space1};
 
-pub fn code_block_span_whitespace1(
+pub fn code_span_whitespace1_for_block(
   mut input: Text
 ) -> IResult<Text, Text> {
   input.extra = "code_block_span_whitespace1";

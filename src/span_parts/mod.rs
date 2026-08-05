@@ -1,4 +1,4 @@
-pub mod code_block_span_whitespace1;
+pub mod code_span_whitespace1_for_block;
 pub mod empty_lines_or_eof;
 pub mod one_or_more_colons;
 pub mod one_or_more_dashes;
