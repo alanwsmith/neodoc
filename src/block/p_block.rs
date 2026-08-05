@@ -94,6 +94,10 @@ mod tests {
 
   #[rstest]
   #[case("Don't create a block from a new section", "-- x")]
+  #[case(
+    "Don't create a block from a new section with leading whitespace",
+    "   -- x"
+  )]
   fn p_block_error_test_runner(
     #[case] description: &str,
     #[case] given: &str,
