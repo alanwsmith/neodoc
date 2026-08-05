@@ -1,3 +1,4 @@
+pub mod block_code_span;
 pub mod block_generic_span;
 pub mod block_text_span;
 pub mod flag_first_word;
