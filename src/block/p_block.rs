@@ -1,8 +1,7 @@
 use crate::Text;
-use crate::section::*;
-use crate::span::Span;
-use crate::span::empty_lines_or_eof::empty_lines_or_eof;
-use crate::span::text_span::text_span;
+use crate::section::Section;
+use crate::span::block_text_span::block_text_span;
+use crate::span_parts::empty_lines_or_eof::empty_lines_or_eof;
 use nom::bytes::complete::tag;
 use nom::character::complete::space0;
 use nom::combinator::not;
@@ -12,18 +11,9 @@ use nom::{IResult, Parser};
 pub fn p_block(mut input: Text) -> IResult<Text, Section> {
   input.extra = "p_block";
   let (input, _) = not((space0, tag("--"))).parse(input)?;
-  let (input, span_strs) = many1(text_span).parse(input)?;
+  let (input, content) =
+    many1(block_text_span).parse(input)?;
   let (input, _) = empty_lines_or_eof.parse(input)?;
-  let content = span_strs
-    .iter()
-    .map(|x| Span::Text {
-      attributes: vec![],
-      content: x.to_string(),
-      flags: vec![],
-      kind: "span".to_string(),
-      template: "default".to_string(),
-    })
-    .collect();
   Ok((
     input,
     Section::PBlock {

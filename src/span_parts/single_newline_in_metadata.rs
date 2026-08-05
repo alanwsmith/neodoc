@@ -93,6 +93,10 @@ mod tests {
     "single newline followed by a dash is an error",
     "\n-"
   )]
+  #[case(
+    "single newline followed by a line with whitespace and then a dash is an error",
+    "\n -"
+  )]
   fn single_newline_in_metadata_error_test_runner(
     #[case] description: &str,
     #[case] given: &str,

@@ -1,7 +1,7 @@
 use crate::Text;
 use crate::flag_or_attr::FlagOrAttr;
-use crate::span::attribute_text_span::attribute_text_span;
-use crate::span::section_token::section_token;
+use crate::span::section_metadata_text_span::section_metadata_text_span;
+use crate::span_parts::section_token::section_token;
 use nom::bytes::complete::{is_not, tag};
 use nom::character::complete::{line_ending, space1};
 use nom::combinator::opt;
@@ -16,7 +16,7 @@ pub fn section_attr(
   let (input, _) = tag(":").parse(input)?;
   let (input, _) = space1.parse(input)?;
   let (input, value) =
-    many1(attribute_text_span).parse(input)?;
+    many1(section_metadata_text_span).parse(input)?;
 
   // let (input, value) = many1(alt((
   //   word_part,

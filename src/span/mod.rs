@@ -1,15 +1,7 @@
-pub mod attribute_text_span;
-pub mod empty_lines_or_eof;
-pub mod generic;
-pub mod section_token;
-pub mod single_character;
-pub mod single_newline;
-pub mod text_span;
-pub mod whitespace0;
-pub mod whitespace1;
-pub mod word_part;
-
-pub use section_token::*;
+pub mod block_generic_span;
+pub mod block_text_span;
+pub mod flag_first_word;
+pub mod section_metadata_text_span;
 
 use crate::metadata::Metadata;
 use serde::{Deserialize, Serialize};
