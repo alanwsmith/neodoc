@@ -3,10 +3,7 @@ use crate::flag_or_attr::FlagOrAttr;
 use crate::span::flag_first_word::flag_first_word;
 use crate::span::section_metadata_text_span::section_metadata_text_span;
 use crate::span_parts::section_token::section_token;
-use crate::span_parts::single_newline::single_newline;
-use crate::span_parts::word_part::word_part;
-use nom::branch::alt;
-use nom::character::complete::{line_ending, space1};
+use nom::character::complete::line_ending;
 use nom::combinator::opt;
 use nom::{IResult, Parser, multi::many0};
 
@@ -15,33 +12,13 @@ pub fn section_flag(
 ) -> IResult<Text, FlagOrAttr> {
   input.extra = "section_flag";
   let (input, _) = section_token.parse(input)?;
-
   let (input, first_word) = flag_first_word.parse(input)?;
   let (input, more_words) =
     many0(section_metadata_text_span).parse(input)?;
   let (input, _) = opt(line_ending).parse(input)?;
-
-  //
   let first_word_vec = vec![first_word];
   let content = [first_word_vec, more_words].concat();
   let flag = FlagOrAttr::SectionFlag(content);
-
-  // .concat()
-  // .into_iter()
-  // .map(|x| *x.fragment())
-  // .collect::<Vec<_>>()
-  // .join("")
-  // .trim()
-  // .to_string(),
-
-  // let flag = FlagOrAttr::SectionFlag(
-  //   vec![Span::Text {
-  //   attributes: vec![],
-  //   flags: vec![],
-  //   kind: "span".to_string(),
-  //   template: "default".to_string(),
-  // }]);
-
   Ok((input, flag))
 }
 
