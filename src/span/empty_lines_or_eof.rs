@@ -34,7 +34,9 @@ mod tests {
   #[case(" \n  \n      \n x", "", " x")]
   #[case("\n\nx", "", "x")]
   #[case("\n\n  x", "", "  x")]
-  fn empty_lines_pass_if_empty(
+  #[case("\n\n  x", "", "  x")]
+  #[case("", "", "")]
+  fn empty_lines_or_eof_test_runner(
     #[case] given: &str,
     #[case] expected: &str,
     #[case] remainder: &str,
@@ -55,9 +57,13 @@ mod tests {
     );
   }
 
-  #[test]
-  fn empty_lines_error_if_not_empty() {
-    let input = Text::new_extra("  asdf\n", "");
+  #[rstest]
+  #[case("x\n")]
+  #[case(" x\n")]
+  fn empty_lines_or_eof_error_test_runner(
+    #[case] given: &str
+  ) {
+    let input = Text::new_extra(given, "");
     let result = empty_lines_or_eof.parse(input);
     assert!(result.is_err());
   }
