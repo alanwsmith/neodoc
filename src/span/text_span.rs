@@ -60,25 +60,29 @@ mod tests {
   use rstest::rstest;
 
   #[rstest]
-  #[case("alfa bravo", "alfa bravo", "")]
+  #[case("1", "alfa bravo", "alfa bravo", "")]
   #[case(
+    "2",
     "alfa bravo\ncharlie delta",
     "alfa bravo charlie delta",
     ""
   )]
   #[case(
+    "3",
     "alfa bravo   \n   charlie delta",
     "alfa bravo charlie delta",
     ""
   )]
   #[case(
+    "4",
     "alfa\nbravo\n\ncharlie delta",
     "alfa bravo",
     "\n\ncharlie delta"
   )]
-  #[case("alfa      bravo", "alfa bravo", "")]
-  #[case(" alfa ", " alfa ", "")]
+  #[case("5", "alfa      bravo", "alfa bravo", "")]
+  #[case("6", " alfa ", " alfa ", "")]
   fn text_span_runner(
+    #[case] description: &str,
     #[case] given: &str,
     #[case] expected: &str,
     #[case] remainder: &str,
@@ -92,17 +96,12 @@ mod tests {
       kind: "span".to_string(),
       template: "default".to_string(),
     };
-    assert_eq!(
-      left,
-      result.1,
-      "{}",
-      format!("\n\n{:?}\n\n{:?}", input, result)
-    );
+    assert_eq!(left, result.1, "\n\n{}\n\n", description);
     assert_eq!(
       &remainder,
       result.0.fragment(),
-      "{}",
-      format!("\n\n{:?}\n\n{:?}", input, result)
+      "\n\n{}\n\n",
+      description
     );
   }
 

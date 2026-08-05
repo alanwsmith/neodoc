@@ -18,6 +18,7 @@ pub fn single_newline(input: Text) -> IResult<Text, Text> {
   if check.is_some() {
     return Ok((input, Text::new_extra("", "")));
   }
+  let (input, _) = space0.parse(input)?;
   let (input, _) =
     not((space0, line_ending)).parse(input)?;
   Ok((input, Text::new_extra(" ", "")))
@@ -43,10 +44,10 @@ mod tests {
     "x"
   )]
   #[case(
-    "single newline with spaces then content after it returns space and does not chomp whitespace on the next line",
+    "single newline with spaces then content after it returns space and chomps whitespace on the next line",
     "\n  x",
     " ",
-    "  x"
+    "x"
   )]
   #[case(
     "single newline followed by line with only whitespace that reaches end of file returns an empty string",
