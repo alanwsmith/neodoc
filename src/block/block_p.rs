@@ -55,11 +55,14 @@ mod tests {
     .unwrap();
     let right: Value =
       serde_json::to_value(result.1).unwrap();
-    assert_eq!(left, right, "{}", description);
+    assert_eq!(left, right, "\n\n{}\n\n", description);
 
-    //dbg!(result.1);
-    // dbg!(left);
-    // dbg!(right);
+    assert_eq!(
+      &remainder,
+      result.0.fragment(),
+      "\n\n{}\n\n",
+      description
+    );
 
     // assert_eq!(left, result.1, "\n\n{}\n\n", description);
     // assert_eq!(
