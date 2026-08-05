@@ -1,11 +1,14 @@
 use crate::Text;
 use nom::bytes::complete::tag;
+use nom::character::complete::space0;
 use nom::character::complete::space1;
-use nom::sequence::pair;
 use nom::{IResult, Parser};
 
+// REMINDER: There can be whitespace before
+// the tokens, but not newlines.
 pub fn section_token(input: Text) -> IResult<Text, Text> {
-  let (input, _) = pair(tag("--"), space1).parse(input)?;
+  let (input, _) =
+    (space0, tag("--"), space1).parse(input)?;
   Ok((input, Text::new_extra("", "")))
 }
 
@@ -16,8 +19,10 @@ mod tests {
   use rstest::rstest;
 
   #[rstest]
-  #[case("-- ", "", "")]
-  #[case("--     ", "", "")]
+  #[case("-- x", "", "x")]
+  #[case("--     x", "", "x")]
+  #[case(" -- x", "", "x")]
+  #[case("     -- x", "", "x")]
   fn section_token_test_runner(
     #[case] given: &str,
     #[case] expected: &str,
@@ -39,18 +44,15 @@ mod tests {
     );
   }
 
-  // #[rstest]
-  // #[case("-- ", "", "")]
-  // fn run_test(
-  //   #[case] given: &str,
-  //   #[case] expected: &str,
-  //   #[case] remainder: &str,
-  // ) {
-  //   let input = Text::new_extra(given, "");
-  //   let left = (remainder, expected);
-  //   let right = section_token(input).unwrap();
-  //   assert_eq!(left, right);
-  // }
+  #[rstest]
+  #[case("--x")]
+  #[case("---")]
+  #[case("x-- ")]
+  fn section_tokens_error_test_runner(#[case] given: &str) {
+    let input = Text::new_extra(given, "");
+    let result = section_token.parse(input);
+    assert!(result.is_err());
+  }
 
   //
 }
