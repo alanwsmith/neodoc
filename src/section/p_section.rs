@@ -1,5 +1,5 @@
 use crate::bound::Bound;
-use crate::section::metadata::metadata;
+use crate::section::metadata::metadata_loader;
 use crate::section::*;
 use crate::span::empty_lines_or_eof::empty_lines_or_eof;
 use nom::bytes::complete::tag;
@@ -17,7 +17,7 @@ pub fn p_section(
   let (input, _) =
     pair(space0, line_ending).parse(input)?;
   let bound = Bound::Full;
-  let (input, metadata) = metadata.parse(input)?;
+  let (input, metadata) = metadata_loader.parse(input)?;
   let (input, _) = empty_lines_or_eof.parse(input)?;
   let (input, content) = many0(p_block).parse(input)?;
 

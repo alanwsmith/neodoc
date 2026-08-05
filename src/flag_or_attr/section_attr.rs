@@ -1,8 +1,10 @@
 use crate::Text;
 use crate::flag_or_attr::FlagOrAttr;
-use crate::span::section_token;
+use crate::span::attribute_text_span::attribute_text_span;
+use crate::span::section_token::section_token;
 use crate::span::single_character::single_colon;
 use crate::span::single_newline::single_newline;
+use crate::span::text_span::*;
 use crate::span::{Span, word_part::word_part};
 use nom::branch::alt;
 use nom::bytes::complete::{is_not, tag};
@@ -18,28 +20,34 @@ pub fn section_attr(
   let (input, key) = is_not(": \n\r\t").parse(input)?;
   let (input, _) = tag(":").parse(input)?;
   let (input, _) = space1.parse(input)?;
-  let (input, value) = many1(alt((
-    word_part,
-    space1,
-    single_newline,
-    single_colon,
-  )))
-  .parse(input)?;
-  let content = value
-    .iter()
-    .map(|v| *v.fragment())
-    .collect::<Vec<_>>()
-    .join("")
-    .trim()
-    .to_string();
+  let (input, value) =
+    many1(attribute_text_span).parse(input)?;
+
+  // let (input, value) = many1(alt((
+  //   word_part,
+  //   space1,
+  //   single_newline,
+  //   single_colon,
+  // )))
+  // .parse(input)?;
+
+  // let content = value
+  //   .iter()
+  //   .map(|v| *v.fragment())
+  //   .collect::<Vec<_>>()
+  //   .join("")
+  //   .trim()
+  //   .to_string();
+
   let (input, _) = opt(line_ending).parse(input)?;
+
   let flag = FlagOrAttr::SectionAttr {
     key: key.to_string(),
-    value: vec![Span::Text {
-      content,
-      kind: "span".to_string(),
-      template: "default".to_string(),
-    }],
+    value, // value: vec![Span::Text {
+           //   content,
+           //   kind: "span".to_string(),
+           //   template: "default".to_string(),
+           // }],
   };
   Ok((input, flag))
 }
@@ -48,6 +56,53 @@ pub fn section_attr(
 mod tests {
   use super::*;
   use pretty_assertions::assert_eq;
+  use rstest::rstest;
+  use serde_json::Value;
+
+  #[rstest]
+  #[case(
+    "key: words",
+    "-- alfa: bravo",
+    "alfa",
+    r#"[
+    {
+      "attributes": [], 
+      "content": "bravo", 
+      "flags": [],
+      "kind": "span", 
+      "name": "text", 
+      "template": "default"
+    }
+    ]"#,
+    ""
+  )]
+  fn section_attribute_runner(
+    #[case] description: &str,
+    #[case] given: &str,
+    #[case] expected_key: &str,
+    #[case] expected_value: &str,
+    #[case] remainder: &str,
+  ) {
+    let input = Text::new_extra(given, "");
+    let result = section_attr.parse(input).unwrap();
+    let left: Value = serde_json::from_str(&format!(
+      r#"{{
+      "key": "{}",
+      "value": {}
+      }}"#,
+      expected_key, expected_value
+    ))
+    .unwrap();
+    let right: Value =
+      serde_json::to_value(&result.1).unwrap();
+    assert_eq!(left, right, "\n\n{}\n\n", description);
+    assert_eq!(
+      &remainder,
+      result.0.fragment(),
+      "\n\n{}\n\n",
+      description,
+    );
+  }
 
   #[test]
   fn section_attr_1() {
@@ -57,7 +112,9 @@ mod tests {
     let target3 = FlagOrAttr::SectionAttr {
       key: target1.to_string(),
       value: vec![Span::Text {
+        attributes: vec![],
         content: target2.to_string(),
+        flags: vec![],
         kind: "span".to_string(),
         template: "default".to_string(),
       }],
@@ -77,7 +134,9 @@ mod tests {
     let target3 = FlagOrAttr::SectionAttr {
       key: target1.to_string(),
       value: vec![Span::Text {
+        attributes: vec![],
         content: target2.to_string(),
+        flags: vec![],
         kind: "span".to_string(),
         template: "default".to_string(),
       }],
@@ -97,7 +156,9 @@ mod tests {
     let target3 = FlagOrAttr::SectionAttr {
       key: target1.to_string(),
       value: vec![Span::Text {
+        attributes: vec![],
         content: target2.to_string(),
+        flags: vec![],
         kind: "span".to_string(),
         template: "default".to_string(),
       }],
@@ -118,7 +179,9 @@ mod tests {
     let target3 = FlagOrAttr::SectionAttr {
       key: target1.to_string(),
       value: vec![Span::Text {
+        attributes: vec![],
         content: target2.to_string(),
+        flags: vec![],
         kind: "span".to_string(),
         template: "default".to_string(),
       }],

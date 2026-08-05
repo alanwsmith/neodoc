@@ -7,7 +7,9 @@
             "key": "lima",
             "value": [
               {
+                "attrs": [],
                 "content": "mike",
+                "flags": [],
                 "kind": "span",
                 "name": "text",
                 "template": "default"
@@ -18,7 +20,9 @@
             "key": "foxtrot",
             "value": [
               {
+                "attrs": [],
                 "content": "golf hotel india",
+                "flags": [],
                 "kind": "span",
                 "name": "text",
                 "template": "default"
@@ -31,7 +35,9 @@
           {
             "content": [
               {
+                "attrs": [],
                 "content": "juliett kilo",
+                "flags": [],
                 "kind": "span",
                 "name": "text",
                 "template": "default"
@@ -45,7 +51,9 @@
         "flags": [
           [
             {
+              "attrs": [],
               "content": "alfa",
+              "flags": [],
               "kind": "span",
               "name": "text",
               "template": "default"
@@ -53,7 +61,9 @@
           ],
           [
             {
+              "attrs": [],
               "content": "bravo charlie delta echo",
+              "flags": [],
               "kind": "span",
               "name": "text",
               "template": "default"
@@ -71,7 +81,9 @@
           {
             "content": [
               {
+                "attrs": [],
                 "content": "more",
+                "flags": [],
                 "kind": "span",
                 "name": "text",
                 "template": "default"
@@ -90,4 +102,3 @@
     ]
   }
 }
-

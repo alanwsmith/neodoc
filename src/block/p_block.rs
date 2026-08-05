@@ -17,7 +17,9 @@ pub fn p_block(mut input: Text) -> IResult<Text, Section> {
   let content = span_strs
     .iter()
     .map(|x| Span::Text {
+      attributes: vec![],
       content: x.to_string(),
+      flags: vec![],
       kind: "span".to_string(),
       template: "default".to_string(),
     })
