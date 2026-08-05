@@ -1,7 +1,7 @@
 use crate::Text;
 use crate::span::single_newline::single_newline;
 use crate::span::whitespace1::whitespace1;
-use crate::span::word::word;
+use crate::span::word_part::word_part;
 use nom::branch::alt;
 use nom::multi::many1;
 use nom::{IResult, Parser};
@@ -9,7 +9,7 @@ use nom::{IResult, Parser};
 pub fn text_span(mut input: Text) -> IResult<Text, String> {
   input.extra = "text_span";
   let (input, results) =
-    many1(alt((word, single_newline, whitespace1)))
+    many1(alt((word_part, single_newline, whitespace1)))
       .parse(input)?;
 
   let output = results
@@ -71,16 +71,6 @@ mod tests {
       format!("\n\n{:?}\n\n{:?}", input, result)
     );
   }
-
-  // fn text_span_runner(
-  //   #[case] given: &str,
-  //   #[case] expected: String,
-  //   #[case] remainder: &str,
-  // ) {
-  //   let left = (remainder, expected);
-  //   let right = text_span(given).unwrap();
-  //   assert_eq!(left, right);
-  // }
 
   //
 }

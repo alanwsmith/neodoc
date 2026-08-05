@@ -1,6 +1,7 @@
+#![allow(warnings)]
 use crate::flag_or_attr::FlagOrAttr;
 use crate::flag_or_attr::flag_first_word::flag_first_word;
-use crate::span::{Span, word::word};
+use crate::span::{Span, word_part::word_part};
 use nom::branch::alt;
 use nom::character::complete::space1;
 use nom::{IResult, Parser, multi::many0};

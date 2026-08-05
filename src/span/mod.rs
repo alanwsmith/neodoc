@@ -6,7 +6,7 @@ pub mod single_newline;
 pub mod text_span;
 pub mod whitespace0;
 pub mod whitespace1;
-pub mod word;
+pub mod word_part;
 
 pub use section_token::*;
 

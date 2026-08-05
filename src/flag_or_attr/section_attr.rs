@@ -3,7 +3,7 @@ use crate::flag_or_attr::FlagOrAttr;
 use crate::span::section_token;
 use crate::span::single_character::single_colon;
 use crate::span::single_newline::single_newline;
-use crate::span::{Span, word::word};
+use crate::span::{Span, word_part::word_part};
 use nom::branch::alt;
 use nom::bytes::complete::{is_not, tag};
 use nom::character::complete::{line_ending, space1};
@@ -19,7 +19,7 @@ pub fn section_attr(
   let (input, _) = tag(":").parse(input)?;
   let (input, _) = space1.parse(input)?;
   let (input, value) = many1(alt((
-    word,
+    word_part,
     space1,
     single_newline,
     single_colon,
