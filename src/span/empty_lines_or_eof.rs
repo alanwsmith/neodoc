@@ -47,7 +47,6 @@ mod tests {
       "{}",
       format!("\n\n{:?}\n\n{:?}", input, result)
     );
-
     assert_eq!(
       &remainder,
       result.0.fragment(),
