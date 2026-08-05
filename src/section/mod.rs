@@ -2,9 +2,8 @@ pub mod metadata;
 pub mod p_section;
 pub mod stand_alone;
 
-use crate::block::block_p::*;
+use crate::block::p_block::p_block;
 use crate::bound::Bound;
-use crate::section::metadata::*;
 use crate::span::*;
 use crate::{Text, flag_or_attr::FlagOrAttr};
 use nom::{IResult, Parser, branch::alt};
@@ -63,14 +62,14 @@ pub enum Section {
   #[serde(rename = "block")]
   PBlock {
     content: Vec<Span>,
-    r#type: String,
+    name: String,
   },
   Placeholder,
 }
 
 pub fn section(input: Text) -> IResult<Text, Section> {
   let (input, section) =
-    alt((p_section, stand_alone_section, block_p))
+    alt((p_section, stand_alone_section, p_block))
       .parse(input)?;
   Ok((input, section))
 }

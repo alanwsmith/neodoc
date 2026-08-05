@@ -7,6 +7,10 @@ use nom::multi::many0;
 use nom::{IResult, Parser};
 use serde::{Deserialize, Serialize};
 
+// REMINDER: This pulls in the attrs and flags
+// regardless of order and delivers them
+// as independent packages
+
 #[derive(Debug, Deserialize, PartialEq, Serialize)]
 pub struct Metadata {
   pub attrs: Vec<FlagOrAttr>,

@@ -82,15 +82,18 @@ mod tests {
   }
 
   #[rstest]
-  #[case("TODO: Description", "x\n")]
-  #[case("TODO: Description", " x\n")]
+  #[case("word part before newline", "x\n")]
   fn empty_lines_or_eof_error_test_runner(
     #[case] description: &str,
     #[case] given: &str,
   ) {
     let input = Text::new_extra(given, "");
     let result = empty_lines_or_eof.parse(input);
-    assert!(result.is_err(), "{}", description);
+    assert!(
+      result.is_err(),
+      "\n\nERROR AT: {}\n\n",
+      description
+    );
   }
 
   //

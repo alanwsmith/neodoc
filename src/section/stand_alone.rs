@@ -7,7 +7,7 @@ pub fn stand_alone_section(
   mut input: Text
 ) -> IResult<Text, Section> {
   input.extra = "stand_alone_section";
-  let (input, content) = many1(block_p).parse(input)?;
+  let (input, content) = many1(p_block).parse(input)?;
   Ok((
     input,
     Section::StandAlone {

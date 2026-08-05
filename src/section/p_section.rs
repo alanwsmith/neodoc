@@ -20,7 +20,7 @@ pub fn p_section(
   let r#type = "p".to_string();
   let (input, metadata) = metadata.parse(input)?;
   let (input, _) = empty_lines_or_eof.parse(input)?;
-  let (input, content) = many0(block_p).parse(input)?;
+  let (input, content) = many0(p_block).parse(input)?;
 
   //  let (input, _) = empty_lines_or_eof.parse(input)?;
 
@@ -30,7 +30,7 @@ pub fn p_section(
   // }
   // .parse(input)?;
   // let (input, _) = empty_lines_or_eof.parse(input)?;
-  // let (input, sections) = many0(block_p).parse(input)?;
+  // let (input, sections) = many0(p_block).parse(input)?;
 
   Ok((
     input,
