@@ -1,5 +1,3 @@
-// TODO: DEPRECATED - In favor of /src/text/mod.rs
-//
 use crate::Text;
 use crate::span::Span;
 use crate::span_parts::one_or_more_dashes::one_or_more_dashes;
@@ -10,8 +8,8 @@ use nom::branch::alt;
 use nom::multi::many1;
 use nom::{IResult, Parser};
 
-pub fn block_text_span(mut input: Text) -> IResult<Text, Span> {
-  input.extra = "block_text_span";
+pub fn text(mut input: Text) -> IResult<Text, Span> {
+  input.extra = "text";
   let (input, results) = many1(alt((
     word_part,
     single_newline,

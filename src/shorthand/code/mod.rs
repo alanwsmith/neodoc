@@ -66,11 +66,15 @@ pub fn code_shorthand_metadata_attribute(
   mut input: Text
 ) -> IResult<Text, Metadata> {
   input.extra = "code_shorthand_metadata_flag";
-  let (input, result) = tag("|xxxx").parse(input)?;
+  let (input, _) = tag("|").parse(input)?;
+  let (input, key) = is_not(": \n\r\t").parse(input)?;
+  let (input, _) = tag(":").parse(input)?;
+  let (input, _) = space1.parse(input)?;
+  // TODO: pull in text values here
   Ok((
     input,
     Metadata::Attribute {
-      key: "xxx".to_string(),
+      key: key.to_string(),
       value: vec![],
     },
   ))
@@ -235,9 +239,6 @@ mod tests {
   #[case("Escaped escape", "``\\\\``", vec![
     Snippet::Escaped("\\".to_string()),
   ])]
-
-  // TODO: Escaped escape: \\\\
-
   fn code_shorthand_without_metadata_runner(
     #[case] description: &str,
     #[case] given: &str,
@@ -251,6 +252,35 @@ mod tests {
       flags: vec![],
       r#type: "span".to_string(),
       template: "default".to_string(),
+    };
+    assert_eq!(left, result.1, "\n\nFAILED: {}\n\n", description);
+    assert_eq!(
+      &"",
+      result.0.fragment(),
+      "\n\nFAILED: {}\n\n",
+      description
+    );
+  }
+
+  // Attribute metadata
+  #[rstest]
+  #[case("key, single word value ending at close of span", "|alfa: bravo``", "alfa", vec![])]
+  fn code_shorthand_attribute_metadata_runner(
+    #[case] description: &str,
+    #[case] given: &str,
+    #[case] expected_key: &str,
+    #[case] expected_value: Vec<Span>,
+  ) {
+    let input = Text::new_extra(given, "");
+    let result =
+      code_shorthand_metadata_attribute.parse(input).unwrap();
+    let left = Metadata::Attribute {
+      key: expected_key.to_string(),
+      value: vec![], // attributes: vec![],
+                     // content: expected,
+                     // flags: vec![],
+                     // r#type: "span".to_string(),
+                     // template: "default".to_string(),
     };
     assert_eq!(left, result.1, "\n\nFAILED: {}\n\n", description);
     assert_eq!(
