@@ -65,7 +65,7 @@ pub fn code_shorthand_escaped_snippets(
 ) -> IResult<Text, Snippet> {
   input.extra = "code_shorthand_normal_snippets";
   let (input, _) = tag("\\").parse(input)?;
-  let (input, result) = alt((tag("`"),)).parse(input)?;
+  let (input, result) = alt((tag("`"), tag("|"))).parse(input)?;
   Ok((input, Snippet::Escaped(result.to_string())))
 }
 
@@ -181,6 +181,11 @@ mod tests {
   #[case("Single escaped backtick", "``\\```", vec![
     Snippet::Escaped("`".to_string()),
   ])]
+  #[case("Escaped pipe", "``\\|``", vec![
+    Snippet::Escaped("|".to_string()),
+  ])]
+
+  // TODO: Escaped escape: \\\\
 
   fn code_shorthand_without_metadata_runner(
     #[case] description: &str,
