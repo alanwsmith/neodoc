@@ -13,18 +13,15 @@ use nom::bytes::complete::{is_not, tag};
 use nom::character::complete::{line_ending, space0};
 use nom::character::complete::{multispace0, space1};
 use nom::combinator::{not, opt};
+use nom::multi::many0;
 use nom::multi::many1;
 use nom::sequence::pair;
 use nom::{IResult, Parser};
 
 pub fn code_shorthand(mut input: Text) -> IResult<Text, Span> {
   input.extra = "code";
-  let (input, _) = tag("``").parse(input)?;
-  let (input, _) =
-    not((space0, line_ending, space0, line_ending)).parse(input)?;
-  let (input, _) = space0.parse(input)?;
-  let (input, _) = opt(single_newline).parse(input)?;
-  let (input, snippets) = many1(alt((
+  let (input, _) = code_shorthand_opening_token.parse(input)?;
+  let (input, snippets) = many0(alt((
     code_shorthand_normal_snippets,
     code_shorthand_escaped_snippets,
   )))
@@ -47,6 +44,18 @@ pub fn code_shorthand(mut input: Text) -> IResult<Text, Span> {
     template: "default".to_string(),
   };
   Ok((input, output))
+}
+
+pub fn code_shorthand_opening_token(
+  mut input: Text
+) -> IResult<Text, Text> {
+  input.extra = "code_shorthand_opening_token";
+  let (input, result) = tag("``").parse(input)?;
+  let (input, _) =
+    not((space0, line_ending, space0, line_ending)).parse(input)?;
+  let (input, _) = space0.parse(input)?;
+  let (input, _) = opt(single_newline).parse(input)?;
+  Ok((input, result))
 }
 
 pub fn code_shorthand_closing_token(
@@ -73,6 +82,8 @@ pub fn code_shorthand_normal_snippets(
   mut input: Text
 ) -> IResult<Text, Snippet> {
   input.extra = "code_shorthand_normal_snippets";
+  let (input, _) =
+    not(code_shorthand_closing_token).parse(input)?;
   let (input, contents) = many1(pair(
     not((space0, line_ending, space0, line_ending)),
     alt((
@@ -129,6 +140,7 @@ mod tests {
   use rstest::rstest;
 
   #[rstest]
+  #[case("Can be empty", "````", vec![])]
   #[case("Single word", "``alfa``", vec![
     Snippet::Normal("alfa".to_string())
   ])]
