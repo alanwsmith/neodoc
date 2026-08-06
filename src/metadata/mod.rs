@@ -2,14 +2,14 @@ pub mod section_attribute_metadata;
 pub mod section_flag_metadata;
 pub mod section_metadata;
 
-use crate::content::Span;
+use crate::content::Content;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 #[serde(untagged)]
 pub enum Metadata {
-  Attribute { key: String, value: Vec<Span> },
-  Flag(Vec<Span>),
+  Attribute { key: String, value: Vec<Content> },
+  Flag(Vec<Content>),
 }
 
 #[derive(Debug, Deserialize, PartialEq, Serialize)]

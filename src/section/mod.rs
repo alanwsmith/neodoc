@@ -63,7 +63,7 @@ pub enum Section {
   },
   #[serde(rename = "block")]
   PBlock {
-    content: Vec<Span>,
+    content: Vec<Content>,
     name: String,
     template: String,
   },

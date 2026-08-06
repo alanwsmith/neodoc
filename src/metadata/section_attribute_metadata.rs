@@ -1,7 +1,7 @@
 use crate::Input;
-use crate::metadata::Metadata;
 use crate::content::section_metadata_text_span::section_metadata_text_span;
 use crate::content_parts::section_token::section_token;
+use crate::metadata::Metadata;
 use nom::bytes::complete::{is_not, tag};
 use nom::character::complete::{line_ending, space1};
 use nom::combinator::opt;
@@ -38,7 +38,7 @@ pub fn section_attribute_metadata(
 
   let flag = Metadata::Attribute {
     key: key.to_string(),
-    value, // value: vec![Span::Input {
+    value, // value: vec![Content::Text {
            //   content,
            //   kind: "span".to_string(),
            //   template: "default".to_string(),
@@ -50,7 +50,7 @@ pub fn section_attribute_metadata(
 #[cfg(test)]
 mod tests {
   use super::*;
-  use crate::content::Span;
+  use crate::content::Content;
   use pretty_assertions::assert_eq;
   use rstest::rstest;
   use serde_json::Value;
@@ -97,8 +97,7 @@ mod tests {
     #[case] remainder: &str,
   ) {
     let input = Input::new_extra(given, "");
-    let result =
-      section_attribute_metadata.parse(input).unwrap();
+    let result = section_attribute_metadata.parse(input).unwrap();
     let left: Value = serde_json::from_str(&format!(
       r#"{{
       "key": "{}",
@@ -107,8 +106,7 @@ mod tests {
       expected_key, expected_value
     ))
     .unwrap();
-    let right: Value =
-      serde_json::to_value(&result.1).unwrap();
+    let right: Value = serde_json::to_value(&result.1).unwrap();
     assert_eq!(left, right, "\n\n{}\n\n", description);
     assert_eq!(
       &remainder,
@@ -125,7 +123,7 @@ mod tests {
     let target2 = "bravo";
     let target3 = Metadata::Attribute {
       key: target1.to_string(),
-      value: vec![Span::Input {
+      value: vec![Content::Text {
         attributes: vec![],
         content: target2.to_string(),
         flags: vec![],
@@ -147,7 +145,7 @@ mod tests {
     let target2 = "bravo charlie";
     let target3 = Metadata::Attribute {
       key: target1.to_string(),
-      value: vec![Span::Input {
+      value: vec![Content::Text {
         attributes: vec![],
         content: target2.to_string(),
         flags: vec![],
@@ -163,14 +161,14 @@ mod tests {
   }
 
   #[test]
-  fn section_attr_multi_line_with_trailing_string_with_colons()
-   {
-    let content = "-- alfa: bravo: https://www.example.com\ncharlie\n\nx";
+  fn section_attr_multi_line_with_trailing_string_with_colons() {
+    let content =
+      "-- alfa: bravo: https://www.example.com\ncharlie\n\nx";
     let target1 = "alfa";
     let target2 = "bravo: https://www.example.com charlie";
     let target3 = Metadata::Attribute {
       key: target1.to_string(),
-      value: vec![Span::Input {
+      value: vec![Content::Text {
         attributes: vec![],
         content: target2.to_string(),
         flags: vec![],

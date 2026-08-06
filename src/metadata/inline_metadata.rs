@@ -10,7 +10,7 @@
 // #![allow(warnings)]
 // use crate::Input;
 // use crate::metadata::{Metadata, Metadatas};
-// use crate::span::Span;
+// use crate::content::Content;
 // use crate::span::flag_first_word::flag_first_word;
 // use crate::content_parts::word_part::word_part;
 // use nom::branch::alt;

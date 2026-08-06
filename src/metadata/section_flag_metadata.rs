@@ -1,8 +1,8 @@
 use crate::Input;
-use crate::metadata::Metadata;
 use crate::content::flag_first_word::flag_first_word;
 use crate::content::section_metadata_text_span::section_metadata_text_span;
 use crate::content_parts::section_token::section_token;
+use crate::metadata::Metadata;
 use nom::character::complete::line_ending;
 use nom::combinator::opt;
 use nom::{IResult, Parser, multi::many0};
@@ -25,7 +25,7 @@ pub fn section_flag_metadata(
 #[cfg(test)]
 mod tests {
   use super::*;
-  use crate::content::Span;
+  use crate::content::Content;
   use pretty_assertions::assert_eq;
   use rstest::rstest;
 
@@ -67,12 +67,7 @@ mod tests {
     ":alfa:bravo",
     ""
   )]
-  #[case(
-    "Chomp trailing whitespace",
-    "-- alfa ",
-    "alfa",
-    ""
-  )]
+  #[case("Chomp trailing whitespace", "-- alfa ", "alfa", "")]
 
   // TODO: Add escaped character for colon at the end of the
   // first word
@@ -82,7 +77,7 @@ mod tests {
     #[case] expected1: &str,
     #[case] expected2: &str,
   ) {
-    let mut spans = vec![Span::Input {
+    let mut spans = vec![Content::Text {
       attributes: vec![],
       content: expected1.to_string(),
       flags: vec![],
@@ -90,7 +85,7 @@ mod tests {
       template: "default".to_string(),
     }];
     if !expected2.is_empty() {
-      spans.push(Span::Input {
+      spans.push(Content::Text {
         attributes: vec![],
         content: expected2.to_string(),
         flags: vec![],
@@ -103,11 +98,7 @@ mod tests {
     let result = section_flag_metadata(input).unwrap();
     let left = target;
     let right = result.1;
-    assert_eq!(
-      left, right,
-      "\n\nFAILED: {}\n\n",
-      description
-    );
+    assert_eq!(left, right, "\n\nFAILED: {}\n\n", description);
   }
 
   #[rstest]

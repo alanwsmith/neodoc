@@ -65,7 +65,7 @@ mod tests {
   //   #[case] target1: &str,
   // ) {
   //   let target2 =
-  //     FlagOrAttr::SectionFlag(vec![Span::Input {
+  //     FlagOrAttr::SectionFlag(vec![Content::Text {
   //       content: target1.to_string(),
   //     }]);
   //   let input = Input::new_extra(content, "");

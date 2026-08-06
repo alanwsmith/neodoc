@@ -10,7 +10,7 @@
 //use crate::Input;
 //use crate::metadata::Metadata;
 ////use crate::flag_or_attr::FlagOrAttr;
-//use crate::span::Span;
+//use crate::content::Content;
 //use crate::span::flag_first_word::flag_first_word;
 //use crate::content_parts::word_part::word_part;
 //use nom::branch::alt;
@@ -25,7 +25,7 @@
 //  // let (input, more_words) =
 //  //   many0(alt((word, space1))).parse(input)?;
 //  // let bits = vec![first_word];
-//  // let flag = FlagOrAttr::InlineFlag(vec![Span::Input {
+//  // let flag = FlagOrAttr::InlineFlag(vec![Content::Text {
 //  //   content: [bits, more_words].concat().join(""),
 //  // }]);
 //  //Ok((input, flag))

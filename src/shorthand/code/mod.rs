@@ -1,7 +1,7 @@
 #![allow(warnings)]
 use crate::Input;
 use crate::metadata::{Metadata, Metadatas};
-use crate::content::{Snippet, Span};
+use crate::content::{Snippet, Content};
 use crate::content_parts::code_span_whitespace1_for_block::code_span_whitespace1_for_block;
 use crate::content_parts::escape_character::escape_backtick;
 use crate::content_parts::one_or_more_dashes::one_or_more_dashes;
@@ -19,7 +19,7 @@ use nom::multi::many1;
 use nom::sequence::pair;
 use nom::{IResult, Parser};
 
-pub fn code_shorthand(mut input: Input) -> IResult<Input, Span> {
+pub fn code_shorthand(mut input: Input) -> IResult<Input, Content> {
   input.extra = "code";
   let (input, _) = code_shorthand_opening_token.parse(input)?;
   let (input, snippets) = many0(alt((
@@ -29,7 +29,7 @@ pub fn code_shorthand(mut input: Input) -> IResult<Input, Span> {
   .parse(input)?;
   let (input, metadatas) = code_shorthand_metadatas.parse(input)?;
   let (input, _) = code_shorthand_closing_token.parse(input)?;
-  let output = Span::Code {
+  let output = Content::Code {
     attributes: vec![],
     content: snippets,
     flags: vec![],
@@ -246,7 +246,7 @@ mod tests {
   ) {
     let input = Input::new_extra(given, "");
     let result = code_shorthand.parse(input).unwrap();
-    let left = Span::Code {
+    let left = Content::Code {
       attributes: vec![],
       content: expected,
       flags: vec![],
@@ -269,7 +269,7 @@ mod tests {
     #[case] description: &str,
     #[case] given: &str,
     #[case] expected_key: &str,
-    #[case] expected_value: Vec<Span>,
+    #[case] expected_value: Vec<Content>,
   ) {
     let input = Input::new_extra(given, "");
     let result =

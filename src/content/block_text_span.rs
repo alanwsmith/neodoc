@@ -1,7 +1,7 @@
 // TODO: DEPRECATED - In favor of /src/text/mod.rs
 //
 use crate::Input;
-use crate::content::Span;
+use crate::content::Content;
 use crate::content_parts::one_or_more_dashes::one_or_more_dashes;
 use crate::content_parts::single_newline::single_newline;
 use crate::content_parts::whitespace1::whitespace1;
@@ -10,7 +10,7 @@ use nom::branch::alt;
 use nom::multi::many1;
 use nom::{IResult, Parser};
 
-pub fn block_text_span(mut input: Input) -> IResult<Input, Span> {
+pub fn block_text_span(mut input: Input) -> IResult<Input, Content> {
   input.extra = "block_text_span";
   let (input, results) = many1(alt((
     word_part,
@@ -25,7 +25,7 @@ pub fn block_text_span(mut input: Input) -> IResult<Input, Span> {
     .collect::<Vec<_>>()
     .join("")
     .to_string();
-  let output = Span::Input {
+  let output = Content::Text {
     attributes: vec![],
     content,
     flags: vec![],
@@ -71,7 +71,7 @@ mod tests {
   ) {
     let input = Input::new_extra(given, "");
     let result = block_text_span.parse(input).unwrap();
-    let left = Span::Input {
+    let left = Content::Text {
       attributes: vec![],
       content: expected.to_string(),
       flags: vec![],

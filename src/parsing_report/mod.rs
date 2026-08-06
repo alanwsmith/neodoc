@@ -26,18 +26,15 @@ pub fn report(result: ResultHolder) {
         e.input.location_line(),
         e.input.get_utf8_column(),
       );
-      let error_line = String::from_utf8(
-        e.input.get_line_beginning().to_vec(),
-      )
-      .unwrap();
+      let error_line =
+        String::from_utf8(e.input.get_line_beginning().to_vec())
+          .unwrap();
       let divider_spaces = max(
         error_message.chars().collect::<Vec<_>>().len(),
         error_line.chars().collect::<Vec<_>>().len(),
       );
-      let pointer_line = format!(
-        "{}^",
-        " ".repeat(e.input.get_utf8_column() - 1),
-      );
+      let pointer_line =
+        format!("{}^", " ".repeat(e.input.get_utf8_column() - 1),);
       let parts = [
         error_message.to_string(),
         "-".repeat(divider_spaces).to_string(),
@@ -59,18 +56,15 @@ pub fn report_section(result: ResultHolderSection) {
         e.input.location_line(),
         e.input.get_utf8_column(),
       );
-      let error_line = String::from_utf8(
-        e.input.get_line_beginning().to_vec(),
-      )
-      .unwrap();
+      let error_line =
+        String::from_utf8(e.input.get_line_beginning().to_vec())
+          .unwrap();
       let divider_spaces = max(
         error_message.chars().collect::<Vec<_>>().len(),
         error_line.chars().collect::<Vec<_>>().len(),
       );
-      let pointer_line = format!(
-        "{}^",
-        " ".repeat(e.input.get_utf8_column() - 1),
-      );
+      let pointer_line =
+        format!("{}^", " ".repeat(e.input.get_utf8_column() - 1),);
       let parts = [
         error_message.to_string(),
         "-".repeat(divider_spaces).to_string(),

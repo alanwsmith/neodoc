@@ -1,5 +1,5 @@
 use crate::Input;
-use crate::content::Span;
+use crate::content::Content;
 use crate::content_parts::one_or_more_colons::one_or_more_colons;
 use crate::content_parts::one_or_more_dashes::one_or_more_dashes;
 use crate::content_parts::single_newline_in_metadata::single_newline_in_metadata;
@@ -17,7 +17,7 @@ use nom_locate::LocatedSpan;
 // issues this is the first place to look.
 pub fn section_metadata_text_span(
   mut input: Input
-) -> IResult<Input, Span> {
+) -> IResult<Input, Content> {
   input.extra = "attribute_text_span";
   let (input, results) = many1(alt((
     word_part,
@@ -39,7 +39,7 @@ pub fn section_metadata_text_span(
       nom::error::ErrorKind::Fail,
     )));
   }
-  let output = Span::Input {
+  let output = Content::Text {
     attributes: vec![],
     content,
     flags: vec![],
@@ -106,7 +106,7 @@ mod tests {
   ) {
     let input = Input::new_extra(given, "");
     let result = section_metadata_text_span.parse(input).unwrap();
-    let left = Span::Input {
+    let left = Content::Text {
       attributes: vec![],
       content: expected.to_string(),
       flags: vec![],

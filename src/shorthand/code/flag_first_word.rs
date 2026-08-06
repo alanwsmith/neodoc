@@ -1,6 +1,6 @@
 #![allow(warnings)]
 use crate::Input;
-use crate::span::Span;
+use crate::content::Content;
 use crate::content_parts::code_flag_word_part::code_flag_word_part;
 use crate::content_parts::colon_not_followed_by_space::colon_not_followed_by_space;
 use crate::content_parts::one_or_more_colons::one_or_more_colons;
@@ -15,15 +15,12 @@ use nom::{IResult, Parser};
 
 pub fn code_shorthand_flag_first_word(
   mut input: Input
-) -> IResult<Input, Span> {
+) -> IResult<Input, Content> {
   input.extra = "code_flag_first_word";
-  let (input, texts) = many1(alt((
-    code_flag_word_part,
-    colon_not_followed_by_space,
-  )))
-  .parse(input)?;
-  let (input, _) =
-    not(pair(tag(":"), multispace1)).parse(input)?;
+  let (input, texts) =
+    many1(alt((code_flag_word_part, colon_not_followed_by_space)))
+      .parse(input)?;
+  let (input, _) = not(pair(tag(":"), multispace1)).parse(input)?;
   let content = texts
     .iter()
     .map(|x| x.to_string())
@@ -33,7 +30,7 @@ pub fn code_shorthand_flag_first_word(
   dbg!(&content);
   Ok((
     input,
-    Span::Input {
+    Content::Text {
       attributes: vec![],
       content,
       r#type: "span".to_string(),
@@ -77,11 +74,7 @@ mod tests {
     let result = code_flag_first_word.parse(input).unwrap();
     let left = test_text_span(expected);
     let right = result.1;
-    assert_eq!(
-      left, right,
-      "\n\nFAILED: {}\n\n",
-      description
-    );
+    assert_eq!(left, right, "\n\nFAILED: {}\n\n", description);
     assert_eq!(
       &remainder,
       result.0.fragment(),
@@ -109,11 +102,7 @@ mod tests {
   ) {
     let input = Input::new_extra(given, "");
     let result = code_flag_first_word.parse(input);
-    assert!(
-      result.is_err(),
-      "\n\nFAILED: {}\n\n",
-      description
-    );
+    assert!(result.is_err(), "\n\nFAILED: {}\n\n", description);
   }
 
   //   #[test]

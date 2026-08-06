@@ -8,7 +8,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 #[serde(tag = "name", rename_all = "lowercase")]
-pub enum Span {
+pub enum Content {
   Code {
     attributes: Vec<Metadata>,
     content: Vec<Snippet>,
@@ -16,7 +16,7 @@ pub enum Span {
     r#type: String,
     template: String,
   },
-  Input {
+  Text {
     attributes: Vec<Metadata>,
     content: String,
     flags: Vec<Metadata>,
@@ -25,8 +25,8 @@ pub enum Span {
   },
 }
 
-pub fn test_text_span(input: &str) -> Span {
-  Span::Input {
+pub fn test_text_span(input: &str) -> Content {
+  Content::Text {
     attributes: vec![],
     content: input.to_string(),
     flags: vec![],
