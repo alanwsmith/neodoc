@@ -33,9 +33,10 @@ pub fn test_text_span(input: &str) -> Content {
   }
 }
 
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(tag = "kind", rename_all = "lowercase")]
-pub enum Snippet {
-  Normal(String),
-  Escaped(String),
-}
+// DEPRECATED: Use Content::Text with template
+// #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
+// #[serde(tag = "kind", rename_all = "lowercase")]
+// pub enum Snippet {
+//   Normal(String),
+//   Escaped(String),
+// }

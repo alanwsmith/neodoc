@@ -1,0 +1,51 @@
+{
+  "given": "-- p\n\nalfa ``bravo`` charlie",
+  "remainder": "",
+  "status": {
+    "ok": {
+      "content": [
+        {
+          "attrs": [],
+          "bound": "all",
+          "content": [
+            {
+              "content": [
+                {
+                  "content": "alfa ",
+                  "template": "default",
+                  "type": "text"
+                },
+                {
+                  "attrs": [],
+                  "content": [
+                    {
+                      "content": "bravo",
+                      "template": "default",
+                      "type": "text"
+                    }
+                  ],
+                  "flags": [],
+                  "subType": "code",
+                  "template": "default",
+                  "type": "shorthand"
+                },
+                {
+                  "content": " charlie",
+                  "template": "default",
+                  "type": "text"
+                }
+              ],
+              "template": "default",
+              "type": "block"
+            }
+          ],
+          "flags": [],
+          "subType": "p",
+          "template": "default",
+          "type": "p"
+        }
+      ]
+    }
+  },
+  "test": "Auto-Saved test"
+}
