@@ -44,8 +44,7 @@ use nom::{
 
 for char in chars:
     lines.append(f"""pub fn escape_{char[1]}(input: Text) -> IResult<Text, Text> {{
-let (input, result) = tag("{char[0]}").parse(input)?;
-let (input, _) = not(tag("{char[0]}")).parse(input)?;
+let (input, result) = tag("\\\\{char[0]}").parse(input)?;
   Ok((input, result))
   }}
 
@@ -62,7 +61,7 @@ for char in chars:
     lines.append(f"""
 #[test]
 fn test_escape_{char[1]}() {{
-    let content = "{char[0]}";
+    let content = "\\\\{char[0]}";
     let input = Text::new_extra(content, "");
       let result = escape_{char[1]}(input).unwrap();
       let left = content;

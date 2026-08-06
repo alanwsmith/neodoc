@@ -19,8 +19,7 @@ pub fn single_newline(input: Text) -> IResult<Text, Text> {
     return Ok((input, Text::new_extra("", "")));
   }
   let (input, _) = space0.parse(input)?;
-  let (input, _) =
-    not((space0, line_ending)).parse(input)?;
+  let (input, _) = not((space0, line_ending)).parse(input)?;
   Ok((input, Text::new_extra(" ", "")))
 }
 
