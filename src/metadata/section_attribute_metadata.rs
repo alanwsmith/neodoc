@@ -9,8 +9,9 @@ use nom::multi::many1;
 use nom::{IResult, Parser};
 
 pub fn section_attribute_metadata(
-  input: Input
+  mut input: Input
 ) -> IResult<Input, Metadata> {
+  input.extra.push("section_attribute_metadata");
   let (input, _) = section_token.parse(input)?;
   let (input, key) = is_not(": \n\r\t").parse(input)?;
   let (input, _) = tag(":").parse(input)?;
@@ -96,7 +97,7 @@ mod tests {
     #[case] expected_value: &str,
     #[case] remainder: &str,
   ) {
-    let input = Input::new_extra(given, "");
+    let input = Input::new_extra(given, vec![]);
     let result = section_attribute_metadata.parse(input).unwrap();
     let left: Value = serde_json::from_str(&format!(
       r#"{{
@@ -129,7 +130,7 @@ mod tests {
         template: "default".to_string(),
       }],
     };
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     let result = section_attribute_metadata(input).unwrap();
     let left = target3;
     let right = result.1;
@@ -149,7 +150,7 @@ mod tests {
         template: "default".to_string(),
       }],
     };
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     let result = section_attribute_metadata(input).unwrap();
     let left = target3;
     let right = result.1;
@@ -170,7 +171,7 @@ mod tests {
         template: "default".to_string(),
       }],
     };
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     let result = section_attribute_metadata(input).unwrap();
     let left = target3;
     let right = result.1;

@@ -3,9 +3,9 @@ use nom::character::complete::space1;
 use nom::{IResult, Parser};
 
 pub fn whitespace1(mut input: Input) -> IResult<Input, Input> {
-  input.extra = "whitespace1";
+  input.extra.push("whitespace1");
   let (input, _) = space1.parse(input)?;
-  Ok((input, Input::new_extra(" ", "")))
+  Ok((input, Input::new_extra(" ", vec![])))
 }
 
 #[cfg(test)]
@@ -24,8 +24,8 @@ mod tests {
     #[case] expected: &str,
     #[case] remainder: &str,
   ) {
-    let input = Input::new_extra(given, "");
-    let result = whitespace1.parse(input).unwrap();
+    let input = Input::new_extra(given, vec![]);
+    let result = whitespace1.parse(input.clone()).unwrap();
     assert_eq!(
       &expected,
       result.1.fragment(),

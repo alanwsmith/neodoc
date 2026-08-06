@@ -10,7 +10,7 @@ use nom::{IResult, Parser, multi::many0};
 pub fn section_flag_metadata(
   mut input: Input
 ) -> IResult<Input, Metadata> {
-  input.extra = "section_flag";
+  input.extra.push("section_flag");
   let (input, _) = section_token.parse(input)?;
   let (input, first_word) = flag_first_word.parse(input)?;
   let (input, more_words) =
@@ -90,7 +90,7 @@ mod tests {
       })
     };
     let target = Metadata::Flag(spans);
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     let result = section_flag_metadata(input).unwrap();
     let left = target;
     let right = result.1;
@@ -118,7 +118,7 @@ mod tests {
     #[case] description: &str,
     #[case] content: &str,
   ) {
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(
       section_flag_metadata(input).is_err(),
       "\n\nFAILED: {}\n\n",

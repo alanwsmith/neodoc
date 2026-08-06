@@ -13,4 +13,4 @@ use nom_locate::LocatedSpan;
 #[allow(dead_code)]
 const SINGLE_CHARACTERS: [u8; 23] = *b"`~!@#$%^&*(){}[]<>:|_-=";
 
-pub type Input<'a> = LocatedSpan<&'a str, &'a str>;
+pub type Input<'a> = LocatedSpan<&'a str, Vec<&'a str>>;

@@ -12,7 +12,8 @@ pub enum Payload {
   Error {},
 }
 
-pub fn payload(input: Input) -> IResult<Input, Payload> {
+pub fn payload(mut input: Input) -> IResult<Input, Payload> {
+  input.extra.push("payload");
   let (input, content) = many1(section).parse(input)?;
   let payload = Payload::Ok { content };
   Ok((input, payload))
@@ -38,14 +39,19 @@ mod tests {
   fn integration() {
     let content = include_str!("tests/1/input.neo").trim();
     let check = include_str!("tests/1/target.json");
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     let left: Value = serde_json::from_str(check).unwrap();
-    let result = payload(input);
+    let result = payload(input.clone());
+    dbg!(&result);
     match result {
       Ok(response) => {
-        let right =
-          serde_json::to_value(response.1).unwrap();
-        assert_eq!(left, right);
+        let right = serde_json::to_value(response.1).unwrap();
+        assert_eq!(
+          left,
+          right,
+          "\n\nFAILED: {}\n\n",
+          serde_json::to_value(*response.0).unwrap().to_string()
+        );
         if left.eq(&right) {
           let test_save_path =
             "tests/integration/ok/auto-saved-test.json";
@@ -57,14 +63,13 @@ mod tests {
           };
           fs::write(
             test_save_path,
-            serde_json::to_string_pretty(&test_output)
-              .unwrap(),
+            serde_json::to_string_pretty(&test_output).unwrap(),
           )
           .unwrap()
         }
       }
-      Err(_) => {
-        // TODO: Output report here
+      Err(e) => {
+        dbg!(e);
       }
     }
 

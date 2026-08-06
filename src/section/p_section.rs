@@ -10,7 +10,7 @@ use nom::sequence::pair;
 use nom::{IResult, Parser};
 
 pub fn p_section(mut input: Input) -> IResult<Input, Section> {
-  input.extra = "p_section";
+  input.extra.push("p_section");
   let (input, _) = section_token.parse(input)?;
   let (input, name) = tag("p").parse(input)?;
   let (input, _) = pair(space0, line_ending).parse(input)?;
@@ -191,7 +191,7 @@ mod tests {
     #[case] content: &str,
     #[case] target1: &str,
   ) {
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     let target2: Value = serde_json::from_str(target1).unwrap();
     let result = p_section(input);
     let left = target2;

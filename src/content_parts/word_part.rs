@@ -3,10 +3,9 @@ use nom::bytes::complete::is_not;
 use nom::{IResult, Parser};
 
 pub fn word_part(mut input: Input) -> IResult<Input, Input> {
-  input.extra = "word_part";
+  input.extra.push("word_part");
   let (input, result) =
-    is_not("`~!@#$%^&*(){}[]<>:|_-= \n\r\t\\")
-      .parse(input)?;
+    is_not("`~!@#$%^&*(){}[]<>:|_-= \n\r\t\\").parse(input)?;
   Ok((input, result))
 }
 
@@ -29,8 +28,8 @@ mod tests {
     #[case] expected: &str,
     #[case] remainder: &str,
   ) {
-    let input = Input::new_extra(given, "");
-    let result = word_part.parse(input).unwrap();
+    let input = Input::new_extra(given, vec![]);
+    let result = word_part.parse(input.clone()).unwrap();
     assert_eq!(
       &expected,
       result.1.fragment(),
@@ -52,12 +51,11 @@ mod tests {
     // defined stop characters.
     SINGLE_CHARACTERS.iter().for_each(|c| {
       let binding = [*c];
-      let x = std::str::from_utf8(&binding)
-        .expect("invalid UTF-8");
+      let x = std::str::from_utf8(&binding).expect("invalid UTF-8");
       let base = "alfa";
       let given = format!("{}{}x", base, x);
-      let input = Input::new_extra(&given, "");
-      let result = word_part.parse(input).unwrap();
+      let input = Input::new_extra(&given, vec![]);
+      let result = word_part.parse(input.clone()).unwrap();
       assert_eq!(
         &base,
         result.1.fragment(),

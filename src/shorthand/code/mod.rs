@@ -20,7 +20,7 @@ use nom::sequence::pair;
 use nom::{IResult, Parser};
 
 pub fn code_shorthand(mut input: Input) -> IResult<Input, Content> {
-  input.extra = "code";
+  input.extra = vec!["code_shorthand"];
   let (input, _) = code_shorthand_opening_token.parse(input)?;
   let (input, content) = many0(alt((
     code_shorthand_normal_snippets,
@@ -43,7 +43,7 @@ pub fn code_shorthand(mut input: Input) -> IResult<Input, Content> {
 pub fn code_shorthand_metadatas(
   mut input: Input
 ) -> IResult<Input, Metadatas> {
-  input.extra = "code_shorthand_metadatas";
+  input.extra.push("code_shorthand_metadatas");
   let (input, metadata) = many0(alt((
     code_shorthand_metadata_attribute,
     code_shorthand_metadata_flag,
@@ -66,7 +66,7 @@ pub fn code_shorthand_metadatas(
 pub fn code_shorthand_metadata_attribute(
   mut input: Input
 ) -> IResult<Input, Metadata> {
-  input.extra = "code_shorthand_metadata_flag";
+  input.extra.push("code_shorthand_metadata_flag");
   let (input, _) = tag("|").parse(input)?;
   let (input, key) = is_not(": \n\r\t").parse(input)?;
   let (input, _) = tag(":").parse(input)?;
@@ -84,7 +84,7 @@ pub fn code_shorthand_metadata_attribute(
 pub fn code_shorthand_metadata_flag(
   mut input: Input
 ) -> IResult<Input, Metadata> {
-  input.extra = "code_shorthand_metadata_flag";
+  input.extra.push("code_shorthand_metadata_flag");
   let (input, result) = tag("|xxxx").parse(input)?;
   Ok((input, Metadata::Flag(vec![])))
 }
@@ -92,7 +92,7 @@ pub fn code_shorthand_metadata_flag(
 pub fn code_shorthand_opening_token(
   mut input: Input
 ) -> IResult<Input, Input> {
-  input.extra = "code_shorthand_opening_token";
+  input.extra.push("code_shorthand_opening_token");
   let (input, result) = tag("``").parse(input)?;
   let (input, _) =
     not((space0, line_ending, space0, line_ending)).parse(input)?;
@@ -104,7 +104,7 @@ pub fn code_shorthand_opening_token(
 pub fn code_shorthand_closing_token(
   mut input: Input
 ) -> IResult<Input, Input> {
-  input.extra = "code_shorthand_closing_token";
+  input.extra.push("code_shorthand_closing_token");
   let (input, _) =
     not((space0, line_ending, space0, line_ending)).parse(input)?;
   let (input, _) = multispace0.parse(input)?;
@@ -115,7 +115,7 @@ pub fn code_shorthand_closing_token(
 pub fn code_shorthand_escaped_snippets(
   mut input: Input
 ) -> IResult<Input, Content> {
-  input.extra = "code_shorthand_normal_snippets";
+  input.extra.push("code_shorthand_normal_snippets");
   let (input, _) = tag("\\").parse(input)?;
   let (input, result) =
     alt((tag("`"), tag("|"), tag("\\"))).parse(input)?;
@@ -132,7 +132,7 @@ pub fn code_shorthand_escaped_snippets(
 pub fn code_shorthand_normal_snippets(
   mut input: Input
 ) -> IResult<Input, Content> {
-  input.extra = "code_shorthand_normal_snippets";
+  input.extra.push("code_shorthand_normal_snippets");
   let (input, _) =
     not(code_shorthand_closing_token).parse(input)?;
   let (input, contents) = many1(pair(
@@ -165,7 +165,7 @@ pub fn code_shorthand_normal_snippets(
 pub fn single_newline_not_followed_by_backtick(
   mut input: Input
 ) -> IResult<Input, Input> {
-  input.extra = "single_newline_not_followed_by_backtick";
+  input.extra = vec!["single_newline_not_followed_by_backtick"];
   let (input, _) = alt((
     pair(tag("\r\n"), not(tag("`"))),
     pair(tag("\n"), not(tag("`"))),
@@ -173,20 +173,23 @@ pub fn single_newline_not_followed_by_backtick(
   .parse(input)?;
   Ok((
     input,
-    Input::new_extra(" ", "single_newline_followedy_by_backtick"),
+    Input::new_extra(
+      " ",
+      vec!["single_newline_followedy_by_backtick"],
+    ),
   ))
 }
 
 pub fn single_whitespace_not_followed_by_backtick(
   mut input: Input
 ) -> IResult<Input, Input> {
-  input.extra = "single_whitespace_not_followed_by_backtick";
+  input.extra = vec!["single_whitespace_not_followed_by_backtick"];
   let (input, _) = pair(tag(" "), not(tag("`"))).parse(input)?;
   Ok((
     input,
     Input::new_extra(
       " ",
-      "single_whitespace_not_followed_by_backtick",
+      vec!["single_whitespace_not_followed_by_backtick"],
     ),
   ))
 }
@@ -204,7 +207,7 @@ mod tests {
     #[case] given: &str,
     #[case] expected: Vec<Content>,
   ) {
-    let input = Input::new_extra(given, "");
+    let input = Input::new_extra(given, vec![]);
     let result = code_shorthand.parse(input).unwrap();
     let left = Content::Code {
       attrs: vec![],
@@ -269,7 +272,7 @@ mod tests {
     #[case] given: &str,
     #[case] expected: &str,
   ) {
-    let input = Input::new_extra(given, "");
+    let input = Input::new_extra(given, vec![]);
     let result = code_shorthand.parse(input).unwrap();
     let left = Content::Code {
       attrs: vec![],
@@ -317,7 +320,7 @@ mod tests {
     #[case] given: &str,
     #[case] expected: Vec<Content>,
   ) {
-    let input = Input::new_extra(given, "");
+    let input = Input::new_extra(given, vec![]);
     let result = code_shorthand.parse(input).unwrap();
     let left = Content::Code {
       attrs: vec![],
@@ -327,7 +330,6 @@ mod tests {
       r#type: "shorthand".to_string(),
       template: "default".to_string(),
     };
-
     assert_eq!(left, result.1, "\n\nFAILED: {}\n\n", description);
     assert_eq!(
       &"",
@@ -416,7 +418,7 @@ mod tests {
     #[case] description: &str,
     #[case] given: &str,
   ) {
-    let input = Input::new_extra(given, "");
+    let input = Input::new_extra(given, vec![]);
     let result = code_shorthand.parse(input);
     assert!(result.is_err(), "\n\nFAILED: {}\n\n", description);
   }
