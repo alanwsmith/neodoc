@@ -124,7 +124,7 @@ pub fn code_shorthand_escaped_snippets(
     Content::Text {
       content: result.to_string(),
       r#type: "text".to_string(),
-      template: "default".to_string(),
+      template: "escaped".to_string(),
     },
   ))
 }
@@ -264,26 +264,6 @@ mod tests {
     "``alfa`bravo``",
     "alfa`bravo"
   )]
-
-  // #[case("Single backtick can be escaped", "``alfa\\`bravo``", vec![
-  //   Snippet::Normal("alfa".to_string()),
-  //   Snippet::Escaped("`".to_string()),
-  //   Snippet::Normal("bravo".to_string())
-  // ])]
-  // #[case("Single backtick must be escaped befor another backtick", "``alfa\\``bravo``", vec![
-  //   Snippet::Normal("alfa".to_string()),
-  //   Snippet::Escaped("`".to_string()),
-  //   Snippet::Normal("`bravo".to_string())
-  // ])]
-  // #[case("Single escaped backtick", "``\\```", vec![
-  //   Snippet::Escaped("`".to_string()),
-  // ])]
-  // #[case("Escaped pipe", "``\\|``", vec![
-  //   Snippet::Escaped("|".to_string()),
-  // ])]
-  // #[case("Escaped escape", "``\\\\``", vec![
-  //   Snippet::Escaped("\\".to_string()),
-  // ])]
   fn code_shorthand_without_metadata_runner(
     #[case] description: &str,
     #[case] given: &str,
@@ -311,6 +291,86 @@ mod tests {
       description
     );
   }
+
+  #[rstest]
+  #[case("Single backtick can be escaped", "``alfa\\`bravo``", vec![
+    Content::Text{ r#type: "text".to_string(), template: "default".to_string(), content: "alfa".to_string()},
+    Content::Text{ r#type: "text".to_string(), template: "escaped".to_string(), content: "`".to_string()},
+    Content::Text{ r#type: "text".to_string(), template: "default".to_string(), content: "bravo".to_string()}
+  ])]
+  #[case("Single backtick must be escaped befor another backtick", "``alfa\\``bravo``", vec![
+    Content::Text{ r#type: "text".to_string(), template: "default".to_string(), content: "alfa".to_string()},
+    Content::Text{ r#type: "text".to_string(), template: "escaped".to_string(), content: "`".to_string()},
+    Content::Text{ r#type: "text".to_string(), template: "default".to_string(), content: "`bravo".to_string()}
+  ])]
+  #[case("Single escaped backtick", "``\\```", vec![
+    Content::Text{ r#type: "text".to_string(), template: "escaped".to_string(), content: "`".to_string()},
+  ])]
+  #[case("Escaped pipe", "``\\|``", vec![
+    Content::Text{ r#type: "text".to_string(), template: "escaped".to_string(), content: "|".to_string()},
+  ])]
+  #[case("Escaped escape", "``\\\\``", vec![
+    Content::Text{ r#type: "text".to_string(), template: "escaped".to_string(), content: "\\".to_string()},
+  ])]
+  fn code_shorthand_escaped_runner(
+    #[case] description: &str,
+    #[case] given: &str,
+    #[case] expected: Vec<Content>,
+  ) {
+    let input = Input::new_extra(given, "");
+    let result = code_shorthand.parse(input).unwrap();
+    let left = Content::Code {
+      attrs: vec![],
+      content: expected,
+      flags: vec![],
+      subType: "code".to_string(),
+      r#type: "shorthand".to_string(),
+      template: "default".to_string(),
+    };
+
+    assert_eq!(left, result.1, "\n\nFAILED: {}\n\n", description);
+    assert_eq!(
+      &"",
+      result.0.fragment(),
+      "\n\nFAILED: {}\n\n",
+      description
+    );
+  }
+
+  // #[case("Single backtick must be escaped befor another backtick", "``alfa\\``bravo``", vec![
+  //   Content::Text{ r#type: "text".to_string(), template: "default", content: "alfa".to_string()},
+  //   Content::Text{ r#type: "text".to_string(), template: "escaped".to_string(), content: "`".to_string()},
+  //   Content::Text{ r#type: "text".to_string(), template: "default", content: "`bravo".to_string())
+  // ])]
+  // #[case("Single escaped backtick", "``\\```", vec![
+  //   Content::Text{ r#type: "text".to_string(), template: "escaped".to_string(), content: "`".to_string()},
+  // ])]
+  // #[case("Escaped pipe", "``\\|``", vec![
+  //   Content::Text{ r#type: "text".to_string(), template: "escaped".to_string(), content: "|".to_string()},
+  // ])]
+  // #[case("Escaped escape", "``\\\\``", vec![
+  //   Content::Text{ r#type: "text".to_string(), template: "escaped".to_string(), content: "\\".to_string()},
+  // ])]
+
+  // #[case("Single backtick can be escaped", "``alfa\\`bravo``", vec![
+  //   Snippet::Normal("alfa".to_string()),
+  //   Snippet::Escaped("`".to_string()),
+  //   Snippet::Normal("bravo".to_string())
+  // ])]
+  // #[case("Single backtick must be escaped befor another backtick", "``alfa\\``bravo``", vec![
+  //   Snippet::Normal("alfa".to_string()),
+  //   Snippet::Escaped("`".to_string()),
+  //   Snippet::Normal("`bravo".to_string())
+  // ])]
+  // #[case("Single escaped backtick", "``\\```", vec![
+  //   Snippet::Escaped("`".to_string()),
+  // ])]
+  // #[case("Escaped pipe", "``\\|``", vec![
+  //   Snippet::Escaped("|".to_string()),
+  // ])]
+  // #[case("Escaped escape", "``\\\\``", vec![
+  //   Snippet::Escaped("\\".to_string()),
+  // ])]
 
   // // Attribute metadata
   // #[rstest]
