@@ -78,18 +78,14 @@ mod tests {
     #[case] expected2: &str,
   ) {
     let mut spans = vec![Content::Text {
-      attributes: vec![],
       content: expected1.to_string(),
-      flags: vec![],
-      r#type: "span".to_string(),
+      r#type: "text".to_string(),
       template: "default".to_string(),
     }];
     if !expected2.is_empty() {
       spans.push(Content::Text {
-        attributes: vec![],
         content: expected2.to_string(),
-        flags: vec![],
-        r#type: "span".to_string(),
+        r#type: "text".to_string(),
         template: "default".to_string(),
       })
     };

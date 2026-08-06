@@ -14,7 +14,7 @@ pub fn p_section(mut input: Input) -> IResult<Input, Section> {
   let (input, _) = section_token.parse(input)?;
   let (input, name) = tag("p").parse(input)?;
   let (input, _) = pair(space0, line_ending).parse(input)?;
-  let bound = Bound::Full;
+  let bound = Bound::All;
   let (input, metadata) = section_metadata.parse(input)?;
   let (input, _) = empty_lines_or_eof.parse(input)?;
   let (input, content) = many0(p_block).parse(input)?;
@@ -22,12 +22,13 @@ pub fn p_section(mut input: Input) -> IResult<Input, Section> {
   Ok((
     input,
     Section::P {
-      attributes: metadata.attributes,
+      attrs: metadata.attributes,
       bound,
       content,
       flags: metadata.flags,
-      name: name.to_string(),
+      subType: name.to_string(),
       template,
+      r#type: "p".to_string(),
     },
   ))
 }

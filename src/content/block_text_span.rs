@@ -10,7 +10,9 @@ use nom::branch::alt;
 use nom::multi::many1;
 use nom::{IResult, Parser};
 
-pub fn block_text_span(mut input: Input) -> IResult<Input, Content> {
+pub fn block_text_span(
+  mut input: Input
+) -> IResult<Input, Content> {
   input.extra = "block_text_span";
   let (input, results) = many1(alt((
     word_part,
@@ -26,10 +28,8 @@ pub fn block_text_span(mut input: Input) -> IResult<Input, Content> {
     .join("")
     .to_string();
   let output = Content::Text {
-    attributes: vec![],
     content,
-    flags: vec![],
-    r#type: "span".to_string(),
+    r#type: "text".to_string(),
     template: "default".to_string(),
   };
   Ok((input, output))
@@ -72,10 +72,8 @@ mod tests {
     let input = Input::new_extra(given, "");
     let result = block_text_span.parse(input).unwrap();
     let left = Content::Text {
-      attributes: vec![],
       content: expected.to_string(),
-      flags: vec![],
-      r#type: "span".to_string(),
+      r#type: "text".to_string(),
       template: "default".to_string(),
     };
     assert_eq!(left, result.1, "\n\n{}\n\n", description);

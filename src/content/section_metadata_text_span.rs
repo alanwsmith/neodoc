@@ -40,10 +40,8 @@ pub fn section_metadata_text_span(
     )));
   }
   let output = Content::Text {
-    attributes: vec![],
     content,
-    flags: vec![],
-    r#type: "span".to_string(),
+    r#type: "text".to_string(),
     template: "default".to_string(),
   };
   Ok((input, output))
@@ -107,10 +105,8 @@ mod tests {
     let input = Input::new_extra(given, "");
     let result = section_metadata_text_span.parse(input).unwrap();
     let left = Content::Text {
-      attributes: vec![],
       content: expected.to_string(),
-      flags: vec![],
-      r#type: "span".to_string(),
+      r#type: "text".to_string(),
       template: "default".to_string(),
     };
     assert_eq!(left, result.1, "\n\n{}\n\n", description,);

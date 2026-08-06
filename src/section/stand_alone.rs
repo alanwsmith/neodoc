@@ -11,8 +11,8 @@ pub fn stand_alone_section(
   Ok((
     input,
     Section::StandAlone {
-      attributes: vec![],
-      bound: Bound::Full,
+      attrs: vec![],
+      bound: Bound::All,
       content,
       flags: vec![],
       name: "standalone".to_string(),
@@ -32,10 +32,7 @@ mod tests {
   #[case("alfa bravo\ncharlie delta", "")]
   #[case("alfa bravo\n\ncharlie delta", "")]
   #[case("alfa bravo\n-- charlie delta", "")]
-  #[case(
-    "alfa bravo\n\n-- charlie delta",
-    "-- charlie delta"
-  )]
+  #[case("alfa bravo\n\n-- charlie delta", "-- charlie delta")]
   fn stand_alone_test_runner(
     #[case] given: &str,
     #[case] remainder: &str,

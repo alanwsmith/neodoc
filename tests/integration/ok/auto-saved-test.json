@@ -1,143 +1,27 @@
 {
-  "given": "-- p\n-- alfa\n-- lima: mike\n-- bravo charlie\ndelta echo\n-- foxtrot: golf\nhotel india\n\njuliett ``example`` kilo\n\nnovember oscar\n\n-- p\n\nmore",
+  "given": "-- p\n\nalfa bravo",
   "remainder": "",
   "status": {
     "ok": {
       "content": [
         {
-          "attributes": [
-            {
-              "key": "lima",
-              "value": [
-                {
-                  "attributes": [],
-                  "content": "mike",
-                  "flags": [],
-                  "name": "text",
-                  "template": "default",
-                  "type": "span"
-                }
-              ]
-            },
-            {
-              "key": "foxtrot",
-              "value": [
-                {
-                  "attributes": [],
-                  "content": "golf hotel india",
-                  "flags": [],
-                  "name": "text",
-                  "template": "default",
-                  "type": "span"
-                }
-              ]
-            }
-          ],
-          "bound": "full",
+          "attrs": [],
+          "bound": "all",
           "content": [
             {
               "content": [
                 {
-                  "attributes": [],
-                  "content": "juliett ",
-                  "flags": [],
-                  "name": "text",
+                  "content": "alfa bravo",
                   "template": "default",
-                  "type": "span"
-                },
-                {
-                  "attributes": [],
-                  "content": "example",
-                  "flags": [],
-                  "name": "code",
-                  "template": "default",
-                  "type": "span"
-                },
-                {
-                  "attributes": [],
-                  "content": " kilo",
-                  "flags": [],
-                  "name": "text",
-                  "template": "default",
-                  "type": "span"
+                  "type": "text"
                 }
               ],
-              "name": "p",
-              "template": "default",
-              "type": "block"
-            },
-            {
-              "content": [
-                {
-                  "attributes": [],
-                  "content": "november oscar",
-                  "flags": [],
-                  "name": "text",
-                  "template": "default",
-                  "type": "span"
-                }
-              ],
-              "name": "p",
-              "template": "default",
-              "type": "block"
-            }
-          ],
-          "flags": [
-            [
-              {
-                "attributes": [],
-                "content": "alfa",
-                "flags": [],
-                "name": "text",
-                "template": "default",
-                "type": "span"
-              }
-            ],
-            [
-              {
-                "attributes": [],
-                "content": "bravo",
-                "flags": [],
-                "name": "text",
-                "template": "default",
-                "type": "span"
-              },
-              {
-                "attributes": [],
-                "content": " charlie delta echo",
-                "flags": [],
-                "name": "text",
-                "template": "default",
-                "type": "span"
-              }
-            ]
-          ],
-          "name": "p",
-          "template": "default",
-          "type": "p"
-        },
-        {
-          "attributes": [],
-          "bound": "full",
-          "content": [
-            {
-              "content": [
-                {
-                  "attributes": [],
-                  "content": "more",
-                  "flags": [],
-                  "name": "text",
-                  "template": "default",
-                  "type": "span"
-                }
-              ],
-              "name": "p",
               "template": "default",
               "type": "block"
             }
           ],
           "flags": [],
-          "name": "p",
+          "subType": "p",
           "template": "default",
           "type": "p"
         }

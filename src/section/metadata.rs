@@ -21,8 +21,7 @@ pub fn metadata_loader(
   input: Input
 ) -> IResult<Input, MetadataLoader> {
   let (input, items) =
-    many0(alt((section_flag, section_attr)))
-      .parse(input)?;
+    many0(alt((section_flag, section_attr))).parse(input)?;
   let attrs = items
     .clone()
     .into_iter()

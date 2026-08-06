@@ -124,10 +124,8 @@ mod tests {
     let target3 = Metadata::Attribute {
       key: target1.to_string(),
       value: vec![Content::Text {
-        attributes: vec![],
         content: target2.to_string(),
-        flags: vec![],
-        r#type: "span".to_string(),
+        r#type: "text".to_string(),
         template: "default".to_string(),
       }],
     };
@@ -146,10 +144,8 @@ mod tests {
     let target3 = Metadata::Attribute {
       key: target1.to_string(),
       value: vec![Content::Text {
-        attributes: vec![],
         content: target2.to_string(),
-        flags: vec![],
-        r#type: "span".to_string(),
+        r#type: "text".to_string(),
         template: "default".to_string(),
       }],
     };
@@ -169,10 +165,8 @@ mod tests {
     let target3 = Metadata::Attribute {
       key: target1.to_string(),
       value: vec![Content::Text {
-        attributes: vec![],
         content: target2.to_string(),
-        flags: vec![],
-        r#type: "span".to_string(),
+        r#type: "text".to_string(),
         template: "default".to_string(),
       }],
     };

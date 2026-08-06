@@ -18,9 +18,9 @@ pub fn p_block(mut input: Input) -> IResult<Input, Section> {
   let (input, _) = empty_lines_or_eof.parse(input)?;
   Ok((
     input,
-    Section::PBlock {
+    Section::DefaultBlock {
       content,
-      name: "p".to_string(),
+      r#type: "block".to_string(),
       template: "default".to_string(),
     },
   ))

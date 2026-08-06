@@ -17,10 +17,8 @@ pub fn flag_first_word(input: Input) -> IResult<Input, Content> {
   Ok((
     input,
     Content::Text {
-      attributes: vec![],
       content: text.to_string(),
-      r#type: "span".to_string(),
-      flags: vec![],
+      r#type: "text".to_string(),
       template: "default".to_string(),
     },
   ))
