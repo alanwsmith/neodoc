@@ -39,11 +39,8 @@ mod tests {
     "alfa",
     r#"[ 
       { 
-        "attributes": [],
         "content": "alfa", 
-        "flags": [],
-        "type": "span", 
-        "name": "text", 
+        "type": "text", 
         "template": "default" 
       }
     ]"#,
@@ -54,11 +51,8 @@ mod tests {
     "alfa bravo charlie",
     r#"[ 
       { 
-        "attributes": [],
         "content": "alfa bravo charlie", 
-        "flags": [],
-        "type": "span", 
-        "name": "text", 
+        "type": "text", 
         "template": "default" 
       }
     ]"#,
@@ -69,11 +63,8 @@ mod tests {
     "alfa bravo\ncharlie delta",
     r#"[ 
       { 
-        "attributes": [],
         "content": "alfa bravo charlie delta", 
-        "flags": [],
-        "type": "span", 
-        "name": "text", 
+        "type": "text", 
         "template": "default" 
       }
     ]"#,
@@ -84,11 +75,8 @@ mod tests {
     "alfa bravo\n\ncharlie delta",
     r#"[ 
       { 
-        "attributes": [],
         "content": "alfa bravo", 
-        "flags": [],
-        "type": "span", 
-        "name": "text", 
+        "type": "text", 
         "template": "default" 
       }
     ]"#,
@@ -99,11 +87,8 @@ mod tests {
     "alfa bravo\n\n-- x",
     r#"[ 
       { 
-        "attributes": [],
         "content": "alfa bravo", 
-        "flags": [],
-        "type": "span", 
-        "name": "text", 
+        "type": "text", 
         "template": "default" 
       }
     ]"#,
@@ -118,7 +103,7 @@ mod tests {
     let input = Input::new_extra(given, vec![]);
     let result = p_block.parse(input).unwrap();
     let left: Value = serde_json::from_str(&format!(
-      r#"{{ "content": {}, "type": "block", "name": "p", "template": "default" }}"#,
+      r#"{{ "content": {}, "type": "block", "template": "default" }}"#,
       expected
     ))
     .unwrap();

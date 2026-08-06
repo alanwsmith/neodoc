@@ -54,27 +54,23 @@ mod tests {
     "-- p\n\nalfa",
     r#"{ 
       "attrs": [], 
-      "bound": "full",
+      "bound": "all",
       "content": [
         {
           "content": [ 
             {
-              "attrs": [],
               "content": "alfa", 
-              "flags": [],
-              "type": "span", 
-              "name": "text", 
+              "type": "text", 
               "template": "default"
             } 
           ],
           "type": "block",
-          "name": "p",
           "template": "default"
         }
       ],
       "flags": [], 
       "type": "p", 
-      "name": "p",
+      "subType": "p",
       "template": "default"
     }"#
   )]
@@ -83,42 +79,34 @@ mod tests {
     "-- p\n\nalfa bravo\ncharlie delta\n\necho foxtrot\ngolf hotel",
     r#"{ 
       "attrs": [], 
-      "bound": "full",
+      "bound": "all",
       "content": [
         {
           "content": [ 
             { 
-              "attrs": [],
               "content": "alfa bravo charlie delta", 
-              "type": "span", 
-              "flags": [],
-              "name": "text",
+              "type": "text", 
               "template": "default"
             }
           ],
           "type": "block",
-          "name": "p",
           "template": "default"
         },
         {
           "content": [ 
             { 
-              "attrs": [],
               "content": "echo foxtrot golf hotel", 
-              "flags": [],
-              "type": "span", 
-              "name": "text", 
+              "type": "text", 
               "template": "default"
             }
           ],
           "type": "block",
-          "name": "p",
           "template": "default"
         }
       ],
       "flags": [], 
       "type": "p", 
-      "name": "p",
+      "subType": "p",
       "template": "default"
     }"#
   )]
@@ -127,22 +115,19 @@ mod tests {
     "-- p\n-- alfa",
     r#"{ 
       "attrs": [], 
-      "bound": "full",
+      "bound": "all",
       "content": [],
       "flags": [
         [ 
           { 
-            "attrs": [],
             "content": "alfa", 
-            "flags": [],
-            "type": "span", 
-            "name": "text", 
+            "type": "text", 
             "template": "default" 
           } 
         ]
       ], 
       "type": "p", 
-      "name": "p",
+      "subType": "p",
       "template": "default"
     }"#
   )]
@@ -151,38 +136,31 @@ mod tests {
     "-- p\n-- alfa\n\nbravo",
     r#"{
       "attrs": [],
-      "bound": "full",
+      "bound": "all",
       "content": [
         {
           "content": [
             { 
-              "attrs": [],
               "content": "bravo", 
-              "flags": [],
-              "type": "span", 
-              "name": "text", 
+              "type": "text", 
               "template": "default" 
             }
           ],
           "type": "block",
-          "name": "p",
           "template": "default"
         }
       ],
       "flags": [
         [
           { 
-            "attrs": [],
             "content": "alfa", 
-            "flags": [],
-            "type": "span", 
-            "name": "text", 
+            "type": "text", 
             "template": "default" 
           }
         ]
       ],
       "type": "p",
-      "name": "p",
+      "subType": "p",
       "template": "default"
     }"#
   )]

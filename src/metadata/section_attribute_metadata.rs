@@ -63,11 +63,8 @@ mod tests {
     "alfa",
     r#"[
     {
-      "attributes": [], 
       "content": "bravo", 
-      "flags": [],
-      "type": "span", 
-      "name": "text", 
+      "type": "text", 
       "template": "default"
     }
     ]"#,
@@ -79,11 +76,8 @@ mod tests {
     "alfa",
     r#"[
     {
-      "attributes": [], 
       "content": "bravo", 
-      "flags": [],
-      "type": "span", 
-      "name": "text", 
+      "type": "text", 
       "template": "default"
     }
     ]"#,
