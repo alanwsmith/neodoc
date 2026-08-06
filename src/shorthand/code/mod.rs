@@ -24,8 +24,11 @@ pub fn code_shorthand(mut input: Text) -> IResult<Text, Span> {
     not((space0, line_ending, space0, line_ending)).parse(input)?;
   let (input, _) = space0.parse(input)?;
   let (input, _) = opt(single_newline).parse(input)?;
-  let (input, snippets) =
-    many1(alt((code_shorthand_normal_snippets,))).parse(input)?;
+  let (input, snippets) = many1(alt((
+    code_shorthand_normal_snippets,
+    code_shorthand_escaped_snippets,
+  )))
+  .parse(input)?;
   // let (input, _) =
   //   not((space0, line_ending, space0, line_ending)).parse(input)?;
   let (input, _) = code_shorthand_closing_token.parse(input)?;
@@ -57,10 +60,19 @@ pub fn code_shorthand_closing_token(
   Ok((input, result))
 }
 
+pub fn code_shorthand_escaped_snippets(
+  mut input: Text
+) -> IResult<Text, Snippet> {
+  input.extra = "code_shorthand_normal_snippets";
+  let (input, _) = tag("\\").parse(input)?;
+  let (input, result) = alt((tag("`"),)).parse(input)?;
+  Ok((input, Snippet::Escaped(result.to_string())))
+}
+
 pub fn code_shorthand_normal_snippets(
   mut input: Text
 ) -> IResult<Text, Snippet> {
-  input.extra = "code";
+  input.extra = "code_shorthand_normal_snippets";
   let (input, contents) = many1(pair(
     not((space0, line_ending, space0, line_ending)),
     alt((
@@ -138,20 +150,34 @@ mod tests {
   #[case("Trailing single newline is trimmed", "``alfa\n``", vec![
     Snippet::Normal("alfa".to_string())
   ])]
-  // #[case("Trailing single newline is trimmed on Windows", "``alfa\r\n``", vec![
-  //   Snippet::Normal("alfa".to_string())
-  // ])]
+  #[case("Trailing single newline is trimmed on Windows", "``alfa\r\n``", vec![
+    Snippet::Normal("alfa".to_string())
+  ])]
   #[case("Internal spaces are maintained", "``alfa      bravo``", vec![
     Snippet::Normal("alfa      bravo".to_string())
   ])]
-  #[case("Single nternal newlines become spaces", "``alfa\nbravo  \n  charlie``", vec![
+  #[case("Single internal newlines become spaces", "``alfa\nbravo  \n  charlie``", vec![
     Snippet::Normal("alfa bravo     charlie".to_string())
   ])]
-  #[case("Single nternal newlines become spaces on Windows", "``alfa\r\nbravo  \r\n  charlie``", vec![
+  #[case("Single internal newlines become spaces on Windows", "``alfa\r\nbravo  \r\n  charlie``", vec![
     Snippet::Normal("alfa bravo     charlie".to_string())
+  ])]
+  #[case("Single backtick does not require escapeing", "``alfa`bravo``", vec![
+    Snippet::Normal("alfa`bravo".to_string())
+  ])]
+  #[case("Single backtick can be escaped", "``alfa\\`bravo``", vec![
+    Snippet::Normal("alfa".to_string()),
+    Snippet::Escaped("`".to_string()),
+    Snippet::Normal("bravo".to_string())
+  ])]
+  #[case("Single backtick must be escaped befor another backtick", "``alfa\\``bravo``", vec![
+    Snippet::Normal("alfa".to_string()),
+    Snippet::Escaped("`".to_string()),
+    Snippet::Normal("`bravo".to_string())
   ])]
 
-  // TODO: ``\nalfa\n``
+  // TODO: alfa\``bravo
+  // TODO: `\`
 
   fn code_shorthand_without_metadata_runner(
     #[case] description: &str,
