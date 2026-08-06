@@ -1,3 +1,4 @@
+#![allow(non_snake_case)]
 pub mod block_generic_span;
 pub mod block_text_span;
 pub mod flag_first_word;
@@ -7,14 +8,15 @@ use crate::metadata::Metadata;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(untagged, rename_all = "lowercase")]
+#[serde(untagged)]
 pub enum Content {
   Code {
-    attributes: Vec<Metadata>,
-    content: Vec<Snippet>,
+    attrs: Vec<Metadata>,
+    content: Vec<Content>,
     flags: Vec<Metadata>,
-    r#type: String,
+    subType: String,
     template: String,
+    r#type: String,
   },
   Text {
     content: String,

@@ -43,7 +43,7 @@ use stand_alone::*;
 // to their added complexity
 
 #[derive(Debug, Deserialize, PartialEq, Serialize)]
-#[serde(untagged, rename_all = "lowercase")]
+#[serde(untagged)]
 pub enum Section {
   P {
     attrs: Vec<Metadata>,

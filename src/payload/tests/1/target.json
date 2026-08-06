@@ -8,7 +8,26 @@
           {
             "content": [
               {
-                "content": "alfa bravo",
+                "content": "alfa ",
+                "template": "default",
+                "type": "text"
+              },
+              {
+                "attrs": [],
+                "content": [
+                  {
+                    "content": "bravo",
+                    "template": "default",
+                    "type": "text"
+                  }
+                ],
+                "flags": [],
+                "subType": "code",
+                "template": "default",
+                "type": "shorthand"
+              },
+              {
+                "content": " charlie",
                 "template": "default",
                 "type": "text"
               }

@@ -20,7 +20,7 @@ pub fn section_metadata(input: Input) -> IResult<Input, Metadatas> {
   let (input, items) =
     many0(alt((section_flag_metadata, section_attribute_metadata)))
       .parse(input)?;
-  let attributes = items
+  let attrs = items
     .clone()
     .into_iter()
     .filter(|x| matches!(x, Metadata::Attribute { .. }))
@@ -30,7 +30,7 @@ pub fn section_metadata(input: Input) -> IResult<Input, Metadatas> {
     .into_iter()
     .filter(|x| matches!(x, Metadata::Flag(_)))
     .collect();
-  let md = Metadatas { attributes, flags };
+  let md = Metadatas { attrs, flags };
   Ok((input, md))
 }
 

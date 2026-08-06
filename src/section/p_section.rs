@@ -22,7 +22,7 @@ pub fn p_section(mut input: Input) -> IResult<Input, Section> {
   Ok((
     input,
     Section::P {
-      attrs: metadata.attributes,
+      attrs: metadata.attrs,
       bound,
       content,
       flags: metadata.flags,
@@ -53,13 +53,13 @@ mod tests {
     "paragraph with no name with single block at end of file",
     "-- p\n\nalfa",
     r#"{ 
-      "attributes": [], 
+      "attrs": [], 
       "bound": "full",
       "content": [
         {
           "content": [ 
             {
-              "attributes": [],
+              "attrs": [],
               "content": "alfa", 
               "flags": [],
               "type": "span", 
@@ -82,13 +82,13 @@ mod tests {
     "paragraph with multiple blocks",
     "-- p\n\nalfa bravo\ncharlie delta\n\necho foxtrot\ngolf hotel",
     r#"{ 
-      "attributes": [], 
+      "attrs": [], 
       "bound": "full",
       "content": [
         {
           "content": [ 
             { 
-              "attributes": [],
+              "attrs": [],
               "content": "alfa bravo charlie delta", 
               "type": "span", 
               "flags": [],
@@ -103,7 +103,7 @@ mod tests {
         {
           "content": [ 
             { 
-              "attributes": [],
+              "attrs": [],
               "content": "echo foxtrot golf hotel", 
               "flags": [],
               "type": "span", 
@@ -126,13 +126,13 @@ mod tests {
     "paragraph section with flag at end of file",
     "-- p\n-- alfa",
     r#"{ 
-      "attributes": [], 
+      "attrs": [], 
       "bound": "full",
       "content": [],
       "flags": [
         [ 
           { 
-            "attributes": [],
+            "attrs": [],
             "content": "alfa", 
             "flags": [],
             "type": "span", 
@@ -150,13 +150,13 @@ mod tests {
     "paragraph section with flag followed by content",
     "-- p\n-- alfa\n\nbravo",
     r#"{
-      "attributes": [],
+      "attrs": [],
       "bound": "full",
       "content": [
         {
           "content": [
             { 
-              "attributes": [],
+              "attrs": [],
               "content": "bravo", 
               "flags": [],
               "type": "span", 
@@ -172,7 +172,7 @@ mod tests {
       "flags": [
         [
           { 
-            "attributes": [],
+            "attrs": [],
             "content": "alfa", 
             "flags": [],
             "type": "span", 

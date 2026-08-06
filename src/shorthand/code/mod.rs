@@ -1,7 +1,6 @@
 #![allow(warnings)]
 use crate::Input;
-use crate::metadata::{Metadata, Metadatas};
-use crate::content::{Snippet, Content};
+use crate::content::{Content, Snippet};
 use crate::content_parts::code_span_whitespace1_for_block::code_span_whitespace1_for_block;
 use crate::content_parts::escape_character::escape_backtick;
 use crate::content_parts::one_or_more_dashes::one_or_more_dashes;
@@ -9,6 +8,7 @@ use crate::content_parts::single_character::single_backtick;
 use crate::content_parts::single_newline::single_newline;
 use crate::content_parts::single_newline_chomped::single_newline_chomped;
 use crate::content_parts::word_part::word_part;
+use crate::metadata::{Metadata, Metadatas};
 use nom::branch::alt;
 use nom::bytes::complete::{is_not, tag};
 use nom::character::complete::{line_ending, space0};
@@ -30,10 +30,11 @@ pub fn code_shorthand(mut input: Input) -> IResult<Input, Content> {
   let (input, metadatas) = code_shorthand_metadatas.parse(input)?;
   let (input, _) = code_shorthand_closing_token.parse(input)?;
   let output = Content::Code {
-    attributes: vec![],
-    content: snippets,
+    attrs: vec![],
+    content: vec![],
     flags: vec![],
-    r#type: "span".to_string(),
+    subType: "code".to_string(),
+    r#type: "shorthand".to_string(),
     template: "default".to_string(),
   };
   Ok((input, output))
@@ -48,7 +49,7 @@ pub fn code_shorthand_metadatas(
     code_shorthand_metadata_flag,
   )))
   .parse(input)?;
-  let attributes = metadata
+  let attrs = metadata
     .clone()
     .into_iter()
     .filter(|x| matches!(x, Metadata::Attribute { .. }))
@@ -58,7 +59,7 @@ pub fn code_shorthand_metadatas(
     .into_iter()
     .filter(|x| matches!(x, Metadata::Flag(_)))
     .collect();
-  let metadatas = Metadatas { attributes, flags };
+  let metadatas = Metadatas { attrs, flags };
   Ok((input, metadatas))
 }
 
@@ -247,10 +248,11 @@ mod tests {
     let input = Input::new_extra(given, "");
     let result = code_shorthand.parse(input).unwrap();
     let left = Content::Code {
-      attributes: vec![],
-      content: expected,
+      attrs: vec![],
+      content: vec![],
       flags: vec![],
-      r#type: "span".to_string(),
+      subType: "code".to_string(),
+      r#type: "shorthand".to_string(),
       template: "default".to_string(),
     };
     assert_eq!(left, result.1, "\n\nFAILED: {}\n\n", description);
@@ -276,7 +278,7 @@ mod tests {
       code_shorthand_metadata_attribute.parse(input).unwrap();
     let left = Metadata::Attribute {
       key: expected_key.to_string(),
-      value: vec![], // attributes: vec![],
+      value: vec![], // attrs: vec![],
                      // content: expected,
                      // flags: vec![],
                      // r#type: "span".to_string(),

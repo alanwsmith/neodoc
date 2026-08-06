@@ -14,6 +14,6 @@ pub enum Metadata {
 
 #[derive(Debug, Deserialize, PartialEq, Serialize)]
 pub struct Metadatas {
-  pub attributes: Vec<Metadata>,
+  pub attrs: Vec<Metadata>,
   pub flags: Vec<Metadata>,
 }
