@@ -26,6 +26,7 @@ pub fn code_shorthand(mut input: Text) -> IResult<Text, Span> {
     code_shorthand_escaped_snippets,
   )))
   .parse(input)?;
+  // let (input, metadata) = code_shorthand_metadata.parse(input)?;
   let (input, _) = code_shorthand_closing_token.parse(input)?;
   let output = Span::Code {
     attributes: vec![],

@@ -9,14 +9,11 @@ use nom::multi::many0;
 use nom::sequence::pair;
 use nom::{IResult, Parser};
 
-pub fn p_section(
-  mut input: Text
-) -> IResult<Text, Section> {
+pub fn p_section(mut input: Text) -> IResult<Text, Section> {
   input.extra = "p_section";
   let (input, _) = section_token.parse(input)?;
   let (input, name) = tag("p").parse(input)?;
-  let (input, _) =
-    pair(space0, line_ending).parse(input)?;
+  let (input, _) = pair(space0, line_ending).parse(input)?;
   let bound = Bound::Full;
   let (input, metadata) = section_metadata.parse(input)?;
   let (input, _) = empty_lines_or_eof.parse(input)?;
@@ -25,7 +22,7 @@ pub fn p_section(
   Ok((
     input,
     Section::P {
-      attributes: metadata.attrs,
+      attributes: metadata.attributes,
       bound,
       content,
       flags: metadata.flags,
@@ -194,12 +191,10 @@ mod tests {
     #[case] target1: &str,
   ) {
     let input = Text::new_extra(content, "");
-    let target2: Value =
-      serde_json::from_str(target1).unwrap();
+    let target2: Value = serde_json::from_str(target1).unwrap();
     let result = p_section(input);
     let left = target2;
-    let right =
-      serde_json::to_value(result.unwrap().1).unwrap();
+    let right = serde_json::to_value(result.unwrap().1).unwrap();
     assert_eq!(left, right, "{}", description);
   }
 

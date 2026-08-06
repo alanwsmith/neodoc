@@ -3,7 +3,7 @@ use crate::Text;
 // use crate::flag_or_attr::section_attr::section_attr;
 // use crate::flag_or_attr::section_flag::section_flag;
 use crate::metadata::{
-  Metadata, MetadataLoader,
+  Metadata, Metadatas,
   section_attribute_metadata::section_attribute_metadata,
   section_flag_metadata::section_flag_metadata,
 };
@@ -16,30 +16,21 @@ use nom::{IResult, Parser};
 // regardless of order and delivers them
 // as independent packages
 
-pub fn section_metadata(
-  input: Text
-) -> IResult<Text, MetadataLoader> {
-  let (input, items) = many0(alt((
-    section_flag_metadata,
-    section_attribute_metadata,
-  )))
-  .parse(input)?;
-  let attrs = items
+pub fn section_metadata(input: Text) -> IResult<Text, Metadatas> {
+  let (input, items) =
+    many0(alt((section_flag_metadata, section_attribute_metadata)))
+      .parse(input)?;
+  let attributes = items
     .clone()
     .into_iter()
     .filter(|x| matches!(x, Metadata::Attribute { .. }))
     .collect();
-
   let flags = items
     .clone()
     .into_iter()
     .filter(|x| matches!(x, Metadata::Flag(_)))
     .collect();
-
-  // let (input, flags) = many0(section_flag).parse(input)?;
-  // let (input, attrs) = many0(section_attr).parse(input)?;
-
-  let md = MetadataLoader { attrs, flags };
+  let md = Metadatas { attributes, flags };
   Ok((input, md))
 }
 
