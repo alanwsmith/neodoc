@@ -1,5 +1,6 @@
 #![allow(warnings)]
 use crate::Text;
+use crate::metadata::{Metadata, Metadatas};
 use crate::span::{Snippet, Span};
 use crate::span_parts::code_span_whitespace1_for_block::code_span_whitespace1_for_block;
 use crate::span_parts::escape_character::escape_backtick;
@@ -26,7 +27,7 @@ pub fn code_shorthand(mut input: Text) -> IResult<Text, Span> {
     code_shorthand_escaped_snippets,
   )))
   .parse(input)?;
-  // let (input, metadata) = code_shorthand_metadata.parse(input)?;
+  let (input, metadatas) = code_shorthand_metadatas.parse(input)?;
   let (input, _) = code_shorthand_closing_token.parse(input)?;
   let output = Span::Code {
     attributes: vec![],
@@ -36,6 +37,51 @@ pub fn code_shorthand(mut input: Text) -> IResult<Text, Span> {
     template: "default".to_string(),
   };
   Ok((input, output))
+}
+
+pub fn code_shorthand_metadatas(
+  mut input: Text
+) -> IResult<Text, Metadatas> {
+  input.extra = "code_shorthand_metadatas";
+  let (input, metadata) = many0(alt((
+    code_shorthand_metadata_attribute,
+    code_shorthand_metadata_flag,
+  )))
+  .parse(input)?;
+  let attributes = metadata
+    .clone()
+    .into_iter()
+    .filter(|x| matches!(x, Metadata::Attribute { .. }))
+    .collect();
+  let flags = metadata
+    .clone()
+    .into_iter()
+    .filter(|x| matches!(x, Metadata::Flag(_)))
+    .collect();
+  let metadatas = Metadatas { attributes, flags };
+  Ok((input, metadatas))
+}
+
+pub fn code_shorthand_metadata_attribute(
+  mut input: Text
+) -> IResult<Text, Metadata> {
+  input.extra = "code_shorthand_metadata_flag";
+  let (input, result) = tag("|xxxx").parse(input)?;
+  Ok((
+    input,
+    Metadata::Attribute {
+      key: "xxx".to_string(),
+      value: vec![],
+    },
+  ))
+}
+
+pub fn code_shorthand_metadata_flag(
+  mut input: Text
+) -> IResult<Text, Metadata> {
+  input.extra = "code_shorthand_metadata_flag";
+  let (input, result) = tag("|xxxx").parse(input)?;
+  Ok((input, Metadata::Flag(vec![])))
 }
 
 pub fn code_shorthand_opening_token(
@@ -66,7 +112,8 @@ pub fn code_shorthand_escaped_snippets(
 ) -> IResult<Text, Snippet> {
   input.extra = "code_shorthand_normal_snippets";
   let (input, _) = tag("\\").parse(input)?;
-  let (input, result) = alt((tag("`"), tag("|"))).parse(input)?;
+  let (input, result) =
+    alt((tag("`"), tag("|"), tag("\\"))).parse(input)?;
   Ok((input, Snippet::Escaped(result.to_string())))
 }
 
@@ -184,6 +231,9 @@ mod tests {
   ])]
   #[case("Escaped pipe", "``\\|``", vec![
     Snippet::Escaped("|".to_string()),
+  ])]
+  #[case("Escaped escape", "``\\\\``", vec![
+    Snippet::Escaped("\\".to_string()),
   ])]
 
   // TODO: Escaped escape: \\\\

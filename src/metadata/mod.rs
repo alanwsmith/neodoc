@@ -1,5 +1,3 @@
-pub mod inline_flag;
-pub mod inline_metadata;
 pub mod section_attribute_metadata;
 pub mod section_flag_metadata;
 pub mod section_metadata;
