@@ -3,80 +3,79 @@ use nom::{
   IResult, Parser, branch::alt, bytes::complete::tag,
   combinator::not,
 };
-
-pub fn single_backtick(input: Text) -> IResult<Text, Text> {
+pub fn escape_backtick(input: Text) -> IResult<Text, Text> {
   let (input, result) = tag("`").parse(input)?;
   let (input, _) = not(tag("`")).parse(input)?;
   Ok((input, result))
 }
 
-pub fn single_tilde(input: Text) -> IResult<Text, Text> {
+pub fn escape_tilde(input: Text) -> IResult<Text, Text> {
   let (input, result) = tag("~").parse(input)?;
   let (input, _) = not(tag("~")).parse(input)?;
   Ok((input, result))
 }
 
-pub fn single_exclamation(input: Text) -> IResult<Text, Text> {
+pub fn escape_exclamation(input: Text) -> IResult<Text, Text> {
   let (input, result) = tag("!").parse(input)?;
   let (input, _) = not(tag("!")).parse(input)?;
   Ok((input, result))
 }
 
-pub fn single_at_sing(input: Text) -> IResult<Text, Text> {
+pub fn escape_at_sing(input: Text) -> IResult<Text, Text> {
   let (input, result) = tag("@").parse(input)?;
   let (input, _) = not(tag("@")).parse(input)?;
   Ok((input, result))
 }
 
-pub fn single_octothorpe(input: Text) -> IResult<Text, Text> {
+pub fn escape_octothorpe(input: Text) -> IResult<Text, Text> {
   let (input, result) = tag("#").parse(input)?;
   let (input, _) = not(tag("#")).parse(input)?;
   Ok((input, result))
 }
 
-pub fn single_dollar_sign(input: Text) -> IResult<Text, Text> {
+pub fn escape_dollar_sign(input: Text) -> IResult<Text, Text> {
   let (input, result) = tag("$").parse(input)?;
   let (input, _) = not(tag("$")).parse(input)?;
   Ok((input, result))
 }
 
-pub fn single_percent_sign(input: Text) -> IResult<Text, Text> {
+pub fn escape_percent_sign(input: Text) -> IResult<Text, Text> {
   let (input, result) = tag("%").parse(input)?;
   let (input, _) = not(tag("%")).parse(input)?;
   Ok((input, result))
 }
 
-pub fn single_caret(input: Text) -> IResult<Text, Text> {
+pub fn escape_caret(input: Text) -> IResult<Text, Text> {
   let (input, result) = tag("^").parse(input)?;
   let (input, _) = not(tag("^")).parse(input)?;
   Ok((input, result))
 }
 
-pub fn single_ampersand(input: Text) -> IResult<Text, Text> {
+pub fn escape_ampersand(input: Text) -> IResult<Text, Text> {
   let (input, result) = tag("&").parse(input)?;
   let (input, _) = not(tag("&")).parse(input)?;
   Ok((input, result))
 }
 
-pub fn single_astrisk(input: Text) -> IResult<Text, Text> {
+pub fn escape_astrisk(input: Text) -> IResult<Text, Text> {
   let (input, result) = tag("*").parse(input)?;
   let (input, _) = not(tag("*")).parse(input)?;
   Ok((input, result))
 }
 
-pub fn single_open_paren(input: Text) -> IResult<Text, Text> {
+pub fn escape_open_paren(input: Text) -> IResult<Text, Text> {
   let (input, result) = tag("(").parse(input)?;
   let (input, _) = not(tag("(")).parse(input)?;
   Ok((input, result))
 }
 
-pub fn single_close_paren(input: Text) -> IResult<Text, Text> {
+pub fn escape_close_paren(input: Text) -> IResult<Text, Text> {
   let (input, result) = tag(")").parse(input)?;
   let (input, _) = not(tag(")")).parse(input)?;
   Ok((input, result))
 }
 
-pub fn single_open_curly_bracket(
+pub fn escape_open_curly_bracket(
   input: Text
 ) -> IResult<Text, Text> {
   let (input, result) = tag("{").parse(input)?;
@@ -84,7 +83,7 @@ pub fn single_open_curly_bracket(
   Ok((input, result))
 }
 
-pub fn single_close_curly_bracket(
+pub fn escape_close_curly_bracket(
   input: Text
 ) -> IResult<Text, Text> {
   let (input, result) = tag("}").parse(input)?;
@@ -92,55 +91,55 @@ pub fn single_close_curly_bracket(
   Ok((input, result))
 }
 
-pub fn single_open_bracket(input: Text) -> IResult<Text, Text> {
+pub fn escape_open_bracket(input: Text) -> IResult<Text, Text> {
   let (input, result) = tag("[").parse(input)?;
   let (input, _) = not(tag("[")).parse(input)?;
   Ok((input, result))
 }
 
-pub fn single_close_bracket(input: Text) -> IResult<Text, Text> {
+pub fn escape_close_bracket(input: Text) -> IResult<Text, Text> {
   let (input, result) = tag("]").parse(input)?;
   let (input, _) = not(tag("]")).parse(input)?;
   Ok((input, result))
 }
 
-pub fn single_less_than(input: Text) -> IResult<Text, Text> {
+pub fn escape_less_than(input: Text) -> IResult<Text, Text> {
   let (input, result) = tag("<").parse(input)?;
   let (input, _) = not(tag("<")).parse(input)?;
   Ok((input, result))
 }
 
-pub fn single_greater_than(input: Text) -> IResult<Text, Text> {
+pub fn escape_greater_than(input: Text) -> IResult<Text, Text> {
   let (input, result) = tag(">").parse(input)?;
   let (input, _) = not(tag(">")).parse(input)?;
   Ok((input, result))
 }
 
-pub fn single_colon(input: Text) -> IResult<Text, Text> {
+pub fn escape_colon(input: Text) -> IResult<Text, Text> {
   let (input, result) = tag(":").parse(input)?;
   let (input, _) = not(tag(":")).parse(input)?;
   Ok((input, result))
 }
 
-pub fn single_pipe(input: Text) -> IResult<Text, Text> {
+pub fn escape_pipe(input: Text) -> IResult<Text, Text> {
   let (input, result) = tag("|").parse(input)?;
   let (input, _) = not(tag("|")).parse(input)?;
   Ok((input, result))
 }
 
-pub fn single_underscore(input: Text) -> IResult<Text, Text> {
+pub fn escape_underscore(input: Text) -> IResult<Text, Text> {
   let (input, result) = tag("_").parse(input)?;
   let (input, _) = not(tag("_")).parse(input)?;
   Ok((input, result))
 }
 
-pub fn single_hyphen(input: Text) -> IResult<Text, Text> {
+pub fn escape_hyphen(input: Text) -> IResult<Text, Text> {
   let (input, result) = tag("-").parse(input)?;
   let (input, _) = not(tag("-")).parse(input)?;
   Ok((input, result))
 }
 
-pub fn single_equal_sign(input: Text) -> IResult<Text, Text> {
+pub fn escape_equal_sign(input: Text) -> IResult<Text, Text> {
   let (input, result) = tag("=").parse(input)?;
   let (input, _) = not(tag("=")).parse(input)?;
   Ok((input, result))
@@ -152,394 +151,394 @@ mod tests {
   use pretty_assertions::assert_eq;
 
   #[test]
-  fn test_single_backtick() {
+  fn test_escape_backtick() {
     let content = "`";
     let input = Text::new_extra(content, "");
-    let result = single_backtick(input).unwrap();
+    let result = escape_backtick(input).unwrap();
     let left = content;
     let right = result.1.fragment();
     assert_eq!(&left, right);
   }
 
   #[test]
-  fn test_single_tilde() {
+  fn test_escape_tilde() {
     let content = "~";
     let input = Text::new_extra(content, "");
-    let result = single_tilde(input).unwrap();
+    let result = escape_tilde(input).unwrap();
     let left = content;
     let right = result.1.fragment();
     assert_eq!(&left, right);
   }
 
   #[test]
-  fn test_single_exclamation() {
+  fn test_escape_exclamation() {
     let content = "!";
     let input = Text::new_extra(content, "");
-    let result = single_exclamation(input).unwrap();
+    let result = escape_exclamation(input).unwrap();
     let left = content;
     let right = result.1.fragment();
     assert_eq!(&left, right);
   }
 
   #[test]
-  fn test_single_at_sing() {
+  fn test_escape_at_sing() {
     let content = "@";
     let input = Text::new_extra(content, "");
-    let result = single_at_sing(input).unwrap();
+    let result = escape_at_sing(input).unwrap();
     let left = content;
     let right = result.1.fragment();
     assert_eq!(&left, right);
   }
 
   #[test]
-  fn test_single_octothorpe() {
+  fn test_escape_octothorpe() {
     let content = "#";
     let input = Text::new_extra(content, "");
-    let result = single_octothorpe(input).unwrap();
+    let result = escape_octothorpe(input).unwrap();
     let left = content;
     let right = result.1.fragment();
     assert_eq!(&left, right);
   }
 
   #[test]
-  fn test_single_dollar_sign() {
+  fn test_escape_dollar_sign() {
     let content = "$";
     let input = Text::new_extra(content, "");
-    let result = single_dollar_sign(input).unwrap();
+    let result = escape_dollar_sign(input).unwrap();
     let left = content;
     let right = result.1.fragment();
     assert_eq!(&left, right);
   }
 
   #[test]
-  fn test_single_percent_sign() {
+  fn test_escape_percent_sign() {
     let content = "%";
     let input = Text::new_extra(content, "");
-    let result = single_percent_sign(input).unwrap();
+    let result = escape_percent_sign(input).unwrap();
     let left = content;
     let right = result.1.fragment();
     assert_eq!(&left, right);
   }
 
   #[test]
-  fn test_single_caret() {
+  fn test_escape_caret() {
     let content = "^";
     let input = Text::new_extra(content, "");
-    let result = single_caret(input).unwrap();
+    let result = escape_caret(input).unwrap();
     let left = content;
     let right = result.1.fragment();
     assert_eq!(&left, right);
   }
 
   #[test]
-  fn test_single_ampersand() {
+  fn test_escape_ampersand() {
     let content = "&";
     let input = Text::new_extra(content, "");
-    let result = single_ampersand(input).unwrap();
+    let result = escape_ampersand(input).unwrap();
     let left = content;
     let right = result.1.fragment();
     assert_eq!(&left, right);
   }
 
   #[test]
-  fn test_single_astrisk() {
+  fn test_escape_astrisk() {
     let content = "*";
     let input = Text::new_extra(content, "");
-    let result = single_astrisk(input).unwrap();
+    let result = escape_astrisk(input).unwrap();
     let left = content;
     let right = result.1.fragment();
     assert_eq!(&left, right);
   }
 
   #[test]
-  fn test_single_open_paren() {
+  fn test_escape_open_paren() {
     let content = "(";
     let input = Text::new_extra(content, "");
-    let result = single_open_paren(input).unwrap();
+    let result = escape_open_paren(input).unwrap();
     let left = content;
     let right = result.1.fragment();
     assert_eq!(&left, right);
   }
 
   #[test]
-  fn test_single_close_paren() {
+  fn test_escape_close_paren() {
     let content = ")";
     let input = Text::new_extra(content, "");
-    let result = single_close_paren(input).unwrap();
+    let result = escape_close_paren(input).unwrap();
     let left = content;
     let right = result.1.fragment();
     assert_eq!(&left, right);
   }
 
   #[test]
-  fn test_single_open_curly_bracket() {
+  fn test_escape_open_curly_bracket() {
     let content = "{";
     let input = Text::new_extra(content, "");
-    let result = single_open_curly_bracket(input).unwrap();
+    let result = escape_open_curly_bracket(input).unwrap();
     let left = content;
     let right = result.1.fragment();
     assert_eq!(&left, right);
   }
 
   #[test]
-  fn test_single_close_curly_bracket() {
+  fn test_escape_close_curly_bracket() {
     let content = "}";
     let input = Text::new_extra(content, "");
-    let result = single_close_curly_bracket(input).unwrap();
+    let result = escape_close_curly_bracket(input).unwrap();
     let left = content;
     let right = result.1.fragment();
     assert_eq!(&left, right);
   }
 
   #[test]
-  fn test_single_open_bracket() {
+  fn test_escape_open_bracket() {
     let content = "[";
     let input = Text::new_extra(content, "");
-    let result = single_open_bracket(input).unwrap();
+    let result = escape_open_bracket(input).unwrap();
     let left = content;
     let right = result.1.fragment();
     assert_eq!(&left, right);
   }
 
   #[test]
-  fn test_single_close_bracket() {
+  fn test_escape_close_bracket() {
     let content = "]";
     let input = Text::new_extra(content, "");
-    let result = single_close_bracket(input).unwrap();
+    let result = escape_close_bracket(input).unwrap();
     let left = content;
     let right = result.1.fragment();
     assert_eq!(&left, right);
   }
 
   #[test]
-  fn test_single_less_than() {
+  fn test_escape_less_than() {
     let content = "<";
     let input = Text::new_extra(content, "");
-    let result = single_less_than(input).unwrap();
+    let result = escape_less_than(input).unwrap();
     let left = content;
     let right = result.1.fragment();
     assert_eq!(&left, right);
   }
 
   #[test]
-  fn test_single_greater_than() {
+  fn test_escape_greater_than() {
     let content = ">";
     let input = Text::new_extra(content, "");
-    let result = single_greater_than(input).unwrap();
+    let result = escape_greater_than(input).unwrap();
     let left = content;
     let right = result.1.fragment();
     assert_eq!(&left, right);
   }
 
   #[test]
-  fn test_single_colon() {
+  fn test_escape_colon() {
     let content = ":";
     let input = Text::new_extra(content, "");
-    let result = single_colon(input).unwrap();
+    let result = escape_colon(input).unwrap();
     let left = content;
     let right = result.1.fragment();
     assert_eq!(&left, right);
   }
 
   #[test]
-  fn test_single_pipe() {
+  fn test_escape_pipe() {
     let content = "|";
     let input = Text::new_extra(content, "");
-    let result = single_pipe(input).unwrap();
+    let result = escape_pipe(input).unwrap();
     let left = content;
     let right = result.1.fragment();
     assert_eq!(&left, right);
   }
 
   #[test]
-  fn test_single_underscore() {
+  fn test_escape_underscore() {
     let content = "_";
     let input = Text::new_extra(content, "");
-    let result = single_underscore(input).unwrap();
+    let result = escape_underscore(input).unwrap();
     let left = content;
     let right = result.1.fragment();
     assert_eq!(&left, right);
   }
 
   #[test]
-  fn test_single_hyphen() {
+  fn test_escape_hyphen() {
     let content = "-";
     let input = Text::new_extra(content, "");
-    let result = single_hyphen(input).unwrap();
+    let result = escape_hyphen(input).unwrap();
     let left = content;
     let right = result.1.fragment();
     assert_eq!(&left, right);
   }
 
   #[test]
-  fn test_single_equal_sign() {
+  fn test_escape_equal_sign() {
     let content = "=";
     let input = Text::new_extra(content, "");
-    let result = single_equal_sign(input).unwrap();
+    let result = escape_equal_sign(input).unwrap();
     let left = content;
     let right = result.1.fragment();
     assert_eq!(&left, right);
   }
 
   #[test]
-  fn test_single_backtick_error() {
+  fn test_escape_backtick_error() {
     let content = "``";
     let input = Text::new_extra(content, "");
-    assert!(single_backtick(input).is_err());
+    assert!(escape_backtick(input).is_err());
   }
 
   #[test]
-  fn test_single_tilde_error() {
+  fn test_escape_tilde_error() {
     let content = "~~";
     let input = Text::new_extra(content, "");
-    assert!(single_tilde(input).is_err());
+    assert!(escape_tilde(input).is_err());
   }
 
   #[test]
-  fn test_single_exclamation_error() {
+  fn test_escape_exclamation_error() {
     let content = "!!";
     let input = Text::new_extra(content, "");
-    assert!(single_exclamation(input).is_err());
+    assert!(escape_exclamation(input).is_err());
   }
 
   #[test]
-  fn test_single_at_sing_error() {
+  fn test_escape_at_sing_error() {
     let content = "@@";
     let input = Text::new_extra(content, "");
-    assert!(single_at_sing(input).is_err());
+    assert!(escape_at_sing(input).is_err());
   }
 
   #[test]
-  fn test_single_octothorpe_error() {
+  fn test_escape_octothorpe_error() {
     let content = "##";
     let input = Text::new_extra(content, "");
-    assert!(single_octothorpe(input).is_err());
+    assert!(escape_octothorpe(input).is_err());
   }
 
   #[test]
-  fn test_single_dollar_sign_error() {
+  fn test_escape_dollar_sign_error() {
     let content = "$$";
     let input = Text::new_extra(content, "");
-    assert!(single_dollar_sign(input).is_err());
+    assert!(escape_dollar_sign(input).is_err());
   }
 
   #[test]
-  fn test_single_percent_sign_error() {
+  fn test_escape_percent_sign_error() {
     let content = "%%";
     let input = Text::new_extra(content, "");
-    assert!(single_percent_sign(input).is_err());
+    assert!(escape_percent_sign(input).is_err());
   }
 
   #[test]
-  fn test_single_caret_error() {
+  fn test_escape_caret_error() {
     let content = "^^";
     let input = Text::new_extra(content, "");
-    assert!(single_caret(input).is_err());
+    assert!(escape_caret(input).is_err());
   }
 
   #[test]
-  fn test_single_ampersand_error() {
+  fn test_escape_ampersand_error() {
     let content = "&&";
     let input = Text::new_extra(content, "");
-    assert!(single_ampersand(input).is_err());
+    assert!(escape_ampersand(input).is_err());
   }
 
   #[test]
-  fn test_single_astrisk_error() {
+  fn test_escape_astrisk_error() {
     let content = "**";
     let input = Text::new_extra(content, "");
-    assert!(single_astrisk(input).is_err());
+    assert!(escape_astrisk(input).is_err());
   }
 
   #[test]
-  fn test_single_open_paren_error() {
+  fn test_escape_open_paren_error() {
     let content = "((";
     let input = Text::new_extra(content, "");
-    assert!(single_open_paren(input).is_err());
+    assert!(escape_open_paren(input).is_err());
   }
 
   #[test]
-  fn test_single_close_paren_error() {
+  fn test_escape_close_paren_error() {
     let content = "))";
     let input = Text::new_extra(content, "");
-    assert!(single_close_paren(input).is_err());
+    assert!(escape_close_paren(input).is_err());
   }
 
   #[test]
-  fn test_single_open_curly_bracket_error() {
+  fn test_escape_open_curly_bracket_error() {
     let content = "{{";
     let input = Text::new_extra(content, "");
-    assert!(single_open_curly_bracket(input).is_err());
+    assert!(escape_open_curly_bracket(input).is_err());
   }
 
   #[test]
-  fn test_single_close_curly_bracket_error() {
+  fn test_escape_close_curly_bracket_error() {
     let content = "}}";
     let input = Text::new_extra(content, "");
-    assert!(single_close_curly_bracket(input).is_err());
+    assert!(escape_close_curly_bracket(input).is_err());
   }
 
   #[test]
-  fn test_single_open_bracket_error() {
+  fn test_escape_open_bracket_error() {
     let content = "[[";
     let input = Text::new_extra(content, "");
-    assert!(single_open_bracket(input).is_err());
+    assert!(escape_open_bracket(input).is_err());
   }
 
   #[test]
-  fn test_single_close_bracket_error() {
+  fn test_escape_close_bracket_error() {
     let content = "]]";
     let input = Text::new_extra(content, "");
-    assert!(single_close_bracket(input).is_err());
+    assert!(escape_close_bracket(input).is_err());
   }
 
   #[test]
-  fn test_single_less_than_error() {
+  fn test_escape_less_than_error() {
     let content = "<<";
     let input = Text::new_extra(content, "");
-    assert!(single_less_than(input).is_err());
+    assert!(escape_less_than(input).is_err());
   }
 
   #[test]
-  fn test_single_greater_than_error() {
+  fn test_escape_greater_than_error() {
     let content = ">>";
     let input = Text::new_extra(content, "");
-    assert!(single_greater_than(input).is_err());
+    assert!(escape_greater_than(input).is_err());
   }
 
   #[test]
-  fn test_single_colon_error() {
+  fn test_escape_colon_error() {
     let content = "::";
     let input = Text::new_extra(content, "");
-    assert!(single_colon(input).is_err());
+    assert!(escape_colon(input).is_err());
   }
 
   #[test]
-  fn test_single_pipe_error() {
+  fn test_escape_pipe_error() {
     let content = "||";
     let input = Text::new_extra(content, "");
-    assert!(single_pipe(input).is_err());
+    assert!(escape_pipe(input).is_err());
   }
 
   #[test]
-  fn test_single_underscore_error() {
+  fn test_escape_underscore_error() {
     let content = "__";
     let input = Text::new_extra(content, "");
-    assert!(single_underscore(input).is_err());
+    assert!(escape_underscore(input).is_err());
   }
 
   #[test]
-  fn test_single_hyphen_error() {
+  fn test_escape_hyphen_error() {
     let content = "--";
     let input = Text::new_extra(content, "");
-    assert!(single_hyphen(input).is_err());
+    assert!(escape_hyphen(input).is_err());
   }
 
   #[test]
-  fn test_single_equal_sign_error() {
+  fn test_escape_equal_sign_error() {
     let content = "==";
     let input = Text::new_extra(content, "");
-    assert!(single_equal_sign(input).is_err());
+    assert!(escape_equal_sign(input).is_err());
   }
 }
 

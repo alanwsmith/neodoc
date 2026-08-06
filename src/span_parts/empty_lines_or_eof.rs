@@ -8,9 +8,7 @@ use nom::multi::many1;
 use nom::sequence::pair;
 use nom::{IResult, Parser};
 
-pub fn empty_lines_or_eof(
-  mut input: Text
-) -> IResult<Text, Text> {
+pub fn empty_lines_or_eof(mut input: Text) -> IResult<Text, Text> {
   input.extra = "empty_lines_or_eof";
   let (input, _) = alt((
     pair(space0, eof).map(|_| ""),
@@ -27,12 +25,7 @@ mod tests {
   use pretty_assertions::assert_eq;
   use rstest::rstest;
   #[rstest]
-  #[case(
-    "two new lines in a row followed by eof",
-    "\n\n",
-    "",
-    ""
-  )]
+  #[case("two new lines in a row followed by eof", "\n\n", "", "")]
   #[case("whitespace then two new lines", "  \n\n", "", "")]
   #[case(
     "newline then whitespace then newline",
@@ -46,12 +39,7 @@ mod tests {
     "",
     " x"
   )]
-  #[case(
-    "two newlines followed by content",
-    "\n\nx",
-    "",
-    "x"
-  )]
+  #[case("two newlines followed by content", "\n\nx", "", "x")]
   #[case(
     "two newlines followed by content with leading whitespace which is kept",
     "\n\n  x",
@@ -89,11 +77,7 @@ mod tests {
   ) {
     let input = Text::new_extra(given, "");
     let result = empty_lines_or_eof.parse(input);
-    assert!(
-      result.is_err(),
-      "\n\nERROR AT: {}\n\n",
-      description
-    );
+    assert!(result.is_err(), "\n\nERROR AT: {}\n\n", description);
   }
 
   //

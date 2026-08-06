@@ -3,6 +3,7 @@ use crate::Text;
 use crate::span::Span;
 use crate::span_parts::code_span_whitespace1_for_block::code_span_whitespace1_for_block;
 use crate::span_parts::one_or_more_dashes::one_or_more_dashes;
+use crate::span_parts::single_character::single_backtick;
 use crate::span_parts::single_newline::single_newline;
 use crate::span_parts::single_newline_chomped::single_newline_chomped;
 use crate::span_parts::word_part::word_part;
@@ -35,6 +36,7 @@ pub fn code_shorthand(mut input: Text) -> IResult<Text, Span> {
     is_not("`| \n"),
     space1_not_followed_by_backtick,
     single_newline,
+    single_backtick,
   )))
   .parse(input)?;
   let (input, _) = space0.parse(input)?;
@@ -84,6 +86,16 @@ mod tests {
     "Trialig newline is trimmed",
     "``alfa bravo\n``",
     "alfa bravo"
+  )]
+  #[case(
+    "Internal newlines turn to spaces",
+    "``alfa\nbravo``",
+    "alfa bravo"
+  )]
+  #[case(
+    "Single backtacks are fine",
+    "``alfa`bravo``",
+    "alfa`bravo"
   )]
 
   fn code_shorthand_without_metadata_runner(

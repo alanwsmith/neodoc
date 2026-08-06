@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 
 # REMINDER: This is the process
-# that generates the `single_character.py`
+# that generates the `escaped_character.rs`
 # file. It's gross, but it works. 
 
-# REMINDER: This does not cover
-# whitespace characters or an
-# escaped backslash. Those 
-# are handled elsewhere. 
+# REMINDER: This does not cover 
+# escaped whitespace or backslashes
+# those and handled elsewhere. 
 
-print("Making single character file")
+print("Making escaped character file")
 
 chars = [
         ("`", "backtick"),
@@ -27,7 +26,7 @@ chars = [
         ("{", "open_curly_bracket"),
         ("}", "close_curly_bracket"),
         ("[", "open_bracket"),
-         ("]", "close_bracket"),
+        ("]", "close_bracket"),
         ("<", "less_than"),
         (">", "greater_than"),
         (":", "colon"),
@@ -41,34 +40,10 @@ lines = [
         """use crate::Text;
 use nom::{
   IResult, Parser, branch::alt, bytes::complete::tag, combinator::not
-};
-"""]
-
-
-# lines.append("""
-# pub fn single_character(
-#   input: Text
-# ) -> IResult<Text, Text> {
-#   let (input, result) = alt((""")
-# chain = []
-# for (index, char) in enumerate(chars):
-#     if index == 7:
-#         chain.append(f"""single_{char[1]}))""")
-#     elif index == 8:
-#         chain.append(f"""alt(( single_{char[1]}""")
-#     else:
-#         chain.append(f"""single_{char[1]}""")
-# lines.append("alt((")
-# lines.append(", ".join(chain))
-# lines.append("""
-#              )))).parse(input)?;
-#   Ok((input, result))
-#   }
-# """)
-
+};"""]
 
 for char in chars:
-    lines.append(f"""pub fn single_{char[1]}(input: Text) -> IResult<Text, Text> {{
+    lines.append(f"""pub fn escape_{char[1]}(input: Text) -> IResult<Text, Text> {{
 let (input, result) = tag("{char[0]}").parse(input)?;
 let (input, _) = not(tag("{char[0]}")).parse(input)?;
   Ok((input, result))
@@ -86,10 +61,10 @@ lines.append("use pretty_assertions::assert_eq;")
 for char in chars:
     lines.append(f"""
 #[test]
-fn test_single_{char[1]}() {{
+fn test_escape_{char[1]}() {{
     let content = "{char[0]}";
     let input = Text::new_extra(content, "");
-      let result = single_{char[1]}(input).unwrap();
+      let result = escape_{char[1]}(input).unwrap();
       let left = content;
       let right = result.1.fragment();
       assert_eq!(&left, right);
@@ -99,16 +74,15 @@ fn test_single_{char[1]}() {{
 for char in chars:
     lines.append(f"""
 #[test]
-fn test_single_{char[1]}_error() {{
+fn test_escape_{char[1]}_error() {{
     let content = "{char[0]}{char[0]}";
     let input = Text::new_extra(content, "");
-    assert!(single_{char[1]}(input).is_err());
+    assert!(escape_{char[1]}(input).is_err());
     }}
                  """)
-
 lines.append("""}""")
 
 
-with open("single_character.rs", "w") as _out:
+with open("escape_character.rs", "w") as _out:
     _out.write("\n".join(lines))
 

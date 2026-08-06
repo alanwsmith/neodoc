@@ -2,6 +2,7 @@ pub mod code_flag_word_part;
 pub mod code_span_whitespace1_for_block;
 pub mod colon_not_followed_by_space;
 pub mod empty_lines_or_eof;
+pub mod escape_character;
 pub mod one_or_more_colons;
 pub mod one_or_more_dashes;
 pub mod section_token;
