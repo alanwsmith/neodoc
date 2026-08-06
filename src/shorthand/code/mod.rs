@@ -4,12 +4,13 @@ use crate::span::Span;
 use crate::span_parts::code_span_whitespace1_for_block::code_span_whitespace1_for_block;
 use crate::span_parts::one_or_more_dashes::one_or_more_dashes;
 use crate::span_parts::single_newline::single_newline;
+use crate::span_parts::single_newline_chomped::single_newline_chomped;
 use crate::span_parts::word_part::word_part;
 use nom::branch::alt;
 use nom::bytes::complete::{is_not, tag};
 use nom::character::complete::space0;
 use nom::character::complete::space1;
-use nom::combinator::not;
+use nom::combinator::{not, opt};
 use nom::multi::many1;
 use nom::{IResult, Parser};
 
@@ -29,9 +30,13 @@ pub fn code_shorthand(mut input: Text) -> IResult<Text, Span> {
   input.extra = "code";
   let (input, _) = tag("``").parse(input)?;
   let (input, _) = space0.parse(input)?;
-  let (input, contents) =
-    many1(alt((is_not("`| \n"), space1_not_followed_by_backtick)))
-      .parse(input)?;
+  let (input, _) = opt(single_newline).parse(input)?;
+  let (input, contents) = many1(alt((
+    is_not("`| \n"),
+    space1_not_followed_by_backtick,
+    single_newline,
+  )))
+  .parse(input)?;
   let (input, _) = space0.parse(input)?;
   let (input, _) = tag("``").parse(input)?;
   let content = contents
@@ -39,6 +44,7 @@ pub fn code_shorthand(mut input: Text) -> IResult<Text, Span> {
     .map(|v| *v.fragment())
     .collect::<Vec<_>>()
     .join("")
+    .trim()
     .to_string();
   let output = Span::Code {
     attributes: vec![],
@@ -72,6 +78,11 @@ mod tests {
   #[case(
     "Leading newline is trimmed",
     "``\nalfa bravo``",
+    "alfa bravo"
+  )]
+  #[case(
+    "Trialig newline is trimmed",
+    "``alfa bravo\n``",
     "alfa bravo"
   )]
 
