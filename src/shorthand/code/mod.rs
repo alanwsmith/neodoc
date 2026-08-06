@@ -26,16 +26,7 @@ pub fn code_shorthand(mut input: Text) -> IResult<Text, Span> {
     code_shorthand_escaped_snippets,
   )))
   .parse(input)?;
-  // let (input, _) =
-  //   not((space0, line_ending, space0, line_ending)).parse(input)?;
   let (input, _) = code_shorthand_closing_token.parse(input)?;
-  // let content = contents
-  //   .iter()
-  //   .map(|v| *v.fragment())
-  //   .collect::<Vec<_>>()
-  //   .join("")
-  //   .trim()
-  //   .to_string();
   let output = Span::Code {
     attributes: vec![],
     content: snippets,
@@ -187,9 +178,9 @@ mod tests {
     Snippet::Escaped("`".to_string()),
     Snippet::Normal("`bravo".to_string())
   ])]
-
-  // TODO: alfa\``bravo
-  // TODO: `\`
+  #[case("Single escaped backtick", "``\\```", vec![
+    Snippet::Escaped("`".to_string()),
+  ])]
 
   fn code_shorthand_without_metadata_runner(
     #[case] description: &str,
@@ -213,44 +204,6 @@ mod tests {
       description
     );
   }
-
-  // #[case(
-  //   "Trialig newline is trimmed",
-  //   "``alfa bravo\n``",
-  //   "alfa bravo"
-  // )]
-  // #[case(
-  //   "Internal newlines turn to spaces",
-  //   "``alfa\nbravo``",
-  //   "alfa bravo"
-  // )]
-  // #[case(
-  //   "Single backtacks are fine",
-  //   "``alfa`bravo``",
-  //   "alfa`bravo"
-  // )]
-  // #[case(
-  //   "Escaped backticks work",
-  //   "``alfa\\``bravo``",
-  //   "alfa``bravo"
-  // )]
-  // fn code_shorthand_without_metadata_runner(
-  //   #[case] description: &str,
-  //   #[case] given: &str,
-  //   #[case] expected: &str,
-  // ) {
-  //   let input = Text::new_extra(given, "");
-  //   let result = code_shorthand.parse(input).unwrap();
-  //   let left = Span::Code {
-  //     attributes: vec![],
-  //     content: expected.to_string(),
-  //     flags: vec![],
-  //     r#type: "span".to_string(),
-  //     template: "default".to_string(),
-  //   };
-  //   assert_eq!(left, result.1, "\n\n{}\n\n", description);
-  //   assert_eq!(&"", result.0.fragment(), "\n\n{}\n\n", description);
-  // }
 
   #[rstest]
   #[case("Empty lines can't start the span", "``\n\nalfa``")]
