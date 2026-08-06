@@ -12,9 +12,9 @@ pub fn whitespace0(mut input: Input) -> IResult<Input, Input> {
   input.extra.push("whitespace0");
   let (input, result) = space0.parse(input)?;
   if result.is_empty() {
-    Ok((input, Input::new_extra("", "whitespace0")))
+    Ok((input, Input::new_extra("", vec!["whitespace0"])))
   } else {
-    Ok((input, Input::new_extra(" ", "whitespace0")))
+    Ok((input, Input::new_extra(" ", vec!["whitespace0"])))
   }
 }
 
@@ -35,19 +35,19 @@ mod tests {
     #[case] expected: &str,
     #[case] remainder: &str,
   ) {
-    let input = Input::new_extra(given, "");
-    let result = whitespace0.parse(input).unwrap();
+    let input = Input::new_extra(given, vec![]);
+    let result = whitespace0.parse(input.clone()).unwrap();
     assert_eq!(
       &expected,
       result.1.fragment(),
       "{}",
-      format!("\n\n{:?}\n\n{:?}", input, result)
+      format!("\n\n{:?}\n\n{:?}", input.clone(), result)
     );
     assert_eq!(
       &remainder,
       result.0.fragment(),
       "{}",
-      format!("\n\n{:?}\n\n{:?}", input, result)
+      format!("\n\n{:?}\n\n{:?}", input.clone(), result)
     );
   }
 

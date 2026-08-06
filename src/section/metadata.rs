@@ -67,7 +67,7 @@ mod tests {
   //     FlagOrAttr::SectionFlag(vec![Content::Text {
   //       content: target1.to_string(),
   //     }]);
-  //   let input = Input::new_extra(content, "");
+  //   let input = Input::new_extra(content, vec![]);
   //   let result = section_flag(input).unwrap();
   //   let left = target2;
   //   let right = result.1;

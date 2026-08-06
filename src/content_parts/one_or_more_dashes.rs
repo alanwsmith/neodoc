@@ -42,7 +42,7 @@ mod tests {
     #[case] expected: &str,
     #[case] remainder: &str,
   ) {
-    let input = Input::new_extra(given, "");
+    let input = Input::new_extra(given, vec![]);
     let result = one_or_more_dashes.parse(input).unwrap();
     assert_eq!(
       &expected,
@@ -64,7 +64,7 @@ mod tests {
   // fn empty_lines_or_eof_error_test_runner(
   //   #[case] given: &str
   // ) {
-  //   let input = Input::new_extra(given, "");
+  //   let input = Input::new_extra(given, vec![]);
   //   let result = one_or_more_dashes.parse(input);
   //   assert!(result.is_err());
   // }

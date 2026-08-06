@@ -7,19 +7,21 @@ use nom::{IResult, Parser};
 // returns an empty string (i.e. there is no space
 // returned)
 
-pub fn single_newline_chomped(input: Input) -> IResult<Input, Input> {
+pub fn single_newline_chomped(
+  input: Input
+) -> IResult<Input, Input> {
   let (input, _) = space0.parse(input)?;
   let (input, _) = line_ending.parse(input)?;
   if input.fragment().is_empty() {
-    return Ok((input, Input::new_extra("", "")));
+    return Ok((input, Input::new_extra("", vec![])));
   }
-  let (_, check) = opt((space0, eof)).parse(input)?;
+  let (_, check) = opt((space0, eof)).parse(input.clone())?;
   if check.is_some() {
-    return Ok((input, Input::new_extra("", "")));
+    return Ok((input, Input::new_extra("", vec![])));
   }
   let (input, _) = space0.parse(input)?;
   let (input, _) = not((space0, line_ending)).parse(input)?;
-  Ok((input, Input::new_extra("", "")))
+  Ok((input, Input::new_extra("", vec![])))
 }
 
 #[cfg(test)]
@@ -60,8 +62,9 @@ mod tests {
     #[case] expected: &str,
     #[case] remainder: &str,
   ) {
-    let input = Input::new_extra(given, "");
-    let result = single_newline_chomped.parse(input).unwrap();
+    let input = Input::new_extra(given, vec![]);
+    let result =
+      single_newline_chomped.parse(input.clone()).unwrap();
     assert_eq!(
       &expected,
       result.1.fragment(),
@@ -86,7 +89,7 @@ mod tests {
     #[case] description: &str,
     #[case] given: &str,
   ) {
-    let input = Input::new_extra(given, "");
+    let input = Input::new_extra(given, vec![]);
     let result = single_newline_chomped.parse(input);
     assert!(result.is_err(), "\n\n{}\n\n", description);
   }

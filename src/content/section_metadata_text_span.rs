@@ -35,7 +35,7 @@ pub fn section_metadata_text_span(
     .to_string();
   if content == " " {
     return Err(nom::Err::Error(nom::error::Error::new(
-      LocatedSpan::new_extra("", ""),
+      LocatedSpan::new_extra("", vec![]),
       nom::error::ErrorKind::Fail,
     )));
   }
@@ -102,7 +102,7 @@ mod tests {
     #[case] expected: &str,
     #[case] remainder: &str,
   ) {
-    let input = Input::new_extra(given, "");
+    let input = Input::new_extra(given, vec![]);
     let result = section_metadata_text_span.parse(input).unwrap();
     let left = Content::Text {
       content: expected.to_string(),

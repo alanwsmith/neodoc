@@ -7,6 +7,6 @@
 
 find "/Users/alan/workshop/neodoc/src/" \
   -type f \( -iname "*.rs" \) -print0 | xargs -0 sed -E -i "" \
-  's|input\.extra = "(.*)"|input.extra.push("\1")|g'
+  's|new_extra\((.*) "(.*)"\)|new_extra(\1 vec!["\2"])|g'
 
 

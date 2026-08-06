@@ -53,7 +53,7 @@
 //    #[case] expected: &str,
 //    #[case] remainder: &str,
 //  ) {
-//    let input = Input::new_extra(given, "");
+//    let input = Input::new_extra(given, vec![]);
 //    let result = inline_flag.parse(input).unwrap();
 //    let content = vec![test_text_span(expected)];
 //    let flag = Metadata::Flag(content);
@@ -72,7 +72,7 @@
 //  //   #[case] description: &str,
 //  //   #[case] given: &str,
 //  // ) {
-//  //   let input = Input::new_extra(given, "");
+//  //   let input = Input::new_extra(given, vec![]);
 //  //   let result = inline_flag.parse(input);
 //  //   assert!(
 //  //     result.is_err(),

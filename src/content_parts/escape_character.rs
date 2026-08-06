@@ -148,7 +148,7 @@ use pretty_assertions::assert_eq;
 #[test]
 fn test_escape_backtick() {
     let content = "\\`";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
       let result = escape_backtick(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -159,7 +159,7 @@ fn test_escape_backtick() {
 #[test]
 fn test_escape_tilde() {
     let content = "\\~";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
       let result = escape_tilde(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -170,7 +170,7 @@ fn test_escape_tilde() {
 #[test]
 fn test_escape_exclamation() {
     let content = "\\!";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
       let result = escape_exclamation(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -181,7 +181,7 @@ fn test_escape_exclamation() {
 #[test]
 fn test_escape_at_sing() {
     let content = "\\@";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
       let result = escape_at_sing(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -192,7 +192,7 @@ fn test_escape_at_sing() {
 #[test]
 fn test_escape_octothorpe() {
     let content = "\\#";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
       let result = escape_octothorpe(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -203,7 +203,7 @@ fn test_escape_octothorpe() {
 #[test]
 fn test_escape_dollar_sign() {
     let content = "\\$";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
       let result = escape_dollar_sign(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -214,7 +214,7 @@ fn test_escape_dollar_sign() {
 #[test]
 fn test_escape_percent_sign() {
     let content = "\\%";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
       let result = escape_percent_sign(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -225,7 +225,7 @@ fn test_escape_percent_sign() {
 #[test]
 fn test_escape_caret() {
     let content = "\\^";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
       let result = escape_caret(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -236,7 +236,7 @@ fn test_escape_caret() {
 #[test]
 fn test_escape_ampersand() {
     let content = "\\&";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
       let result = escape_ampersand(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -247,7 +247,7 @@ fn test_escape_ampersand() {
 #[test]
 fn test_escape_astrisk() {
     let content = "\\*";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
       let result = escape_astrisk(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -258,7 +258,7 @@ fn test_escape_astrisk() {
 #[test]
 fn test_escape_open_paren() {
     let content = "\\(";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
       let result = escape_open_paren(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -269,7 +269,7 @@ fn test_escape_open_paren() {
 #[test]
 fn test_escape_close_paren() {
     let content = "\\)";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
       let result = escape_close_paren(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -280,7 +280,7 @@ fn test_escape_close_paren() {
 #[test]
 fn test_escape_open_curly_bracket() {
     let content = "\\{";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
       let result = escape_open_curly_bracket(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -291,7 +291,7 @@ fn test_escape_open_curly_bracket() {
 #[test]
 fn test_escape_close_curly_bracket() {
     let content = "\\}";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
       let result = escape_close_curly_bracket(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -302,7 +302,7 @@ fn test_escape_close_curly_bracket() {
 #[test]
 fn test_escape_open_bracket() {
     let content = "\\[";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
       let result = escape_open_bracket(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -313,7 +313,7 @@ fn test_escape_open_bracket() {
 #[test]
 fn test_escape_close_bracket() {
     let content = "\\]";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
       let result = escape_close_bracket(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -324,7 +324,7 @@ fn test_escape_close_bracket() {
 #[test]
 fn test_escape_less_than() {
     let content = "\\<";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
       let result = escape_less_than(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -335,7 +335,7 @@ fn test_escape_less_than() {
 #[test]
 fn test_escape_greater_than() {
     let content = "\\>";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
       let result = escape_greater_than(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -346,7 +346,7 @@ fn test_escape_greater_than() {
 #[test]
 fn test_escape_colon() {
     let content = "\\:";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
       let result = escape_colon(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -357,7 +357,7 @@ fn test_escape_colon() {
 #[test]
 fn test_escape_pipe() {
     let content = "\\|";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
       let result = escape_pipe(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -368,7 +368,7 @@ fn test_escape_pipe() {
 #[test]
 fn test_escape_underscore() {
     let content = "\\_";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
       let result = escape_underscore(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -379,7 +379,7 @@ fn test_escape_underscore() {
 #[test]
 fn test_escape_hyphen() {
     let content = "\\-";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
       let result = escape_hyphen(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -390,7 +390,7 @@ fn test_escape_hyphen() {
 #[test]
 fn test_escape_equal_sign() {
     let content = "\\=";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
       let result = escape_equal_sign(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -401,7 +401,7 @@ fn test_escape_equal_sign() {
 #[test]
 fn test_escape_backtick_error() {
     let content = "``";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(escape_backtick(input).is_err());
     }
                  
@@ -409,7 +409,7 @@ fn test_escape_backtick_error() {
 #[test]
 fn test_escape_tilde_error() {
     let content = "~~";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(escape_tilde(input).is_err());
     }
                  
@@ -417,7 +417,7 @@ fn test_escape_tilde_error() {
 #[test]
 fn test_escape_exclamation_error() {
     let content = "!!";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(escape_exclamation(input).is_err());
     }
                  
@@ -425,7 +425,7 @@ fn test_escape_exclamation_error() {
 #[test]
 fn test_escape_at_sing_error() {
     let content = "@@";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(escape_at_sing(input).is_err());
     }
                  
@@ -433,7 +433,7 @@ fn test_escape_at_sing_error() {
 #[test]
 fn test_escape_octothorpe_error() {
     let content = "##";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(escape_octothorpe(input).is_err());
     }
                  
@@ -441,7 +441,7 @@ fn test_escape_octothorpe_error() {
 #[test]
 fn test_escape_dollar_sign_error() {
     let content = "$$";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(escape_dollar_sign(input).is_err());
     }
                  
@@ -449,7 +449,7 @@ fn test_escape_dollar_sign_error() {
 #[test]
 fn test_escape_percent_sign_error() {
     let content = "%%";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(escape_percent_sign(input).is_err());
     }
                  
@@ -457,7 +457,7 @@ fn test_escape_percent_sign_error() {
 #[test]
 fn test_escape_caret_error() {
     let content = "^^";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(escape_caret(input).is_err());
     }
                  
@@ -465,7 +465,7 @@ fn test_escape_caret_error() {
 #[test]
 fn test_escape_ampersand_error() {
     let content = "&&";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(escape_ampersand(input).is_err());
     }
                  
@@ -473,7 +473,7 @@ fn test_escape_ampersand_error() {
 #[test]
 fn test_escape_astrisk_error() {
     let content = "**";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(escape_astrisk(input).is_err());
     }
                  
@@ -481,7 +481,7 @@ fn test_escape_astrisk_error() {
 #[test]
 fn test_escape_open_paren_error() {
     let content = "((";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(escape_open_paren(input).is_err());
     }
                  
@@ -489,7 +489,7 @@ fn test_escape_open_paren_error() {
 #[test]
 fn test_escape_close_paren_error() {
     let content = "))";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(escape_close_paren(input).is_err());
     }
                  
@@ -497,7 +497,7 @@ fn test_escape_close_paren_error() {
 #[test]
 fn test_escape_open_curly_bracket_error() {
     let content = "{{";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(escape_open_curly_bracket(input).is_err());
     }
                  
@@ -505,7 +505,7 @@ fn test_escape_open_curly_bracket_error() {
 #[test]
 fn test_escape_close_curly_bracket_error() {
     let content = "}}";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(escape_close_curly_bracket(input).is_err());
     }
                  
@@ -513,7 +513,7 @@ fn test_escape_close_curly_bracket_error() {
 #[test]
 fn test_escape_open_bracket_error() {
     let content = "[[";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(escape_open_bracket(input).is_err());
     }
                  
@@ -521,7 +521,7 @@ fn test_escape_open_bracket_error() {
 #[test]
 fn test_escape_close_bracket_error() {
     let content = "]]";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(escape_close_bracket(input).is_err());
     }
                  
@@ -529,7 +529,7 @@ fn test_escape_close_bracket_error() {
 #[test]
 fn test_escape_less_than_error() {
     let content = "<<";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(escape_less_than(input).is_err());
     }
                  
@@ -537,7 +537,7 @@ fn test_escape_less_than_error() {
 #[test]
 fn test_escape_greater_than_error() {
     let content = ">>";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(escape_greater_than(input).is_err());
     }
                  
@@ -545,7 +545,7 @@ fn test_escape_greater_than_error() {
 #[test]
 fn test_escape_colon_error() {
     let content = "::";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(escape_colon(input).is_err());
     }
                  
@@ -553,7 +553,7 @@ fn test_escape_colon_error() {
 #[test]
 fn test_escape_pipe_error() {
     let content = "||";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(escape_pipe(input).is_err());
     }
                  
@@ -561,7 +561,7 @@ fn test_escape_pipe_error() {
 #[test]
 fn test_escape_underscore_error() {
     let content = "__";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(escape_underscore(input).is_err());
     }
                  
@@ -569,7 +569,7 @@ fn test_escape_underscore_error() {
 #[test]
 fn test_escape_hyphen_error() {
     let content = "--";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(escape_hyphen(input).is_err());
     }
                  
@@ -577,7 +577,7 @@ fn test_escape_hyphen_error() {
 #[test]
 fn test_escape_equal_sign_error() {
     let content = "==";
-    let input = Input::new_extra(content, "");
+    let input = Input::new_extra(content, vec![]);
     assert!(escape_equal_sign(input).is_err());
     }
                  

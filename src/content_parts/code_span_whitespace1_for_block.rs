@@ -10,6 +10,6 @@ pub fn code_span_whitespace1_for_block(
   let (input, _) = (space1, not(tag("`"))).parse(input)?;
   Ok((
     input,
-    Input::new_extra(" ", "code_block_span_whitespace1"),
+    Input::new_extra(" ", vec!["code_block_span_whitespace1"]),
   ))
 }

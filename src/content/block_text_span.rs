@@ -69,7 +69,7 @@ mod tests {
     #[case] expected: &str,
     #[case] remainder: &str,
   ) {
-    let input = Input::new_extra(given, "");
+    let input = Input::new_extra(given, vec![]);
     let result = block_text_span.parse(input).unwrap();
     let left = Content::Text {
       content: expected.to_string(),

@@ -16,7 +16,7 @@ pub fn empty_lines_or_eof(mut input: Input) -> IResult<Input, Input> {
   ))
   .parse(input)?;
   let (input, _) = opt(eof).parse(input)?;
-  Ok((input, Input::new_extra("", "empty_lines_or_eof")))
+  Ok((input, Input::new_extra("", vec!["empty_lines_or_eof"])))
 }
 
 #[cfg(test)]
@@ -53,7 +53,7 @@ mod tests {
     #[case] expected: &str,
     #[case] remainder: &str,
   ) {
-    let input = Input::new_extra(given, "");
+    let input = Input::new_extra(given, vec![]);
     let result = empty_lines_or_eof.parse(input).unwrap();
     assert_eq!(
       &expected,
@@ -75,7 +75,7 @@ mod tests {
     #[case] description: &str,
     #[case] given: &str,
   ) {
-    let input = Input::new_extra(given, "");
+    let input = Input::new_extra(given, vec![]);
     let result = empty_lines_or_eof.parse(input);
     assert!(result.is_err(), "\n\nERROR AT: {}\n\n", description);
   }

@@ -383,7 +383,7 @@ mod tests {
   //   #[case] expected_key: &str,
   //   #[case] expected_value: Vec<Content>,
   // ) {
-  //   let input = Input::new_extra(given, "");
+  //   let input = Input::new_extra(given, vec![]);
   //   let result =
   //     code_shorthand_metadata_attribute.parse(input).unwrap();
   //   let left = Metadata::Attribute {

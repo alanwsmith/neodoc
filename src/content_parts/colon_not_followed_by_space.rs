@@ -29,7 +29,7 @@ mod tests {
     #[case] expected: &str,
     #[case] remainder: &str,
   ) {
-    let input = Input::new_extra(given, "");
+    let input = Input::new_extra(given, vec![]);
     let result =
       colon_not_followed_by_space.parse(input).unwrap();
     let left = expected;
@@ -54,7 +54,7 @@ mod tests {
     #[case] description: &str,
     #[case] given: &str,
   ) {
-    let input = Input::new_extra(given, "");
+    let input = Input::new_extra(given, vec![]);
     let result = colon_not_followed_by_space.parse(input);
     assert!(
       result.is_err(),
