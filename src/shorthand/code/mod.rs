@@ -14,6 +14,7 @@ use nom::character::complete::space0;
 use nom::character::complete::space1;
 use nom::combinator::{not, opt};
 use nom::multi::many1;
+use nom::sequence::pair;
 use nom::{IResult, Parser};
 
 pub fn code_shorthand(mut input: Text) -> IResult<Text, Span> {
@@ -56,9 +57,9 @@ pub fn code_shorthand_normal_snippets(
 ) -> IResult<Text, Snippet> {
   input.extra = "code";
   let (input, contents) = many1(alt((
-    is_not("`| \n\\"),
-    space1_not_followed_by_backtick,
-    single_newline,
+    is_not("`| \n\r\t\\"),
+    single_whitespace_not_followed_by_backtick,
+    single_newline_not_followed_by_backtick,
     single_backtick,
   )))
   .parse(input)?;
@@ -72,15 +73,32 @@ pub fn code_shorthand_normal_snippets(
   Ok((input, Snippet::Normal(content)))
 }
 
-pub fn space1_not_followed_by_backtick(
+pub fn single_newline_not_followed_by_backtick(
   mut input: Text
 ) -> IResult<Text, Text> {
-  input.extra = "space1_not_followed_by_backtick";
-  let (input, _) = space1.parse(input)?;
-  let (input, _) = not(tag("`")).parse(input)?;
+  input.extra = "single_newline_not_followed_by_backtick";
+  let (input, _) = alt((
+    pair(tag("\r\n"), not(tag("`"))),
+    pair(tag("\n"), not(tag("`"))),
+  ))
+  .parse(input)?;
   Ok((
     input,
-    Text::new_extra(" ", "space1_not_followedy_by_backtick"),
+    Text::new_extra(" ", "single_newline_followedy_by_backtick"),
+  ))
+}
+
+pub fn single_whitespace_not_followed_by_backtick(
+  mut input: Text
+) -> IResult<Text, Text> {
+  input.extra = "single_whitespace_not_followed_by_backtick";
+  let (input, _) = pair(tag(" "), not(tag("`"))).parse(input)?;
+  Ok((
+    input,
+    Text::new_extra(
+      " ",
+      "single_whitespace_not_followed_by_backtick",
+    ),
   ))
 }
 
@@ -97,6 +115,24 @@ mod tests {
   #[case("Multiple words", "``alfa bravo``", vec![
     Snippet::Normal("alfa bravo".to_string())
   ])]
+  #[case("Leading spaces are trimmed", "``   alfa``", vec![
+    Snippet::Normal("alfa".to_string())
+  ])]
+  #[case("Trailing spaces are trimmed", "``alfa    ``", vec![
+    Snippet::Normal("alfa".to_string())
+  ])]
+  #[case("Internal spaces are maintained", "``alfa      bravo``", vec![
+    Snippet::Normal("alfa      bravo".to_string())
+  ])]
+  #[case("Single nternal newlines become spaces", "``alfa\nbravo  \n  charlie``", vec![
+    Snippet::Normal("alfa bravo     charlie".to_string())
+  ])]
+  #[case("Single nternal newlines become spaces on Windows", "``alfa\r\nbravo  \r\n  charlie``", vec![
+    Snippet::Normal("alfa bravo     charlie".to_string())
+  ])]
+
+  // TODO: ``\nalfa\n``
+
   fn code_shorthand_without_metadata_runner(
     #[case] description: &str,
     #[case] given: &str,
@@ -116,8 +152,6 @@ mod tests {
   }
 
   // #[rstest]
-  // #[case("Single word", "``alfa``", "alfa")]
-  // #[case("Multiple words", "``alfa bravo``", "alfa bravo")]
   // #[case(
   //   "Leading space is trimmed",
   //   "`` alfa bravo``",
@@ -174,11 +208,11 @@ mod tests {
   #[rstest]
   #[case("Empty lines are not allowed", "``alfa\n\n``")]
   #[case(
-    "Empty lines are not allowed with space before first newline",
+    "Empty lines are not allowed with space before first newline of an empty line",
     "``alfa \n\n``"
   )]
   #[case(
-    "Empty lines are not allowed with space before second newline",
+    "Empty lines are not allowed with space before second newline of an empty line",
     "``alfa\n \n``"
   )]
   fn code_shorthand_error_test_runner(
