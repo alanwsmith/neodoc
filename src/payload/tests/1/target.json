@@ -23,6 +23,16 @@
                         "type": "text"
                       }
                     ]
+                  },
+                  {
+                    "key": "echo",
+                    "value": [
+                      {
+                        "content": "foxtrot",
+                        "template": "default",
+                        "type": "text"
+                      }
+                    ]
                   }
                 ],
                 "content": [
@@ -38,7 +48,7 @@
                 "type": "shorthand"
               },
               {
-                "content": " echo",
+                "content": " golf",
                 "template": "default",
                 "type": "text"
               }
