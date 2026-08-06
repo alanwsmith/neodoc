@@ -42,7 +42,6 @@ mod tests {
     let input = Input::new_extra(content, vec![]);
     let left: Value = serde_json::from_str(check).unwrap();
     let result = payload(input.clone());
-    dbg!(&result);
     match result {
       Ok(response) => {
         let right = serde_json::to_value(response.1).unwrap();

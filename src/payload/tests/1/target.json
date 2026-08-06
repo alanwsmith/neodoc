@@ -38,7 +38,7 @@
                 "type": "shorthand"
               },
               {
-                "content": " charlie",
+                "content": " echo",
                 "template": "default",
                 "type": "text"
               }

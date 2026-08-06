@@ -23,14 +23,14 @@ pub fn code_shorthand(mut input: Input) -> IResult<Input, Content> {
   input.extra = vec!["code_shorthand"];
   let (input, _) = code_shorthand_opening_token.parse(input)?;
   let (input, content) = many0(alt((
-    code_shorthand_normal_snippets,
-    code_shorthand_escaped_snippets,
+    code_shorthand_normal_content,
+    code_shorthand_escaped_content,
   )))
   .parse(input)?;
   let (input, metadatas) = code_shorthand_metadatas.parse(input)?;
   let (input, _) = code_shorthand_closing_token.parse(input)?;
   let output = Content::Code {
-    attrs: vec![],
+    attrs: metadatas.attrs,
     content,
     flags: vec![],
     subType: "code".to_string(),
@@ -71,12 +71,15 @@ pub fn code_shorthand_metadata_attribute(
   let (input, key) = is_not(": \n\r\t").parse(input)?;
   let (input, _) = tag(":").parse(input)?;
   let (input, _) = space1.parse(input)?;
+  let (input, value) =
+    many1(code_shorthand_normal_content).parse(input)?;
+
   // TODO: pull in text values here
   Ok((
     input,
     Metadata::Attribute {
       key: key.to_string(),
-      value: vec![],
+      value,
     },
   ))
 }
@@ -112,10 +115,10 @@ pub fn code_shorthand_closing_token(
   Ok((input, result))
 }
 
-pub fn code_shorthand_escaped_snippets(
+pub fn code_shorthand_escaped_content(
   mut input: Input
 ) -> IResult<Input, Content> {
-  input.extra.push("code_shorthand_normal_snippets");
+  input.extra.push("code_shorthand_normal_content");
   let (input, _) = tag("\\").parse(input)?;
   let (input, result) =
     alt((tag("`"), tag("|"), tag("\\"))).parse(input)?;
@@ -129,10 +132,10 @@ pub fn code_shorthand_escaped_snippets(
   ))
 }
 
-pub fn code_shorthand_normal_snippets(
+pub fn code_shorthand_normal_content(
   mut input: Input
 ) -> IResult<Input, Content> {
-  input.extra.push("code_shorthand_normal_snippets");
+  input.extra.push("code_shorthand_normal_content");
   let (input, _) =
     not(code_shorthand_closing_token).parse(input)?;
   let (input, contents) = many1(pair(
@@ -197,6 +200,7 @@ pub fn single_whitespace_not_followed_by_backtick(
 #[cfg(test)]
 mod tests {
   use super::*;
+  use crate::content::test_text_span;
   use pretty_assertions::assert_eq;
   use rstest::rstest;
 
@@ -339,69 +343,41 @@ mod tests {
     );
   }
 
-  // #[case("Single backtick must be escaped befor another backtick", "``alfa\\``bravo``", vec![
-  //   Content::Text{ r#type: "text".to_string(), template: "default", content: "alfa".to_string()},
-  //   Content::Text{ r#type: "text".to_string(), template: "escaped".to_string(), content: "`".to_string()},
-  //   Content::Text{ r#type: "text".to_string(), template: "default", content: "`bravo".to_string())
-  // ])]
-  // #[case("Single escaped backtick", "``\\```", vec![
-  //   Content::Text{ r#type: "text".to_string(), template: "escaped".to_string(), content: "`".to_string()},
-  // ])]
-  // #[case("Escaped pipe", "``\\|``", vec![
-  //   Content::Text{ r#type: "text".to_string(), template: "escaped".to_string(), content: "|".to_string()},
-  // ])]
-  // #[case("Escaped escape", "``\\\\``", vec![
-  //   Content::Text{ r#type: "text".to_string(), template: "escaped".to_string(), content: "\\".to_string()},
-  // ])]
-
-  // #[case("Single backtick can be escaped", "``alfa\\`bravo``", vec![
-  //   Snippet::Normal("alfa".to_string()),
-  //   Snippet::Escaped("`".to_string()),
-  //   Snippet::Normal("bravo".to_string())
-  // ])]
-  // #[case("Single backtick must be escaped befor another backtick", "``alfa\\``bravo``", vec![
-  //   Snippet::Normal("alfa".to_string()),
-  //   Snippet::Escaped("`".to_string()),
-  //   Snippet::Normal("`bravo".to_string())
-  // ])]
-  // #[case("Single escaped backtick", "``\\```", vec![
-  //   Snippet::Escaped("`".to_string()),
-  // ])]
-  // #[case("Escaped pipe", "``\\|``", vec![
-  //   Snippet::Escaped("|".to_string()),
-  // ])]
-  // #[case("Escaped escape", "``\\\\``", vec![
-  //   Snippet::Escaped("\\".to_string()),
-  // ])]
-
-  // // Attribute metadata
-  // #[rstest]
-  // #[case("key, single word value ending at close of span", "|alfa: bravo``", "alfa", vec![])]
-  // fn code_shorthand_attribute_metadata_runner(
-  //   #[case] description: &str,
-  //   #[case] given: &str,
-  //   #[case] expected_key: &str,
-  //   #[case] expected_value: Vec<Content>,
-  // ) {
-  //   let input = Input::new_extra(given, vec![]);
-  //   let result =
-  //     code_shorthand_metadata_attribute.parse(input).unwrap();
-  //   let left = Metadata::Attribute {
-  //     key: expected_key.to_string(),
-  //     value: vec![], // attrs: vec![],
-  //                    // content: expected,
-  //                    // flags: vec![],
-  //                    // r#type: "span".to_string(),
-  //                    // template: "default".to_string(),
-  //   };
-  //   assert_eq!(left, result.1, "\n\nFAILED: {}\n\n", description);
-  //   assert_eq!(
-  //     &"",
-  //     result.0.fragment(),
-  //     "\n\nFAILED: {}\n\n",
-  //     description
-  //   );
-  // }
+  // Attribute metadata
+  #[rstest]
+  #[case("key, single word value ending at close of span", "|alfa: bravo``", "alfa", vec![
+    test_text_span("bravo")
+  ])]
+  fn code_shorthand_attribute_metadata_runner(
+    #[case] description: &str,
+    #[case] given: &str,
+    #[case] expected_key: &str,
+    #[case] expected_value: Vec<Content>,
+  ) {
+    let input = Input::new_extra(given, vec![]);
+    match code_shorthand_metadata_attribute.parse(input) {
+      Ok(result) => {
+        let left = Metadata::Attribute {
+          key: expected_key.to_string(),
+          value: expected_value,
+        };
+        assert_eq!(
+          left, result.1,
+          "\n\nFAILED: {}\n\n",
+          description
+        );
+        assert_eq!(
+          &"``",
+          result.0.fragment(),
+          "\n\nFAILED: {}\n\n",
+          description
+        );
+      }
+      Err(_) => {
+        // TODO Add errors here if needed
+      }
+    }
+  }
 
   #[rstest]
   #[case("Empty lines can't start the span", "``\n\nalfa``")]

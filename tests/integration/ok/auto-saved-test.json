@@ -1,5 +1,5 @@
 {
-  "given": "-- p\n\nalfa ``bravo`` charlie",
+  "given": "-- p\n\nalfa ``bravo|charlie: delta`` echo",
   "remainder": "",
   "status": {
     "ok": {
@@ -16,7 +16,18 @@
                   "type": "text"
                 },
                 {
-                  "attrs": [],
+                  "attrs": [
+                    {
+                      "key": "charlie",
+                      "value": [
+                        {
+                          "content": "delta",
+                          "template": "default",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ],
                   "content": [
                     {
                       "content": "bravo",
@@ -30,7 +41,7 @@
                   "type": "shorthand"
                 },
                 {
-                  "content": " charlie",
+                  "content": " echo",
                   "template": "default",
                   "type": "text"
                 }
