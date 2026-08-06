@@ -40,7 +40,7 @@ chars = [
 lines = [
         """use crate::Text;
 use nom::{
-  IResult, Parser, branch::alt, bytes::complete::tag, combinator::not
+  IResult, Parser, bytes::complete::tag, combinator::not
 };
 """]
 

@@ -1,6 +1,6 @@
 use crate::Text;
 use nom::{
-  IResult, Parser, branch::alt, bytes::complete::tag, combinator::not
+  IResult, Parser, bytes::complete::tag
 };
 pub fn escape_backtick(input: Text) -> IResult<Text, Text> {
 let (input, result) = tag("\\`").parse(input)?;
