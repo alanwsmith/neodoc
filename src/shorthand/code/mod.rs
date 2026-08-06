@@ -1,6 +1,6 @@
 #![allow(warnings)]
 use crate::Text;
-use crate::span::Span;
+use crate::span::{Snippet, Span};
 use crate::span_parts::code_span_whitespace1_for_block::code_span_whitespace1_for_block;
 use crate::span_parts::escape_character::escape_backtick;
 use crate::span_parts::one_or_more_dashes::one_or_more_dashes;
@@ -21,16 +21,47 @@ pub fn code_shorthand(mut input: Text) -> IResult<Text, Span> {
   let (input, _) = tag("``").parse(input)?;
   let (input, _) = space0.parse(input)?;
   let (input, _) = opt(single_newline).parse(input)?;
+  let (input, snippets) =
+    many1(alt((code_shorthand_normal_snippets,))).parse(input)?;
+
+  // let (input, contents) = many1(alt((
+  //   is_not("`| \n\\"),
+  //   space1_not_followed_by_backtick,
+  //   single_newline,
+  //   single_backtick,
+  //   escape_backtick,
+  // )))
+  // .parse(input)?;
+  let (input, _) = space0.parse(input)?;
+  let (input, _) = tag("``").parse(input)?;
+  // let content = contents
+  //   .iter()
+  //   .map(|v| *v.fragment())
+  //   .collect::<Vec<_>>()
+  //   .join("")
+  //   .trim()
+  //   .to_string();
+  let output = Span::Code {
+    attributes: vec![],
+    content: snippets,
+    flags: vec![],
+    r#type: "span".to_string(),
+    template: "default".to_string(),
+  };
+  Ok((input, output))
+}
+
+pub fn code_shorthand_normal_snippets(
+  mut input: Text
+) -> IResult<Text, Snippet> {
+  input.extra = "code";
   let (input, contents) = many1(alt((
     is_not("`| \n\\"),
     space1_not_followed_by_backtick,
     single_newline,
     single_backtick,
-    escape_backtick,
   )))
   .parse(input)?;
-  let (input, _) = space0.parse(input)?;
-  let (input, _) = tag("``").parse(input)?;
   let content = contents
     .iter()
     .map(|v| *v.fragment())
@@ -38,14 +69,7 @@ pub fn code_shorthand(mut input: Text) -> IResult<Text, Span> {
     .join("")
     .trim()
     .to_string();
-  let output = Span::Code {
-    attributes: vec![],
-    content: vec![],
-    flags: vec![],
-    r#type: "span".to_string(),
-    template: "default".to_string(),
-  };
-  Ok((input, output))
+  Ok((input, Snippet::Normal(content)))
 }
 
 pub fn space1_not_followed_by_backtick(
@@ -65,6 +89,31 @@ mod tests {
   use super::*;
   use pretty_assertions::assert_eq;
   use rstest::rstest;
+
+  #[rstest]
+  #[case("Single word", "``alfa``", vec![
+    Snippet::Normal("alfa".to_string())
+  ])]
+  #[case("Multiple words", "``alfa bravo``", vec![
+    Snippet::Normal("alfa bravo".to_string())
+  ])]
+  fn code_shorthand_without_metadata_runner(
+    #[case] description: &str,
+    #[case] given: &str,
+    #[case] expected: Vec<Snippet>,
+  ) {
+    let input = Text::new_extra(given, "");
+    let result = code_shorthand.parse(input).unwrap();
+    let left = Span::Code {
+      attributes: vec![],
+      content: expected,
+      flags: vec![],
+      r#type: "span".to_string(),
+      template: "default".to_string(),
+    };
+    assert_eq!(left, result.1, "\n\n{}\n\n", description);
+    assert_eq!(&"", result.0.fragment(), "\n\n{}\n\n", description);
+  }
 
   // #[rstest]
   // #[case("Single word", "``alfa``", "alfa")]
