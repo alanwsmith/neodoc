@@ -10,8 +10,8 @@ use crate::span_parts::single_newline_chomped::single_newline_chomped;
 use crate::span_parts::word_part::word_part;
 use nom::branch::alt;
 use nom::bytes::complete::{is_not, tag};
-use nom::character::complete::space0;
-use nom::character::complete::space1;
+use nom::character::complete::{line_ending, space0};
+use nom::character::complete::{multispace0, space1};
 use nom::combinator::{not, opt};
 use nom::multi::many1;
 use nom::sequence::pair;
@@ -20,21 +20,15 @@ use nom::{IResult, Parser};
 pub fn code_shorthand(mut input: Text) -> IResult<Text, Span> {
   input.extra = "code";
   let (input, _) = tag("``").parse(input)?;
+  let (input, _) =
+    not((space0, line_ending, space0, line_ending)).parse(input)?;
   let (input, _) = space0.parse(input)?;
   let (input, _) = opt(single_newline).parse(input)?;
   let (input, snippets) =
     many1(alt((code_shorthand_normal_snippets,))).parse(input)?;
-
-  // let (input, contents) = many1(alt((
-  //   is_not("`| \n\\"),
-  //   space1_not_followed_by_backtick,
-  //   single_newline,
-  //   single_backtick,
-  //   escape_backtick,
-  // )))
-  // .parse(input)?;
-  let (input, _) = space0.parse(input)?;
-  let (input, _) = tag("``").parse(input)?;
+  // let (input, _) =
+  //   not((space0, line_ending, space0, line_ending)).parse(input)?;
+  let (input, _) = code_shorthand_closing_token.parse(input)?;
   // let content = contents
   //   .iter()
   //   .map(|v| *v.fragment())
@@ -52,20 +46,34 @@ pub fn code_shorthand(mut input: Text) -> IResult<Text, Span> {
   Ok((input, output))
 }
 
+pub fn code_shorthand_closing_token(
+  mut input: Text
+) -> IResult<Text, Text> {
+  input.extra = "code_shorthand_closing_token";
+  let (input, _) =
+    not((space0, line_ending, space0, line_ending)).parse(input)?;
+  let (input, _) = multispace0.parse(input)?;
+  let (input, result) = tag("``").parse(input)?;
+  Ok((input, result))
+}
+
 pub fn code_shorthand_normal_snippets(
   mut input: Text
 ) -> IResult<Text, Snippet> {
   input.extra = "code";
-  let (input, contents) = many1(alt((
-    is_not("`| \n\r\t\\"),
-    single_whitespace_not_followed_by_backtick,
-    single_newline_not_followed_by_backtick,
-    single_backtick,
-  )))
+  let (input, contents) = many1(pair(
+    not((space0, line_ending, space0, line_ending)),
+    alt((
+      is_not("`| \n\r\t\\"),
+      single_whitespace_not_followed_by_backtick,
+      single_newline_not_followed_by_backtick,
+      single_backtick,
+    )),
+  ))
   .parse(input)?;
   let content = contents
     .iter()
-    .map(|v| *v.fragment())
+    .map(|v| *v.1.fragment())
     .collect::<Vec<_>>()
     .join("")
     .trim()
@@ -118,9 +126,21 @@ mod tests {
   #[case("Leading spaces are trimmed", "``   alfa``", vec![
     Snippet::Normal("alfa".to_string())
   ])]
+  #[case("Leading newline is trimmed", "``\nalfa``", vec![
+    Snippet::Normal("alfa".to_string())
+  ])]
+  #[case("Leading newline is trimmed on Windows", "``\r\nalfa``", vec![
+    Snippet::Normal("alfa".to_string())
+  ])]
   #[case("Trailing spaces are trimmed", "``alfa    ``", vec![
     Snippet::Normal("alfa".to_string())
   ])]
+  #[case("Trailing single newline is trimmed", "``alfa\n``", vec![
+    Snippet::Normal("alfa".to_string())
+  ])]
+  // #[case("Trailing single newline is trimmed on Windows", "``alfa\r\n``", vec![
+  //   Snippet::Normal("alfa".to_string())
+  // ])]
   #[case("Internal spaces are maintained", "``alfa      bravo``", vec![
     Snippet::Normal("alfa      bravo".to_string())
   ])]
@@ -147,26 +167,15 @@ mod tests {
       r#type: "span".to_string(),
       template: "default".to_string(),
     };
-    assert_eq!(left, result.1, "\n\n{}\n\n", description);
-    assert_eq!(&"", result.0.fragment(), "\n\n{}\n\n", description);
+    assert_eq!(left, result.1, "\n\nFAILED: {}\n\n", description);
+    assert_eq!(
+      &"",
+      result.0.fragment(),
+      "\n\nFAILED: {}\n\n",
+      description
+    );
   }
 
-  // #[rstest]
-  // #[case(
-  //   "Leading space is trimmed",
-  //   "`` alfa bravo``",
-  //   "alfa bravo"
-  // )]
-  // #[case(
-  //   "Trailing space is trimmed",
-  //   "``alfa bravo ``",
-  //   "alfa bravo"
-  // )]
-  // #[case(
-  //   "Leading newline is trimmed",
-  //   "``\nalfa bravo``",
-  //   "alfa bravo"
-  // )]
   // #[case(
   //   "Trialig newline is trimmed",
   //   "``alfa bravo\n``",
@@ -206,6 +215,7 @@ mod tests {
   // }
 
   #[rstest]
+  #[case("Empty lines can't start the span", "``\n\nalfa``")]
   #[case("Empty lines are not allowed", "``alfa\n\n``")]
   #[case(
     "Empty lines are not allowed with space before first newline of an empty line",
@@ -221,7 +231,7 @@ mod tests {
   ) {
     let input = Text::new_extra(given, "");
     let result = code_shorthand.parse(input);
-    assert!(result.is_err(), "\n\nERROR AT: {}\n\n", description);
+    assert!(result.is_err(), "\n\nFAILED: {}\n\n", description);
   }
 
   //
