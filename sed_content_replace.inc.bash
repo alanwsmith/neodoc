@@ -7,6 +7,6 @@
 
 find "/Users/alan/workshop/neodoc/content/" \
   -type f \( -iname "*.js" -o -iname "*.html" -o -iname "*.txt" -o -iname "*.md" -o -iname "*.neo" \) -print0 | xargs -0 sed -E -i "" \
-  's|file_list|fileList|g'
+  's|input.extra = "(.*)"|input.extra.push("\1")|g'
 
 

@@ -4,7 +4,7 @@ use nom::{IResult, Parser, bytes::complete::is_a};
 pub fn one_or_more_colons(
   mut input: Input
 ) -> IResult<Input, Input> {
-  input.extra = "one_or_more_colons";
+  input.extra.push("one_or_more_colons");
   let (input, result) = is_a(":").parse(input)?;
   Ok((input, result))
 }

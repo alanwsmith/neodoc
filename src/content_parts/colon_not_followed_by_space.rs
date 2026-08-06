@@ -7,7 +7,7 @@ use nom::{IResult, Parser};
 pub fn colon_not_followed_by_space(
   mut input: Input
 ) -> IResult<Input, Input> {
-  input.extra = "colon_not_followed_by_space";
+  input.extra.push("colon_not_followed_by_space");
   let (input, result) = tag(":").parse(input)?;
   let (input, _) = not(multispace1).parse(input)?;
   Ok((input, result))

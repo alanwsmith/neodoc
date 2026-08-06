@@ -9,7 +9,7 @@ use nom::sequence::pair;
 use nom::{IResult, Parser};
 
 pub fn empty_lines_or_eof(mut input: Input) -> IResult<Input, Input> {
-  input.extra = "empty_lines_or_eof";
+  input.extra.push("empty_lines_or_eof");
   let (input, _) = alt((
     pair(space0, eof).map(|_| ""),
     many1(pair(space0, line_ending)).map(|_| ""),

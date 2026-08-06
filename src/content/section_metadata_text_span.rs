@@ -18,7 +18,7 @@ use nom_locate::LocatedSpan;
 pub fn section_metadata_text_span(
   mut input: Input
 ) -> IResult<Input, Content> {
-  input.extra = "attribute_text_span";
+  input.extra.push("attribute_text_span");
   let (input, results) = many1(alt((
     word_part,
     single_newline_in_metadata,

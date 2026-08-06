@@ -11,7 +11,7 @@ use nom::multi::many1;
 use nom::{IResult, Parser};
 
 pub fn p_block(mut input: Input) -> IResult<Input, Section> {
-  input.extra = "p_block";
+  input.extra.push("p_block");
   let (input, _) = not((space0, tag("--"))).parse(input)?;
   let (input, content) =
     many1(alt((block_text_span, code_shorthand))).parse(input)?;

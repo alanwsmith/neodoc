@@ -6,7 +6,7 @@ use nom::{IResult, Parser, character::complete::space1};
 pub fn code_span_whitespace1_for_block(
   mut input: Input
 ) -> IResult<Input, Input> {
-  input.extra = "code_block_span_whitespace1";
+  input.extra.push("code_block_span_whitespace1");
   let (input, _) = (space1, not(tag("`"))).parse(input)?;
   Ok((
     input,

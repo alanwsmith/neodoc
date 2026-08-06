@@ -20,7 +20,7 @@
 // pub fn inline_metadata(
 //   mut input: Input
 // ) -> IResult<Input, Metadatas> {
-//   input.extra = "inline_metadata";
+//   input.extra.push("inline_metadata");
 //   Ok((
 //     input,
 //     Metadatas {

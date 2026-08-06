@@ -16,7 +16,7 @@ use nom::{IResult, Parser};
 pub fn code_shorthand_flag_first_word(
   mut input: Input
 ) -> IResult<Input, Content> {
-  input.extra = "code_flag_first_word";
+  input.extra.push("code_flag_first_word");
   let (input, texts) =
     many1(alt((code_flag_word_part, colon_not_followed_by_space)))
       .parse(input)?;

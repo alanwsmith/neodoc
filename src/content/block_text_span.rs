@@ -13,7 +13,7 @@ use nom::{IResult, Parser};
 pub fn block_text_span(
   mut input: Input
 ) -> IResult<Input, Content> {
-  input.extra = "block_text_span";
+  input.extra.push("block_text_span");
   let (input, results) = many1(alt((
     word_part,
     single_newline,

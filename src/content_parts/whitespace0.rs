@@ -9,7 +9,7 @@ use nom::{IResult, Parser};
 // REMINDER: This does not include line_endings
 //
 pub fn whitespace0(mut input: Input) -> IResult<Input, Input> {
-  input.extra = "whitespace0";
+  input.extra.push("whitespace0");
   let (input, result) = space0.parse(input)?;
   if result.is_empty() {
     Ok((input, Input::new_extra("", "whitespace0")))

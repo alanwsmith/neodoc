@@ -5,7 +5,7 @@ use nom::{IResult, Parser};
 pub fn code_flag_word_part(
   mut input: Input
 ) -> IResult<Input, Input> {
-  input.extra = "word_part";
+  input.extra.push("word_part");
   let (input, result) =
     is_not(":`| \n\r\t\\").parse(input)?;
   Ok((input, result))
