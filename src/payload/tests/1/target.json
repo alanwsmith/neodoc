@@ -48,7 +48,7 @@
                 "flags": [],
                 "name": "code",
                 "template": "default",
-                "type": "span"
+                "type": "shorthand"
               },
               {
                 "attributes": [],

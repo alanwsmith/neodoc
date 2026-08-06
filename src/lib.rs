@@ -4,6 +4,7 @@ pub mod metadata;
 pub mod parsing_report;
 pub mod payload;
 pub mod section;
+pub mod shorthand;
 pub mod span;
 pub mod span_parts;
 

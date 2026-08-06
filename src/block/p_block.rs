@@ -1,7 +1,7 @@
 use crate::Text;
 use crate::section::Section;
+use crate::shorthand::code::code_shorthand;
 use crate::span::block_text_span::block_text_span;
-use crate::span::code_span_for_block::code_span_for_block;
 use crate::span_parts::empty_lines_or_eof::empty_lines_or_eof;
 use nom::branch::alt;
 use nom::bytes::complete::tag;
@@ -14,7 +14,7 @@ pub fn p_block(mut input: Text) -> IResult<Text, Section> {
   input.extra = "p_block";
   let (input, _) = not((space0, tag("--"))).parse(input)?;
   let (input, content) =
-    many1(alt((block_text_span, code_span_for_block)))
+    many1(alt((block_text_span, code_shorthand)))
       .parse(input)?;
   let (input, _) = empty_lines_or_eof.parse(input)?;
   Ok((

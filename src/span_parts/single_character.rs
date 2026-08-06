@@ -604,4 +604,3 @@ mod tests {
     assert!(single_equal_sign(input).is_err());
   }
 }
-
