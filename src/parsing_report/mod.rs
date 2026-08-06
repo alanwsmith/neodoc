@@ -1,4 +1,4 @@
-use crate::Text;
+use crate::Input;
 use crate::section::Section;
 use nom::error::Error;
 use nom::{Err, Finish};
@@ -7,12 +7,12 @@ use std::cmp::max;
 use std::fs;
 
 type ResultHolder<'a> = Result<
-  (Text<'a>, Text<'a>),
+  (Input<'a>, Input<'a>),
   Err<Error<LocatedSpan<&'a str, &'a str>>>,
 >;
 
 type ResultHolderSection<'a> = Result<
-  (Text<'a>, Section),
+  (Input<'a>, Section),
   Err<Error<LocatedSpan<&'a str, &'a str>>>,
 >;
 

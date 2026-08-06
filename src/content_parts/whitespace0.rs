@@ -1,4 +1,4 @@
-use crate::Text;
+use crate::Input;
 use nom::character::complete::space0;
 use nom::{IResult, Parser};
 
@@ -8,13 +8,13 @@ use nom::{IResult, Parser};
 //
 // REMINDER: This does not include line_endings
 //
-pub fn whitespace0(mut input: Text) -> IResult<Text, Text> {
+pub fn whitespace0(mut input: Input) -> IResult<Input, Input> {
   input.extra = "whitespace0";
   let (input, result) = space0.parse(input)?;
   if result.is_empty() {
-    Ok((input, Text::new_extra("", "whitespace0")))
+    Ok((input, Input::new_extra("", "whitespace0")))
   } else {
-    Ok((input, Text::new_extra(" ", "whitespace0")))
+    Ok((input, Input::new_extra(" ", "whitespace0")))
   }
 }
 
@@ -35,7 +35,7 @@ mod tests {
     #[case] expected: &str,
     #[case] remainder: &str,
   ) {
-    let input = Text::new_extra(given, "");
+    let input = Input::new_extra(given, "");
     let result = whitespace0.parse(input).unwrap();
     assert_eq!(
       &expected,

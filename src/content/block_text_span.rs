@@ -1,16 +1,16 @@
 // TODO: DEPRECATED - In favor of /src/text/mod.rs
 //
-use crate::Text;
-use crate::span::Span;
-use crate::span_parts::one_or_more_dashes::one_or_more_dashes;
-use crate::span_parts::single_newline::single_newline;
-use crate::span_parts::whitespace1::whitespace1;
-use crate::span_parts::word_part::word_part;
+use crate::Input;
+use crate::content::Span;
+use crate::content_parts::one_or_more_dashes::one_or_more_dashes;
+use crate::content_parts::single_newline::single_newline;
+use crate::content_parts::whitespace1::whitespace1;
+use crate::content_parts::word_part::word_part;
 use nom::branch::alt;
 use nom::multi::many1;
 use nom::{IResult, Parser};
 
-pub fn block_text_span(mut input: Text) -> IResult<Text, Span> {
+pub fn block_text_span(mut input: Input) -> IResult<Input, Span> {
   input.extra = "block_text_span";
   let (input, results) = many1(alt((
     word_part,
@@ -25,7 +25,7 @@ pub fn block_text_span(mut input: Text) -> IResult<Text, Span> {
     .collect::<Vec<_>>()
     .join("")
     .to_string();
-  let output = Span::Text {
+  let output = Span::Input {
     attributes: vec![],
     content,
     flags: vec![],
@@ -69,9 +69,9 @@ mod tests {
     #[case] expected: &str,
     #[case] remainder: &str,
   ) {
-    let input = Text::new_extra(given, "");
+    let input = Input::new_extra(given, "");
     let result = block_text_span.parse(input).unwrap();
-    let left = Span::Text {
+    let left = Span::Input {
       attributes: vec![],
       content: expected.to_string(),
       flags: vec![],

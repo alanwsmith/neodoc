@@ -7,17 +7,17 @@
 // the details.
 //
 //#![allow(warnings)]
-//use crate::Text;
+//use crate::Input;
 //use crate::metadata::Metadata;
 ////use crate::flag_or_attr::FlagOrAttr;
 //use crate::span::Span;
 //use crate::span::flag_first_word::flag_first_word;
-//use crate::span_parts::word_part::word_part;
+//use crate::content_parts::word_part::word_part;
 //use nom::branch::alt;
 //use nom::character::complete::space1;
 //use nom::{IResult, Parser, multi::many0};
 
-//pub fn inline_flag(input: Text) -> IResult<Text, Metadata> {
+//pub fn inline_flag(input: Input) -> IResult<Input, Metadata> {
 //  let (input, first_word) = flag_first_word.parse(input)?;
 //  let content = vec![first_word];
 //  // TODO: Wire this up for real
@@ -25,7 +25,7 @@
 //  // let (input, more_words) =
 //  //   many0(alt((word, space1))).parse(input)?;
 //  // let bits = vec![first_word];
-//  // let flag = FlagOrAttr::InlineFlag(vec![Span::Text {
+//  // let flag = FlagOrAttr::InlineFlag(vec![Span::Input {
 //  //   content: [bits, more_words].concat().join(""),
 //  // }]);
 //  //Ok((input, flag))
@@ -53,7 +53,7 @@
 //    #[case] expected: &str,
 //    #[case] remainder: &str,
 //  ) {
-//    let input = Text::new_extra(given, "");
+//    let input = Input::new_extra(given, "");
 //    let result = inline_flag.parse(input).unwrap();
 //    let content = vec![test_text_span(expected)];
 //    let flag = Metadata::Flag(content);
@@ -72,7 +72,7 @@
 //  //   #[case] description: &str,
 //  //   #[case] given: &str,
 //  // ) {
-//  //   let input = Text::new_extra(given, "");
+//  //   let input = Input::new_extra(given, "");
 //  //   let result = inline_flag.parse(input);
 //  //   assert!(
 //  //     result.is_err(),

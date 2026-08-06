@@ -38,7 +38,7 @@ chars = [
         ]
 
 lines = [
-        """use crate::Text;
+        """use crate::Input;
 use nom::{
   IResult, Parser, bytes::complete::tag, combinator::not
 };
@@ -47,8 +47,8 @@ use nom::{
 
 # lines.append("""
 # pub fn single_character(
-#   input: Text
-# ) -> IResult<Text, Text> {
+#   input: Input
+# ) -> IResult<Input, Input> {
 #   let (input, result) = alt((""")
 # chain = []
 # for (index, char) in enumerate(chars):
@@ -68,7 +68,7 @@ use nom::{
 
 
 for char in chars:
-    lines.append(f"""pub fn single_{char[1]}(input: Text) -> IResult<Text, Text> {{
+    lines.append(f"""pub fn single_{char[1]}(input: Input) -> IResult<Input, Input> {{
 let (input, result) = tag("{char[0]}").parse(input)?;
 let (input, _) = not(tag("{char[0]}")).parse(input)?;
   Ok((input, result))
@@ -88,7 +88,7 @@ for char in chars:
 #[test]
 fn test_single_{char[1]}() {{
     let content = "{char[0]}";
-    let input = Text::new_extra(content, "");
+    let input = Input::new_extra(content, "");
       let result = single_{char[1]}(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -101,7 +101,7 @@ for char in chars:
 #[test]
 fn test_single_{char[1]}_error() {{
     let content = "{char[0]}{char[0]}";
-    let input = Text::new_extra(content, "");
+    let input = Input::new_extra(content, "");
     assert!(single_{char[1]}(input).is_err());
     }}
                  """)

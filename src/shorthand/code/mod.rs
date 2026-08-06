@@ -1,14 +1,14 @@
 #![allow(warnings)]
-use crate::Text;
+use crate::Input;
 use crate::metadata::{Metadata, Metadatas};
-use crate::span::{Snippet, Span};
-use crate::span_parts::code_span_whitespace1_for_block::code_span_whitespace1_for_block;
-use crate::span_parts::escape_character::escape_backtick;
-use crate::span_parts::one_or_more_dashes::one_or_more_dashes;
-use crate::span_parts::single_character::single_backtick;
-use crate::span_parts::single_newline::single_newline;
-use crate::span_parts::single_newline_chomped::single_newline_chomped;
-use crate::span_parts::word_part::word_part;
+use crate::content::{Snippet, Span};
+use crate::content_parts::code_span_whitespace1_for_block::code_span_whitespace1_for_block;
+use crate::content_parts::escape_character::escape_backtick;
+use crate::content_parts::one_or_more_dashes::one_or_more_dashes;
+use crate::content_parts::single_character::single_backtick;
+use crate::content_parts::single_newline::single_newline;
+use crate::content_parts::single_newline_chomped::single_newline_chomped;
+use crate::content_parts::word_part::word_part;
 use nom::branch::alt;
 use nom::bytes::complete::{is_not, tag};
 use nom::character::complete::{line_ending, space0};
@@ -19,7 +19,7 @@ use nom::multi::many1;
 use nom::sequence::pair;
 use nom::{IResult, Parser};
 
-pub fn code_shorthand(mut input: Text) -> IResult<Text, Span> {
+pub fn code_shorthand(mut input: Input) -> IResult<Input, Span> {
   input.extra = "code";
   let (input, _) = code_shorthand_opening_token.parse(input)?;
   let (input, snippets) = many0(alt((
@@ -40,8 +40,8 @@ pub fn code_shorthand(mut input: Text) -> IResult<Text, Span> {
 }
 
 pub fn code_shorthand_metadatas(
-  mut input: Text
-) -> IResult<Text, Metadatas> {
+  mut input: Input
+) -> IResult<Input, Metadatas> {
   input.extra = "code_shorthand_metadatas";
   let (input, metadata) = many0(alt((
     code_shorthand_metadata_attribute,
@@ -63,8 +63,8 @@ pub fn code_shorthand_metadatas(
 }
 
 pub fn code_shorthand_metadata_attribute(
-  mut input: Text
-) -> IResult<Text, Metadata> {
+  mut input: Input
+) -> IResult<Input, Metadata> {
   input.extra = "code_shorthand_metadata_flag";
   let (input, _) = tag("|").parse(input)?;
   let (input, key) = is_not(": \n\r\t").parse(input)?;
@@ -81,16 +81,16 @@ pub fn code_shorthand_metadata_attribute(
 }
 
 pub fn code_shorthand_metadata_flag(
-  mut input: Text
-) -> IResult<Text, Metadata> {
+  mut input: Input
+) -> IResult<Input, Metadata> {
   input.extra = "code_shorthand_metadata_flag";
   let (input, result) = tag("|xxxx").parse(input)?;
   Ok((input, Metadata::Flag(vec![])))
 }
 
 pub fn code_shorthand_opening_token(
-  mut input: Text
-) -> IResult<Text, Text> {
+  mut input: Input
+) -> IResult<Input, Input> {
   input.extra = "code_shorthand_opening_token";
   let (input, result) = tag("``").parse(input)?;
   let (input, _) =
@@ -101,8 +101,8 @@ pub fn code_shorthand_opening_token(
 }
 
 pub fn code_shorthand_closing_token(
-  mut input: Text
-) -> IResult<Text, Text> {
+  mut input: Input
+) -> IResult<Input, Input> {
   input.extra = "code_shorthand_closing_token";
   let (input, _) =
     not((space0, line_ending, space0, line_ending)).parse(input)?;
@@ -112,8 +112,8 @@ pub fn code_shorthand_closing_token(
 }
 
 pub fn code_shorthand_escaped_snippets(
-  mut input: Text
-) -> IResult<Text, Snippet> {
+  mut input: Input
+) -> IResult<Input, Snippet> {
   input.extra = "code_shorthand_normal_snippets";
   let (input, _) = tag("\\").parse(input)?;
   let (input, result) =
@@ -122,8 +122,8 @@ pub fn code_shorthand_escaped_snippets(
 }
 
 pub fn code_shorthand_normal_snippets(
-  mut input: Text
-) -> IResult<Text, Snippet> {
+  mut input: Input
+) -> IResult<Input, Snippet> {
   input.extra = "code_shorthand_normal_snippets";
   let (input, _) =
     not(code_shorthand_closing_token).parse(input)?;
@@ -148,8 +148,8 @@ pub fn code_shorthand_normal_snippets(
 }
 
 pub fn single_newline_not_followed_by_backtick(
-  mut input: Text
-) -> IResult<Text, Text> {
+  mut input: Input
+) -> IResult<Input, Input> {
   input.extra = "single_newline_not_followed_by_backtick";
   let (input, _) = alt((
     pair(tag("\r\n"), not(tag("`"))),
@@ -158,18 +158,18 @@ pub fn single_newline_not_followed_by_backtick(
   .parse(input)?;
   Ok((
     input,
-    Text::new_extra(" ", "single_newline_followedy_by_backtick"),
+    Input::new_extra(" ", "single_newline_followedy_by_backtick"),
   ))
 }
 
 pub fn single_whitespace_not_followed_by_backtick(
-  mut input: Text
-) -> IResult<Text, Text> {
+  mut input: Input
+) -> IResult<Input, Input> {
   input.extra = "single_whitespace_not_followed_by_backtick";
   let (input, _) = pair(tag(" "), not(tag("`"))).parse(input)?;
   Ok((
     input,
-    Text::new_extra(
+    Input::new_extra(
       " ",
       "single_whitespace_not_followed_by_backtick",
     ),
@@ -244,7 +244,7 @@ mod tests {
     #[case] given: &str,
     #[case] expected: Vec<Snippet>,
   ) {
-    let input = Text::new_extra(given, "");
+    let input = Input::new_extra(given, "");
     let result = code_shorthand.parse(input).unwrap();
     let left = Span::Code {
       attributes: vec![],
@@ -271,7 +271,7 @@ mod tests {
     #[case] expected_key: &str,
     #[case] expected_value: Vec<Span>,
   ) {
-    let input = Text::new_extra(given, "");
+    let input = Input::new_extra(given, "");
     let result =
       code_shorthand_metadata_attribute.parse(input).unwrap();
     let left = Metadata::Attribute {
@@ -306,7 +306,7 @@ mod tests {
     #[case] description: &str,
     #[case] given: &str,
   ) {
-    let input = Text::new_extra(given, "");
+    let input = Input::new_extra(given, "");
     let result = code_shorthand.parse(input);
     assert!(result.is_err(), "\n\nFAILED: {}\n\n", description);
   }

@@ -1,4 +1,4 @@
-use crate::Text;
+use crate::Input;
 use crate::section::*;
 use nom::IResult;
 use nom::{Parser, multi::many1};
@@ -12,7 +12,7 @@ pub enum Payload {
   Error {},
 }
 
-pub fn payload(input: Text) -> IResult<Text, Payload> {
+pub fn payload(input: Input) -> IResult<Input, Payload> {
   let (input, content) = many1(section).parse(input)?;
   let payload = Payload::Ok { content };
   Ok((input, payload))
@@ -38,7 +38,7 @@ mod tests {
   fn integration() {
     let content = include_str!("tests/1/input.neo").trim();
     let check = include_str!("tests/1/target.json");
-    let input = Text::new_extra(content, "");
+    let input = Input::new_extra(content, "");
     let left: Value = serde_json::from_str(check).unwrap();
     let result = payload(input);
     match result {

@@ -4,8 +4,8 @@ use nom::multi::many1;
 use nom::{IResult, Parser};
 
 pub fn stand_alone_section(
-  mut input: Text
-) -> IResult<Text, Section> {
+  mut input: Input
+) -> IResult<Input, Section> {
   input.extra = "stand_alone_section";
   let (input, content) = many1(p_block).parse(input)?;
   Ok((
@@ -40,7 +40,7 @@ mod tests {
     #[case] given: &str,
     #[case] remainder: &str,
   ) {
-    let input = Text::new_extra(given, "");
+    let input = Input::new_extra(given, "");
     let result = stand_alone_section.parse(input).unwrap();
     assert_eq!(
       &remainder,

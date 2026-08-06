@@ -1,8 +1,8 @@
-use crate::Text;
+use crate::Input;
+use crate::content::block_text_span::block_text_span;
+use crate::content_parts::empty_lines_or_eof::empty_lines_or_eof;
 use crate::section::Section;
 use crate::shorthand::code::code_shorthand;
-use crate::span::block_text_span::block_text_span;
-use crate::span_parts::empty_lines_or_eof::empty_lines_or_eof;
 use nom::branch::alt;
 use nom::bytes::complete::tag;
 use nom::character::complete::space0;
@@ -10,12 +10,11 @@ use nom::combinator::not;
 use nom::multi::many1;
 use nom::{IResult, Parser};
 
-pub fn p_block(mut input: Text) -> IResult<Text, Section> {
+pub fn p_block(mut input: Input) -> IResult<Input, Section> {
   input.extra = "p_block";
   let (input, _) = not((space0, tag("--"))).parse(input)?;
   let (input, content) =
-    many1(alt((block_text_span, code_shorthand)))
-      .parse(input)?;
+    many1(alt((block_text_span, code_shorthand))).parse(input)?;
   let (input, _) = empty_lines_or_eof.parse(input)?;
   Ok((
     input,
@@ -116,15 +115,14 @@ mod tests {
     #[case] expected: &str,
     #[case] remainder: &str,
   ) {
-    let input = Text::new_extra(given, "");
+    let input = Input::new_extra(given, "");
     let result = p_block.parse(input).unwrap();
     let left: Value = serde_json::from_str(&format!(
       r#"{{ "content": {}, "type": "block", "name": "p", "template": "default" }}"#,
       expected
     ))
     .unwrap();
-    let right: Value =
-      serde_json::to_value(result.1).unwrap();
+    let right: Value = serde_json::to_value(result.1).unwrap();
     assert_eq!(left, right, "\n\n{}\n\n", description);
     assert_eq!(
       &remainder,
@@ -144,13 +142,9 @@ mod tests {
     #[case] description: &str,
     #[case] given: &str,
   ) {
-    let input = Text::new_extra(given, "");
+    let input = Input::new_extra(given, "");
     let result = p_block.parse(input);
-    assert!(
-      result.is_err(),
-      "\n\nERROR AT: {}\n\n",
-      description
-    );
+    assert!(result.is_err(), "\n\nERROR AT: {}\n\n", description);
   }
 
   //

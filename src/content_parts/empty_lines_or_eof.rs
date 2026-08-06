@@ -1,4 +1,4 @@
-use crate::Text;
+use crate::Input;
 use nom::branch::alt;
 use nom::character::complete::line_ending;
 use nom::character::complete::space0;
@@ -8,7 +8,7 @@ use nom::multi::many1;
 use nom::sequence::pair;
 use nom::{IResult, Parser};
 
-pub fn empty_lines_or_eof(mut input: Text) -> IResult<Text, Text> {
+pub fn empty_lines_or_eof(mut input: Input) -> IResult<Input, Input> {
   input.extra = "empty_lines_or_eof";
   let (input, _) = alt((
     pair(space0, eof).map(|_| ""),
@@ -16,7 +16,7 @@ pub fn empty_lines_or_eof(mut input: Text) -> IResult<Text, Text> {
   ))
   .parse(input)?;
   let (input, _) = opt(eof).parse(input)?;
-  Ok((input, Text::new_extra("", "empty_lines_or_eof")))
+  Ok((input, Input::new_extra("", "empty_lines_or_eof")))
 }
 
 #[cfg(test)]
@@ -53,7 +53,7 @@ mod tests {
     #[case] expected: &str,
     #[case] remainder: &str,
   ) {
-    let input = Text::new_extra(given, "");
+    let input = Input::new_extra(given, "");
     let result = empty_lines_or_eof.parse(input).unwrap();
     assert_eq!(
       &expected,
@@ -75,7 +75,7 @@ mod tests {
     #[case] description: &str,
     #[case] given: &str,
   ) {
-    let input = Text::new_extra(given, "");
+    let input = Input::new_extra(given, "");
     let result = empty_lines_or_eof.parse(input);
     assert!(result.is_err(), "\n\nERROR AT: {}\n\n", description);
   }

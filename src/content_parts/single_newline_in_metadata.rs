@@ -1,4 +1,4 @@
-use crate::Text;
+use crate::Input;
 use nom::bytes::complete::tag;
 use nom::character::complete::{line_ending, space0};
 use nom::combinator::{eof, not, opt};
@@ -10,22 +10,22 @@ use nom::{IResult, Parser};
 // be used in section metadata.
 
 pub fn single_newline_in_metadata(
-  input: Text
-) -> IResult<Text, Text> {
+  input: Input
+) -> IResult<Input, Input> {
   let (input, _) = space0.parse(input)?;
   let (input, _) = line_ending.parse(input)?;
   if input.fragment().is_empty() {
-    return Ok((input, Text::new_extra("", "")));
+    return Ok((input, Input::new_extra("", "")));
   }
   let (_, check) = opt((space0, eof)).parse(input)?;
   if check.is_some() {
-    return Ok((input, Text::new_extra("", "")));
+    return Ok((input, Input::new_extra("", "")));
   }
   let (input, _) = space0.parse(input)?;
   let (input, _) = not(tag("-")).parse(input)?;
   let (input, _) =
     not((space0, line_ending)).parse(input)?;
-  Ok((input, Text::new_extra(" ", "")))
+  Ok((input, Input::new_extra(" ", "")))
 }
 
 #[cfg(test)]
@@ -66,7 +66,7 @@ mod tests {
     #[case] expected: &str,
     #[case] remainder: &str,
   ) {
-    let input = Text::new_extra(given, "");
+    let input = Input::new_extra(given, "");
     let result =
       single_newline_in_metadata.parse(input).unwrap();
     assert_eq!(
@@ -101,7 +101,7 @@ mod tests {
     #[case] description: &str,
     #[case] given: &str,
   ) {
-    let input = Text::new_extra(given, "");
+    let input = Input::new_extra(given, "");
     let result = single_newline_in_metadata.parse(input);
     assert!(
       result.is_err(),

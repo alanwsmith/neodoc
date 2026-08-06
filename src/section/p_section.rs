@@ -1,15 +1,15 @@
 use crate::bound::Bound;
+use crate::content_parts::empty_lines_or_eof::empty_lines_or_eof;
+use crate::content_parts::section_token::section_token;
 use crate::metadata::section_metadata::section_metadata;
 use crate::section::*;
-use crate::span_parts::empty_lines_or_eof::empty_lines_or_eof;
-use crate::span_parts::section_token::section_token;
 use nom::bytes::complete::tag;
 use nom::character::complete::{line_ending, space0};
 use nom::multi::many0;
 use nom::sequence::pair;
 use nom::{IResult, Parser};
 
-pub fn p_section(mut input: Text) -> IResult<Text, Section> {
+pub fn p_section(mut input: Input) -> IResult<Input, Section> {
   input.extra = "p_section";
   let (input, _) = section_token.parse(input)?;
   let (input, name) = tag("p").parse(input)?;
@@ -190,7 +190,7 @@ mod tests {
     #[case] content: &str,
     #[case] target1: &str,
   ) {
-    let input = Text::new_extra(content, "");
+    let input = Input::new_extra(content, "");
     let target2: Value = serde_json::from_str(target1).unwrap();
     let result = p_section(input);
     let left = target2;

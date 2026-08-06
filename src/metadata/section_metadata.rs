@@ -1,4 +1,4 @@
-use crate::Text;
+use crate::Input;
 // use crate::flag_or_attr::FlagOrAttr;
 // use crate::flag_or_attr::section_attr::section_attr;
 // use crate::flag_or_attr::section_flag::section_flag;
@@ -16,7 +16,7 @@ use nom::{IResult, Parser};
 // regardless of order and delivers them
 // as independent packages
 
-pub fn section_metadata(input: Text) -> IResult<Text, Metadatas> {
+pub fn section_metadata(input: Input) -> IResult<Input, Metadatas> {
   let (input, items) =
     many0(alt((section_flag_metadata, section_attribute_metadata)))
       .parse(input)?;
@@ -57,10 +57,10 @@ mod tests {
   //   #[case] target1: &str,
   // ) {
   //   let target2 =
-  //     FlagOrAttr::SectionFlag(vec![Span::Text {
+  //     FlagOrAttr::SectionFlag(vec![Span::Input {
   //       content: target1.to_string(),
   //     }]);
-  //   let input = Text::new_extra(content, "");
+  //   let input = Input::new_extra(content, "");
   //   let result = section_flag(input).unwrap();
   //   let left = target2;
   //   let right = result.1;

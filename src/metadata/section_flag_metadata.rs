@@ -1,15 +1,15 @@
-use crate::Text;
+use crate::Input;
 use crate::metadata::Metadata;
-use crate::span::flag_first_word::flag_first_word;
-use crate::span::section_metadata_text_span::section_metadata_text_span;
-use crate::span_parts::section_token::section_token;
+use crate::content::flag_first_word::flag_first_word;
+use crate::content::section_metadata_text_span::section_metadata_text_span;
+use crate::content_parts::section_token::section_token;
 use nom::character::complete::line_ending;
 use nom::combinator::opt;
 use nom::{IResult, Parser, multi::many0};
 
 pub fn section_flag_metadata(
-  mut input: Text
-) -> IResult<Text, Metadata> {
+  mut input: Input
+) -> IResult<Input, Metadata> {
   input.extra = "section_flag";
   let (input, _) = section_token.parse(input)?;
   let (input, first_word) = flag_first_word.parse(input)?;
@@ -25,7 +25,7 @@ pub fn section_flag_metadata(
 #[cfg(test)]
 mod tests {
   use super::*;
-  use crate::span::Span;
+  use crate::content::Span;
   use pretty_assertions::assert_eq;
   use rstest::rstest;
 
@@ -82,7 +82,7 @@ mod tests {
     #[case] expected1: &str,
     #[case] expected2: &str,
   ) {
-    let mut spans = vec![Span::Text {
+    let mut spans = vec![Span::Input {
       attributes: vec![],
       content: expected1.to_string(),
       flags: vec![],
@@ -90,7 +90,7 @@ mod tests {
       template: "default".to_string(),
     }];
     if !expected2.is_empty() {
-      spans.push(Span::Text {
+      spans.push(Span::Input {
         attributes: vec![],
         content: expected2.to_string(),
         flags: vec![],
@@ -99,7 +99,7 @@ mod tests {
       })
     };
     let target = Metadata::Flag(spans);
-    let input = Text::new_extra(content, "");
+    let input = Input::new_extra(content, "");
     let result = section_flag_metadata(input).unwrap();
     let left = target;
     let right = result.1;
@@ -131,7 +131,7 @@ mod tests {
     #[case] description: &str,
     #[case] content: &str,
   ) {
-    let input = Text::new_extra(content, "");
+    let input = Input::new_extra(content, "");
     assert!(
       section_flag_metadata(input).is_err(),
       "\n\nFAILED: {}\n\n",

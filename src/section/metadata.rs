@@ -1,4 +1,4 @@
-use crate::Text;
+use crate::Input;
 use crate::flag_or_attr::FlagOrAttr;
 use crate::flag_or_attr::section_attr::section_attr;
 use crate::flag_or_attr::section_flag::section_flag;
@@ -18,8 +18,8 @@ pub struct MetadataLoader {
 }
 
 pub fn metadata_loader(
-  input: Text
-) -> IResult<Text, MetadataLoader> {
+  input: Input
+) -> IResult<Input, MetadataLoader> {
   let (input, items) =
     many0(alt((section_flag, section_attr)))
       .parse(input)?;
@@ -65,10 +65,10 @@ mod tests {
   //   #[case] target1: &str,
   // ) {
   //   let target2 =
-  //     FlagOrAttr::SectionFlag(vec![Span::Text {
+  //     FlagOrAttr::SectionFlag(vec![Span::Input {
   //       content: target1.to_string(),
   //     }]);
-  //   let input = Text::new_extra(content, "");
+  //   let input = Input::new_extra(content, "");
   //   let result = section_flag(input).unwrap();
   //   let left = target2;
   //   let right = result.1;

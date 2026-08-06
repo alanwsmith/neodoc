@@ -1,5 +1,5 @@
-use crate::Text;
-use crate::span::Span;
+use crate::Input;
+use crate::content::Span;
 use nom::bytes::complete::take_while1;
 use nom::combinator::verify;
 use nom::{IResult, Parser};
@@ -8,15 +8,15 @@ fn is_word_char(c: char) -> bool {
   !c.is_whitespace()
 }
 
-pub fn flag_first_word(input: Text) -> IResult<Text, Span> {
+pub fn flag_first_word(input: Input) -> IResult<Input, Span> {
   let (input, text) =
-    verify(take_while1(is_word_char), |s: &Text| {
+    verify(take_while1(is_word_char), |s: &Input| {
       !s.ends_with(':')
     })
     .parse(input)?;
   Ok((
     input,
-    Span::Text {
+    Span::Input {
       attributes: vec![],
       content: text.to_string(),
       r#type: "span".to_string(),
@@ -35,7 +35,7 @@ pub fn flag_first_word(input: Text) -> IResult<Text, Span> {
 //   fn flag_first_word_1() {
 //     let content = "alfa";
 //     let target = "alfa";
-//     let input = Text::new_extra(content, "");
+//     let input = Input::new_extra(content, "");
 //     let result = flag_first_word(input).unwrap();
 //     let left = target;
 //     let right = result.1.fragment();
@@ -46,7 +46,7 @@ pub fn flag_first_word(input: Text) -> IResult<Text, Span> {
 //   fn flag_first_word_2() {
 //     let content = "bravo ";
 //     let target = "bravo";
-//     let input = Text::new_extra(content, "");
+//     let input = Input::new_extra(content, "");
 //     let result = flag_first_word(input).unwrap();
 //     let left = target;
 //     let right = result.1.fragment();
@@ -57,7 +57,7 @@ pub fn flag_first_word(input: Text) -> IResult<Text, Span> {
 //   fn flag_first_word_3() {
 //     let content = "charlie:delta";
 //     let target = "charlie:delta";
-//     let input = Text::new_extra(content, "");
+//     let input = Input::new_extra(content, "");
 //     let result = flag_first_word(input).unwrap();
 //     let left = target;
 //     let right = result.1.fragment();
@@ -67,7 +67,7 @@ pub fn flag_first_word(input: Text) -> IResult<Text, Span> {
 //   #[test]
 //   fn flag_first_word_error_on_colon() {
 //     let content = "echo:";
-//     let input = Text::new_extra(content, "");
+//     let input = Input::new_extra(content, "");
 //     let result = flag_first_word(input);
 //     assert!(result.is_err());
 //   }
@@ -75,7 +75,7 @@ pub fn flag_first_word(input: Text) -> IResult<Text, Span> {
 //   #[test]
 //   fn flag_first_word_error_on_colon_2() {
 //     let content = "foxtrot:golf: ";
-//     let input = Text::new_extra(content, "");
+//     let input = Input::new_extra(content, "");
 //     let result = flag_first_word(input);
 //     assert!(result.is_err());
 //   }

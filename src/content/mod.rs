@@ -16,7 +16,7 @@ pub enum Span {
     r#type: String,
     template: String,
   },
-  Text {
+  Input {
     attributes: Vec<Metadata>,
     content: String,
     flags: Vec<Metadata>,
@@ -26,7 +26,7 @@ pub enum Span {
 }
 
 pub fn test_text_span(input: &str) -> Span {
-  Span::Text {
+  Span::Input {
     attributes: vec![],
     content: input.to_string(),
     flags: vec![],

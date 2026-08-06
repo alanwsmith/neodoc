@@ -37,13 +37,13 @@ chars = [
         ]
 
 lines = [
-        """use crate::Text;
+        """use crate::Input;
 use nom::{
   IResult, Parser, bytes::complete::tag
 };"""]
 
 for char in chars:
-    lines.append(f"""pub fn escape_{char[1]}(input: Text) -> IResult<Text, Text> {{
+    lines.append(f"""pub fn escape_{char[1]}(input: Input) -> IResult<Input, Input> {{
 let (input, result) = tag("\\\\{char[0]}").parse(input)?;
   Ok((input, result))
   }}
@@ -62,7 +62,7 @@ for char in chars:
 #[test]
 fn test_escape_{char[1]}() {{
     let content = "\\\\{char[0]}";
-    let input = Text::new_extra(content, "");
+    let input = Input::new_extra(content, "");
       let result = escape_{char[1]}(input).unwrap();
       let left = content;
       let right = result.1.fragment();
@@ -75,7 +75,7 @@ for char in chars:
 #[test]
 fn test_escape_{char[1]}_error() {{
     let content = "{char[0]}{char[0]}";
-    let input = Text::new_extra(content, "");
+    let input = Input::new_extra(content, "");
     assert!(escape_{char[1]}(input).is_err());
     }}
                  """)

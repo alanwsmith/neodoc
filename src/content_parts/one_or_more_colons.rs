@@ -1,9 +1,9 @@
-use crate::Text;
+use crate::Input;
 use nom::{IResult, Parser, bytes::complete::is_a};
 
 pub fn one_or_more_colons(
-  mut input: Text
-) -> IResult<Text, Text> {
+  mut input: Input
+) -> IResult<Input, Input> {
   input.extra = "one_or_more_colons";
   let (input, result) = is_a(":").parse(input)?;
   Ok((input, result))
@@ -34,7 +34,7 @@ mod tests {
     #[case] expected: &str,
     #[case] remainder: &str,
   ) {
-    let input = Text::new_extra(given, "");
+    let input = Input::new_extra(given, "");
     let result = one_or_more_colons.parse(input).unwrap();
     assert_eq!(
       &expected,
@@ -56,7 +56,7 @@ mod tests {
   // fn empty_lines_or_eof_error_test_runner(
   //   #[case] given: &str
   // ) {
-  //   let input = Text::new_extra(given, "");
+  //   let input = Input::new_extra(given, "");
   //   let result = one_or_more_colons.parse(input);
   //   assert!(result.is_err());
   // }

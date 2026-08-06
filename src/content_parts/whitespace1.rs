@@ -1,11 +1,11 @@
-use crate::Text;
+use crate::Input;
 use nom::character::complete::space1;
 use nom::{IResult, Parser};
 
-pub fn whitespace1(mut input: Text) -> IResult<Text, Text> {
+pub fn whitespace1(mut input: Input) -> IResult<Input, Input> {
   input.extra = "whitespace1";
   let (input, _) = space1.parse(input)?;
-  Ok((input, Text::new_extra(" ", "")))
+  Ok((input, Input::new_extra(" ", "")))
 }
 
 #[cfg(test)]
@@ -24,7 +24,7 @@ mod tests {
     #[case] expected: &str,
     #[case] remainder: &str,
   ) {
-    let input = Text::new_extra(given, "");
+    let input = Input::new_extra(given, "");
     let result = whitespace1.parse(input).unwrap();
     assert_eq!(
       &expected,

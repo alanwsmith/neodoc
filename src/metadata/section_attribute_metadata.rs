@@ -1,7 +1,7 @@
-use crate::Text;
+use crate::Input;
 use crate::metadata::Metadata;
-use crate::span::section_metadata_text_span::section_metadata_text_span;
-use crate::span_parts::section_token::section_token;
+use crate::content::section_metadata_text_span::section_metadata_text_span;
+use crate::content_parts::section_token::section_token;
 use nom::bytes::complete::{is_not, tag};
 use nom::character::complete::{line_ending, space1};
 use nom::combinator::opt;
@@ -9,8 +9,8 @@ use nom::multi::many1;
 use nom::{IResult, Parser};
 
 pub fn section_attribute_metadata(
-  input: Text
-) -> IResult<Text, Metadata> {
+  input: Input
+) -> IResult<Input, Metadata> {
   let (input, _) = section_token.parse(input)?;
   let (input, key) = is_not(": \n\r\t").parse(input)?;
   let (input, _) = tag(":").parse(input)?;
@@ -38,7 +38,7 @@ pub fn section_attribute_metadata(
 
   let flag = Metadata::Attribute {
     key: key.to_string(),
-    value, // value: vec![Span::Text {
+    value, // value: vec![Span::Input {
            //   content,
            //   kind: "span".to_string(),
            //   template: "default".to_string(),
@@ -50,7 +50,7 @@ pub fn section_attribute_metadata(
 #[cfg(test)]
 mod tests {
   use super::*;
-  use crate::span::Span;
+  use crate::content::Span;
   use pretty_assertions::assert_eq;
   use rstest::rstest;
   use serde_json::Value;
@@ -96,7 +96,7 @@ mod tests {
     #[case] expected_value: &str,
     #[case] remainder: &str,
   ) {
-    let input = Text::new_extra(given, "");
+    let input = Input::new_extra(given, "");
     let result =
       section_attribute_metadata.parse(input).unwrap();
     let left: Value = serde_json::from_str(&format!(
@@ -125,7 +125,7 @@ mod tests {
     let target2 = "bravo";
     let target3 = Metadata::Attribute {
       key: target1.to_string(),
-      value: vec![Span::Text {
+      value: vec![Span::Input {
         attributes: vec![],
         content: target2.to_string(),
         flags: vec![],
@@ -133,7 +133,7 @@ mod tests {
         template: "default".to_string(),
       }],
     };
-    let input = Text::new_extra(content, "");
+    let input = Input::new_extra(content, "");
     let result = section_attribute_metadata(input).unwrap();
     let left = target3;
     let right = result.1;
@@ -147,7 +147,7 @@ mod tests {
     let target2 = "bravo charlie";
     let target3 = Metadata::Attribute {
       key: target1.to_string(),
-      value: vec![Span::Text {
+      value: vec![Span::Input {
         attributes: vec![],
         content: target2.to_string(),
         flags: vec![],
@@ -155,7 +155,7 @@ mod tests {
         template: "default".to_string(),
       }],
     };
-    let input = Text::new_extra(content, "");
+    let input = Input::new_extra(content, "");
     let result = section_attribute_metadata(input).unwrap();
     let left = target3;
     let right = result.1;
@@ -170,7 +170,7 @@ mod tests {
     let target2 = "bravo: https://www.example.com charlie";
     let target3 = Metadata::Attribute {
       key: target1.to_string(),
-      value: vec![Span::Text {
+      value: vec![Span::Input {
         attributes: vec![],
         content: target2.to_string(),
         flags: vec![],
@@ -178,7 +178,7 @@ mod tests {
         template: "default".to_string(),
       }],
     };
-    let input = Text::new_extra(content, "");
+    let input = Input::new_extra(content, "");
     let result = section_attribute_metadata(input).unwrap();
     let left = target3;
     let right = result.1;

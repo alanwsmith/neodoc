@@ -1,4 +1,4 @@
-use crate::Text;
+use crate::Input;
 use nom::bytes::complete::tag;
 use nom::character::complete::space0;
 use nom::character::complete::space1;
@@ -6,10 +6,10 @@ use nom::{IResult, Parser};
 
 // REMINDER: There can be whitespace before
 // the tokens, but not newlines.
-pub fn section_token(input: Text) -> IResult<Text, Text> {
+pub fn section_token(input: Input) -> IResult<Input, Input> {
   let (input, _) =
     (space0, tag("--"), space1).parse(input)?;
-  Ok((input, Text::new_extra("", "")))
+  Ok((input, Input::new_extra("", "")))
 }
 
 #[cfg(test)]
@@ -28,7 +28,7 @@ mod tests {
     #[case] expected: &str,
     #[case] remainder: &str,
   ) {
-    let input = Text::new_extra(given, "");
+    let input = Input::new_extra(given, "");
     let result = section_token.parse(input).unwrap();
     assert_eq!(
       &expected,
@@ -49,7 +49,7 @@ mod tests {
   #[case("---")]
   #[case("x-- ")]
   fn section_tokens_error_test_runner(#[case] given: &str) {
-    let input = Text::new_extra(given, "");
+    let input = Input::new_extra(given, "");
     let result = section_token.parse(input);
     assert!(result.is_err());
   }

@@ -1,10 +1,10 @@
 #![allow(warnings)]
-use crate::Text;
+use crate::Input;
 use crate::span::Span;
-use crate::span_parts::code_flag_word_part::code_flag_word_part;
-use crate::span_parts::colon_not_followed_by_space::colon_not_followed_by_space;
-use crate::span_parts::one_or_more_colons::one_or_more_colons;
-use crate::span_parts::word_part::word_part;
+use crate::content_parts::code_flag_word_part::code_flag_word_part;
+use crate::content_parts::colon_not_followed_by_space::colon_not_followed_by_space;
+use crate::content_parts::one_or_more_colons::one_or_more_colons;
+use crate::content_parts::word_part::word_part;
 use nom::branch::alt;
 use nom::bytes::complete::tag;
 use nom::character::complete::multispace1;
@@ -14,8 +14,8 @@ use nom::sequence::pair;
 use nom::{IResult, Parser};
 
 pub fn code_shorthand_flag_first_word(
-  mut input: Text
-) -> IResult<Text, Span> {
+  mut input: Input
+) -> IResult<Input, Span> {
   input.extra = "code_flag_first_word";
   let (input, texts) = many1(alt((
     code_flag_word_part,
@@ -33,7 +33,7 @@ pub fn code_shorthand_flag_first_word(
   dbg!(&content);
   Ok((
     input,
-    Span::Text {
+    Span::Input {
       attributes: vec![],
       content,
       r#type: "span".to_string(),
@@ -73,7 +73,7 @@ mod tests {
     #[case] expected: &str,
     #[case] remainder: &str,
   ) {
-    let input = Text::new_extra(given, "");
+    let input = Input::new_extra(given, "");
     let result = code_flag_first_word.parse(input).unwrap();
     let left = test_text_span(expected);
     let right = result.1;
@@ -107,7 +107,7 @@ mod tests {
     #[case] description: &str,
     #[case] given: &str,
   ) {
-    let input = Text::new_extra(given, "");
+    let input = Input::new_extra(given, "");
     let result = code_flag_first_word.parse(input);
     assert!(
       result.is_err(),
@@ -120,7 +120,7 @@ mod tests {
   //   fn flag_first_word_1() {
   //     let content = "alfa";
   //     let target = "alfa";
-  //     let input = Text::new_extra(content, "");
+  //     let input = Input::new_extra(content, "");
   //     let result = flag_first_word(input).unwrap();
   //     let left = target;
   //     let right = result.1.fragment();
@@ -131,7 +131,7 @@ mod tests {
   //   fn flag_first_word_2() {
   //     let content = "bravo ";
   //     let target = "bravo";
-  //     let input = Text::new_extra(content, "");
+  //     let input = Input::new_extra(content, "");
   //     let result = flag_first_word(input).unwrap();
   //     let left = target;
   //     let right = result.1.fragment();
@@ -142,7 +142,7 @@ mod tests {
   //   fn flag_first_word_3() {
   //     let content = "charlie:delta";
   //     let target = "charlie:delta";
-  //     let input = Text::new_extra(content, "");
+  //     let input = Input::new_extra(content, "");
   //     let result = flag_first_word(input).unwrap();
   //     let left = target;
   //     let right = result.1.fragment();
@@ -152,7 +152,7 @@ mod tests {
   //   #[test]
   //   fn flag_first_word_error_on_colon() {
   //     let content = "echo:";
-  //     let input = Text::new_extra(content, "");
+  //     let input = Input::new_extra(content, "");
   //     let result = flag_first_word(input);
   //     assert!(result.is_err());
   //   }
@@ -160,7 +160,7 @@ mod tests {
   //   #[test]
   //   fn flag_first_word_error_on_colon_2() {
   //     let content = "foxtrot:golf: ";
-  //     let input = Text::new_extra(content, "");
+  //     let input = Input::new_extra(content, "");
   //     let result = flag_first_word(input);
   //     assert!(result.is_err());
   //   }

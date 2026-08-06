@@ -1,8 +1,8 @@
-use crate::Text;
+use crate::Input;
 use nom::bytes::complete::is_not;
 use nom::{IResult, Parser};
 
-pub fn word_part(mut input: Text) -> IResult<Text, Text> {
+pub fn word_part(mut input: Input) -> IResult<Input, Input> {
   input.extra = "word_part";
   let (input, result) =
     is_not("`~!@#$%^&*(){}[]<>:|_-= \n\r\t\\")
@@ -29,7 +29,7 @@ mod tests {
     #[case] expected: &str,
     #[case] remainder: &str,
   ) {
-    let input = Text::new_extra(given, "");
+    let input = Input::new_extra(given, "");
     let result = word_part.parse(input).unwrap();
     assert_eq!(
       &expected,
@@ -56,7 +56,7 @@ mod tests {
         .expect("invalid UTF-8");
       let base = "alfa";
       let given = format!("{}{}x", base, x);
-      let input = Text::new_extra(&given, "");
+      let input = Input::new_extra(&given, "");
       let result = word_part.parse(input).unwrap();
       assert_eq!(
         &base,

@@ -1,11 +1,11 @@
 pub mod p_section;
 pub mod stand_alone;
 
-use crate::Text;
+use crate::Input;
 use crate::block::p_block::p_block;
 use crate::bound::Bound;
 use crate::metadata::Metadata;
-use crate::span::*;
+use crate::content::*;
 use nom::{IResult, Parser, branch::alt};
 use p_section::p_section;
 use serde::{Deserialize, Serialize};
@@ -70,7 +70,7 @@ pub enum Section {
   Placeholder,
 }
 
-pub fn section(input: Text) -> IResult<Text, Section> {
+pub fn section(input: Input) -> IResult<Input, Section> {
   let (input, section) =
     alt((p_section, stand_alone_section, p_block))
       .parse(input)?;

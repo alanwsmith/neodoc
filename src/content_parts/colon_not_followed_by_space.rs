@@ -1,12 +1,12 @@
-use crate::Text;
+use crate::Input;
 use nom::bytes::complete::tag;
 use nom::character::complete::multispace1;
 use nom::combinator::not;
 use nom::{IResult, Parser};
 
 pub fn colon_not_followed_by_space(
-  mut input: Text
-) -> IResult<Text, Text> {
+  mut input: Input
+) -> IResult<Input, Input> {
   input.extra = "colon_not_followed_by_space";
   let (input, result) = tag(":").parse(input)?;
   let (input, _) = not(multispace1).parse(input)?;
@@ -29,7 +29,7 @@ mod tests {
     #[case] expected: &str,
     #[case] remainder: &str,
   ) {
-    let input = Text::new_extra(given, "");
+    let input = Input::new_extra(given, "");
     let result =
       colon_not_followed_by_space.parse(input).unwrap();
     let left = expected;
@@ -54,7 +54,7 @@ mod tests {
     #[case] description: &str,
     #[case] given: &str,
   ) {
-    let input = Text::new_extra(given, "");
+    let input = Input::new_extra(given, "");
     let result = colon_not_followed_by_space.parse(input);
     assert!(
       result.is_err(),
