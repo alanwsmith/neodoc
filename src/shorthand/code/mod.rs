@@ -50,11 +50,14 @@ pub fn code_shorthand(mut input: Input) -> IResult<Input, Content> {
 
 #[cfg(test)]
 mod tests {
-  use crate::{content::test_text_span, metadata::Metadata};
-
   use super::*;
+  use crate::{content::test_text_span, metadata::Metadata};
   use pretty_assertions::assert_eq;
   use rstest::rstest;
+
+  // TODO:
+  // - can be empty with flags
+  // - flag and attr order is arbitrary
 
   #[rstest]
   #[case("Can be empty", "````", vec![])]
