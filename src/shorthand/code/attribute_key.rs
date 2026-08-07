@@ -14,11 +14,12 @@ pub fn attribute_key(mut input: Input) -> IResult<Input, Input> {
 
 #[cfg(test)]
 mod tests {
+  use crate::report::report;
+
   use super::*;
   use pretty_assertions::assert_eq;
   use rstest::rstest;
 
-  // Attribute metadata
   #[rstest]
   #[case("single word key", "|alfa: bravo``", "alfa", "bravo``")]
   fn code_shorthand_attribute_runner(
@@ -43,8 +44,9 @@ mod tests {
           description
         );
       }
-      Err(_) => {
-        // TODO Add errors here if needed
+      Err(e) => {
+        report(e);
+        panic!("Parsing Error");
       }
     }
   }

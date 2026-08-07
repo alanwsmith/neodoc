@@ -3,10 +3,8 @@ use crate::content::Content;
 use crate::content_parts::single_character::single_backtick;
 use crate::shorthand::code::close_token::close_token;
 use crate::shorthand::code::single_line_ending_into_space::single_line_ending_into_space;
-// use crate::shorthand::code::single_newline_not_followed_by_backtick_or_pipe::single_newline_not_followed_by_backtick_or_pipe;
-// use crate::shorthand::code::single_whitespace_not_followed_by_backtick_or_pipe::single_whitespace_not_followed_by_backtick_or_pipe;
 use nom::branch::alt;
-use nom::bytes::complete::is_not;
+use nom::bytes::complete::{is_not, tag};
 use nom::character::complete::{line_ending, space0};
 use nom::combinator::not;
 use nom::multi::many1;
@@ -20,9 +18,12 @@ pub fn normal_content(mut input: Input) -> IResult<Input, Content> {
     not((space0, line_ending, space0, line_ending)),
     alt((
       is_not("`|\n\r\t\\"),
+      // NOTE: Tabs are converted to two spaces which is
+      // a permanent change if the AST is rendered back out
+      // to NeoDoc.
+      tag("\t")
+        .map(|_| Input::new_extra("  ", vec!["normal_content"])),
       single_line_ending_into_space,
-      //single_whitespace_not_followed_by_backtick_or_pipe,
-      // single_newline_not_followed_by_backtick_or_pipe,
       single_backtick,
     )),
   ))
@@ -77,7 +78,25 @@ mod tests {
     " alfa bravo ",
     "``"
   )]
-
+  #[case(
+    "Newlines surrounded by whitespace turn into whitespace",
+    " \n alfa \n bravo \n ``",
+    "   alfa   bravo   ",
+    "``"
+  )]
+  #[case(
+    "Single backticks work in content",
+    "`alfa``",
+    "`alfa",
+    "``"
+  )]
+  #[case("Stop at unescaed pipe", "alfa|", "alfa", "|")]
+  #[case(
+    "Tabs are converted to two spaces",
+    "alfa\tbravo``",
+    "alfa  bravo",
+    "``"
+  )]
   fn code_shorthand_normal_content_runner(
     #[case] description: &str,
     #[case] given: &str,

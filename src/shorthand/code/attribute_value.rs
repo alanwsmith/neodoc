@@ -35,6 +35,7 @@ mod tests {
   use super::*;
   use crate::content::Content;
   use crate::content::test_text_span;
+  use crate::report::report;
   use pretty_assertions::assert_eq;
   use rstest::rstest;
 
@@ -84,8 +85,9 @@ mod tests {
           description
         );
       }
-      Err(_) => {
-        // TODO Add errors here if needed
+      Err(e) => {
+        report(e);
+        panic!("Parsing Error");
       }
     }
   }
