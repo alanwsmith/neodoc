@@ -1,0 +1,72 @@
+{
+  "given": "-- p\n\nalfa ``bravo|charlie: delta|echo: foxtrot`` golf",
+  "remainder": "",
+  "status": {
+    "ok": {
+      "content": [
+        {
+          "attrs": [],
+          "bound": "all",
+          "content": [
+            {
+              "content": [
+                {
+                  "content": "alfa ",
+                  "template": "default",
+                  "type": "text"
+                },
+                {
+                  "attrs": [
+                    {
+                      "key": "charlie",
+                      "value": [
+                        {
+                          "content": "delta",
+                          "template": "default",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    {
+                      "key": "echo",
+                      "value": [
+                        {
+                          "content": "foxtrot",
+                          "template": "default",
+                          "type": "text"
+                        }
+                      ]
+                    }
+                  ],
+                  "content": [
+                    {
+                      "content": "bravo",
+                      "template": "default",
+                      "type": "text"
+                    }
+                  ],
+                  "flags": [],
+                  "subType": "code",
+                  "template": "default",
+                  "type": "shorthand"
+                },
+                {
+                  "content": " golf",
+                  "template": "default",
+                  "type": "text"
+                }
+              ],
+              "template": "default",
+              "type": "block"
+            }
+          ],
+          "flags": [],
+          "subType": "p",
+          "template": "default",
+          "type": "p"
+        }
+      ]
+    }
+  },
+  "test": "Auto-Saved test"
+}

@@ -16,8 +16,17 @@ pub fn attribute_value(
   let (input, _) = opt(single_newline_chomped).parse(input)?;
   let (input, _) = not((space0, line_ending)).parse(input)?;
   let (input, _) = space0.parse(input)?;
-
-  let (input, value) = many1(normal_content).parse(input)?;
+  let (input, mut value) = many1(normal_content).parse(input)?;
+  let (input, _) =
+    not((space0, line_ending, space0, line_ending)).parse(input)?;
+  // Trim trailing space off the last item if it's Content::Text
+  if let Some(Content::Text {
+    content, r#type, ..
+  }) = value.last_mut()
+    && r#type.as_str() == "text"
+  {
+    *content = content.trim_end().to_string();
+  }
   Ok((input, value))
 }
 
@@ -41,6 +50,15 @@ mod tests {
     test_text_span("alfa bravo")
   ], "``")]
   #[case("Single newline is permitted", "\nalfa bravo``", vec![
+    test_text_span("alfa bravo")
+  ], "``")]
+  #[case("Space can surround leading single newline", "  \n  alfa bravo``", vec![
+    test_text_span("alfa bravo")
+  ], "``")]
+  #[case("Single trailing whitespace is trimmed before end of span", "alfa bravo ``", vec![
+    test_text_span("alfa bravo")
+  ], "``")]
+  #[case("Multiple trailing whitespace is trimmed before end of span", "alfa bravo  ``", vec![
     test_text_span("alfa bravo")
   ], "``")]
 
@@ -78,15 +96,15 @@ mod tests {
     "Empty lines with whitespace at the start break",
     "\n   \n"
   )]
-  // #[case("Empty lines are not allowed", "alfa\n\nbravo")]
-  // #[case(
-  //   "Empty lines are not allowed with space before first newline of an empty line",
-  //   "``alfa \n\n``"
-  // )]
-  // #[case(
-  //   "Empty lines are not allowed with space before second newline of an empty line",
-  //   "``alfa\n \n``"
-  // )]
+  #[case("Empty lines are not allowed", "alfa\n\nbravo")]
+  #[case(
+    "Empty lines are not allowed with space before first newline of an empty line",
+    "alfa \n\n"
+  )]
+  #[case(
+    "Empty lines are not allowed with space before second newline of an empty line",
+    "alfa\n \n"
+  )]
   fn code_shorthand_attribute_value_error_runner(
     #[case] description: &str,
     #[case] given: &str,

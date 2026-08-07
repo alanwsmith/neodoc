@@ -7,8 +7,8 @@ pub mod flag;
 pub mod metadatas;
 pub mod normal_content;
 pub mod open_token;
-pub mod singel_whitespace_not_followed_by_backtick;
-pub mod single_newline_not_followed_by_backtick;
+pub mod single_newline_not_followed_by_backtick_or_pipe;
+pub mod single_whitespace_not_followed_by_backtick_or_pipe;
 
 use crate::Input;
 use crate::content::Content;
@@ -24,13 +24,21 @@ use open_token::open_token;
 pub fn code_shorthand(mut input: Input) -> IResult<Input, Content> {
   input.extra = vec!["code_shorthand"];
   let (input, _) = open_token.parse(input)?;
-  let (input, content) =
+  let (input, mut contents) =
     many0(alt((normal_content, escaped_content))).parse(input)?;
+  // Trim trailing space off the last item if it's Content::Text
+  if let Some(Content::Text {
+    content, r#type, ..
+  }) = contents.last_mut()
+    && r#type.as_str() == "text"
+  {
+    *content = content.trim_end().to_string();
+  }
   let (input, metadatas) = metadatas.parse(input)?;
   let (input, _) = close_token.parse(input)?;
   let output = Content::Code {
     attrs: metadatas.attrs,
-    content,
+    content: contents,
     flags: vec![],
     subType: "code".to_string(),
     r#type: "shorthand".to_string(),
