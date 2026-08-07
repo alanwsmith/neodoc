@@ -19,56 +19,44 @@ mod tests {
   use pretty_assertions::assert_eq;
   use rstest::rstest;
 
-  // #[rstest]
-  // #[case("Single word value ending at close of span", "|alfa: bravo``", "alfa", vec![
-  //   test_text_span("bravo")
-  // ])]
-  // #[case("Multiple word value ending at close of span", "|alfa: bravo charlie``", "alfa", vec![
-  //   test_text_span("bravo charlie")
-  // ])]
-  // #[case("Whitespace is removed when value is on its own line", "|alfa:\nbravo\n``", "alfa", vec![
-  //   test_text_span("bravo")
-  // ])]
-  // #[case("Whitespace is removed when value is on its own line after spaces before newline", "|alfa:  \nbravo\n``", "alfa", vec![
-  //   test_text_span("bravo")
-  // ])]
-  // #[rstest]
-  // #[case("Backticks can be escaped in attribute value", "|alfa: bravo\\``charlie``", "alfa", vec![
-  //   test_text_span("bravo"),
-  //   test_escaped_span("`"),
-  //   test_text_span("`charlie"),
-  // ])]
-  // fn code_shorthand_flag_runner(
-  //   #[case] description: &str,
-  //   #[case] given: &str,
-  //   #[case] expected_key: &str,
-  //   #[case] expected_value: Vec<Content>,
-  // ) {
-  //   let input = Input::new_extra(given, vec![]);
-  //   match flag.parse(input) {
-  //     Ok(result) => {
-  //       let left = Metadata::Attribute {
-  //         key: expected_key.to_string(),
-  //         value: expected_value,
-  //       };
-  //       assert_eq!(
-  //         left, result.1,
-  //         "\n\nFAILED: {}\n\n",
-  //         description
-  //       );
-  //       assert_eq!(
-  //         &"``",
-  //         result.0.fragment(),
-  //         "\n\nFAILED: {}\n\n",
-  //         description
-  //       );
-  //     }
-  //     Err(e) => {
-  //       report(e);
-  //       panic!("Parsing Error: {}", description);
-  //     }
-  //   }
-  // }
+  #[rstest]
+  #[case(
+    "Single word flag ends at close token", 
+    "|alfa``", 
+    vec![test_text_span("bravo")], 
+    "``"
+  )]
+  fn code_shorthand_flag_runner(
+    #[case] description: &str,
+    #[case] given: &str,
+    #[case] expected: Vec<Metadata>,
+    #[case] remainder: Vec<Content>,
+  ) {
+    let input = Input::new_extra(given, vec![]);
+    match flag.parse(input) {
+      Ok(result) => {
+        let left = Metadata::Attribute {
+          key: expected_key.to_string(),
+          value: expected_value,
+        };
+        assert_eq!(
+          left, result.1,
+          "\n\nFAILED: {}\n\n",
+          description
+        );
+        assert_eq!(
+          &"``",
+          result.0.fragment(),
+          "\n\nFAILED: {}\n\n",
+          description
+        );
+      }
+      Err(e) => {
+        report(e);
+        panic!("Parsing Error: {}", description);
+      }
+    }
+  }
 
   // #[rstest]
   // #[case(

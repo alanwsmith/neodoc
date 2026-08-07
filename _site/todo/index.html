@@ -38,11 +38,14 @@
 <meta name="apple-mobile-web-app-title" content="neodoc.style" />
 
   </head>
+
+  
   <body>
+
 <header class="default">
   <div class="left-right">
     <div>
-  <a href="/">NeoDoc.Style</a>
+  <a href="/">NeoDoc</a>
 
   -
 
@@ -111,6 +114,35 @@ involve any type of grouping or
 organization. I'm simply throwing 
 stuff at the top of the list as they 
 come do mind.
+
+
+[] Add predefined section for ``metatag``
+that's attributes that if a full page
+is rendered from it can be used
+to generate arbitrary meta tags
+in the head of the document. 
+
+[] The default output from NeoDoc is
+a full HTML page. Show how to override
+that with a template so the content
+can be used as just a section and
+without script and style tags as an
+example.
+
+
+[] Create a pre-defined ``-- refs`` section
+that holds attributes that can be accessed
+by doing ``:attr-name`` as either a flag
+or an attribute value in other content. 
+
+TBD on if refs should be the only thing
+that goes through on an attribute. That is
+can the ref be inside a longer string. 
+Feels like the answer should be no. 
+If there's a ref, it's 100% of either
+the flag of the value of the attr.
+
+
 
 [] Maybe the ``-- status: `` attr in metadata
 should be ``published`` and then everything
@@ -1007,6 +1039,7 @@ via: >>https://bsky.app/profile/did:plc:revjuqmkvrw6fnkxppqtszpv>>
   &copy; 2026 <a href="https://bsky.app/profile/neodoc.style">NeoDoc.Style</a>
 </footer>
     <div>
+      id = "01/n6/ft/kg"
     </div>
     <div class="page-templates" hidden>
       <bitty-9 data-connect="/bits.raw/default.js"></bitty-9>

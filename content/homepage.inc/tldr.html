@@ -1,79 +1,155 @@
 == filter md
-## TL;DR
+## How It Works
 
-To give you a quick idea of how it works, this 
-is a neodoc:
+### Content and Templates
+
+For a quick example, here's a NeoDoc for
+a monthly book review post:
+
 
 == filter highlight("neo", class = "code-block")
+-- title
+
+Books From July
+
+Family reunion time. Always a good opportunity 
+to get some reading done down by the water. 
+Here's what I got up to:
+
 -- book-review
--- title: Dungeon Crawler Carl
 -- author: Matt Dinniman
 -- cover: dungeon-crawler-carl-cover.jpg
 
-First off, I did the audio book instead
-of the paper copy. I don't know how much
-I would have liked the physical version
-but the narrator for the audio book
-is absolute gold. 
+Dungeon Crawler Carl
 
+First off, I did the audio book instead of the 
+paper copy. I don't know how much I would have 
+liked the physical version but the narrator for 
+the audio book is absolute gold. etc.
+
+-- book-review
+-- author: William Gibson 
+-- cover: neuromancer-cover.jpg
+
+Neuromancer
+
+The Matrix, you say? Have I got a story for you. 
 etc.
+
+
 == endfilter
 
-
-it turns into this:
+It turns into this:
 
 == endfilter
+
 
 <style>
 == include dir("/examples/book-review/styles.css")
 </style>
-
 == include dir("/examples/book-review/content.html")
 
+
 == filter md
 
-The formatting comes in from the neodoc lexicon. 
-It stores output templates and styles 
-independently from the content. You can created layouts that apply
-to all your content and versions for individual 
-  pieces of content. Or, you can skip them all
-together and use defaults from wherever
-your content appears. 
-
-
-### Alternate Perspectives
-
-Separating content from layout means different
-apps can do different things with the same
-pieces of content.
-For example, instead of showing a basic
-timeline, an app could aggregate all the book
-reviews you've posted on a single page. 
-Something like:
+The formatting comes from HTML templates 
+applied by the app that's rendering the content. 
+Since each app can have its own templates, 
+another one could pick up the same content
+and render it like this:
 
 == endfilter
-== include dir("/examples/book-list/content.html")
+
+<style>
+== include dir("/examples/book-review-2/styles.css")
+</style>
+== include dir("/examples/book-review-2/content.html")
+
+
 == filter md
 
-It doesn't have to be just your books. 
-Apps could just as easily grab all the book
-reviews from all the folks you follow
-for the list. 
 
-### Shorts Included
+### Graceful Defaults
 
-The book review example shows how to use
-  neodoc for rich content. They can also
-  be dead simple. For example, this
-  is a perfectly acceptable neodoc:
+NeoDocs are collections of content broken up
+into sections. Each one starts with
+two dashes and a name. For example, there's a single
+"__-- title__" and two "__-- book-review__"
+sections in the example above. (The
+book-review sections also have a couple lines of
+attributes after the header. We'll get to those 
+momentarily.)
 
-== filter highlight("neo", class = "code-block")
-hey you. relax your shoulders. 
+NeoDoc generates HTML by matching section
+names to templates. That's how each of
+the hypothetical apps above created their
+view of the content. However, there's no 
+guarantee that any given app will have a 
+template for a specific section type. NeoDoc 
+handles those cases by falling back to 
+rendering sections without templates as paragraphs. 
+
+So, an app without __-- title__ or 
+__-- book-review__ templates would
+render the monthly review post like this:
+
 == endfilter
 
+<style>
+== include dir("/examples/book-review-3/styles.css")
+</style>
 
-No fuss. No muss. Just a post similar to
-one you'd find on [Bluesky](https://bsky.app/).
+== include dir("/examples/book-review-3/content.html")
+
+== filter md 
+
+
+### The Attributes
+
+Each of the __-- book-review__ sections in the
+example has additions lines starting with
+two dashes. Specifically, the __-- author__
+and __-- cover__ lines. These are 
+_section attributes_. Each one consists
+of a key/value pair. 
+
+Attribute content doesn't appear by default
+That's why the authors and cover images don't 
+show up in the fallback, paragraph view of 
+the content. It's up to individual apps to 
+include the content or not as they see fit. 
+
+But, attributes offer more than just
+the ability to appear in the output. 
+They provide data that can be queried.
+
+
+## The NeoDoc Database
+
+NeoDoc's sections and attributes create 
+the foundation of queryable, ad hoc database. 
+For example, say you have a piece of
+content with a hundred __-- book-review__
+sections in it. Each one with an
+__-- author__ attribute. You could
+write an app that lets you search
+for and display all the apps from
+a given author. 
+
+There's no reason the query has to
+be limited to a single file. The
+app could be set up to query
+against all your posts looking
+for any __-- book-review__ with
+an __-- author__ of the given name.
+
+Going the next step up, there's
+no reason the app has to be limited
+to just _your_ content. With the
+public, open nature of the Atmosphere,
+you can query everything that's
+in any NeoDoc out there. 
+
 
 == endfilter
 

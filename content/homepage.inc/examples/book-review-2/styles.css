@@ -1,0 +1,55 @@
+.book-review-2 {
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.book-review-2-wrapper .title {
+  font-weight: 900;
+  border-bottom: var(--faded-reverse-border);
+}
+
+.book-review-2 p {
+  margin-top: 0;
+}
+
+.book-review-2 img { 
+  max-width: 7rem;
+  padding-top: 0.6rem;
+}
+
+.book-review-2-wrapper .by {
+  color: var(--faded-reverse-color);
+  padding-bottom: 0.8rem;
+}
+
+
+.book-review-2-wrapper {
+  background-color: var(--faded-warning-color);
+  padding: var(--default-padding);
+  border-radius: var(--default-border-radius);
+  border: var(--faded-reverse-border);
+  margin: var(--default-margin);
+  display: flex;
+  align-items: stretch;
+}
+
+.book-review-2-wrapper .heading {
+  display: flex;
+  justify-content: end;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  white-space: nowrap;
+  padding-left: 1rem;
+  margin-right: 1.8rem;
+  border-left: var(--faded-reverse-border);
+  font-weight: 900;
+  font-size: 1.9rem;
+}
+
+
+.book-review-2-wrapper .content {
+  flex: 1
+}
+

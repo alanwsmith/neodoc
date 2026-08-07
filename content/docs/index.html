@@ -1,4 +1,41 @@
-== extends "/template.inc/switches/default.html"
+== extends "/templates.inc/switches/default.html"
+
+
+== block toml
+title = "Documentation"
+created = 2026-08-07T14:28:00-04:00
+id = "01/n7/c8/xg" 
+== endblock
+
+
+== block content
+== filter md
+## Pre-Defined Sections
+
+- template - for storing templates for the
+page that the rendering engine can use
+if the app allows it. An ``id`` fields
+must exist for the engine to pick it up. 
+
+- metadata - page metadata.
+The `-- template:` will override the 
+default processing template.
+
+- title - Title section for the page. 
+The first block is treated as an
+h1 title by default that goes
+inside an hgroup tag. an optional
+`-- subtitle:`  attribute can be 
+added which will populate in the
+hgroup as well. 
+
+
+
+== endfilter
+
+
+
+== endblock
 
 
 -- h2

@@ -25,7 +25,12 @@
     == include "/templates.inc/metadata/default.html"
 
   </head>
+
+  [#
+  <body contenteditable="true">
+  #]
   <body>
+
     == include "/templates.inc/headers/default.html"
     [! block payload !][! endblock !]
     == include "/templates.inc/footers/default.html"

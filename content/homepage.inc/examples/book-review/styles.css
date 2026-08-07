@@ -2,11 +2,6 @@
   display: grid;
   grid-template-columns: 1fr 5fr;
   gap: 1rem;
-  background-color: var(--faded-warning-color);
-  padding: var(--default-padding);
-  border-radius: var(--default-border-radius);
-  border: var(--faded-reverse-border);
-  margin: var(--default-margin);
 }
 
 .book-review .title {
@@ -23,4 +18,13 @@
 
 .book-review .by {
   color: var(--accent-color);
+}
+
+
+.book-reviews-wrapper {
+  background-color: var(--faded-warning-color);
+  padding: var(--default-padding);
+  border-radius: var(--default-border-radius);
+  border: var(--faded-reverse-border);
+  margin: var(--default-margin);
 }

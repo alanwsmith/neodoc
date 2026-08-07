@@ -1,18 +1,111 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/default.css" />
+    <script type="module" src="&#x2f;scripts.raw&#x2f;bitty&#x2f;bitty-9.0.0-beta1.source.js"></script>
+    <style>
     body {
       background-color: black;
-      color: goldenrod;
-    } 
-  </style>
-</head>
-<body>
-template not found: template "/template.inc/switches/default.html" does not exist (in /docs/index.html:1)
-</body>
-</html>
+      color: #ccc;
+    }
+    </style>
+
+
+
+
+
+
+
+<title>Documentation</title>
+<meta property="og:title" content="Documentation" />
+<meta name="description" content="from neodoc.style" />
+<meta property="og:description" content="from neodoc.style" />
+
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https:&#x2f;&#x2f;neodoc.style/templates.inc/metadata/" />
+<meta property="og:image" content="https:&#x2f;&#x2f;neodoc.style/og-image.jpg" />
+
+
+
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+<link rel="shortcut icon" href="/favicon/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="neodoc.style" />
+
+  </head>
+
   
+  <body>
+
+<header class="default">
+  <div class="left-right">
+    <div>
+  <a href="/">NeoDoc</a>
+
+  -
+
+  <a href="/blog/">blog</a>
+
+  -
+
+  <a href="/todo/">todo</a>
+
+      </div>
+    <div>
+
+  <a href="https://bsky.app/profile/neodoc.style">@neodoc.style</a>
+    </div>
+    </div>
+</header>    
+<main class="default default-flow">
+  <hgroup>
+    <h1>Documentation</h1>
+  </hgroup>
+
+<h2>Pre-Defined Sections</h2>
+<ul>
+<li>
+<p>template - for storing templates for the
+page that the rendering engine can use
+if the app allows it. An <code>id</code> fields
+must exist for the engine to pick it up.</p>
+</li>
+<li>
+<p>metadata - page metadata.
+The <code>-- template:</code> will override the
+default processing template.</p>
+</li>
+<li>
+<p>title - Title section for the page.
+The first block is treated as an
+h1 title by default that goes
+inside an hgroup tag. an optional
+<code>-- subtitle:</code>  attribute can be
+added which will populate in the
+hgroup as well.</p>
+</li>
+</ul>
+
+
+
+</main>
+
+
+
+
+
+<footer class="default">
+  &copy; 2026 <a href="https://bsky.app/profile/neodoc.style">NeoDoc.Style</a>
+</footer>
+    <div>
+    </div>
+    <div class="page-templates" hidden>
+      <bitty-9 data-connect="/bits.raw/default.js"></bitty-9>
+    </div>
+  </body>
+</html>
