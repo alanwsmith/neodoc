@@ -33,6 +33,14 @@ pub fn test_text_span(input: &str) -> Content {
   }
 }
 
+pub fn test_escaped_span(input: &str) -> Content {
+  Content::Text {
+    content: input.to_string(),
+    r#type: "text".to_string(),
+    template: "escaped".to_string(),
+  }
+}
+
 // DEPRECATED: Use Content::Text with template
 // #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 // #[serde(tag = "kind", rename_all = "lowercase")]

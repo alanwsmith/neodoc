@@ -2,6 +2,7 @@ use crate::Input;
 use crate::content::Content;
 use crate::metadata::Metadata;
 use crate::shorthand::code::attribute_key::attribute_key;
+use crate::shorthand::code::attribute_value::attribute_value;
 use crate::shorthand::code::normal_content::normal_content;
 use nom::multi::many1;
 use nom::{IResult, Parser};
@@ -9,22 +10,7 @@ use nom::{IResult, Parser};
 pub fn attribute(mut input: Input) -> IResult<Input, Metadata> {
   input.extra.push("attribute");
   let (input, key) = attribute_key.parse(input)?;
-  let (input, mut value) = many1(normal_content).parse(input)?;
-  // Trim trailing space off the last item if it's Content::Text
-  if let Some(Content::Text {
-    content, r#type, ..
-  }) = value.last_mut()
-    && r#type.as_str() == "text"
-  {
-    *content = content.trim_end().to_string();
-  }
-  if let Some(Content::Text {
-    content, r#type, ..
-  }) = value.first_mut()
-    && r#type.as_str() == "text"
-  {
-    *content = content.trim_start().to_string();
-  }
+  let (input, value) = attribute_value.parse(input)?;
   Ok((
     input,
     Metadata::Attribute {
@@ -38,6 +24,7 @@ pub fn attribute(mut input: Input) -> IResult<Input, Metadata> {
 mod tests {
   use super::*;
   use crate::content::Content;
+  use crate::content::test_escaped_span;
   use crate::content::test_text_span;
   use crate::report::report;
   use pretty_assertions::assert_eq;
@@ -57,8 +44,10 @@ mod tests {
     test_text_span("bravo")
   ])]
   #[rstest]
-  #[case("Backticks can be escaped in value", "|alfa: bravo\\``charlie``", "alfa", vec![
-    test_text_span("bravo``charlie")
+  #[case("Backticks can be escaped in attribute value", "|alfa: bravo\\``charlie``", "alfa", vec![
+    test_text_span("bravo"),
+    test_escaped_span("`"),
+    test_text_span("`charlie"),
   ])]
 
   fn code_shorthand_attribute_runner(

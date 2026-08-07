@@ -1,7 +1,9 @@
 use crate::Input;
 use crate::content::Content;
 use crate::content_parts::single_newline_chomped::single_newline_chomped;
+use crate::shorthand::code::escaped_content::escaped_content;
 use crate::shorthand::code::normal_content::normal_content;
+use nom::branch::alt;
 use nom::character::complete::line_ending;
 use nom::character::complete::space0;
 use nom::combinator::not;
@@ -16,7 +18,8 @@ pub fn attribute_value(
   let (input, _) = opt(single_newline_chomped).parse(input)?;
   let (input, _) = not((space0, line_ending)).parse(input)?;
   let (input, _) = space0.parse(input)?;
-  let (input, mut value) = many1(normal_content).parse(input)?;
+  let (input, mut value) =
+    many1(alt((normal_content, escaped_content))).parse(input)?;
   let (input, _) =
     not((space0, line_ending, space0, line_ending)).parse(input)?;
   // Trim trailing space off the last item if it's Content::Text
@@ -34,6 +37,7 @@ pub fn attribute_value(
 mod tests {
   use super::*;
   use crate::content::Content;
+  use crate::content::test_escaped_span;
   use crate::content::test_text_span;
   use crate::report::report;
   use pretty_assertions::assert_eq;
@@ -64,6 +68,16 @@ mod tests {
   ], "``")]
   #[case("Remove trailing whitespace from a newline", "alfa bravo\n``", vec![
     test_text_span("alfa bravo")
+  ], "``")]
+  #[case("Backticks can be escaped in attribute values", "alfa\\`bravo``", vec![
+    test_text_span("alfa"),
+    test_escaped_span("`"),
+    test_text_span("bravo"),
+  ], "``")]
+  #[case("Backticks can be escaped in attribute values beore another backtick", "alfa\\``bravo``", vec![
+    test_text_span("alfa"),
+    test_escaped_span("`"),
+    test_text_span("`bravo"),
   ], "``")]
   fn code_shorthand_attribute_value_runner(
     #[case] description: &str,
