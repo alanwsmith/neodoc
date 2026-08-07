@@ -2,7 +2,8 @@ use crate::Input;
 use crate::content::Content;
 use crate::content_parts::single_character::single_backtick;
 use crate::shorthand::code::close_token::close_token;
-use crate::shorthand::code::single_newline_not_followed_by_backtick_or_pipe::single_newline_not_followed_by_backtick_or_pipe;
+use crate::shorthand::code::single_line_ending_into_space::single_line_ending_into_space;
+// use crate::shorthand::code::single_newline_not_followed_by_backtick_or_pipe::single_newline_not_followed_by_backtick_or_pipe;
 // use crate::shorthand::code::single_whitespace_not_followed_by_backtick_or_pipe::single_whitespace_not_followed_by_backtick_or_pipe;
 use nom::branch::alt;
 use nom::bytes::complete::is_not;
@@ -19,8 +20,9 @@ pub fn normal_content(mut input: Input) -> IResult<Input, Content> {
     not((space0, line_ending, space0, line_ending)),
     alt((
       is_not("`|\n\r\t\\"),
+      single_line_ending_into_space,
       //single_whitespace_not_followed_by_backtick_or_pipe,
-      single_newline_not_followed_by_backtick_or_pipe,
+      // single_newline_not_followed_by_backtick_or_pipe,
       single_backtick,
     )),
   ))
@@ -51,6 +53,30 @@ mod tests {
 
   #[rstest]
   #[case("Single word at end of span", "alfa``", "alfa", "``")]
+  #[case(
+    "Multiple words at end of span",
+    "alfa bravo``",
+    "alfa bravo",
+    "``"
+  )]
+  #[case(
+    "Single whitespaces are maintained",
+    " alfa bravo ``",
+    " alfa bravo ",
+    "``"
+  )]
+  #[case(
+    "Multiple whitespaces are maintained",
+    "  alfa  bravo  ``",
+    "  alfa  bravo  ",
+    "``"
+  )]
+  #[case(
+    "Single newlines turn into whitespace",
+    "\nalfa\nbravo\n``",
+    " alfa bravo ",
+    "``"
+  )]
 
   fn code_shorthand_normal_content_runner(
     #[case] description: &str,

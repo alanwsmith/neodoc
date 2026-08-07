@@ -1,0 +1,95 @@
+use crate::Input;
+use nom::branch::alt;
+use nom::bytes::complete::tag;
+use nom::character::complete::{line_ending, space0};
+use nom::combinator::not;
+use nom::sequence::pair;
+use nom::{IResult, Parser};
+
+pub fn single_line_ending_into_space(
+  mut input: Input
+) -> IResult<Input, Input> {
+  input.extra = vec!["single_line_ending_into_space"];
+  let (input, _) = line_ending.parse(input)?;
+  let (input, _) = not(pair(space0, line_ending)).parse(input)?;
+
+  Ok((
+    input,
+    Input::new_extra(" ", vec!["single_line_ending_into_space"]),
+  ))
+}
+
+#[cfg(test)]
+mod tests {
+  use crate::report::report;
+
+  use super::*;
+  // use crate::content::Content;
+  use pretty_assertions::assert_eq;
+  use rstest::rstest;
+
+  // Attribute metadata
+  #[rstest]
+  #[case(
+    "Single newline followed immediatly by content",
+    "\n\nx",
+    " ",
+    "x"
+  )]
+  fn code_shorthand_single_line_ending_into_space_runner(
+    #[case] description: &str,
+    #[case] given: &str,
+    #[case] expected: &str,
+    #[case] remainder: &str,
+  ) {
+    let input = Input::new_extra(given, vec![]);
+    match single_line_ending_into_space.parse(input) {
+      Ok(result) => {
+        let left = expected;
+        assert_eq!(
+          left,
+          *result.1.fragment(),
+          "\n\nFAILED: {}\n\n",
+          description
+        );
+        assert_eq!(
+          remainder,
+          *result.0.fragment(),
+          "\n\nFAILED: {}\n\n",
+          description
+        );
+      }
+      Err(e) => {
+        report(e);
+        panic!("Test Error");
+        // TODO Add errors here if needed
+      }
+    }
+  }
+
+  // #[rstest]
+  // #[case("Empty lines at the start break", "\n\n")]
+  // #[case(
+  //   "Empty lines with whitespace at the start break",
+  //   "\n   \n"
+  // )]
+  // #[case("Empty lines are not allowed", "alfa\n\nbravo")]
+  // #[case(
+  //   "Empty lines are not allowed with space before first newline of an empty line",
+  //   "alfa \n\n"
+  // )]
+  // #[case(
+  //   "Empty lines are not allowed with space before second newline of an empty line",
+  //   "alfa\n \n"
+  // )]
+  // fn code_shorthand_attribute_value_error_runner(
+  //   #[case] description: &str,
+  //   #[case] given: &str,
+  // ) {
+  //   let input = Input::new_extra(given, vec![]);
+  //   let result = attribute_value.parse(input);
+  //   assert!(result.is_err(), "\n\nFAILED: {}\n\n", description);
+  // }
+
+  //
+}

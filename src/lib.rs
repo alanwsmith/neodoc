@@ -3,8 +3,8 @@ pub mod bound;
 pub mod content;
 pub mod content_parts;
 pub mod metadata;
-pub mod parsing_report;
 pub mod payload;
+pub mod report;
 pub mod section;
 pub mod shorthand;
 

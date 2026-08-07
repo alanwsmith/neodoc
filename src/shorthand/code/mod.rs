@@ -7,6 +7,7 @@ pub mod flag;
 pub mod metadatas;
 pub mod normal_content;
 pub mod open_token;
+pub mod single_line_ending_into_space;
 pub mod single_newline_not_followed_by_backtick_or_pipe;
 pub mod single_whitespace_not_followed_by_backtick_or_pipe;
 
