@@ -50,6 +50,8 @@ pub fn code_shorthand(mut input: Input) -> IResult<Input, Content> {
 
 #[cfg(test)]
 mod tests {
+  use crate::{content::test_text_span, metadata::Metadata};
+
   use super::*;
   use pretty_assertions::assert_eq;
   use rstest::rstest;
@@ -66,6 +68,34 @@ mod tests {
     let left = Content::Code {
       attrs: vec![],
       content: expected,
+      flags: vec![],
+      subType: "code".to_string(),
+      r#type: "shorthand".to_string(),
+      template: "default".to_string(),
+    };
+    assert_eq!(left, result.1, "\n\nFAILED: {}\n\n", description);
+    assert_eq!(
+      &"",
+      result.0.fragment(),
+      "\n\nFAILED: {}\n\n",
+      description
+    );
+  }
+
+  #[rstest]
+  #[case("Can be empty with attributes", "``|alfa: bravo``", vec![
+    Metadata::Attribute { key: "alfa".to_string(), value: vec![test_text_span("bravo")] }
+  ])]
+  fn code_shorthand_empty_with_attrs_runner(
+    #[case] description: &str,
+    #[case] given: &str,
+    #[case] expected: Vec<Metadata>,
+  ) {
+    let input = Input::new_extra(given, vec![]);
+    let result = code_shorthand.parse(input).unwrap();
+    let left = Content::Code {
+      attrs: expected,
+      content: vec![],
       flags: vec![],
       subType: "code".to_string(),
       r#type: "shorthand".to_string(),

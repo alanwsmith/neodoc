@@ -12,7 +12,7 @@ pub fn attribute_key(mut input: Input) -> IResult<Input, Input> {
   let (input, _) = tag("|").parse(input)?;
   let (input, _) =
     opt(single_line_ending_into_space).parse(input)?;
-  let (input, key) = is_not(": \n\r\t").parse(input)?;
+  let (input, key) = is_not(":`|\\ \n\r\t").parse(input)?;
   let (input, _) = tag(":").parse(input)?;
   // Reminder: using the pair with space1 and space0
   // is a hack so you don't have to make another
@@ -47,7 +47,7 @@ mod tests {
     "bravo``"
   )]
 
-  fn code_shorthand_attribute_runner(
+  fn code_shorthand_attribute_key_runner(
     #[case] description: &str,
     #[case] given: &str,
     #[case] key: &str,
@@ -74,5 +74,18 @@ mod tests {
         panic!("Parsing Error {}", description);
       }
     }
+  }
+
+  #[rstest]
+  #[case("Keys can't have backticks", "|al`fa: bravo")]
+  #[case("Keys can't have pipes", "|al|fa: bravo")]
+  #[case("Keys can't have escapes", "|al\\fa: bravo")]
+  fn code_shorthand_attribute_key_error_runner(
+    #[case] description: &str,
+    #[case] given: &str,
+  ) {
+    let input = Input::new_extra(given, vec![]);
+    let result = attribute_key.parse(input);
+    assert!(result.is_err(), "\n\nFAILED: {}\n\n", description);
   }
 }
