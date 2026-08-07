@@ -1,27 +1,52 @@
 use crate::Input;
+use crate::shorthand::code::single_line_ending_into_space::single_line_ending_into_space;
+use nom::branch::alt;
 use nom::bytes::complete::{is_not, tag};
-use nom::character::complete::space1;
+use nom::character::complete::{line_ending, space0, space1};
+use nom::combinator::{not, opt};
+use nom::sequence::pair;
 use nom::{IResult, Parser};
 
 pub fn attribute_key(mut input: Input) -> IResult<Input, Input> {
   input.extra.push("attribute_key");
   let (input, _) = tag("|").parse(input)?;
+  let (input, _) =
+    opt(single_line_ending_into_space).parse(input)?;
   let (input, key) = is_not(": \n\r\t").parse(input)?;
   let (input, _) = tag(":").parse(input)?;
-  let (input, _) = space1.parse(input)?;
+  // Reminder: using the pair with space1 and space0
+  // is a hack so you don't have to make another
+  // Input::new_extra() element from the pair of
+  // space0 and line_ending
+  let (input, _) =
+    alt((pair(space0, line_ending), pair(space1, space0)))
+      .parse(input)?;
+  let (input, _) = not((space0, line_ending)).parse(input)?;
   Ok((input, key))
 }
 
 #[cfg(test)]
 mod tests {
-  use crate::report::report;
-
   use super::*;
+  use crate::report::report;
   use pretty_assertions::assert_eq;
   use rstest::rstest;
 
   #[rstest]
   #[case("single word key", "|alfa: bravo``", "alfa", "bravo``")]
+  #[case(
+    "single word followed by newline",
+    "|alfa:\nbravo``",
+    "alfa",
+    "bravo``"
+  )]
+  #[case(
+    "Key can start after a newline",
+    "|\nalfa: bravo``",
+    "alfa",
+    "bravo``"
+  )]
+
   fn code_shorthand_attribute_runner(
     #[case] description: &str,
     #[case] given: &str,
@@ -46,7 +71,7 @@ mod tests {
       }
       Err(e) => {
         report(e);
-        panic!("Parsing Error");
+        panic!("Parsing Error {}", description);
       }
     }
   }

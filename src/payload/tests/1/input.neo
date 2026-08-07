@@ -1,3 +1,10 @@
 -- p
 
-alfa ``bravo|charlie: delta|echo: foxtrot`` golf
+alfa ``bravo
+|
+charlie:
+delta
+|
+echo:   
+   foxtrot
+`` golf

@@ -62,7 +62,9 @@ mod tests {
   #[case("Multiple trailing whitespace is trimmed before end of span", "alfa bravo  ``", vec![
     test_text_span("alfa bravo")
   ], "``")]
-
+  #[case("Remove trailing whitespace from a newline", "alfa bravo\n``", vec![
+    test_text_span("alfa bravo")
+  ], "``")]
   fn code_shorthand_attribute_value_runner(
     #[case] description: &str,
     #[case] given: &str,
@@ -115,4 +117,6 @@ mod tests {
     let result = attribute_value.parse(input);
     assert!(result.is_err(), "\n\nFAILED: {}\n\n", description);
   }
+
+  //
 }

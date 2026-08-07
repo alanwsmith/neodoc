@@ -1,5 +1,5 @@
 {
-  "given": "-- p\n\nalfa ``bravo|charlie: delta|echo: foxtrot`` golf",
+  "given": "-- p\n\nalfa ``bravo\n|\ncharlie:\ndelta\n|\necho:   \n   foxtrot\n`` golf",
   "remainder": "",
   "status": {
     "ok": {
