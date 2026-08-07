@@ -40,13 +40,11 @@ mod tests {
   #[case("Whitespace is removed when value is on its own line after spaces before newline", "|alfa:  \nbravo\n``", "alfa", vec![
     test_text_span("bravo")
   ])]
-  #[rstest]
   #[case("Backticks can be escaped in attribute value", "|alfa: bravo\\``charlie``", "alfa", vec![
     test_text_span("bravo"),
     test_escaped_span("`"),
     test_text_span("`charlie"),
   ])]
-
   fn code_shorthand_attribute_runner(
     #[case] description: &str,
     #[case] given: &str,
