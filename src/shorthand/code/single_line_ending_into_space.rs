@@ -32,10 +32,17 @@ mod tests {
   #[rstest]
   #[case(
     "Single newline followed immediatly by content",
-    "\n\nx",
+    "\nx",
     " ",
     "x"
   )]
+  #[case(
+    "Space after the line ending is preserved",
+    "\n  x",
+    " ",
+    "  x"
+  )]
+
   fn code_shorthand_single_line_ending_into_space_runner(
     #[case] description: &str,
     #[case] given: &str,
@@ -61,35 +68,25 @@ mod tests {
       }
       Err(e) => {
         report(e);
-        panic!("Test Error");
-        // TODO Add errors here if needed
+        panic!("Parsing Error");
       }
     }
   }
 
-  // #[rstest]
-  // #[case("Empty lines at the start break", "\n\n")]
-  // #[case(
-  //   "Empty lines with whitespace at the start break",
-  //   "\n   \n"
-  // )]
-  // #[case("Empty lines are not allowed", "alfa\n\nbravo")]
-  // #[case(
-  //   "Empty lines are not allowed with space before first newline of an empty line",
-  //   "alfa \n\n"
-  // )]
-  // #[case(
-  //   "Empty lines are not allowed with space before second newline of an empty line",
-  //   "alfa\n \n"
-  // )]
-  // fn code_shorthand_attribute_value_error_runner(
-  //   #[case] description: &str,
-  //   #[case] given: &str,
-  // ) {
-  //   let input = Input::new_extra(given, vec![]);
-  //   let result = attribute_value.parse(input);
-  //   assert!(result.is_err(), "\n\nFAILED: {}\n\n", description);
-  // }
+  #[rstest]
+  #[case("Empty lines at the start break", "\n\n")]
+  #[case(
+    "Empty lines with whitespace at the start break",
+    "\n   \n"
+  )]
+  fn code_shorthand_single_line_ending_into_space_error_runner(
+    #[case] description: &str,
+    #[case] given: &str,
+  ) {
+    let input = Input::new_extra(given, vec![]);
+    let result = single_line_ending_into_space.parse(input);
+    assert!(result.is_err(), "\n\nFAILED: {}\n\n", description);
+  }
 
   //
 }
