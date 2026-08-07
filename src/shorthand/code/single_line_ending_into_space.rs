@@ -1,6 +1,4 @@
 use crate::Input;
-use nom::branch::alt;
-use nom::bytes::complete::tag;
 use nom::character::complete::{line_ending, space0};
 use nom::combinator::not;
 use nom::sequence::pair;
@@ -21,14 +19,11 @@ pub fn single_line_ending_into_space(
 
 #[cfg(test)]
 mod tests {
-  use crate::report::report;
-
   use super::*;
-  // use crate::content::Content;
+  use crate::report::report;
   use pretty_assertions::assert_eq;
   use rstest::rstest;
 
-  // Attribute metadata
   #[rstest]
   #[case(
     "Single newline followed immediatly by content",
@@ -42,7 +37,6 @@ mod tests {
     " ",
     "  x"
   )]
-
   fn code_shorthand_single_line_ending_into_space_runner(
     #[case] description: &str,
     #[case] given: &str,
