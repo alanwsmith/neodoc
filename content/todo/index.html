@@ -59,6 +59,51 @@ organization. I'm simply throwing
 stuff at the top of the list as they 
 come do mind.
 
+[] Maybe the ``-- status: `` attr in metadata
+should be ``published`` and then everything
+else which is left up to the app. That's
+probably better than ``done``. It's more
+explicit and ties in with the ``-- published: ``
+attr. 
+
+Another options would be to simply
+reply on the ``-- published: `` attr
+as the indicator. That probably makes
+even more sense. Stuff can still be sent up
+but it's considered some type of draft
+until ``-- published: DATETIME`` is set.
+
+Apps could choose to implement custom 
+``-- status`` attrs. Or, they could
+rely on the native ``-- template:``
+attr to make other determinations. 
+Though, that would still likely lead
+to having to change two things in order
+to move from draft to published. 
+Unless, of course, the app just treated
+everything that's not published as
+a draft. 
+
+
+
+
+
+
+[] Define how text in raw sections should
+be handled when it comes to leading whitespace. 
+For example, when a pre section is nested
+it would be nice if the content could be
+nested as well. This would mean looking
+looking at all the lines to figure out which
+ones is the least padded over and removing
+that much whitespace from the entire. 
+
+There would need to be a way to turn that
+feature off, but it feels like having
+the space trimmed should be the default. 
+Maybe the way to turn it off is a 
+``no-trim`` flag.
+
 
 [] Include ability to have alternate
 version of the content in different

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/default.css" />
+    <script type="module" src="&#x2f;scripts.raw&#x2f;bitty&#x2f;bitty-9.0.0-beta1.source.js"></script>
+    <style>
+    body {
+      background-color: black;
+      color: #ccc;
+    }
+    </style>
+
+
+<style>
+    
+
+    </style>
+
+
+
+
+
+<title>neodoc.style</title>
+<meta property="og:title" content="neodoc.style" />
+<meta name="description" content="from neodoc.style" />
+<meta property="og:description" content="from neodoc.style" />
+
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https:&#x2f;&#x2f;neodoc.style/templates.inc/metadata/" />
+<meta property="og:image" content="https:&#x2f;&#x2f;neodoc.style/og-image.jpg" />
+
+
+
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+<link rel="shortcut icon" href="/favicon/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="neodoc.style" />
+
+  </head>
+  <body>
+<header class="default">
+  <div class="left-right">
+    <div>
+  <a href="/">NeoDoc.Style</a>
+
+  -
+
+  <a href="/blog/">blog</a>
+
+  -
+
+  <a href="/todo/">todo</a>
+
+      </div>
+    <div>
+
+  <a href="https://bsky.app/profile/neodoc.style">@neodoc.style</a>
+    </div>
+    </div>
+</header>    
+<main class="default default-flow">
+  <hgroup>
+    <h1></h1>
+  </hgroup>
+
+<pre class="tmp-neo">-- title
+
+Spoiler/Content-Warning Update
+
+Part of the NeoDoc spec is a list of 
+section types that include reference 
+HTML templates and rendering expectations 
+for output.
+
+Two new section types have been added 
+based on the discussion from
+>> In Which A Book Lexicon is Born |
+https://discourse.atmosphere.community/t/in-which-a-book-lexicon-is-born/1042 >>.
+
+They are: Spoilers and Content Warnings.
+
+There's also a new inline Spoiler tag.
+The specific start/stop tokens are TBD, 
+but it'll be something like:
+
+  -- pre/
+
+  This is ;;a spoiler;; to
+  keep things a surprise.
+
+  -- /pre
+
+
+-- h2
+
+The NeoDoc Advantage
+
+The Spoiler and Content Warning sections
+are prime examples of NeoDoc's ability to 
+offer content portability to the Atmosphere.
+Without NeoDoc (or something like it) the 
+ability to migrate content with spoilers 
+or warnings between apps is impractical 
+at best.
+
+For example, assuming the use of Markdown,
+the two ways that come to mind for 
+identifying spoiler and content-warning 
+content in plain-text storage are: 
+
+
+-- numbered/
+
+1. Add custom Markdown tokens like: 
+
+  -- pre/
+
+  ```cw Content Warning Label Goes Here
+  Everything in this section is
+  behind a content warning.
+  ```
+
+  ```spoiler
+  This is the content of a spoiler
+  section.
+  ```
+
+  And ;;this text;; is an inline
+  spoiler.
+
+  -- /pre
+
+
+2. Define specific HTML tag/class 
+combinations and roll out to using them.
+For example:
+
+  -- pre/
+
+    <section class="content-warning">
+      <div class="label">
+        Content Warning Label Goes Here
+      </div>
+
+      Everything in this section is
+      behind a content warning. 
+
+      Markdown parsers should be able 
+      to automatically transform these
+      blocks into paragraphs.
+
+    </section>
+
+
+    <section class="spoiler">
+
+      Everything in this section is
+      behind a spoiler interface. 
+
+      Markdown parsers should be able 
+      to automatically transform these
+      blocks into paragraphs.
+
+    </section>
+
+
+    Here is <span class="spoiler">some
+    spoiler text</span> that gets
+    hidden.
+
+  -- /pre
+
+-- /numbered
+
+
+In either case, every app that uses
+the content must agree on the syntax/html 
+in order to maintain functionality. 
+
+That's a practical impossibility.
+There's no realistic way to have portable
+spoiler/content-warning content using
+Markdown as a result. The same issue 
+arises with any other format that doesn't 
+have native spoiler or content-warning 
+types.
+
+With the feature built in to NeoDoc, 
+apps don't have to invent or coordinate
+on custom syntax. They simply use
+what's already defined in the spec.
+
+
+-- h2
+
+Change Window
+
+I've been using NeoDoc for three years
+in my static site generator. No one else
+has it yet. That provides a fantastic 
+opportunity to refine its capabilities
+to further support the Atmosphere while 
+it's being extracted into its own library. 
+The spoiler/content-warning is a perfect 
+example. I hadn't thought of them
+until the topic came up in the community.
+
+What's nice about NeoDoc's format is
+that no alterations to the parser are
+necessary to accommodate the change. The
+only modification is an update to the
+spec to include the section types in the 
+pre-defined list and supply their 
+reference templates. 
+
+A critical point is that these type of
+adjustments can only be made before NeoDoc 
+is actively in production. Once it is, it'll 
+be like a lexicon where stability of the
+spec is a requirement. (Further enhancements 
+are still possible. They would just have 
+to be a matter of community convention
+with the possibility of optional addendum 
+section type specs, but the parser
+functionality won't change.)
+
+
+-- h2
+
+Outro
+
+I'll end with my refrain: 
+
+Without portable content the full promise 
+of a decentralized internet can't be 
+achieved. 
+
+While you can move from one PDS to 
+another, you're content is still locked 
+into specific apps if no one else uses 
+the format its stored in. Handling 
+multiple formats is, of course, possible. 
+But, it would be better spending time
+on features that enhance app experience
+rather than building ETLs. 
+
+I believe moving content between apps
+is more appealing to non-technical users
+than being able to migrate their PDS.
+While Markdown is portable, it's 
+incredibly limited. At the epoch of
+the Atmosphere, we should aim for
+better. 
+
+-a
+
+
+
+-- endnote
+
+Adding the inline spoiler tag __is__ 
+a change to the parser. Those changes
+are only possible before NeoDoc is
+in production. Once the shorthand
+tokens have been locked down no
+new ones will be added since that
+would break backwards compatibility.
+
+
+
+-- metadata
+-- created: 2026-08-07T07:53:00-04:00
+-- published: 2026-08-07T10:16:00-04:00
+-- tags: neodoc
+
+
+
+</pre></main>
+
+
+
+
+
+<footer class="default">
+  &copy; 2026 <a href="https://bsky.app/profile/neodoc.style">NeoDoc.Style</a>
+</footer>
+    <div>
+    </div>
+    <div class="page-templates" hidden>
+      <bitty-9 data-connect="/bits.raw/default.js"></bitty-9>
+    </div>
+  </body>
+</html>
