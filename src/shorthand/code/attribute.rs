@@ -1,10 +1,7 @@
 use crate::Input;
-use crate::content::Content;
 use crate::metadata::Metadata;
 use crate::shorthand::code::attribute_key::attribute_key;
 use crate::shorthand::code::attribute_value::attribute_value;
-use crate::shorthand::code::normal_content::normal_content;
-use nom::multi::many1;
 use nom::{IResult, Parser};
 
 pub fn attribute(mut input: Input) -> IResult<Input, Metadata> {

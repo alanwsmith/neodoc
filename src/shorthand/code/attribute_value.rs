@@ -79,6 +79,16 @@ mod tests {
     test_escaped_span("`"),
     test_text_span("`bravo"),
   ], "``")]
+  #[case("Pipes can be escaped", "alfa\\|bravo``", vec![
+    test_text_span("alfa"),
+    test_escaped_span("|"),
+    test_text_span("bravo"),
+  ], "``")]
+  #[case("Backslashes can be escaped", "alfa\\\\bravo``", vec![
+    test_text_span("alfa"),
+    test_escaped_span("\\"),
+    test_text_span("bravo"),
+  ], "``")]
   fn code_shorthand_attribute_value_runner(
     #[case] description: &str,
     #[case] given: &str,
@@ -109,6 +119,8 @@ mod tests {
   }
 
   #[rstest]
+  #[case("No content to closing token is invalid", "``")]
+  #[case("No content to pipe invalid", "|")]
   #[case("Empty lines at the start break", "\n\n")]
   #[case(
     "Empty lines with whitespace at the start break",
