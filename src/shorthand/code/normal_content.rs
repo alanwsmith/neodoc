@@ -3,7 +3,7 @@ use crate::content::Content;
 use crate::content_parts::single_character::single_backtick;
 use crate::shorthand::code::close_token::close_token;
 use crate::shorthand::code::single_newline_not_followed_by_backtick_or_pipe::single_newline_not_followed_by_backtick_or_pipe;
-use crate::shorthand::code::single_whitespace_not_followed_by_backtick_or_pipe::single_whitespace_not_followed_by_backtick_or_pipe;
+// use crate::shorthand::code::single_whitespace_not_followed_by_backtick_or_pipe::single_whitespace_not_followed_by_backtick_or_pipe;
 use nom::branch::alt;
 use nom::bytes::complete::is_not;
 use nom::character::complete::{line_ending, space0};
@@ -25,6 +25,8 @@ pub fn normal_content(mut input: Input) -> IResult<Input, Content> {
     )),
   ))
   .parse(input)?;
+  let (input, _) =
+    not((space0, line_ending, space0, line_ending)).parse(input)?;
   let content = contents
     .iter()
     .map(|v| *v.1.fragment())
@@ -39,4 +41,58 @@ pub fn normal_content(mut input: Input) -> IResult<Input, Content> {
       template: "default".to_string(),
     },
   ))
+}
+
+#[cfg(test)]
+mod tests {
+  use super::*;
+  use pretty_assertions::assert_eq;
+  use rstest::rstest;
+
+  #[rstest]
+  #[case("Single word at end of span", "alfa``", "alfa", "``")]
+
+  fn code_shorthand_normal_content_runner(
+    #[case] description: &str,
+    #[case] given: &str,
+    #[case] expected: &str,
+    #[case] remainder: &str,
+  ) {
+    let input = Input::new_extra(given, vec![]);
+    let result = normal_content.parse(input).unwrap();
+    let left = Content::Text {
+      content: expected.to_string(),
+      r#type: "text".to_string(),
+      template: "default".to_string(),
+    };
+    assert_eq!(left, result.1, "\n\nFAILED: {}\n\n", description);
+    assert_eq!(
+      remainder,
+      *result.0.fragment(),
+      "\n\nFAILED: {}\n\n",
+      description
+    );
+  }
+
+  #[rstest]
+  #[case("Content can't have empty lines", "\n\n``")]
+  #[case("Empty lines are not allowed", "alfa\n\n``")]
+  #[case(
+    "Empty lines are not allowed with space before first newline of an empty line",
+    "alfa \n\n``"
+  )]
+  #[case(
+    "Empty lines are not allowed with space before second newline of an empty line",
+    "alfa\n \n``"
+  )]
+  fn code_shorthand_normal_content_error_runner(
+    #[case] description: &str,
+    #[case] given: &str,
+  ) {
+    let input = Input::new_extra(given, vec![]);
+    let result = normal_content.parse(input);
+    assert!(result.is_err(), "\n\nFAILED: {}\n\n", description);
+  }
+
+  //
 }

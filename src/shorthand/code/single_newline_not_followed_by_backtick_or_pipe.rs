@@ -10,6 +10,7 @@ pub fn single_newline_not_followed_by_backtick_or_pipe(
 ) -> IResult<Input, Input> {
   input.extra =
     vec!["single_newline_not_followed_by_backtick_or_pipe"];
+  // TODO: Switch this to line ending and check for pipe too.
   let (input, _) = alt((
     pair(tag("\r\n"), not(tag("`"))),
     pair(tag("\n"), not(tag("`"))),
@@ -27,7 +28,7 @@ pub fn single_newline_not_followed_by_backtick_or_pipe(
 #[cfg(test)]
 mod tests {
   use super::*;
-  use crate::content::Content;
+  // use crate::content::Content;
   use pretty_assertions::assert_eq;
   use rstest::rstest;
 
