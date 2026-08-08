@@ -12,9 +12,10 @@ id = "asdf"
 == block content
 
 
+
 <ul>
 == for f in fileList() 
-  == if f[1].status == "done"
+  == if f[1].published
   <li>
     <a href="[@ f[1].dir @]/">
     == if f[1].title or f[1].linkTitle

@@ -1,0 +1,165 @@
+== extends "/templates.inc/switches/default.html"
+
+
+== block toml
+linkTitle = "Notes on a Plain Text Field"
+created = 2026-08-08T10:01:00-04:00
+published = 2026-08-08T10:01:00-04:00
+id = "01/n7/ed/mw" 
+== endblock
+
+== block styles
+== endblock
+
+
+
+== block content
+== filter md
+
+NOTE: This was original posted on 
+the [atmosphere.community discourse server](https://discourse.atmosphere.community/t/in-which-a-book-lexicon-is-born/1042/15?u=al9000.com).
+
+---
+
+## Notes on a Plain Text Field
+
+### Definitely a Good Idea
+
+[quote="adamfortuna, post:9, topic:1042"]
+I think we should make plaintext field mandatory, and have content included in multiple formats. Maybe a plaintext version then an array of `contentType` versions provided by the platform?
+[/quote]
+
+First off, couldn't agree more with the first part. A plain text field feels absolutely necessary. We should strive to make content in the Atmosphere as portable as possible. Plain text distribution can go a long way in that direction. The specific contents of the field are worthy of discussion, though.
+
+From the surrounding context, I read adamfortuna's perspective to mean no explicit formatting for the plain text (i.e. it's not markdown, just un-formatted strings of text with blank lines representing paragraph breaks). I believe that's the wrong direction. Defining a spec with effectively no formatting severally limits the practical portability of the content. 
+
+For example, say we have two apps:
+
+- App Alfa: A book review app. It lets folks write reviews that contain strikethrough text.
+
+	The lexicon for the app's content is set up to store the original review (including identifying which text is strikethrough) in a custom format associated with a specific MIME type (e.g. `contentType: "text/x-app-alfa-book-review"`) that other apps can ingest.
+
+	It also stores/provides a plain text version of the review with no formatting beyond empty lines for paragraph breaks. 
+
+- App Bravo: A book review reader app. It gathers reviews from other apps (including App Alfa) and displays them in a single feed. 
+
+The developers of App Bravo have a few options when it comes to content from App Alfa. They can:
+
+1. Create a transformation process that converts `text/x-app-alfa-book-review` content into their desired output. 
+
+2. Ingest and distribute the plain text version of the App Alfa content with a generic converter that turns empty lines into paragraph breaks. 
+
+3. Not include the content from App Alfa.
+
+Option 1 takes work, obviously. But, if App Bravo wants the content from App Alfa, it's really the only option. 
+
+If App Bravo tried the second option to just output the plain text content then the reviews would either be incomplete (e.g. if App Alfa removed the strikethrough text when making the plain text copy), or they would be a mess (e.g. if the strikethrough text gets included, there would be no way to identify what should be struck and what shouldn't). Either way, the view of the content that App Bravo provides diverges from the original every time strikethrough text is used.  
+
+So, if App Bravo wants the content from App Alfa in a presentable style, they have to do the work to ingest the `text/x-app-alfa-book-review` format. Doable, but it could end up being a lot of work depending on the complexity of the format. The work would also have to be done for every other app that App Bravo wants to add to their reader. 
+
+If the plain text content App Alfa distributes is in a portable format, App Bravo can use pre-existing packages to handle the transformations with minimal workload. Even better. They only have to do that work once to cover ingesting content from every other app that also uses the format. 
+
+That leads us to Markdown. 
+
+
+### Markdown
+
+It's entirely possible I misunderstood the context and adamfortuna was talking about storing Markdown content in the mandatory plain text field. Things get a little better if that's the case. 
+
+With Markdown, App Alfa can still store their data in their custom `text/x-app-alfa-book-review` format. But, the plain text Markdown version they ship has known formatting rules to apply to it. All App Bravo needs to do to render the content is put it through one of the many available Markdown processors and render the results. 
+
+Mark down has a native syntax built in for strikethrough. So, App Bravo can fully reproduce the content from App Alfa in their review reader. That's an improvement, but it leads back to a new version of the original problem: Instead of limiting content to the least common features of plain text, content is now limited to the least common features of Markdown. Anything beyond basic blog post formatting is out of scope. 
+
+For example, say App Alfa provides a _spoiler_ feature that let's folks hide content behind a spoiler cover with a label on it. There's no native way to represent that in Markdown. The feature needs a custom content type defined which is not something Markdown can do.
+
+[aside: Embedding HTML in Markdown is possible, but that locks content into the specific tags used for the embed. I consider that a non-starter for portable content.]
+
+App Bravo can always implement the `text/x-app-alfa-book-review` engine. But, we're back to the same issue of effort. If the formats get complicated and/or the review reader wants to ingest content from lots of other apps, the workload becomes a limiting factor (and the effort would be better spent building social features rather than ETLs). Dealing with custom formats also add significant complexity to the system since both sides must stay in sync if there are any changes.   
+
+We also haven't mentioned the increased burden on App Alfa. They must expend effort to generate and maintain the `text/x-app-alfa-book-review` spec and outputs. If apps aren't in place to use the format, the appeal of doing that work is limited. Which leads to the a chicken/egg/cold-start problem because building an App Bravo reader app based on custom formats which _might_ exist someday isn't super appealing either.
+
+I expect the practical reality of all this is that if the plaintext field is Markdown, then content from any app that does more than what Markdown can represent will effectively be locked into the original app. Trying to use it elsewhere will either be too much work, to broken, or both. 
+
+Given the creativity of the Atmosphere, that'll happen a lot. 
+
+I believe instead of expanding the number of content formats (i.e. each app being responsible for defining their own format/content-type), we should focus down to standardize on a smaller number of formats that are better at what they do. Markdown will certainly play a role. And, it's fine, as long as all you want to do is basic paragraph content. But, having to truncate all the content we want to be portable down to Markdown's limited feature set would be a huge miss. 
+
+That leads us to NeoDoc. 
+
+
+### NeoDoc
+
+NeoDoc is a content format born out of frustrations with Markdown's limitations. (And, full disclosure, it was me. I was the one who got so frustrated with Markdown's limitations that I designed the format to use [on my various sites](https://links.alanwsmith.com/).) 
+
+Here's a quick example of how to use it to make spoiler content for a book review: 
+
+```txt
+-- title
+
+Dungeon Crawler Carl
+
+A bunch of words about the book
+go here.
+
+-- spoiler/
+-- label: Only read this if 
+you're done with chapter 27.
+
+If the doomsday device isn't a 
+Chekhov's Gun, I don't know
+what is.
+
+-- /spoiler
+
+And back to more writing
+about the book that's not
+under the spoiler.
+
+```
+
+NeoDoc produces a standardized AST designed for use in a templating system (which is also standardized). NeoDoc provides a default set of templates with the expectation that apps will customize them to their liking. App Alfa (where the content originated) would have `title` and `spoiler` templates responsible for rendering the `-- title` and `-- spoiler` sections of the content. The spoiler being set up to cover the text with an opaque box and the label. 
+
+App Bravo can make it's own versions of those templates. Or, it can use the original ones from App Alfa. (The idea being that App Alfa stores its templates in a lexicon that App Bravo has access to. More details on that to come in future discussions.) Or, it can fall all the way back to the defaults built into NeoDoc.
+
+This gives each app complete control over how it display content without having to interact with each other through custom formats. Other apps can use the content just as easily and just as independently. All without limiting features beyond basic paragraphs. 
+
+The net result is a portable content format that doesn't sacrifice creativity to the limitations of Markdown's format. 
+
+### Outro
+
+There's a little more to NeoDoc than you see here, but not much. It's designed to keep the mental model small so you can focus on making content. You can check out the [NeoDoc site](https://neodoc.style) for more info. Or, [ping me](https://bsky.app/profile/al9000.com) or the [neodoc](https://bsky.app/profile/neodoc.style) accounts on bluesky if you've got question or feedback beyond the scope of this thread. 
+
+-a
+
+
+### Postscript
+
+- NeoDoc has been around for three years. But, you've probably never heard of it given that it's embedded in my personal static site generator. It puts in a lot of work there powering [roughly three thousand pages of content](https://www.alanwsmith.com/neo-files/report), but hasn't seen wider distribution yet. I'm extracting it to a library and independent app that can be used in the Atmosphere as we speak.  
+
+- I'd probably stick an WYSIWYG editor in front of NeoDoc most of the time, but it's entirely human readable/writable plain text without one. It'll be even more so as syntax highlighters for the format come online. 
+
+- I hadn't thought about spoiler tags or content warnings until this thread. They're perfect examples of the types of content I believe we should be working to ensure are portable. My general point being that if content isn't fully portable, you're effectively locked in to an app even if you can change the PDS that's storing the data. For example, if I wrote a bunch of posts with spoilers in them any app that doesn't support them will appear broken. I wouldn't move to them. 
+
+- Regarding:
+
+    [quote="omg.jacky.wtf, post:10, topic:1042"]
+    how would you implement a spoilers tag in the CLI - for example
+    [/quote]
+
+  I don't think we should use the limitations of our output environments to determine the the fidelity of the content distribution. We should make the raw content is rich as possible. That way, apps that are rending for specific applications (like the CLI) can have as many options as possible to come up with a solution for their environments. 
+
+  (Thinking about the CLI specifically. One option would be to transform the characters of spoiler content to █ blocks, then provide a hot key to toggle the actual content on and off. Of course, for this to happen, the app generating the CLI content would need something like NeoDocs formatting to know what to hide and what to show.)
+
+- I'm exited NeoDoc handles spoilers out of the box. Of course, it's not the only solution. While I'd love to see NeoDoc become a part of the Atmosphere, I won't be too disappointed if it doesn't, so long as we put other solutions for fully portable content in place. 
+
+- Oh, yeah, there's an entire bit about how the named NeoDoc sections and their associated attributes act as ad hoc keys for database style querying. This post is already super long and I don't have the spoons to get into that right now. There's a overview [on the NeoDoc site](https://neodoc.style) if you want to learn more. 
+
+- I also started [another thread](https://discourse.atmosphere.community/t/neodoc-a-content-format-and-the-atmosphere/1050) talking about NeoDoc specifically if you're interested in that.
+
+
+
+
+== endfilter
+== endblock
+
+

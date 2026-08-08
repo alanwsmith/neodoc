@@ -109,15 +109,22 @@ header.default {
   justify-content: space-between;
 }
 
+li > :where(:not(:first-child)) {
+  margin-top: var(--flow-space, var(--default-flow));
+}
+
 main.default {
   max-width: min(46rem, calc(100vw - 3rem));
   margin-inline: auto;
   margin-top: 4rem;
 }
 
-
 .no-underline {
   text-decoration: none;
 }
 
+
+ul > :where(:not(:first-child)) {
+  margin-top: var(--flow-space, var(--default-flow));
+}
 
