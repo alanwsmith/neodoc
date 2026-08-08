@@ -1,12 +1,10 @@
 {
   "bittyURL": "/scripts.raw/bitty/bitty-9.0.0-beta1.source.js",
   "domain": "neodoc.style",
+  "openGraph": {
+    "description": "portable, plain text content for the atmosphere",
+    "image": "/og-image.jpg"
+  },
   "rootURL": "https://neodoc.style",
-  "site": {
-    "title": "neodoc.style",
-    "ogImage": {
-      "defaultDescription": "from neodoc.style",
-      "defaultPath": "/images/og-image.jpg"
-    }
-  }
+  "title": "neodoc.style"
 }

@@ -1,51 +1,46 @@
-[!- set og_url -!]
-[!- if file_path == "/index.html" -!]
-[@ d["/site.json"].rootURL @]
-[!- elif stem(file_path) == "index" -!]
-[@ d["/site.json"].rootURL @][@ dir() @]/
-[!- else -!]
-[@ d["/site.json"].rootURL @][@ dir() @]/
-[@ file_path @]
-[!- endif -!]
-[!- endset -!]
+== set og_url
+  == if p.path == "/index.html"
+    [@- d["/site.json"].rootURL -@]
+  == elif stem(p.path) == "index"
+    [@- d["/site.json"].rootURL @][@ p.dir -@]/
+  == else
+    [@ p.path @]
+  == endif
+== endset
 
-[!- set og_image -!]
-  [!- if exists(p.dir + "/og-image.jpg") -!]
-[@ d["/site.json"].rootURL @][@ p.dir @]/og-image.jpg
-  [!- elif exists(p.dir + "/og-image-auto.jpg") -!]
-[@ d["/site.json"].rootURL @][@ p.dir @]/og-image-auto.jpg
-  [!- else -!]
-[@ d["/site.json"].rootURL @]/og-image.jpg
-  [!- endif -!]
-[!- endset -!]
+== set og_image_base
+  == if p.dir == "/"
+    [@- d["/site.json"].rootURL -@]
+  == else
+    [@- d["/site.json"].rootURL @][@- p.dir -@]
+  == endif
+== endset 
 
-[!- set og_title !]
-  [!- if p.title !]
-  [@- p.title -@]
-  [!- else -!]
-  [@- d["/site.json"].site.title -@]
-  [!- endif -!]
-[!- endset -!]
+== set og_image 
+  == if exists(p.dir + "/og-image.jpg")
+    [@- og_image_base -@]/og-image.jpg[@- "" -@]
+  == elif exists(p.dir + "/og-image-auto.jpg")
+    [@- og_image_base -@]/og-image-auto.jpg[@- "" -@]
+  == else
+    [@- d["/site.json"].rootURL -@]/og-image.jpg[@- "" -@]
+  == endif
+== endset 
 
+== set og_title
+  [@- if(p.linkTitle, p.title, d["/site.json"].title) -@]
+== endset
 
 == set og_description 
-== if p.ogDescription
-[@- p.ogDescription -@]
-== elif p.path != "/index.html"
-[@- d["/site.json"].site.ogImage.defaultDescription -@]
-== else
-[@- "an upcoming content lexicon for the AT Proto Atmosphere" -@]
-== endif
+  [@- if(p.description, d["/site.json"].openGraph.description) -@]
 == endset
 
 == set og_type
-== if p.path == "/index.html"
-[@- "website" -@]
-== else
-[@- "article" -@]
-== endif
+  == if p.path == "/index.html"
+    [@- "website" -@]
+  == else
+    [@- "article" -@]
+  == endif
 == endset
-
 
 
 <title>[@ og_title @]</title>
@@ -57,10 +52,10 @@
 
 <meta property="og:type" content="[@ og_type @]" />
 <meta property="og:url" content="[@ og_url @]" />
-<meta property="og:image" content="[@ og_image @]" />
+<meta property="og:image" content="[@ og_image @]?[@ date(p.published, format = "%Y%m%d%H%M%S") @]" />
 
 [#
-<link rel="alternate" type="application/atom+xml" title="al9000.com" href="/rss/feed.xml" />
+<link rel="alternate" type="application/atom+xml" title="NeoDoc" href="/rss/feed.xml" />
 #]
 
 
